@@ -1,6 +1,6 @@
 import React from "react"
 import { Routes, Route, Link } from "react-router-dom";
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css'
 import "./css/Login.css"
 
 
@@ -109,9 +109,6 @@ const LoginContainer = () => {
               <Col span={11}
                 className="ContentSide"
               >
-                {/* {
-                  (options === "LoginForm" ? <LoginForm/> : <Register/>)
-                } */}
                 
                 <Routes>
                     <Route path="/" element={<LoginForm/>}/>
