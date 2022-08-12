@@ -4,12 +4,12 @@ import "./css/Login.css"
 import { Button, Form, Input , Radio, DatePicker} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-<<<<<<< HEAD
+
 import { Routes, Route, Link } from "react-router-dom";
 
-=======
+
 import { Col, Row } from 'antd';
->>>>>>> a091fa8b9a0ca639335be86bdbf1f43dda49ead8
+
 
 const onChange = (date, dateString) => {
   console.log(date, dateString);
