@@ -150,3 +150,35 @@
   color: white;
 }
 
+.button-box {
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+  margin-bottom: 35px;
+  position: relative;
+  width: fit-content;
+  flex-wrap: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-toggle {
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  
+}
+
+#toggle {
+  top: 0;
+  left: 0;
+  background: linear-gradient(200deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%);
+  width: 120px;
+  height: 100%;
+  position: absolute;
+  border-radius: 30px;
+  transition: 1s;
+}

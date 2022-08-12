@@ -3,6 +3,7 @@ import React from "react"
 import 'antd/dist/antd.css';
 
 import "./css/Login.css"
+import { Routes, Route, Link } from "react-router-dom";
 
 import { Button, Form, Input, Checkbox , Space, Tooltip} from 'antd';
 import { UserOutlined, InfoCircleOutlined, LockOutlined } from '@ant-design/icons';
@@ -21,11 +22,11 @@ const LoginForm = () => {
       <div
         className="LoginCotainer"
       >
-        <h1
-          style={{
-            color:"white"
-          }}
-        >Login</h1>
+        <div className="button-box">
+            <div id="toggle" style={{left: "0px", width: "110px"}}></div>
+            <Link to="/"><button type="button" className="btn-toggle fw-bold">Log in</button></Link>
+            <Link to="/register"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
+        </div>
 
         <Form
           className="InputForm"

@@ -4,6 +4,7 @@ import "./css/Login.css"
 import { Button, Form, Input , Radio, DatePicker} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Routes, Route, Link } from "react-router-dom";
 
 
 const onChange = (date, dateString) => {
@@ -17,11 +18,11 @@ const Register = () => {
         <div
           className="RegisterCotainer"
         >
-        <h1
-          style={{
-            color:"white"
-          }}
-        >Register</h1>
+        <div className="button-box">
+            <div id="toggle" style={{left: "160px", width: "110px"}}></div>
+            <Link to="/"><button type="button" className="btn-toggle fw-bold">Log in</button></Link>
+            <Link to="/register"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
+        </div>
 
         <Form
           className="RegisterForm">
