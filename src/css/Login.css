@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap');
+
+.Header{
+  height: 15vh;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.BodyCotainer{
+  margin: 0;
+  background: rgba(144,0,241,1);
+  background: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%);
+  opacity: 0.9;
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  -webkit-animation: gradient 10s ease infinite;
+  height: 85vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 30em 10em ;
+  z-index: 0;
+}
+
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.MainContainer{
+  display: flex;
+  flex-flow: row nowrap;
+  height: 65vh;
+  box-shadow: 0.5rem 0.5rem 6rem -0.5rem rgb(71, 71, 71);
+  z-index: 1;
+  width: 100%;
+}
+
+.BackgroundSide{
+  flex-basis: 60%;
+  height: 65vh;
+}
+
+
+.ActionButton{
+  width: 10em;
+  height: 3em;
+  font-style: italic;
+  font-weight: bold;
+  
+}
+
+
+
+.ContentSide{
+  flex-basis: 40%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2em;
+  background-color: #526F85;
+  width: 100%;
+  height: 65vh;
+}
+
+.LoginCotainer{
+  display: flex;
+  flex-flow: column nowrap;
+  width: 85%;
+  height: 55vh;
+  text-align: center;
+  padding: 2rem;
+  background-color: #526F85;
+}
+
+.RegisterCotainer{
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: 55vh;
+  text-align: center;
+  padding: 1rem;
+  background-color: #526F85;
+}
+
+.LoginCotainer h1, .RegisterCotainer h1{
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.RegisterForm{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.RegisterItems{
+  flex-basis: 50%;
+  width: 15rem;
+  color: white;
+  border: none;
+  border-style: none none solid none;
+  background: #384656;
+  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+}
+
+.LoginItems{
+  height: 3rem;
+  border: none;
+  border-style: none none solid none;
+  background: #384656;
+  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+}
+
+.ant-input-affix-wrapper > input.ant-input{
+  background: none;
+  color: white;
+}
+
+.ant-picker-input > input{
+  color: white;
+}
+
+.ant-picker-suffix {
+  color: white;
+}
+
