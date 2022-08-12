@@ -85,15 +85,21 @@ const LoginContainer = () => {
           >
             <Row
               className="MainContainer" 
+              gutter={{
+                xs: 8,
+                sm: 16,
+                md: 24,
+                lg: 32,
+              }}
             >
               {/* Background Side */}
-              <Col span={15}
+              <Col span={16}
                 className="BackgroundSide"
               >
                <div>
                <img 
-                      src={require("./image/Image1.jpg")}
-                      alt="image1"
+                      src={require("./image/Galaxy-login.png")}
+                      alt="background"
                       style={{
                         height: "65vh",
                         width:"100%",
@@ -106,7 +112,7 @@ const LoginContainer = () => {
               </Col>
 
               {/* Content Size */}
-              <Col span={11}
+              <Col span={16}
                 className="ContentSide"
               >
                 
@@ -116,6 +122,7 @@ const LoginContainer = () => {
                 </Routes>
 
               </Col>
+
             </Row>
 
           </Content>
