@@ -86,8 +86,9 @@
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: 55vh;
+  height: 65vh;
   text-align: center;
+  align-items: center;
   padding: 2rem;
   background-color: #526F85;
 }
@@ -95,10 +96,11 @@
 .RegisterCotainer{
   display: flex;
   flex-flow: column nowrap;
-  width: 100%;
-  height: 55vh;
-  justify-content: space-between;
-  padding: 1rem;
+  /* width: 100%; */
+  height: 65vh;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 2rem;
   background-color: #526F85;
 }
 
@@ -112,7 +114,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: 100%;
+  /* width: 100%; */
   height: auto;
 }
 
@@ -148,11 +150,11 @@
 }
 
 .button-box {
-  box-shadow: 0 0 20px 9px #ff61241f;
+  box-shadow: 0 0 20px 9px #fc4a0377;
   border-radius: 30px;
   margin-bottom: 35px;
   position: relative;
-  width: fit-content;
+  /* width: fit-content; */
   flex-wrap: nowrap;
   display: flex;
   justify-content: center;
@@ -160,6 +162,8 @@
 }
 
 .btn-toggle {
+  color: white;
+  font-weight: bold;
   padding: 10px 30px;
   cursor: pointer;
   background: transparent;
@@ -178,4 +182,26 @@
   position: absolute;
   border-radius: 30px;
   transition: 1s;
+}
+
+.btn-gradient{
+  background: rgb(144,0,241);
+  background-image: linear-gradient(200deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%);
+  /* width: 100%; */
+  background-position: right;
+  background-size: 200%;
+  transition: 500ms ease-in-out;
+}
+
+.btn-gradient:hover {
+  background: rgb(144,0,241);
+  background: linear-gradient(200deg, rgba(235,170,80,1) 0%, rgba(253,29,29,1) 50%, rgba(144,0,241,1) 100%);
+  background-position: left;
+}
+
+@media screen and (max-width: 1200px) {
+  .RegisterCotainer, .LoginCotainer {
+    height: fit-content;
+    width: fit-content;
+  }
 }

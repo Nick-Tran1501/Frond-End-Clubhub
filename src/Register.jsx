@@ -22,7 +22,7 @@ const Register = () => {
           className="RegisterCotainer"
         >
         <div className="button-box">
-            <div id="toggle" style={{left: "160px", width: "110px"}}></div>
+            <div id="toggle" style={{left: "100px", width: "114px"}}></div>
             <Link to="/"><button type="button" className="btn-toggle fw-bold">Log in</button></Link>
             <Link to="/register"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
         </div>
@@ -293,10 +293,11 @@ const Register = () => {
             shape="round" 
             size="large"
             htmlType="submit"
+            className="btn-gradient"
             style={{
               width:"35rem",
               height:"3rem",
-              marginTop:"2rem"
+              marginTop:"1rem"
               
             }}
           >
