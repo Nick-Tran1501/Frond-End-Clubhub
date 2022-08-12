@@ -30,8 +30,27 @@ const Register = () => {
         <Form
           className="RegisterForm">
         <Row 
-        gutter={8}>
-          <Col flex={2.5}>
+        gutter={8}
+        style={{
+          width:"100%",
+          display:"flex",
+          flexFlow:"row nowrap",
+          justifyContent:"center",
+          alignItems:"center"
+          
+        }}
+        
+        >
+          <Col
+            xxl={12}
+            xl={12}
+            lg={12}
+            md={12}
+            xs={12}
+            style={{
+              flexBasis:"50%"
+            }}
+          >
 
             <Form.Item
               className="ItemsContainer"
@@ -136,7 +155,18 @@ const Register = () => {
             </Form.Item>
 
           </Col>
-          <Col flex={2.5}>
+          <Col 
+            
+            xxl={12}
+            xl={12}
+            lg={12}
+            md={12}
+            xs={12}
+
+            style={{
+              flexBasis:"50%"
+            }}
+            >
             <Form.Item>
               <h3
                 style={{
