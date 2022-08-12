@@ -10,7 +10,6 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import { Col, Row } from 'antd';
 
-
 const onChange = (date, dateString) => {
   console.log(date, dateString);
 };
