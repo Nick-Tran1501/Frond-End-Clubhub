@@ -82,6 +82,7 @@ const LoginContainer = () => {
         <Layout>
           <Content
             className="BodyCotainer"
+            
           >
             <Row
               className="MainContainer" 
@@ -95,6 +96,11 @@ const LoginContainer = () => {
               {/* Background Side */}
               <Col span={16}
                 className="BackgroundSide"
+                xxl={16}
+                xl={12}
+                lg={0}
+                md={0}
+                xs={0}
               >
                <div>
                <img 
@@ -112,8 +118,14 @@ const LoginContainer = () => {
               </Col>
 
               {/* Content Size */}
-              <Col span={16}
+              <Col span={8}
                 className="ContentSide"
+               xxl={8}
+               xl={12}
+               lg={24}
+               md={24}
+                xs={24}
+               
               >
                 
                 <Routes>
