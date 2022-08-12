@@ -86,12 +86,7 @@ const LoginContainer = () => {
           >
             <Row
               className="MainContainer" 
-              gutter={{
-                xs: 8,
-                sm: 16,
-                md: 24,
-                lg: 32,
-              }}
+              
             >
               {/* Background Side */}
               <Col span={16}
