@@ -4,8 +4,12 @@ import "./css/Login.css"
 import { Button, Form, Input , Radio, DatePicker} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+<<<<<<< HEAD
 import { Routes, Route, Link } from "react-router-dom";
 
+=======
+import { Col, Row } from 'antd';
+>>>>>>> a091fa8b9a0ca639335be86bdbf1f43dda49ead8
 
 const onChange = (date, dateString) => {
   console.log(date, dateString);
@@ -26,216 +30,233 @@ const Register = () => {
 
         <Form
           className="RegisterForm">
-          <Form.Item
-            className="ItemsContainer"
-          >
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Fullname:</h3>
-         
-            <Input 
-              size="large" 
-              placeholder="Enter Your Fullname"         
-              style={{
-                color:"white"
-              }}
-              className="RegisterItems"
-              allowClear="true"
-              required
-            />
-          </Form.Item>
+        <Row 
+        gutter={8}>
+          <Col flex={2.5}>
 
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Email:</h3>
-        
-            <Input 
-              size="large" 
-              placeholder="Enter Your Email"         
-              style={{
-                color:"white"
-              }}
-              className="RegisterItems"
-              allowClear="true"
-              required
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Gender:</h3>
-           
-            <Radio.Group 
-              onChange={onChange} 
-              size="large"
+            <Form.Item
+              className="ItemsContainer"
             >
-              <Radio 
-                value={"Male"}
+              <h3
                 style={{
-                  color:"white"
+                  color:"white",
+                  textAlign:"left"
                 }}
-                >Male
-              </Radio>
-              <Radio 
-                value={"Female"}
-                style={{
-                color:"white"
-                }}  
-              >Female
-              </Radio>
-              <Radio 
-                value={"Other"}
-                style={{
-                color:"white"
-                }}  
-              >Other
-              </Radio>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >DOB:</h3>
-            <DatePicker 
-              size="large"
-              format={dateFormatList} 
-              placeholder="Your Birthday"
-              className="RegisterItems"
-              style={{
-                
-                color:"white"
-              }}
-              inputReadOnly="true" 
-              allowClear="true"
-            />
-          </Form.Item>
+              >Fullname:</h3>
           
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Address:</h3>
-        
-            <Input 
-              size="large" 
-              placeholder="Your Address"         
-              style={{
-                color:"white"
-              }}
-              className="RegisterItems"
-              allowClear="true"
-              required
-            />
-          </Form.Item>
+              <Input 
+                size="large" 
+                placeholder="Enter Your Fullname"         
+                style={{
+                  color:"white"
+                }}
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Email:</h3>
+          
+              <Input 
+                size="large" 
+                placeholder="Enter Your Email"         
+                style={{
+                  color:"white"
+                }}
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Gender:</h3>
             
+              <Radio.Group 
+                onChange={onChange} 
+                size="large"
+                style={{
+                  height:"2.5rem"
+                }}
+              >
+                <Radio 
+                  value={"Male"}
+                  style={{
+                    color:"white"
+                  }}
+                  >Male
+                </Radio>
+                <Radio 
+                  value={"Female"}
+                  style={{
+                  color:"white"
+                  }}  
+                >Female
+                </Radio>
+                <Radio 
+                  value={"Other"}
+                  style={{
+                  color:"white"
+                  }}  
+                >Other
+                </Radio>
+              </Radio.Group>
+            </Form.Item>
 
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Username:</h3>
-        
-            <Input 
-              size="large" 
-              placeholder="Enter Your Username"         
-              style={{
-                color:"white"
-              }}
-              prefix={<UserOutlined 
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >DOB:</h3>
+              <DatePicker 
+                size="large"
+                format={dateFormatList} 
+                placeholder="Your Birthday"
+                className="RegisterItems"
                 style={{
                   
+                  color:"white"
                 }}
-              />}
-              className="RegisterItems"
-              allowClear="true"
-              required
-            />
-          </Form.Item>
+                inputReadOnly="true" 
+                allowClear="true"
+              />
+            </Form.Item>
 
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Password:</h3>
-        
-            <Input.Password 
-              size="large" 
-              placeholder="Enter Password"         
-              style={{
-                color:"white"
-              }}
-              iconRender={(visible) => (visible ? <EyeTwoTone
+          </Col>
+          <Col flex={2.5}>
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Address:</h3>
+          
+              <Input 
+                size="large" 
+                placeholder="Your Address"         
                 style={{
                   color:"white"
                 }}
-              /> : <EyeInvisibleOutlined 
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+            </Form.Item>
+              
+
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Username:</h3>
+          
+              <Input 
+                size="large" 
+                placeholder="Enter Your Username"         
                 style={{
                   color:"white"
                 }}
-              />)}
-              prefix={<LockOutlined
-                  
+                prefix={<UserOutlined 
+                  style={{
+                    
+                  }}
                 />}
-              className="RegisterItems"
-              allowClear="true"
-              required
-            />
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+            </Form.Item>
 
-          </Form.Item>
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Password:</h3>
+          
+              <Input.Password 
+                size="large" 
+                placeholder="Enter Password"         
+                style={{
+                  color:"white"
+                }}
+                iconRender={(visible) => (visible ? <EyeTwoTone
+                  style={{
+                    color:"white"
+                  }}
+                /> : <EyeInvisibleOutlined 
+                  style={{
+                    color:"white"
+                  }}
+                />)}
+                prefix={<LockOutlined
+                    
+                  />}
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
 
-          <Form.Item>
-            <h3
-              style={{
-                color:"white",
-                textAlign:"left"
-              }}
-            >Re-type Password:</h3>
+            </Form.Item>
+
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Re-type Password:</h3>
+          
+              <Input.Password 
+                size="large" 
+                placeholder="Re-type Password"         
+                style={{
+                  color:"white"
+                }}
+                iconRender={(visible) => (visible ? <EyeTwoTone
+                  style={{
+                    color:"white"
+                  }}
+                /> : <EyeInvisibleOutlined 
+                  style={{
+                    color:"white"
+                  }}
+                />)}
+                prefix={<LockOutlined
+                    
+                  />}
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+
+            </Form.Item>
+          </Col>
+        </Row>
         
-            <Input.Password 
-              size="large" 
-              placeholder="Re-type Password"         
-              style={{
-                color:"white"
-              }}
-              iconRender={(visible) => (visible ? <EyeTwoTone
-                style={{
-                  color:"white"
-                }}
-              /> : <EyeInvisibleOutlined 
-                style={{
-                  color:"white"
-                }}
-              />)}
-              prefix={<LockOutlined
-                  
-                />}
-              className="RegisterItems"
-              allowClear="true"
-              required
-            />
+          
 
-          </Form.Item>
+          
+          
+          
 
 
           <Button 
