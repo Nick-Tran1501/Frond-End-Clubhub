@@ -80,6 +80,7 @@
   justify-content: space-around;
   background-color: #526F85;
   height: 65vh;
+  width: fit-content;
 }
 
 .LoginCotainer{
@@ -115,7 +116,7 @@
   flex-flow: row wrap;
   justify-content: center;
   /* width: 100%; */
-  height: auto;
+  height: 65vh;
 }
 
 .RegisterItems{
