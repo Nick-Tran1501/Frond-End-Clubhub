@@ -5,7 +5,7 @@ import { Button, Form, Input , Radio, DatePicker} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-import { Routes, Route, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 
 
 import { Col, Row } from 'antd';
