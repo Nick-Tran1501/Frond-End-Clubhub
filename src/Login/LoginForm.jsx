@@ -2,7 +2,7 @@
 import React from "react"
 import 'antd/dist/antd.css';
 
-import "./css/Login.css"
+import "../css/Login.css"
 import { Link } from "react-router-dom";
 
 import { Button, Form, Input, Checkbox ,  Tooltip} from 'antd';
@@ -44,7 +44,7 @@ const LoginForm = () => {
                 }}
               />}
               suffix={
-                <Tooltip title="Your Username">
+                <Tooltip title="Username is your personal username that you have registered">
                   <InfoCircleOutlined
                     style={{
                       color:"white"

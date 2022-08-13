@@ -1,15 +1,15 @@
 import React from "react"
 import { Routes, Route, Link } from "react-router-dom";
 import 'antd/dist/antd.min.css'
-import "./css/Login.css"
+import "../css/Login.css"
 
 
 import { Col, Row } from 'antd';
 import { Layout } from "antd";
 import {Button} from 'antd';
 
-import LoginForm from "./LoginForm";
-import Register from "./Register";
+import LoginForm from "../Login/LoginForm";
+import Register from "../Login/Register";
 
 
 
@@ -96,7 +96,7 @@ const LoginContainer = () => {
               >
                <div>
                <img 
-                      src={require("./image/Galaxy-login.png")}
+                      src={require("../image/Galaxy-login.png")}
                       alt="background"
                       style={{
                         height: "65vh",

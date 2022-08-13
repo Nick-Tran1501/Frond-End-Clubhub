@@ -1,6 +1,6 @@
 import React from "react"
 import 'antd/dist/antd.css';
-import "./css/Login.css"
+import "../css/Login.css"
 import { Button, Form, Input , Radio, DatePicker} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
@@ -95,7 +95,27 @@ const Register = () => {
             </Form.Item>
 
             <Form.Item>
-              <h3
+            <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Address:</h3>
+          
+              <Input 
+                size="large" 
+                placeholder="Enter Your Address"         
+                style={{
+                  color:"white"
+                }}
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+            </Form.Item>
+
+            <Form.Item>
+             <h3
                 style={{
                   color:"white",
                   textAlign:"left"
@@ -116,6 +136,7 @@ const Register = () => {
                   }}
                   >Male
                 </Radio>
+
                 <Radio 
                   value={"Female"}
                   style={{
@@ -123,35 +144,8 @@ const Register = () => {
                   }}  
                 >Female
                 </Radio>
-                <Radio 
-                  value={"Other"}
-                  style={{
-                  color:"white"
-                  }}  
-                >Other
-                </Radio>
+                
               </Radio.Group>
-            </Form.Item>
-
-            <Form.Item>
-              <h3
-                style={{
-                  color:"white",
-                  textAlign:"left"
-                }}
-              >DOB:</h3>
-              <DatePicker 
-                size="large"
-                format={dateFormatList} 
-                placeholder="Your Birthday"
-                className="RegisterItems"
-                style={{
-                  
-                  color:"white"
-                }}
-                inputReadOnly="true" 
-                allowClear="true"
-              />
             </Form.Item>
 
           </Col>
@@ -173,17 +167,18 @@ const Register = () => {
                   color:"white",
                   textAlign:"left"
                 }}
-              >Address:</h3>
-          
-              <Input 
-                size="large" 
-                placeholder="Your Address"         
+              >Date of Birth:</h3>
+              <DatePicker 
+                size="large"
+                format={dateFormatList} 
+                placeholder="Your Birthday"
+                className="RegisterItems"
                 style={{
+                  
                   color:"white"
                 }}
-                className="RegisterItems"
+                inputReadOnly="true" 
                 allowClear="true"
-                required
               />
             </Form.Item>
               
