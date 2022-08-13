@@ -3,9 +3,9 @@ import React from "react"
 import 'antd/dist/antd.css';
 
 import "./css/Login.css"
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { Button, Form, Input, Checkbox , Space, Tooltip} from 'antd';
+import { Button, Form, Input, Checkbox ,  Tooltip} from 'antd';
 import { UserOutlined, InfoCircleOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
