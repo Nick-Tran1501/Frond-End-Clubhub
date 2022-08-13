@@ -25,9 +25,6 @@ const LoginContainer = () => {
         {/* Header */}
         <Header
           className="Header"
-          style={{
-            backgroundColor:"black",
-          }}
         >
 
           <div
