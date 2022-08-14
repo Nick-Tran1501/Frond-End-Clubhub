@@ -4,6 +4,7 @@ import 'antd/dist/antd.min.css'
 import "../css/Login.css"
 import {ArrowRightOutlined} from '@ant-design/icons';
 import backgroundVid from "../image/bg-vid2.mp4";
+import ClubLogo from '../image/ClubHub_Trans.png'
 
 import { Col, Row } from 'antd';
 import { Layout } from "antd";
@@ -14,7 +15,7 @@ import Register from "../Login/Register";
 
 
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 
 const LoginContainer = () => {
@@ -31,6 +32,35 @@ const LoginContainer = () => {
             className="BodyCotainer"
             
           >
+            <div
+              className="Logo"
+            >
+              <div className="logo-img">
+              <img 
+                src= {ClubLogo}  
+                alt="ClubHubLogo" 
+                width="200px"
+                height="150px"
+                style={{
+                  
+                }}
+              />
+
+              </div>
+
+            <div className="title">
+              <h1 style={{
+                fontSize: '50px',
+
+              }}
+              > 
+                Wellcome to RMIT CLUB HUB
+              </h1>
+            </div>   
+
+            </div>
+            
+
             <Row
               className="MainContainer" 
               
