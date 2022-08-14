@@ -4,19 +4,18 @@
 
 .BodyCotainer{
   margin: 0;
-  /* background: rgba(144,0,241,1);
-  background: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 10s ease infinite; */
-  background-image: url("/src/image/Galaxy-login.png");
-  
-  background-size: cover;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 75%, rgba(2,0,36,1) 100%);
+ 
+
   opacity: 0.94;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
+  
   justify-content: center;
-  padding: 5rem 5rem;
+  padding: 3rem 5rem 10rem 5rem; 
+  gap: 5rem; 
   border-style: hidden;
  
 }
@@ -50,11 +49,35 @@
   display: flex;
   flex-flow: row nowrap;
   height: 65vh;
-  box-shadow: 0.5rem 0.5rem 6rem -0.5rem rgb(71, 71, 71);
+  box-shadow: 0.5rem 0.5rem 6rem -0.5rem rgb(31, 30, 30);
+  
   justify-content: center;
   
 }
 
+/* ----- Logo and Title login page ------- */
+.Logo{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  
+}
+
+.logo-img {
+  flex-basis: 30%;
+}
+.title {
+  flex-basis: 70%;
+  align-self: center;
+}
+
+.title h1 {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+/* another */
 .BackgroundSide{
   height: 65vh;
   /* background-image: url("/src/image/Galaxy-login.png"); */
