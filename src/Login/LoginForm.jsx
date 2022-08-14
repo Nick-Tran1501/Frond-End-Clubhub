@@ -6,7 +6,7 @@ import "../css/Login.css"
 import { Link } from "react-router-dom";
 
 import { Button, Form, Input, Checkbox ,  Tooltip} from 'antd';
-import { UserOutlined, InfoCircleOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, InfoCircleOutlined, LockOutlined} from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 
@@ -28,6 +28,10 @@ const LoginForm = () => {
             <Link to="/register"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
         </div>
 
+        <h1>
+          Login
+        </h1>
+
         <Form
           className="InputForm"
           style={{
@@ -38,6 +42,7 @@ const LoginForm = () => {
             <Input 
               size="large" 
               placeholder="Enter Your Username" 
+              allowClear="true"
               prefix={<UserOutlined 
                 style={{
                   
@@ -77,6 +82,7 @@ const LoginForm = () => {
                   
                 />}
               className="LoginItems"
+              allowClear="true"
               required
               style={{
                 color:"white"
@@ -142,7 +148,7 @@ const LoginForm = () => {
         </div>
                   
       </div>
-
+        
     </React.Fragment>
   )
 }
