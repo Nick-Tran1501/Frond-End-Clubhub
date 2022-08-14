@@ -2,7 +2,7 @@ import React from "react"
 import { Routes, Route, Link } from "react-router-dom";
 import 'antd/dist/antd.min.css'
 import "../css/Login.css"
-
+import {ArrowRightOutlined} from '@ant-design/icons'
 
 import { Col, Row } from 'antd';
 import { Layout } from "antd";
@@ -23,58 +23,7 @@ const LoginContainer = () => {
     <React.Fragment>
       <Layout>
         {/* Header */}
-        <Header
-          className="Header"
-        >
-
-          <div
-            className="Logo"
-          >
-            <h1
-              style={{
-                color:"white"
-              }}
-            >
-              CLUBHUB
-            </h1>
-
-          </div>
-
-          <div
-            className="ActionContainer"
-          >
-              <Button 
-                type="text"
-                shape="round"  
-                size={"large"}
-                style={{
-                  textDecoration:"underline",
-                  color:"white"        
-                }}
-
-              >
-                <Link to="/">
-                  Login
-                </Link>
-              </Button>
-              <Button 
-              type="text"
-              shape="round"  
-              size={"large"}
-              style={{
-                textDecoration:"underline",
-                color:"white"
-                            
-              }}
-            >
-              <Link to="/register">
-                Register
-              </Link>
-            </Button>
-
-          </div>
-          
-        </Header>
+        
 
         <Layout>
           <Content
@@ -94,17 +43,44 @@ const LoginContainer = () => {
                 md={0}
                 xs={0}
               >
-               <div>
-               <img 
-                      src={require("../image/Galaxy-login.png")}
-                      alt="background"
-                      style={{
-                        height: "65vh",
-                        width:"100%",
-                        opacity:"0.9"
-                      }}
-                      />
-               </div>
+                <div
+                  className="ButtonContainer"
+                >
+                  
+                  <Button 
+                    type="primary" 
+                    shape="round" 
+                    size="large"
+                    htmlType="submit"
+                    className="btn-gradient"
+                    style={{
+                      width:"15rem",
+                      height:"3rem",
+                      marginTop:"1rem"
+                      
+                    }}
+                    
+                  >
+                    Learn More <ArrowRightOutlined />
+                  </Button>
+
+                  <Button 
+                    type="primary" 
+                    shape="round" 
+                    size="large"
+                    htmlType="submit"
+                    className="btn-gradient"
+                    style={{
+                      width:"15rem",
+                      height:"3rem",
+                      marginTop:"1rem"
+                      
+                    }}
+                  >
+                    Visit as Guest
+                </Button>
+                </div>
+               
 
 
               </Col>
@@ -112,12 +88,11 @@ const LoginContainer = () => {
               {/* Content Size */}
               <Col span={8}
                 className="ContentSide"
-               xxl={8}
-               xl={12}
-               lg={24}
-               md={24}
-                xs={24}
-               
+                xxl={8}
+                xl={12}
+                lg={24}
+                md={24}
+                xs={24}        
               >
                 
                 <Routes>

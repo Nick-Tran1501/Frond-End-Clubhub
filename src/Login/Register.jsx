@@ -1,7 +1,7 @@
 import React from "react"
 import 'antd/dist/antd.css';
 import "../css/Login.css"
-import { Button, Form, Input , Radio, DatePicker} from 'antd';
+import { Button, Form, Input , DatePicker, Select, Checkbox} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
@@ -9,6 +9,19 @@ import {Link } from "react-router-dom";
 
 
 import { Col, Row } from 'antd';
+
+
+
+const { Option } = Select;
+
+const handleChange = (value) => {
+  console.log(`selected ${value}`);
+};
+
+const Checked = (e) => {
+  console.log(`checked = ${e.target.checked}`);
+};
+
 
 const onChange = (date, dateString) => {
   console.log(date, dateString);
@@ -41,6 +54,7 @@ const Register = () => {
         }}
         
         >
+          {/* Left Column */}
           <Col
             xxl={12}
             xl={12}
@@ -52,6 +66,7 @@ const Register = () => {
             }}
           >
 
+            {/*Fullname*/}
             <Form.Item
               className="ItemsContainer"
             >
@@ -74,6 +89,7 @@ const Register = () => {
               />
             </Form.Item>
 
+            {/* Email*/}
             <Form.Item>
               <h3
                 style={{
@@ -94,17 +110,19 @@ const Register = () => {
               />
             </Form.Item>
 
+
+            {/* Phone */}
             <Form.Item>
             <h3
                 style={{
                   color:"white",
                   textAlign:"left"
                 }}
-              >Address:</h3>
+              >Phone:</h3>
           
               <Input 
                 size="large" 
-                placeholder="Enter Your Address"         
+                placeholder="Enter Your Phone Number"         
                 style={{
                   color:"white"
                 }}
@@ -114,100 +132,7 @@ const Register = () => {
               />
             </Form.Item>
 
-            <Form.Item>
-             <h3
-                style={{
-                  color:"white",
-                  textAlign:"left"
-                }}
-              >Gender:</h3>
-            
-              <Radio.Group 
-                onChange={onChange} 
-                size="large"
-                style={{
-                  height:"2.5rem"
-                }}
-              >
-                <Radio 
-                  value={"Male"}
-                  style={{
-                    color:"white"
-                  }}
-                  >Male
-                </Radio>
-
-                <Radio 
-                  value={"Female"}
-                  style={{
-                  color:"white"
-                  }}  
-                >Female
-                </Radio>
-                
-              </Radio.Group>
-            </Form.Item>
-
-          </Col>
-          <Col 
-            
-            xxl={12}
-            xl={12}
-            lg={12}
-            md={12}
-            xs={12}
-
-            style={{
-              flexBasis:"50%"
-            }}
-            >
-            <Form.Item>
-              <h3
-                style={{
-                  color:"white",
-                  textAlign:"left"
-                }}
-              >Date of Birth:</h3>
-              <DatePicker 
-                size="large"
-                format={dateFormatList} 
-                placeholder="Your Birthday"
-                className="RegisterItems"
-                style={{
-                  
-                  color:"white"
-                }}
-                inputReadOnly="true" 
-                allowClear="true"
-              />
-            </Form.Item>
-              
-
-            <Form.Item>
-              <h3
-                style={{
-                  color:"white",
-                  textAlign:"left"
-                }}
-              >Username:</h3>
-          
-              <Input 
-                size="large" 
-                placeholder="Enter Your Username"         
-                style={{
-                  color:"white"
-                }}
-                prefix={<UserOutlined 
-                  style={{
-                    
-                  }}
-                />}
-                className="RegisterItems"
-                allowClear="true"
-                required
-              />
-            </Form.Item>
-
+              {/* Password */}
             <Form.Item>
               <h3
                 style={{
@@ -241,6 +166,102 @@ const Register = () => {
 
             </Form.Item>
 
+           
+          </Col>
+
+          {/* Right Column */}
+          <Col  
+            xxl={12}
+            xl={12}
+            lg={12}
+            md={12}
+            xs={12}
+
+            style={{
+              flexBasis:"50%"
+            }}
+            >
+              {/* DOB */}
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Date of Birth:</h3>
+              <DatePicker 
+                size="large"
+                format={dateFormatList} 
+                placeholder="Your Birthday"
+                className="RegisterItems"
+                style={{
+                  
+                  color:"white"
+                }}
+                inputReadOnly="true" 
+                allowClear="true"
+              />
+            </Form.Item>
+              
+              {/* Gender */}
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Gender:</h3>
+              <Select
+                size="large"
+                onChange={handleChange}
+                className="RegisterItems"
+                style={{
+                  background:"black",
+                  backgroundColor:"black",
+                  color:"black"
+                }}
+                placeholder="Select your gender"
+              >
+                <Option
+                  value="Male"
+                >
+                  Male
+                </Option>
+                <Option
+                  value="Female"
+                >
+                  Female
+                </Option>
+              </Select>
+            </Form.Item>
+            
+            {/* Username */}
+            <Form.Item>
+              <h3
+                style={{
+                  color:"white",
+                  textAlign:"left"
+                }}
+              >Username:</h3>
+          
+              <Input 
+                size="large" 
+                placeholder="Enter Your Username"         
+                style={{
+                  color:"white"
+                }}
+                prefix={<UserOutlined 
+                  style={{
+                    
+                  }}
+                />}
+                className="RegisterItems"
+                allowClear="true"
+                required
+              />
+            </Form.Item>
+
+            {/* Re-type Password  */}
             <Form.Item>
               <h3
                 style={{
@@ -274,14 +295,30 @@ const Register = () => {
 
             </Form.Item>
           </Col>
+
         </Row>
         
+        <Checkbox onChange={Checked}
+          style={{
+            fontSize:"18px",
+            width:"100%",
+            
+          }}
+        >
+          I agree to all the <span
+            className="Agreement"
+            
+          >Term</span>,  
+          <span
+            className="Agreement"
+            
+          > Privacy Policy</span>, and 
           
-
-          
-          
-          
-
+          <span
+            className="Agreement"
+            
+          > Fees</span>
+        </Checkbox>
 
           <Button 
             type="primary" 
