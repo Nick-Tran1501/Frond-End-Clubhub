@@ -2,7 +2,8 @@ import React from "react"
 import { Routes, Route, Link } from "react-router-dom";
 import 'antd/dist/antd.min.css'
 import "../css/Login.css"
-import {ArrowRightOutlined} from '@ant-design/icons'
+import {ArrowRightOutlined} from '@ant-design/icons';
+import backgroundVid from "../image/bg-vid2.mp4";
 
 import { Col, Row } from 'antd';
 import { Layout } from "antd";
@@ -43,6 +44,10 @@ const LoginContainer = () => {
                 md={0}
                 xs={0}
               >
+                <video loop autoPlay muted id='video'>
+                  <source src={backgroundVid} type='video/mp4'/>
+                </video>
+
                 <div
                   className="ButtonContainer"
                 >

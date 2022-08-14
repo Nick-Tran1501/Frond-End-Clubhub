@@ -57,8 +57,15 @@
 
 .BackgroundSide{
   height: 65vh;
-  background-image: url("/src/image/Galaxy-login.png");
+  /* background-image: url("/src/image/Galaxy-login.png"); */
   background-size: cover;
+}
+
+.BackgroundSide video{
+  width: 100%;
+  height: 65vh;
+  object-fit: cover;
+  position: absolute;
 }
 
 .ButtonContainer{
