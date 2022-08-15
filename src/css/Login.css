@@ -7,6 +7,7 @@
   background: rgb(2,0,36);
   background: linear-gradient(200deg,rgba(0,212,255,1)  0%, rgb(8, 8, 156) 90%, rgba(2,0,36,1) 100%);
   background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
   -webkit-animation: gradient 5s ease infinite;
 
   opacity: 0.94;
@@ -76,6 +77,9 @@
   margin: 0px;
   padding: 0px;
   font-family: 'Rubik Distressed', cursive;
+  background: -webkit-linear-gradient(rgb(249, 255, 255)50%,rgb(255, 0, 0)50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 

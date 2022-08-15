@@ -200,12 +200,13 @@ const Register = () => {
                 format={dateFormatList} 
                 placeholder="Your Birthday"
                 className="RegisterItems"
+                onChange={onChange}
                 style={{
                   
                   color:"white"
                 }}
-                inputReadOnly="true" 
-                allowClear="true"
+                inputReadOnly= {true}
+                allowClear={true}
               />
             </Form.Item>
               
