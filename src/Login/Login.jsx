@@ -51,7 +51,7 @@ const LoginContainer = () => {
             <div className="title">
               <h1 style={{
                 fontSize: '50px',
-
+                color:"white"
               }}
               > 
                 Wellcome to RMIT CLUB HUB
