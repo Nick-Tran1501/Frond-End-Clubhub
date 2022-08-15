@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="App">
 
-       <LoginContainer/>
+       {/* <LoginContainer/> */}
 
-      {/* <Home/> */}
+      <Home/>
 
       {/* <Welcome/> */}
     </div>
