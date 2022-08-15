@@ -5,7 +5,7 @@
 .BodyCotainer{
   margin: 0;
   background: rgb(2,0,36);
-  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%);
+  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgb(8, 8, 156) 90%, rgba(2,0,36,1) 100%);
  
 
   opacity: 0.94;
@@ -49,7 +49,7 @@
   display: flex;
   flex-flow: row nowrap;
   height: 65vh;
-  box-shadow: 0.5rem 0.5rem 6rem -0.5rem rgb(31, 30, 30);
+  box-shadow: 0.6rem 0.6rem 6rem -0.6rem rgb(31, 30, 30);
   
   justify-content: center;
   
@@ -80,7 +80,6 @@
 /* another */
 .BackgroundSide{
   height: 65vh;
-  /* background-image: url("/src/image/Galaxy-login.png"); */
   background-size: cover;
 }
 
