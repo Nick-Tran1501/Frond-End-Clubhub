@@ -1,5 +1,5 @@
 .rightContainer{
-    flex: 3.5;
+    flex: 2.5;
     height: calc(100vh - 50px);
     background-color: blueviolet;
 }
