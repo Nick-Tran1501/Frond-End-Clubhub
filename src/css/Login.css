@@ -193,7 +193,7 @@
 }
 
 .button-box {
-  border: 1px solid;
+  border: 1px solid rgba(0,212,255,1);
   border-radius: 30px;
   margin-bottom: 35px;
   position: relative;
@@ -207,7 +207,7 @@
 .btn-toggle {
   color: white;
   font-weight: bold;
-  padding: 10px 25px;
+  padding: 10px 27px;
   cursor: pointer;
   background: transparent;
   border: 0;
