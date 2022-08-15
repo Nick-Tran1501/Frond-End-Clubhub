@@ -77,9 +77,7 @@
   margin: 0px;
   padding: 0px;
   font-family: 'Rubik Distressed', cursive;
-  background: -webkit-linear-gradient(rgb(249, 255, 255)50%,rgb(255, 0, 0)50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: 5px;
 }
 
 
