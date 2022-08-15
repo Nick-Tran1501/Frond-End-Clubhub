@@ -225,7 +225,7 @@
 
 .btn-gradient{
   background: rgb(2,0,36);
-  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%);
+  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 50%, rgba(2,0,36,1) 100%);
   background-position: right;
   background-size: 200%;
   transition: 500ms ease-in-out;

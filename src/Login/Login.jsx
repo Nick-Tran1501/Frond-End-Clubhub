@@ -54,7 +54,7 @@ const LoginContainer = () => {
                 color:"white"
               }}
               > 
-                Wellcome to RMIT CLUB HUB
+               It's Time To Improve Your Talent
               </h1>
             </div>   
 
