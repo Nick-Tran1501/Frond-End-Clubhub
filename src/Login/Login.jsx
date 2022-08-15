@@ -50,11 +50,11 @@ const LoginContainer = () => {
 
             <div className="title">
               <h1 style={{
-                fontSize: '50px',
+                fontSize: '55px',
                 color:"white"
               }}
               > 
-               It's Time To Improve Your Talent
+               Join Us and Show Your Talent !!!
               </h1>
             </div>   
 
