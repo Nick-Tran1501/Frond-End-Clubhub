@@ -54,7 +54,7 @@ const LoginContainer = () => {
                 color:"white"
               }}
               > 
-               It's Time To Improve Your Talent
+               Join Us and Show Your Talent !!!
               </h1>
             </div>   
 

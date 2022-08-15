@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap');
 
-
+@import url('https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Inter:wght@400;600;700&family=Permanent+Marker&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,100&family=Rubik+Distressed&display=swap');
 
 .BodyCotainer{
   margin: 0;
@@ -72,9 +72,10 @@
   align-self: center;
 }
 
-.title h1 {
+.title h1{
   margin: 0px;
   padding: 0px;
+  font-family: 'Rubik Distressed', cursive;
 }
 
 
@@ -153,7 +154,7 @@
   border: none;
   border-style: none none solid none;
   background: #384656;
-  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+  border-image: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%) 1;
 }
 
 .LoginItems{
@@ -162,7 +163,7 @@
   border: none;
   border-style: none none solid none;
   background: #384656;
-  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+  border-image: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%) 1;
 }
 
 .ant-input-affix-wrapper > input.ant-input{
@@ -184,11 +185,11 @@
   border: none;
   border-style: none none solid none;
   background: #384656;
-  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+  border-image: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%) 1;
 }
 
 .button-box {
-  box-shadow: 0 0 20px 9px #fb31ed77;
+  border: 1px solid;
   border-radius: 30px;
   margin-bottom: 35px;
   position: relative;

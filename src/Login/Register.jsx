@@ -73,7 +73,9 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
+                  
                 }}
               >Fullname:</h3>
           
@@ -94,7 +96,8 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Email:</h3>
           
@@ -116,7 +119,8 @@ const Register = () => {
             <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Phone:</h3>
           
@@ -137,7 +141,8 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Password:</h3>
           
@@ -186,7 +191,8 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Date of Birth:</h3>
               <DatePicker 
@@ -208,7 +214,8 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Gender:</h3>
               <Select
@@ -240,7 +247,8 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Username:</h3>
           
@@ -266,7 +274,8 @@ const Register = () => {
               <h3
                 style={{
                   color:"white",
-                  textAlign:"left"
+                  textAlign:"left",
+                  fontSize:"15px"
                 }}
               >Re-type Password:</h3>
           
