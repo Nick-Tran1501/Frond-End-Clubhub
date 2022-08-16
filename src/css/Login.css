@@ -9,15 +9,13 @@
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
   -webkit-animation: gradient 5s ease infinite;
-
   opacity: 0.94;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
-  
   justify-content: center;
-  padding: 3rem 5rem 10rem 5rem; 
-  gap: 5rem; 
+  padding: 5rem 5rem 10rem 5rem; 
+  gap: 4rem; 
   border-style: hidden;
  
 }
