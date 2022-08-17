@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap');
 
-
+@import url('https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Inter:wght@400;600;700&family=Permanent+Marker&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,100&family=Rubik+Distressed&display=swap');
 
 .BodyCotainer{
   margin: 0;
   background: rgb(2,0,36);
-  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgb(8, 8, 156) 90%, rgba(2,0,36,1) 100%);
- 
-
+  background: linear-gradient(200deg,rgba(0,212,255,1)  0%, rgb(8, 8, 156) 90%, rgba(2,0,36,1) 100%);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  -webkit-animation: gradient 5s ease infinite;
   opacity: 0.94;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
-  
   justify-content: center;
-  padding: 3rem 5rem 10rem 5rem; 
-  gap: 5rem; 
+  padding: 5rem 5rem 10rem 5rem; 
+  gap: 4rem; 
   border-style: hidden;
  
 }
@@ -71,9 +71,11 @@
   align-self: center;
 }
 
-.title h1 {
+.title h1{
   margin: 0px;
   padding: 0px;
+  font-family: 'Rubik Distressed', cursive;
+  letter-spacing: 5px;
 }
 
 
@@ -152,7 +154,7 @@
   border: none;
   border-style: none none solid none;
   background: #384656;
-  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+  border-image: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%) 1;
 }
 
 .LoginItems{
@@ -161,7 +163,7 @@
   border: none;
   border-style: none none solid none;
   background: #384656;
-  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+  border-image: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%) 1;
 }
 
 .ant-input-affix-wrapper > input.ant-input{
@@ -183,11 +185,11 @@
   border: none;
   border-style: none none solid none;
   background: #384656;
-  border-image: linear-gradient(-45deg, rgba(144,0,241,1) 0%, rgba(253,29,29,1) 50%, rgba(235,170,80,1) 100%) 1;
+  border-image: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%) 1;
 }
 
 .button-box {
-  box-shadow: 0 0 20px 9px #fb31ed77;
+  border: 1px solid rgba(0,212,255,1);
   border-radius: 30px;
   margin-bottom: 35px;
   position: relative;
@@ -201,7 +203,7 @@
 .btn-toggle {
   color: white;
   font-weight: bold;
-  padding: 10px 25px;
+  padding: 10px 27px;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -224,15 +226,15 @@
 
 .btn-gradient{
   background: rgb(2,0,36);
-  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%);
+  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 50%, rgba(2,0,36,1) 100%);
   background-position: right;
   background-size: 200%;
   transition: 500ms ease-in-out;
 }
 
 .btn-gradient:hover {
-  background: rgb(144,0,241);
-  background: linear-gradient(200deg, rgba(235,170,80,1) 0%, rgba(253,29,29,1) 50%, rgba(144,0,241,1) 100%);
+
+  background: rgba(9,9,121,1) ;
   background-position: left;
 }
 

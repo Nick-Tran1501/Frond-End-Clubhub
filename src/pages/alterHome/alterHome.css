@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.homeContainer{
+.homesContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     /* grid-template-rows: 0.3fr 2fr 2fr 0.2fr; */
@@ -14,4 +14,3 @@
     "sidebar feed feed rightbar"
     "sidebar feed feed rightbar";
 }
-

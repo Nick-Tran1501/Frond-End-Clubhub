@@ -51,10 +51,10 @@ const LoginContainer = () => {
             <div className="title">
               <h1 style={{
                 fontSize: '50px',
-
+                color:"white"
               }}
               > 
-                Wellcome to RMIT CLUB HUB
+               It's Time To Improve Your Talent
               </h1>
             </div>   
 
@@ -91,8 +91,8 @@ const LoginContainer = () => {
                     style={{
                       width:"15rem",
                       height:"3rem",
-                      marginTop:"1rem"
-                      
+                      marginTop:"1rem",
+                      background:"rgba(0,212,255,1) "
                     }}
                     
                   >

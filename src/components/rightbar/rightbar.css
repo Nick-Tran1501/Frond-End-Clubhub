@@ -1,5 +1,5 @@
 .rightContainer{
-    flex: 3.5;
-    height: calc(100vh - 50px);
+    height: 100%;
     background-color: blueviolet;
+    grid-area: rightbar;
 }
