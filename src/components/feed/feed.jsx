@@ -4,7 +4,7 @@ import './feed.css';
 function feed() {
   return (
     <div className='feedContainer'> 
-      Feed section 
+      lorem1000000
     </div>
   )
 }

@@ -1,5 +1,6 @@
 .feedContainer{
-    flex: 6.5;
-    height: calc(100vh - 50px);
+    height: 95vh;
     background-color: aqua;
+    overflow-y: scroll;
+    grid-area: feed;
 }
