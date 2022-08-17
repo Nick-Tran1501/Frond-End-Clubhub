@@ -6,6 +6,7 @@ import Rightbars from '../../components/rightbar/rightbar';
 import Footer from '../../components/footer/footer';
 import './home.css';
 
+
 function home() {
   return (
     <div>
@@ -13,6 +14,9 @@ function home() {
       <div className="homeContainer">
         <Sidebars/>
         <Feed/>
+
+         
+        
         <Rightbars/>
       </div>
       <Footer/>
