@@ -12,18 +12,6 @@ import { Col, Row } from 'antd';
 
 function home() {
   return (
-    <div>
-      <Navbars/>
-      <div className="homeContainer">
-        <Sidebars/>
-        <Feed/>
-
-         
-        
-        <Rightbars/>
-      </div>
-      <Footer/>
-
     <div className="homeContainer">
             <Row>
         <Col span={24}>
