@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import "antd/dist/antd.min.css";
 import "./Post.css";
 import { Image, Button, Comment, Form, Input, List, Carousel } from "antd";
@@ -13,6 +12,8 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
+
+
 const { TextArea } = Input;
 
 const Post = () => {
@@ -137,14 +138,28 @@ const Post = () => {
           {/* Post Info */}
           <div className="PostInfo">
             <div>
-              <p>Nam</p>
+              <p
+                style={{
+                  fontWeight:"bold"
+                }}
+              >Nam</p>
             </div>
 
             <div>
-              <p>Nam</p>
+              <p
+                style={{
+                  opacity:"0.6",
+                  fontWeight:"bold"
+                }}
+              >Today</p>
             </div>
-            <div>
-              <p>Nam</p>
+            <div
+              style={{
+                opacity:"0.6",
+                fontWeight:"bold"
+              }}
+            >
+              <p>RMIT University</p>
             </div>
           </div>
           {/* Post Setting */}
@@ -182,40 +197,64 @@ const Post = () => {
 
           <div className="PostImage">
             <Carousel
-              dots={true}
+              dots={false}
               arrows
               prevArrow={<LeftOutlined/>}
               nextArrow={<RightOutlined/>}
+              style={{
+                // width:"100%",
+                paddingRight:"5rem"
+              }}
             >
               <Image
                 width="100%"
-                height="35rem"
+                height="20rem"
                 src={require("../../image/Image1.jpg")}
+                style={{
+                  objectFit:"contain"
+                }}
               />
               <Image
                 width="100%"
-                height="35rem"
+                height="20rem"
                 src={require("../../image/Image2.jpg")}
+                style={{
+                  objectFit:"contain"
+                }}
               />
               <Image
                 width="100%"
-                height="35rem"
+                height="20rem"
                 src={require("../../image/Image3.jpg")}
+                style={{
+                  objectFit:"contain"
+                }}
               />
               <Image
                 width="100%"
-                height="35rem"
+                height="20rem"
                 src={require("../../image/ClubHub_Trans.png")}
+                style={{
+                  objectFit:"contain"
+
+                }}
               />
               <Image
                 width="100%"
-                height="35rem"
+                height="20rem"
                 src={require("../../image/Galaxy-login.png")}
+                style={{
+                  objectFit:"contain"
+
+                }}
               />
               <Image
                 width="100%"
-                height="500px"
+                height="20rem"
                 src={require("../../image/Image3.jpg")}
+                style={{
+                  objectFit:"contain"
+                }}
               />
 
 
