@@ -12,7 +12,7 @@ function welcome() {
       <Navbars />
       <div className="welcomeContainer">
         <Hero/>
-        <Gallery/>
+        <Gallery />
       </div>
       <Footer/>
     </div>
