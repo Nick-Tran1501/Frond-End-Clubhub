@@ -41,9 +41,7 @@ const LoginContainer = () => {
                 alt="ClubHubLogo" 
                 width="200px"
                 height="150px"
-                style={{
-                  
-                }}
+                
               />
 
               </div>

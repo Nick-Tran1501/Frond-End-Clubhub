@@ -1,0 +1,119 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* -----Post Header------ */
+.PostContainer{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  padding: 1rem;
+  width: 50rem;
+  height: auto;
+  border: 2px solid;
+  gap:2rem;
+}
+.PostHeader{
+  height: 3rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-flow: 10%;
+  
+}
+.ProfileImage{
+  height: 52px;
+  border: 1px solid;
+  border-radius: 50%;
+  flex-basis: 7%;
+  align-self: center;
+}
+
+.PostInfo{
+  height: 40px;
+  font-size: 12px;
+  flex-basis: 83%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.PostInfo div{
+  height: 15px;
+}
+
+/* -----PostContent----- */
+.PostContent{
+  flex-flow: 75%;
+  text-align: justify;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.Content{
+  font-size: 15px;
+}
+
+.PostResult{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ReactResult{
+  flex-basis: 10%;
+  text-align: right;
+  padding-top: 5px ;
+}
+
+.ResultIcon{
+  flex-basis: 70%;
+  font-size: 15px;
+  
+}
+.CommentsResult{
+  flex-basis: 20%;
+}
+
+/* ------Post Footer------ */
+.PostFooter{
+  flex-basis: 15%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ActionButtons{
+  flex-basis: 30%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.Button{
+  border:none;
+  background: none;
+  text-align: center;
+  font-size: 17px;
+  width: 30%;
+  height: 1rem;
+  padding-bottom: 2rem;
+}
+
+.ButtonIcons{
+padding-bottom: 1rem ;
+font-size: 20px;
+}
+
+.Button:hover{
+  color:rgb(18, 79, 234) 
+  
+}
