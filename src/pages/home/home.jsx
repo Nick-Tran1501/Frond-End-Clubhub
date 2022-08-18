@@ -45,6 +45,7 @@ function home() {
           <Footer />
         </Col>
       </Row>
+
       </Layout>
       
       
@@ -52,6 +53,10 @@ function home() {
 
       
     </div>
+
+    </div>
+    // </div>
+
   );
 }
 
