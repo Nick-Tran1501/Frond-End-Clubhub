@@ -1,5 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Inter:wght@400;600;700&family=Permanent+Marker&family=Poppins:wght@500;700&family=Roboto+Serif:opsz@8..144&family=Roboto:ital,wght@1,100&family=Rubik+Distressed&family=Ubuntu:wght@500;700&display=swap');
+
 .galleryContainer{
     width: 100%;
-    background-color: bisque;
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Panels. */
+.splitview {
+    position: relative;
+    width: 100%;
+    min-height: 45vw;
+    overflow: hidden;
+}
+
+.panel {
+    position: absolute;
+    width: 100vw;
+    min-height: 45vw;
+    overflow: hidden;
+}
+
+    .panel .content {
+        position: absolute;
+        width: 100vw;
+        min-height: 45vw;
+        color: #FFF;
+    }
+
+    .panel .description {
+        width: 25%;
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        text-align: center;
+    }
+
+    .panel img {
+        box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.15);
+        width: 35%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+.bottom {
+    background-color: rgba(2, 0, 36, 0.944);
+    z-index: 1;
+}
+
+    .bottom .description {
+        right: 5%;
+    }
+
+    .bottom .description h1 {
+        color: rgba(0, 213, 255, 0.79);
+    }
+
+.top {
+    background-color: rgba(0, 213, 255, 0.79);
+    z-index: 2;
+    width: 50vw;
+}
+
+    .top .description {
+        left: 5%;
+    }
+
+    /* left card */
+.left {
+    background-color: rgba(2, 0, 36, 0.944);
+    z-index: 2;
+
+    clip-path: polygon(45% 0, 0% 0, 0% 100%, 37% 100%, 28% 70%);
+}
+
+    .left .description {
+        left: 5%;
+    }
+
+    .left .description h1{
+        color: rgba(0, 213, 255, 0.79);
+    }
+
+.left_2 {
+    z-index: 0;
+}
+
+    .left_2 img {
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    /* right card */
+.right {
+    background-color: rgba(2, 0, 36, 0.944);
+    z-index: 2;
+    clip-path: polygon(55% 0, 100% 0%, 100% 100%, 63% 100%, 72% 70%);
+}
+
+    .right .description {
+        right: 5%;
+    }
+
+    .right .description h1{
+        color: rgba(0, 213, 255, 0.79);
+    }
+
+.right {
+    z-index: 2;
+}
+    .right_2 img {
+        width: 100%;
+        height: 100%;
+    }
+/* Handle. */
+.handle {
+    height: 100%;
+    position: absolute;
+    display: block;
+    background-color: rgb(253, 171, 0);
+    width: 5px;
+    top: 0;
+    left: 50%;
+    z-index: 3;
+}
+
+/* Skewed. */
+.skewed .handle {
+    top: 50%;
+    transform: rotate(30deg) translateY(-50%);
+    height: 200%;
+    -webkit-transform-origin: top;
+    -moz-transform-origin: top;
+    transform-origin: top;
+}
+
+.skewed .top {
+    transform: skew(-30deg);
+    margin-left: -1000px;
+    width: calc(50vw + 1000px);
+}
+
+.skewed .top .content {
+    transform: skew(30deg);
+    margin-left: 1000px;
+}
+
+/* team section styleing */
+.team {
+    background-color: #fff;
+    padding-bottom: 50px;
+}
+
+.tag {
+    position: relative;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    padding-top: 30px;
+}
+
+.tag::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 280px;
+    height: 3px;
+    transform: translateX(-50%);
+    background: #111;
+}
+
+.tag::after {
+    content: "The way finders";
+    position: absolute;
+    bottom: -17px;
+    left: 50%;
+    font-size: 25px;
+    color: rgba(0, 213, 255, 0.79);
+    padding: 5px;
+    transform: translateX(-50%);
+    background: #fff;
+}
+  
+.imgslider {
+    background: #111;
+    width: 80%;
+    margin: 10px auto;
+    padding: 50px;
+}
+
+.slick-arrow {
+    background-color: rgba(0, 213, 255, 0.79);
+}
+.slick-slide div {
+    margin: 0 30px;
+    outline: none;
+}
+.slick-list {
+    margin: 0 -10px;
+}
+
+.card_team {
+    border-radius: 6px;
+    padding: 25px 35px;
+    background-color: #222;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card_team:hover img{
+    border-color: #fff;
+}
+
+.card_team img {
+    width: 80%;
+    height: 80%;
+    margin: 10px auto;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid rgba(0, 213, 255, 0.79);
+}
+
+.card_team h2 {
+    color: rgba(0, 213, 255, 0.79);
+    text-align: center;
+}
+
+.card_team p {
+    color: #FFF;
+    text-align: center;
+}
+
+/* Responsive. */
+@media (max-width: 900px) {
+    .galleryContainer {
+        font-size: 75%;
+    }
 }

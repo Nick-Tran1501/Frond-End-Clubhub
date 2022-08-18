@@ -17,7 +17,7 @@ function App() {
 
       <Home/>
 
-      {/* <Welcome/> */}
+      <Welcome/>
 
       {/* <AlterHome/> */}
     </div>
