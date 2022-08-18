@@ -41,20 +41,18 @@ const LoginContainer = () => {
                 alt="ClubHubLogo" 
                 width="200px"
                 height="150px"
-                style={{
-                  
-                }}
+                
               />
 
               </div>
 
             <div className="title">
               <h1 style={{
-                fontSize: '55px',
+                fontSize: '50px',
                 color:"white"
               }}
               > 
-               Join Us and Show Your Talent !!!
+               It's Time To Improve Your Talent
               </h1>
             </div>   
 
@@ -91,8 +89,8 @@ const LoginContainer = () => {
                     style={{
                       width:"15rem",
                       height:"3rem",
-                      marginTop:"1rem"
-                      
+                      marginTop:"1rem",
+                      background:"rgba(0,212,255,1) "
                     }}
                     
                   >
