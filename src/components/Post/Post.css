@@ -55,9 +55,42 @@
 }
 
 .Content{
-  font-size: 15px;
+  font-size: 13px;
 }
 
+.PostImage{
+  display: flex;
+  flex-flow: column nowrap;
+  height: 35rem;
+}
+/* Carousel Arrows */
+.ant-carousel .slick-next{
+  font-size: 30px;
+  color: black;
+  opacity: 0.9;
+  z-index: 5;
+  height: 30px;
+  width: 30px;
+  right: 0px;
+}
+
+.ant-carousel .slick-prev{
+  font-size: 30px;
+  color: black;
+  opacity: 0.9;
+  z-index: 5;
+  height: 30px;
+  width: 30px;
+}
+
+
+.ant-carousel .slick-next:hover, .ant-carousel .slick-prev:hover{
+  color: rgba(9,9,121,1);
+  background-color: gray;
+  border: grey;
+  border-radius:50% ;
+}
+/* Post Result */
 .PostResult{
   display: flex;
   flex-flow: row nowrap;
@@ -116,4 +149,8 @@ font-size: 20px;
 .Button:hover{
   color:rgb(18, 79, 234) 
   
+}
+
+.readOrHide{
+  text-decoration: underline;
 }
