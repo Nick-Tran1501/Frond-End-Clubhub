@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Button, Comment, Form, Input, List } from "antd";
+import { Image, Button, Comment, Form, Input, List, Carousel } from "antd";
 import {
   EditOutlined,
   LikeOutlined,
   ShareAltOutlined,
   CommentOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
-
 const { TextArea } = Input;
-
-
 
 const Post = () => {
   // ------Show Comments-----
@@ -22,11 +22,8 @@ const Post = () => {
   // -------Like Count--------
   const [likeCount, setLikeCount] = useState(0);
   const handleLike = () => {
-    setLikeCount(prevState => prevState +1)
-  }
-
-
-  
+    setLikeCount((prevState) => prevState + 1);
+  };
 
   const CommentList = ({ comments }) => (
     <List
@@ -36,7 +33,7 @@ const Post = () => {
       renderItem={(props) => <Comment {...props} />}
     />
   );
-  
+
   const Editor = ({ onChange, onSubmit, submitting, value }) => (
     <>
       <Form.Item>
@@ -55,7 +52,7 @@ const Post = () => {
     </>
   );
 
-  
+  // -------Comment Box-------
   const CommentsContainer = () => {
     const [comments, setComments] = useState([]);
     const [submitting, setSubmitting] = useState(false);
@@ -64,7 +61,7 @@ const Post = () => {
     const handleSubmit = () => {
       if (!value) return;
       setSubmitting(true);
-      
+
       setTimeout(() => {
         setSubmitting(false);
         setValue("");
@@ -78,7 +75,6 @@ const Post = () => {
           },
         ]);
       }, 1000);
-      
     };
 
     const handleChange = (e) => {
@@ -86,25 +82,41 @@ const Post = () => {
     };
 
     return (
-
       <div>
-          <Comment
-            avatar={
-              <Image width="100%" src={require("../../image/Image1.jpg")} />
-            }
-            content={
-              <Editor
-                onChange={handleChange}
-                onSubmit={handleSubmit}
-                submitting={submitting}
-                value={value}
-              />
-            }
-          />
-          {comments.length > 0 && <CommentList comments={comments}/>}
-        </div>
+        <Comment
+          avatar={
+            <Image width="100%" src={require("../../image/Image1.jpg")} />
+          }
+          content={
+            <Editor
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              submitting={submitting}
+              value={value}
+            />
+          }
+        />
+        {comments.length > 0 && <CommentList comments={comments} />}
+      </div>
     );
   };
+
+  const ReadMore = ({ children }) => {
+    const text = children;
+    const [isReadMore, setIsReadMore] = useState(true);
+    const toggleReadMore = () => {
+      setIsReadMore(!isReadMore);
+    };
+    return (
+      <p className="text">
+        {isReadMore ? text.slice(0, 150) : text}
+        <span onClick={toggleReadMore} className="readOrHide">
+          {isReadMore ? "...read more" : " show less"}
+        </span>
+      </p>
+    );
+  };
+
   return (
     <React.Fragment>
       <div className="PostContainer">
@@ -152,23 +164,63 @@ const Post = () => {
         {/* -----Post Content----- */}
         <div className="PostContent">
           <div className="Content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
-            ipsa, molestiae laudantium nostrum voluptates inventore dolore
-            laborum optio, perspiciatis accusantium architecto repudiandae.
-            Repudiandae, consequuntur corrupti. Quod perferendis necessitatibus,
-            nihil aperiam ipsam, ad, molestias asperiores delectus sit maiores
-            inventore officia magni quos animi sed corrupti vero nam distinctio
-            culpa reprehenderit facilis nostrum accusamus repellendus.
-            Blanditiis commodi inventore laborum nihil eius beatae soluta ullam
-            ducimus, vero qui culpa illum, fuga illo in rerum, velit aliquid
-            placeat! Dolorem perspiciatis aspernatur tempora neque veritatis
-            amet nulla ipsa quam, non nostrum aperiam perferendis consequuntur
-            aliquid fugiat exercitationem quae voluptatibus a quo dolore quos
-            fuga nobis.
+            <ReadMore>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum quam
+              ratione natus laudantium? Sint est, inventore ipsa totam sunt
+              tempore, laboriosam veniam voluptatem voluptas, illum at
+              blanditiis omnis quasi unde in quae. Dolorem dolor deserunt
+              accusamus quas officia, esse atque, in vero expedita soluta
+              debitis, natus sint ipsam magnam repudiandae nisi aspernatur vel
+              tenetur dignissimos pariatur possimus delectus. Sed, ratione.
+              Neque ipsum omnis laborum perspiciatis repellendus. Minus
+              provident molestiae dolorem eum iure. Aliquam saepe odit culpa
+              laudantium possimus, nam maiores est quaerat adipisci, vero modi,
+              ipsa rerum commodi nostrum dignissimos facilis pariatur ullam sint
+              assumenda aperiam fugit. Iure, quidem possimus.
+            </ReadMore>
           </div>
 
           <div className="PostImage">
-            <Image width="100%" src={require("../../image/Image1.jpg")} />
+            <Carousel
+              dots={true}
+              arrows
+              prevArrow={<LeftOutlined/>}
+              nextArrow={<RightOutlined/>}
+            >
+              <Image
+                width="100%"
+                height="35rem"
+                src={require("../../image/Image1.jpg")}
+              />
+              <Image
+                width="100%"
+                height="35rem"
+                src={require("../../image/Image2.jpg")}
+              />
+              <Image
+                width="100%"
+                height="35rem"
+                src={require("../../image/Image3.jpg")}
+              />
+              <Image
+                width="100%"
+                height="35rem"
+                src={require("../../image/ClubHub_Trans.png")}
+              />
+              <Image
+                width="100%"
+                height="35rem"
+                src={require("../../image/Galaxy-login.png")}
+              />
+              <Image
+                width="100%"
+                height="500px"
+                src={require("../../image/Image3.jpg")}
+              />
+
+
+
+            </Carousel>
           </div>
 
           <div className="PostResult">
@@ -182,7 +234,11 @@ const Post = () => {
 
             <div className="CommentsResult">
               <p>
-                100 <span> <CommentOutlined></CommentOutlined></span>
+                100{" "}
+                <span>
+                  {" "}
+                  <CommentOutlined></CommentOutlined>
+                </span>
               </p>
             </div>
           </div>
@@ -191,9 +247,7 @@ const Post = () => {
 
         {/* -------Post Footer------ */}
         <div className="PostFooter">
-          <button className="Button"
-            onClick={handleLike}
-          >
+          <button className="Button" onClick={handleLike}>
             <div className="ActionButtons">
               <p>Like</p>
               <LikeOutlined className="ButtonIcons" />
@@ -201,9 +255,11 @@ const Post = () => {
           </button>
 
           <button className="Button">
-            <div 
+            <div
               className="ActionButtons"
-              onClick={()=>{setShow(!show)}}
+              onClick={() => {
+                setShow(!show);
+              }}
             >
               <p>Comment</p>
               <CommentOutlined className="ButtonIcons" />
@@ -217,9 +273,8 @@ const Post = () => {
             </div>
           </button>
         </div>
-        
-        {show && <CommentsContainer/>}
-        
+
+        {show && <CommentsContainer />}
       </div>
     </React.Fragment>
   );
