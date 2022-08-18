@@ -19,11 +19,11 @@ function App() {
 
        {/* <LoginContainer/> */}
 
-        {/* <Post/> */}
+        <Post/>
 
-      <Home/>
+      {/* <Home/>
 
-      <Welcome/>
+      <Welcome/> */}
 
       {/* <AlterHome/> */}
     </div>

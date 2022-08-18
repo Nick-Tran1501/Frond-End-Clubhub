@@ -85,6 +85,7 @@
 
 
 .ant-carousel .slick-next:hover, .ant-carousel .slick-prev:hover{
+  
   color: rgba(9,9,121,1);
   background-color: gray;
   border: grey;
