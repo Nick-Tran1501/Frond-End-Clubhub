@@ -5,8 +5,7 @@ import Home from './pages/home/home';
 import Welcome from './pages/welcome/welcome';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Post from './components/Post/Post';
-
+import PostList from './components/PostList/PostList';
 import AlterHome from './pages/alterHome/alterHome';
 
 
@@ -19,11 +18,11 @@ function App() {
 
        {/* <LoginContainer/> */}
 
-        {/* <Post/> */}
+        {/* <PostList/> */}
 
       <Home/>
 
-      <Welcome/>
+      {/* <Welcome/> */}
 
       {/* <AlterHome/> */}
     </div>

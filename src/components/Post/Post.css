@@ -3,17 +3,21 @@
   padding: 0;
 }
 
-/* -----Post Header------ */
+
 .PostContainer{
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
   padding: 1rem;
-  width: 50rem;
+  width: 100%;
   height: auto;
-  border: 2px solid;
+  border: none;
+  border-radius: 5px;
   gap:2rem;
+  background-color: white;
 }
+
+/* -----Post Header------ */
 .PostHeader{
   height: 3rem;
   display: flex;
@@ -30,6 +34,7 @@
   border-radius: 50%;
   flex-basis: 7%;
   align-self: center;
+  
 }
 
 .PostInfo{
@@ -55,13 +60,17 @@
 }
 
 .Content{
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .PostImage{
   display: flex;
   flex-flow: column nowrap;
-  height: 35rem;
+  height: 25rem;
+  justify-content: space-around; 
+  text-align: center;
+  
+  
 }
 /* Carousel Arrows */
 .ant-carousel .slick-next{
@@ -81,6 +90,7 @@
   z-index: 5;
   height: 30px;
   width: 30px;
+  left: 0;
 }
 
 
