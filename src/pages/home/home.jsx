@@ -36,8 +36,9 @@ function home() {
           </Col>
 
           <Col xs={0} sm={6} md={6} lg={6} xl={6}>
-            <Rightbars />
+            <Rightbars/>
           </Col>
+          
         </Row>
       </Layout>
       <Row>
@@ -54,7 +55,7 @@ function home() {
       
     </div>
 
-    </div>
+    
     // </div>
 
   );

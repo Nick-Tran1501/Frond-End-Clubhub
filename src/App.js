@@ -19,7 +19,6 @@ function App() {
        {/* <LoginContainer/> */}
 
         {/* <PostList/> */}
-
       <Home/>
 
       {/* <Welcome/> */}
