@@ -11,14 +11,14 @@ import { Col, Row,Layout } from "antd";
 function home() {
   return (
     <div className="homeContainer">
-      <Layout>
+  
         <Row>
           <Col span={24} >
             <Navbars />
           </Col>
         </Row>
 
-        <Layout>
+
         <Row
           gutter={{
             xs: 0,
@@ -39,21 +39,19 @@ function home() {
             <Rightbars />
           </Col>
         </Row>
-      </Layout>
+
       <Row>
         <Col span={24}>
           <Footer />
         </Col>
       </Row>
 
-      </Layout>
+
       
       
       
 
       
-    </div>
-
     </div>
     // </div>
 
