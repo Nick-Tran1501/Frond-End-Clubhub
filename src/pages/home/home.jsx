@@ -8,7 +8,7 @@ import "./home.css";
 import "antd/dist/antd.css";
 import { Col, Row,Layout } from "antd";
 
-function home() {
+const home = () => {
   return (
     <div className="homeContainer">
   

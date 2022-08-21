@@ -10,7 +10,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavbarBrand } from "react-bootstrap";
 
-function navbar() {
+const navbar = () => {
   return (
     <div className="navbar--container">
       <Navbar className="d-flex" style={{zIndex: 1,}} bg="light" expand="lg">

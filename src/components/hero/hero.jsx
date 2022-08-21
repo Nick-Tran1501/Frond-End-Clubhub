@@ -2,7 +2,7 @@ import React from 'react';
 import './hero.css';
 // import Typical from 'react-typical';
 
-function hero() {
+const hero = () => {
   return (
     <div className='heroContainer'>
       <div className='hero'>

@@ -210,51 +210,43 @@ const Post = () => {
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image1.jpg")}
-                style={{
-                  objectFit:"contain"
-                }}
+                className="Images"
+                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image2.jpg")}
-                style={{
-                  objectFit:"contain"
-                }}
+                className="Images"
+                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image3.jpg")}
-                style={{
-                  objectFit:"contain"
-                }}
+                className="Images"
+                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/ClubHub_Trans.png")}
-                style={{
-                  objectFit:"contain"
-
-                }}
+                className="Images"
+                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Galaxy-login.png")}
-                style={{
-                  objectFit:"contain"
-
-                }}
+                className="Images"
+                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image3.jpg")}
-                style={{
-                  objectFit:"contain"
-                }}
+                className="Images"
+                
               />
 
 

@@ -7,7 +7,7 @@ import Feed from '../../components/feed/feed';
 import "antd/dist/antd.css";
 
 
-function profile() {
+const profile = () =>  {
   return (
     <div className='profile--container'>
         <Navbar/>

@@ -9,7 +9,7 @@ import { Col, Divider, Row } from 'antd';
 import 'antd/dist/antd.css';
 import { Footer } from 'antd/lib/layout/layout';
 
-function alterHome() {
+const alterHome = () => {
   return (
     <div className='homesContainer'>
     </div>
