@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import PostList from './components/PostList/PostList';
 import AlterHome from './pages/alterHome/alterHome';
+import Profile from './pages/profile/profile'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         {/*<Welcome/> */}
 
         {/* <AlterHome/> */}
+        <Profile />
     </div>
   );
 }
