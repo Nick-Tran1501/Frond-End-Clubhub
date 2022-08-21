@@ -44,7 +44,6 @@ function home() {
         </Col>
       </Row>
     </div>
-    </div>
   );
 }
 
