@@ -11,7 +11,7 @@ import avatar from "../../image/avatar.png"
 import { useEffect } from 'react';
 import teammate from './team_data'
 
-function Gallery() {
+const Gallery = () => {
 
   // const settings = {
   //   dots: true,

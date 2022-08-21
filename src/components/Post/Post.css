@@ -70,7 +70,10 @@
   justify-content: space-around; 
   text-align: center;
   
-  
+}
+
+.Images{
+  object-fit: cover;
 }
 /* Carousel Arrows */
 .ant-carousel .slick-next{
