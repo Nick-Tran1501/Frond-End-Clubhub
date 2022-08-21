@@ -5,7 +5,7 @@ import Hero from "../../components/hero/hero";
 import Gallery from "../../components/gallery/gallery";
 import Footer from "../../components/footer/footer";
 
-function welcome() {
+const welcome = () => {
   return (
     <div>
 
