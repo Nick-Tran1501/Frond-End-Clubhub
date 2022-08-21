@@ -6,44 +6,59 @@ import Rightbars from "../../components/rightbar/rightbar";
 import Footer from "../../components/footer/footer";
 import "./home.css";
 import "antd/dist/antd.css";
-import { Col, Row } from 'antd';
+import { Col, Row,Layout } from "antd";
 
-
-
-function home() {
+const home = () => {
   return (
     <div className="homeContainer">
-            <Row>
-        <Col span={24}>
-          <Navbars/>
-        </Col>
-      </Row>
+  
+        <Row>
+          <Col span={24} >
+            <Navbars />
+          </Col>
+        </Row>
 
-      <Row gutter={{
-        xs: 8,
-        sm: 16,
-        md: 24,
-        lg: 32,
-      }}>
-        <Col span={4}>
-          <Sidebars/>
-        </Col>
 
-        <Col xs={20} sm={14} md={14} lg={14} xl={14}>
-          <Feed/>
-        </Col>
+        <Row
+          gutter={{
+            xs: 0,
+            sm: 8,
+            md: 16,
+            lg: 22,
+          }}
+        >
+          <Col xs={0} sm={0} md={4} lg={4} xl={4}>
+            <Sidebars />
+          </Col>
 
-        <Col xs={0} sm={6} md={6} lg={6} xl={6}>
-          <Rightbars/>
-        </Col>
-      </Row>
+          <Col xs={24} sm={18} md={14} lg={14} xl={14}>
+            <Feed />
+          </Col>
+
+          <Col xs={0} sm={6} md={6} lg={6} xl={6}>
+            <Rightbars/>
+          </Col>
+          
+        </Row>
 
       <Row>
         <Col span={24}>
-          <Footer/>
+          <Footer />
         </Col>
       </Row>
+
+
+      
+      
+      
+
+      
     </div>
+<<<<<<< HEAD
+=======
+    // </div>
+
+>>>>>>> b297d1e1b7f5962c67ed859b302017119b73258e
   );
 }
 

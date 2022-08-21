@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import {LaptopOutlined, UserOutlined, NotificationOutlined} from "@ant-design/icons";
 
-function sidebar() {
+const sidebar = () => {
 
   const item2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
     (icon, index) => {

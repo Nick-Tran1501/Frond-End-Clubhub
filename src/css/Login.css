@@ -14,7 +14,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  padding: 5rem 5rem 10rem 5rem; 
+  padding: 10rem 7rem 10rem 5rem; 
   gap: 4rem; 
   border-style: hidden;
  
@@ -59,7 +59,8 @@
 .Logo{
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   
 }
 
@@ -68,14 +69,13 @@
 }
 .title {
   flex-basis: 70%;
-  align-self: center;
+  
 }
 
 .title h1{
-  margin: 0px;
-  padding: 0px;
   font-family: 'Rubik Distressed', cursive;
   letter-spacing: 5px;
+  
 }
 
 
@@ -245,4 +245,15 @@
 }
 .ant-select-arrow {
   color: white;
+}
+
+.LoginFooter{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bolder;
+  padding-bottom: 3rem;
 }

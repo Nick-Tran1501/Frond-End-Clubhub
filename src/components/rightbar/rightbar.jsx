@@ -1,12 +1,20 @@
 import React from 'react';
 import './rightbar.css';
+import RecommendClub from "../recommendClub/recommendClub";
+import UpcomingEvent from "../upComingEvent/upComingEvent";
+import "antd/dist/antd.min.css";
 
-function rightbar() {
+
+
+
+const Rightbars = () => {
   return (
     <div className='rightContainer'>
-      Rightbar section
+      <RecommendClub/>
+      <UpcomingEvent/>
+      <UpcomingEvent/>
     </div>
   )
 }
 
-export default rightbar
+export default Rightbars

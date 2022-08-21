@@ -1,5 +1,9 @@
 .rightContainer{
-    height: 100%;
-    background-color: blueviolet;
-    grid-area: rightbar;
+    height: 90vh;
+    background-color: rgb(171, 164, 164);
+    overflow: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 4rem 2.5rem;
+    gap: 4rem
 }

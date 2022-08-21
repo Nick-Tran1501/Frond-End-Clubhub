@@ -1,10 +1,11 @@
 import React from 'react';
 import './feed.css';
+import PostList from '../PostList/PostList';
 
-function feed() {
+const feed = () => {
   return (
     <div className='feedContainer'> 
-      lorem1000000
+      <PostList/>
     </div>
   )
 }
