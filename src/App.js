@@ -16,10 +16,10 @@ function App() {
   return (
     <div className="App">
 
-        <LoginContainer/>
+        {/* <LoginContainer/> */}
 
         {/* <PostList/> */}
-        {/* <Home/> */}
+        <Home/>
         {/*<Welcome/> */}
 
         {/* <AlterHome/> */}

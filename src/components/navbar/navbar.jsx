@@ -1,7 +1,15 @@
 import React from "react";
 import "./navbar.css";
 import "antd/dist/antd.css";
+import {
+  SearchOutlined,
+  UserOutlined,
+  WechatFilled,
+  BellFilled,
+} from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
+import userAvatar from "../../image/42527221_688413261531308_7133408386179137536_n.jpg";
+import {Col, Row,} from "antd";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -13,37 +21,45 @@ import { NavbarBrand } from "react-bootstrap";
 const navbar = () => {
   return (
     <div className="navbar--container">
-      <Navbar className="d-flex" style={{zIndex: 1,}} bg="light" expand="lg">
-        <Container fluid>
+      <div className="topbarLeft">
+        <span className="logo">CLUB HUB</span>
+      </div>
+      <div className="topbarCenter">
+        <div className="searchbar">
+          <SearchOutlined className="searchIcon" />
+          <input
+            placeholder="Search for friend, post or video"
+            className="searchInput"
+          />
+        </div>
+      </div>
 
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-
-          
-          <Navbar.Toggle aria-controls="navbarScroll"/>
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="ms-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Row className="topbarRight">
+        <Col xs={0} sm={0} md={0} lg={6} xl={6} className="topbarLinks">
+          <span className="topbarLink">Homepage</span>
+          <span className="topbarLink">Timeline</span>
+        </Col>
+      
+        <Col xs={0} sm={0} md={0} lg={0} xl={6} className="topbarIcons">
+          <div className="topbarIconItem">
+            <UserOutlined />
+            <span className="topbarIconBadge">1</span>
+          </div>
+          <div className="topbarIconItem">
+            <WechatFilled />
+            <span className="topbarIconBadge">2</span>
+          </div>
+          <div className="topbarIconItem">
+            <BellFilled />
+            <span className="topbarIconBadge">1</span>
+          </div>
+        </Col>
+        <Col>
+        <img src={userAvatar} alt="" className="topbarImg" />
+        </Col>
+      </Row>
     </div>
   );
-}
+};
 
 export default navbar;
