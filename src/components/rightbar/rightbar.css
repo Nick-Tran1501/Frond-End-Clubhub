@@ -4,6 +4,6 @@
     overflow: auto;
     display: flex;
     flex-flow: column nowrap;
-    padding: 4rem 1.5rem;
+    padding: 4rem 2.5rem;
     gap: 4rem
 }
