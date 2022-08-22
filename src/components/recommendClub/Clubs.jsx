@@ -2,21 +2,20 @@ import React from "react";
 import "antd/dist/antd.min.css";
 
 import { Button } from "antd";
-import {ArrowRightOutlined} from "@ant-design/icons"; 
-import "./Clubs.css"
+import "./Clubs.css";
 
 const Clubs = () => {
-  return(
-
+  return (
     <React.Fragment>
       <div className="ClubContainer">
-        <button
-          className="ButtonImage"
-        >
-
-          <img src={require("../../image/Image1.jpg")} alt="logo" width="50px" height="50px" 
+        <button className="ButtonImage">
+          <img
+            src={require("../../image/Image1.jpg")}
+            alt="logo"
+            width="100%"
+            height="55px"
             style={{
-              borderRadius:"50%"
+              borderRadius: "50%",
             }}
           />
         </button>
@@ -24,33 +23,43 @@ const Clubs = () => {
         <div className="clubInfo">
           <p
             style={{
-              fontWeight:"bold"
+              fontWeight: "bold",
+              marginBottom:"0"
             }}
-          >Football</p>
+          >
+            Football SGS Club
+          </p>
           <p
             style={{
-              fontWeight:"bold",
-              opacity:"0.6"
+              fontWeight: "bold",
+              opacity: "0.6",
             }}
-          >Together Stronger</p>
-          
+          >
+            Together Stronger
+          </p>
+
+          <div
+            className="JoinButton"
+            style={{
+              textAlign: "center",
+              marginTop:"1rem"
+            }}
+          >
+            <Button className="JoinButton" shape="round" size="medium">
+              <p
+                style={{
+                  fontWeight: "bold",
+                }}
+              >
+                Join Us
+              </p>
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="JoinButton"
-        style={{
-          textAlign:"center"
-        }}
-      >
-        <Button type="primary" shape="round"  size="medium" >
-          Join us <ArrowRightOutlined style={{
-            color:"white",
-            fontSize:"12px"
-            }}/>
-        </Button>
-      </div>
-        <hr></hr>
+      <hr></hr>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default Clubs;
