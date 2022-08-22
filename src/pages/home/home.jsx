@@ -43,7 +43,7 @@ const home = () => {
 
       <Row>
         <Col span={24}>
-          <Footer />
+          {/* <Footer /> */}
         </Col>
       </Row>
 
