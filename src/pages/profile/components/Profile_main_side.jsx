@@ -1,6 +1,15 @@
 import React from 'react';
 import "../profile.css";
 import "antd/dist/antd.css";
+import { Image, Button, Comment, Form, Input, List, Carousel, Modal } from "antd";
+import {
+  EditOutlined,
+  LikeOutlined,
+  ShareAltOutlined,
+  CommentOutlined,
+  LeftOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
 
 
 const Profile_main_side = () => {
@@ -49,27 +58,80 @@ const Profile_main_side = () => {
 
         <div className="ml media">
             <div className="md it-row1">
-            <h3>Media</h3>
-            <a href="#">All images</a>
+                <div className='row1-title'>
+                    <h3>Media</h3>
+                    <a href="#">All images</a>
+                </div>
             </div>
-            <div className="md img-list">
-            <div><img src="image\Image4.JPG" alt="media1" className="img" /></div>
-            <div><img src="image\Image4.JPG" alt="media2" className="img" /></div>
-            <div><img src="image\Image4.JPG" alt="media1" className="img" /></div>
-            <div><img src="image\Image4.JPG" alt="media2" className="img" /></div>
+            <div className="MediaImage">
+                <Carousel
+                dots={false}
+                arrows
+                prevArrow={<LeftOutlined />}
+                nextArrow={<RightOutlined />}
+                style={{
+                    width:"100%",
+                    paddingRight: "1rem",
+                }}
+                >
+                <Image
+                    width="100%"
+                    height="10rem"
+                    src={require("../../../image/Image1.jpg")}
+                    className="Images"
+                />
+                <Image
+                    width="100%"
+                    height="10rem"
+                    src={require("../../../image/Image2.jpg")}
+                    className="Images"
+                />
+                <Image
+                    width="100%"
+                    height="10rem"
+                    src={require("../../../image/Image3.jpg")}
+                    className="Images"
+                />
+                <Image
+                    width="100%"
+                    height="10rem"
+                    src={require("../../../image/ClubHub_Trans.png")}
+                    className="Images"
+                />
+                <Image
+                    width="100%"
+                    height="10rem"
+                    src={require("../../../image/Galaxy-login.png")}
+                    className="Images"
+                />
+                <Image
+                    width="100%"
+                    height="10rem"
+                    src={require("../../../image/Image3.jpg")}
+                    className="Images"
+                />
+                </Carousel>
             </div>
+            {/* <div className="md img-list">
+                <div><img src="image\Image4.JPG" alt="media1" className="img" /></div>
+                <div><img src="image\Image4.JPG" alt="media2" className="img" /></div>
+                <div><img src="image\Image4.JPG" alt="media1" className="img" /></div>
+                <div><img src="image\Image4.JPG" alt="media2" className="img" /></div>
+            </div> */}
         </div>
 
         <div className="ml friend-list">
             <div className="fr it-row1">
-            <h3>Friends</h3>
-            <a href="#">All friends</a>
+                <div className='row1-title'>
+                    <h3>Friends</h3>
+                    <a href="#">All friends</a>
+                </div>
             </div>
             <div className="fr img-list">
-            <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Doraemon</div>
-            <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Shizuka</div>
-            <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Chaien</div>
-            <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Suneo</div>
+                <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Doraemon</div>
+                <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Shizuka</div>
+                <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Chaien</div>
+                {/* <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Suneo</div> */}
             </div>
         </div>
 
