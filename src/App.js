@@ -24,7 +24,7 @@ function App() {
         {/*<Welcome/> */}
 
         {/* <AlterHome/> */}
-        <Profile />
+        {/* <Profile /> */}
     </div>
   );
 }
