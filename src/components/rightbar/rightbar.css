@@ -1,9 +1,9 @@
 .rightContainer{
     height: 90vh;
-    background-color: rgb(171, 164, 164);
+    background-color: #F5F5F5;
     overflow: auto;
     display: flex;
     flex-flow: column nowrap;
-    padding: 4rem 2.5rem;
-    gap: 4rem
+    padding: 2rem 1rem;
+    gap: 1rem;
 }

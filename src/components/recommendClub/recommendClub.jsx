@@ -3,6 +3,9 @@ import Clubs from "./Clubs";
 import "antd/dist/antd.min.css";
 import "../recommendClub/recommendClub.css"
 import { Button } from "antd";
+import {
+  ArrowRightOutlined
+} from "@ant-design/icons";
 
 const RecommendClub = () => {
   return(
@@ -16,8 +19,15 @@ const RecommendClub = () => {
         <Clubs/>
 
 
-        <Button type="primary" shape="round"  size="medium" >
-          View More
+        <Button
+          className="ViewMoreButton"
+        shape="round"  size="medium" >
+          <p>View More</p>
+          <ArrowRightOutlined 
+            size="small"
+            className="ViewMoreIcon"
+          
+          />
         </Button>
       </div>
 

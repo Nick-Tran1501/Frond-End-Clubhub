@@ -6,7 +6,7 @@ import Rightbars from "../../components/rightbar/rightbar";
 import Footer from "../../components/footer/footer";
 import "./home.css";
 import "antd/dist/antd.css";
-import { Col, Row,Layout } from "antd";
+import { Col, Row, Layout } from "antd";
 
 const home = () => {
   return (
@@ -22,9 +22,9 @@ const home = () => {
         <Row
           gutter={{
             xs: 0,
-            sm: 8,
-            md: 16,
-            lg: 22,
+            sm: 1,
+            md: 1,
+            lg: 1,
           }}
         >
           <Col xs={0} sm={0} md={4} lg={4} xl={4}>
@@ -32,7 +32,7 @@ const home = () => {
           </Col>
 
           <Col xs={24} sm={18} md={14} lg={14} xl={14}>
-            <Feed />
+            <Feed/>
           </Col>
 
           <Col xs={0} sm={6} md={6} lg={6} xl={6}>
@@ -47,12 +47,6 @@ const home = () => {
         </Col>
       </Row>
 
-
-      
-      
-      
-
-      
     </div>
   );
 }

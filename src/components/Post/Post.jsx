@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Button, Comment, Form, Input, List, Carousel } from "antd";
+import { Image, Button, Comment, Form, Input, List, Carousel, Modal } from "antd";
 import {
   EditOutlined,
   LikeOutlined,
@@ -12,7 +12,6 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
-
 
 const { TextArea } = Input;
 
@@ -26,15 +25,9 @@ const Post = () => {
     setLikeCount((prevState) => prevState + 1);
   };
 
-  const CommentList = ({ comments }) => (
-    <List
-      dataSource={comments}
-      header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
-      itemLayout="horizontal"
-      renderItem={(props) => <Comment {...props} />}
-    />
-  );
 
+
+ // -------Comment Box-------
   const Editor = ({ onChange, onSubmit, submitting, value }) => (
     <>
       <Form.Item>
@@ -53,7 +46,16 @@ const Post = () => {
     </>
   );
 
-  // -------Comment Box-------
+  // --------Comments----------
+  const CommentList = ({ comments }) => (
+    <List
+      dataSource={comments}
+      header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
+      itemLayout="horizontal"
+      renderItem={(props) => <Comment {...props} />}
+    />
+  );
+ 
   const CommentsContainer = () => {
     const [comments, setComments] = useState([]);
     const [submitting, setSubmitting] = useState(false);
@@ -102,6 +104,7 @@ const Post = () => {
     );
   };
 
+  // ------------Read More--------------
   const ReadMore = ({ children }) => {
     const text = children;
     const [isReadMore, setIsReadMore] = useState(true);
@@ -118,6 +121,25 @@ const Post = () => {
     );
   };
 
+
+  // edit Box
+
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = (e) => {
+    console.log(e);
+    setVisible(false);
+  };
+
+  const handleCancel = (e) => {
+    console.log(e);
+    setVisible(false);
+  };
+
   return (
     <React.Fragment>
       <div className="PostContainer">
@@ -132,6 +154,7 @@ const Post = () => {
               height="100%"
               style={{
                 borderRadius: "50%",
+                objectFit:"cover"
               }}
             />
           </div>
@@ -140,23 +163,30 @@ const Post = () => {
             <div>
               <p
                 style={{
-                  fontWeight:"bold"
+                  fontWeight: "bold",
+                  fontSize:"18px"
                 }}
-              >Nam</p>
+              >
+                Nam
+              </p>
             </div>
 
             <div>
               <p
                 style={{
-                  opacity:"0.6",
-                  fontWeight:"bold"
+                  opacity: "0.6",
+                  fontWeight: "bold",
+                  fontSize:"12px"
                 }}
-              >Today</p>
+              >
+                Today
+              </p>
             </div>
             <div
               style={{
-                opacity:"0.6",
-                fontWeight:"bold"
+                opacity: "0.6",
+                fontWeight: "bold",
+                fontSize:"12px"
               }}
             >
               <p>RMIT University</p>
@@ -170,9 +200,28 @@ const Post = () => {
                 border: "none",
                 background: "none",
               }}
+              onClick={showModal}
             >
               <EditOutlined />
             </button>
+            <Modal
+              title="Basic Modal"
+              visible={visible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              okButtonProps={{
+                // functin here
+                disabled: true,
+                
+              }}
+              cancelButtonProps={{
+                disabled: false,
+              }}
+            >
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Modal>
           </div>
         </div>
 
@@ -199,11 +248,11 @@ const Post = () => {
             <Carousel
               dots={false}
               arrows
-              prevArrow={<LeftOutlined/>}
-              nextArrow={<RightOutlined/>}
+              prevArrow={<LeftOutlined />}
+              nextArrow={<RightOutlined />}
               style={{
-                // width:"100%",
-                paddingRight:"5rem"
+                width:"100%",
+                paddingRight: "1rem",
               }}
             >
               <Image
@@ -211,46 +260,37 @@ const Post = () => {
                 height="20rem"
                 src={require("../../image/Image1.jpg")}
                 className="Images"
-                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image2.jpg")}
                 className="Images"
-                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image3.jpg")}
                 className="Images"
-                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/ClubHub_Trans.png")}
                 className="Images"
-                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Galaxy-login.png")}
                 className="Images"
-                
               />
               <Image
                 width="100%"
                 height="20rem"
                 src={require("../../image/Image3.jpg")}
                 className="Images"
-                
               />
-
-
-
             </Carousel>
           </div>
 
@@ -264,16 +304,13 @@ const Post = () => {
             </div>
 
             <div className="CommentsResult">
-              <p>
-                100{" "}
-                <span>
-                  {" "}
-                  <CommentOutlined></CommentOutlined>
-                </span>
-              </p>
+              <p style={{ fontSize: "18px", paddingTop: "5px" }}>100</p>
+              <span className="commentsIcon">
+                <CommentOutlined></CommentOutlined>
+              </span>
             </div>
           </div>
-          <hr />
+          <hr/>
         </div>
 
         {/* -------Post Footer------ */}

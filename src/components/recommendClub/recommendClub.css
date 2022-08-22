@@ -7,4 +7,23 @@
   gap: 0.2rem;
   border-radius: 5px;
   width: 100%;
+  border: 2px solid #E5E7E9;
+}
+
+.RecommendTitle{
+  font-weight: bold;
+}
+
+.ViewMoreButton{
+  background: none;
+  border: none;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 15px;
+}
+
+.ViewMoreIcon{
+  padding-top: 0.2rem;
 }
