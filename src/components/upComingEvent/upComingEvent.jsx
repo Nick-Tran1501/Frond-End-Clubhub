@@ -18,8 +18,15 @@ const UpcomingEvent = () => {
         </div>
         <div className="EventInfo">
           <h5
+          style={{
+            fontSize:"15px",
+            fontWeight:"bold",
+            opacity:"0.6"
+          }}
+          >Event</h5>
+          <h5
             style={{
-              fontSize:"30px",
+              fontSize:"20px",
               fontWeight:"bold"
               
             }}
