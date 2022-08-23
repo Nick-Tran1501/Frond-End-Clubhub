@@ -13,9 +13,9 @@
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: space-around;
   padding: 10rem 7rem 10rem 5rem; 
-  gap: 4rem; 
+  gap: 2rem;
   border-style: hidden;
  
 }
@@ -50,7 +50,6 @@
   flex-flow: row nowrap;
   height: 65vh;
   box-shadow: 0.6rem 0.6rem 6rem -0.6rem rgb(31, 30, 30);
-  
   justify-content: center;
   
 }
@@ -255,5 +254,4 @@
   color: white;
   font-size: 18px;
   font-weight: bolder;
-  padding-bottom: 3rem;
 }
