@@ -36,6 +36,8 @@ const Register = () => {
         >
         <div className="button-box">
             <div id="toggle" style={{left: "100px", width: "90px"}}></div>
+
+            <div id="toggle" style={{left: "100px", width: "92px"}}></div>
             <Link to="/"><button type="button" className="btn-toggle fw-bold">Log in</button></Link>
             <Link to="/registerpage"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
         </div>

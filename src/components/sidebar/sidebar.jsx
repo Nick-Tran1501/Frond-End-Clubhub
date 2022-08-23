@@ -62,7 +62,11 @@ const sidebar = () => {
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
           style={{ height: '100%', borderRight: 0 }}
+<<<<<<< HEAD
           items={items}
+=======
+          // items={item2}
+>>>>>>> 40439526d61f22ea69e0df438dd893293ed2dd9a
         />
 
 
