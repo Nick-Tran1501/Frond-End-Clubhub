@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import { Routes, Route} from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -117,8 +117,8 @@ const LoginPage = () => {
                 xs={24}
               >
                 <Routes>
-                  <Route path="/" element={<LoginForm />} />
-                  <Route path="/register" element={<Register />} />
+                  <Route exact path="/" element={<LoginForm />} />
+                  <Route exact path="/registerpage" element={<Register />} />
                 </Routes>
               </Col>
             </Row>
