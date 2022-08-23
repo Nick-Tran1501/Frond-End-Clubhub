@@ -1,5 +1,116 @@
 .sideContainer{
-    height: 90vh;
+
+    height: 95vh;
     background-color: red;
-    grid-area: sidebar;
+
+    margin: 30px 0 0 15px;
+    border-radius: 10px;
+    text-align: center;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
+.sideAvatar{
+    margin-bottom: 10px;
+}
+
+.sideTop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: white;
+    padding-bottom: 10px;
+}
+
+.sideTop h2{
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.sideTop h4{
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: gray;
+}
+
+.sideTop > img{
+    margin-bottom: -30px;
+    width: 100%;
+    height: 60px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
+}
+
+.sideStats{
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white;
+}
+
+.sideStat{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sideStat > p {
+    color: gray;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.sideStatNum{
+    font-weight: bold;
+    color: #0a66c2 !important;
+}
+
+.sideBottom{
+    text-align: left;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.sideRecentItem{
+    display: flex;
+    font-size: 0.7rem;
+    color: gray;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.sideRecentItem:hover{
+    background-color: #1890ff;
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+}
+
+.sideAdvertise{
+    padding: 10px;
+    border: 1px solid lightgrey;
+    background-color: white;
+    border-radius: 10px;
+    margin: 70px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sideAdvertise > h2 {
+    font-size: 1rem;
+
 }

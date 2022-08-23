@@ -3,12 +3,11 @@ import Navbars from "../../components/navbar/navbar";
 import Sidebars from "../../components/sidebar/sidebar";
 import Feed from "../../components/feed/feed";
 import Rightbars from "../../components/rightbar/rightbar";
-import Footer from "../../components/footer/footer";
 import "./home.css";
 import "antd/dist/antd.css";
-import { Col, Row, Layout } from "antd";
+import { Col, Row} from "antd";
 
-const home = () => {
+const Home = () => {
   return (
     <div className="homeContainer">
   
@@ -41,14 +40,9 @@ const home = () => {
           
         </Row>
 
-      <Row>
-        <Col span={24}>
-          <Footer />
-        </Col>
-      </Row>
-
     </div>
+
   );
 }
 
-export default home;
+export default Home;
