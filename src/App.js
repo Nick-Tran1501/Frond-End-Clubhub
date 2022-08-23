@@ -16,14 +16,11 @@ function App() {
     <div className="App">
           <Routes>
             <Route path='/*' element={<LoginPage/>}/>
-<<<<<<< HEAD
             {/* <Route path='/register' element={<Register/>}/> */}
             <Route path='/welcome' element={<Welcome/>}/>
             {/* <Route path='*' element={alert("404 Not Found")}/> */}
-=======
             <Route path='/welcome' element={<Welcome/>}/>
 
->>>>>>> 40439526d61f22ea69e0df438dd893293ed2dd9a
           </Routes>
        {/* <LoginPage/> */}
         {/* <Home/> */}
