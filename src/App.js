@@ -22,8 +22,9 @@ function App() {
             <Route path='/welcome' element={<Welcome/>}/>
 
           </Routes>
+          
        {/* <LoginPage/> */}
-        {/* <Home/> */}
+        <Home/>
         {/*<Welcome/> */}
 
 

@@ -1,65 +1,109 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.css";
 import "antd/dist/antd.css";
 import {
-  SearchOutlined,
+  HomeFilled,
   UserOutlined,
-  WechatFilled,
+  FlagFilled,
   BellFilled,
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import userAvatar from "../../image/42527221_688413261531308_7133408386179137536_n.jpg";
-import {Col, Row,} from "antd";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { NavbarBrand } from "react-bootstrap";
+import ClubLogo from "../../image/ClubHub_Trans.png";
+import { Col, Row, AutoComplete, Input, Avatar } from "antd";
+import Option from "./navbarOption";
 
-const navbar = () => {
+// Test function of autocomplete
+
+const getRandomInt = (max, min = 0) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const searchResult = (query) =>
+  new Array(getRandomInt(5))
+    .join(".")
+    .split(".")
+    .map((_, idx) => {
+      const category = `${query}${idx}`;
+      return {
+        value: category,
+        label: (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>
+              Found {query} on{" "}
+              <a
+                href={`https://s.taobao.com/search?q=${query}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {category}
+              </a>
+            </span>
+            <span>{getRandomInt(200, 100)} results</span>
+          </div>
+        ),
+      };
+    });
+
+const Navbar = () => {
+  // Manange the Handling Search,
+
+  const [options, setOptions] = useState([]);
+
+  const handleSearch = (value) => {
+    setOptions(value ? searchResult(value) : []);
+  };
+
+  const onSelect = (value) => {
+    console.log("onSelect", value);
+  };
+
+  // Render the View
   return (
     <div className="navbar--container">
-      <div className="topbarLeft">
-        <span className="logo">CLUB HUB</span>
-      </div>
-      <div className="topbarCenter">
-        <div className="searchbar">
-          <SearchOutlined className="searchIcon" />
-          <input
-            placeholder="Search for friend, post or video"
-            className="searchInput"
-          />
-        </div>
-      </div>
+      <Row>
+        <Col lg={24} className="navLeft">
+          <img src={ClubLogo} alt="" />
 
-      <Row className="topbarRight">
-        <Col xs={0} sm={0} md={0} lg={6} xl={6} className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          {/* Nav Search Bar */}
+          <Row>
+            <Col className="navSearch">
+              <AutoComplete
+                dropdownMatchSelectWidth={252}
+                style={{}}
+                options={options}
+                onSelect={onSelect}
+                onSearch={handleSearch}
+              >
+                <Input.Search
+                  size="large"
+                  placeholder="input here"
+                  style={{}}
+                />
+              </AutoComplete>
+            </Col>
+          </Row>
         </Col>
-      
-        <Col xs={0} sm={0} md={0} lg={0} xl={6} className="topbarIcons">
-          <div className="topbarIconItem">
-            <UserOutlined />
-            <span className="topbarIconBadge">1</span>
+      </Row>
+
+      {/* Nav Right Icon */}
+      <Row>
+        <Col xs={0} md={0} lg={24}>
+          <div className="navRight">
+            <Option Icon={HomeFilled} title="Home" />
+            <Option Icon={FlagFilled} title="My club" />
+            <Option Icon={FlagFilled} title="My club" />
+            <Option Icon={BellFilled} title="Nofication" />
+            <Option avatar={userAvatar} />
           </div>
-          <div className="topbarIconItem">
-            <WechatFilled />
-            <span className="topbarIconBadge">2</span>
-          </div>
-          <div className="topbarIconItem">
-            <BellFilled />
-            <span className="topbarIconBadge">1</span>
-          </div>
-        </Col>
-        <Col>
-        <img src={userAvatar} alt="" className="topbarImg" />
         </Col>
       </Row>
     </div>
   );
 };
 
-export default navbar;
+export default Navbar;
