@@ -55,6 +55,17 @@ const sidebar = () => {
 
   return (
     <div className="sideContainer">
+
+      
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          defaultOpenKeys={["sub1"]}
+          style={{ height: '100%', borderRight: 0 }}
+          items={item2}
+        />
+
+
       <Row>
       <Col xs={24} lg={24} className="sideTop">
         <img src={profileImg} alt="" />
@@ -86,6 +97,7 @@ const sidebar = () => {
         <h2> Want to explore more? </h2>
         <a href="https://www.rmit.edu.vn/vi"> Click Here </a>
       </div>
+
     </div>
   );
 };
