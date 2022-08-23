@@ -7,7 +7,7 @@ import "./home.css";
 import "antd/dist/antd.css";
 import { Col, Row} from "antd";
 
-const home = () => {
+const Home = () => {
   return (
     <div className="homeContainer">
   
@@ -45,4 +45,4 @@ const home = () => {
   );
 }
 
-export default home;
+export default Home;
