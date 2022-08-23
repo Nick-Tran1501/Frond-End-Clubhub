@@ -5,7 +5,7 @@ import { Button, Form, Input , DatePicker, Select, Checkbox} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-import {Link } from "react-router-dom";
+import {Route,Routes, Link } from "react-router-dom";
 
 
 import { Col, Row } from 'antd';
@@ -35,9 +35,11 @@ const Register = () => {
           className="RegisterCotainer"
         >
         <div className="button-box">
+            <div id="toggle" style={{left: "100px", width: "90px"}}></div>
+
             <div id="toggle" style={{left: "100px", width: "92px"}}></div>
             <Link to="/"><button type="button" className="btn-toggle fw-bold">Log in</button></Link>
-            <Link to="/register"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
+            <Link to="/registerpage"><button type="button" className="btn-toggle fw-bold">Register</button></Link>
         </div>
 
         <Form
