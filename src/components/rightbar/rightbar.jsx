@@ -5,8 +5,6 @@ import UpcomingEvent from "../upComingEvent/upComingEvent";
 import "antd/dist/antd.min.css";
 
 
-
-
 const Rightbars = () => {
   return (
     <div className='rightContainer'>

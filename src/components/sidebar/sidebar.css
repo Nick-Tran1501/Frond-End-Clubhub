@@ -1,5 +1,4 @@
 .sideContainer{
-    height: 90vh;
+    height: 95vh;
     background-color: red;
-    grid-area: sidebar;
 }

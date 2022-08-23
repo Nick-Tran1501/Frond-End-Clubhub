@@ -1,7 +1,12 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
+
 import "antd/dist/antd.min.css";
 import "../css/Login.css";
+
+
 import { ArrowRightOutlined } from "@ant-design/icons";
 import backgroundVid from "../image/bg-vid2.mp4";
 import ClubLogo from "../image/ClubHub_Trans.png";
@@ -13,14 +18,17 @@ import { Button } from "antd";
 import LoginForm from "../Login/LoginForm";
 import Register from "../Login/Register";
 
+
 const { Content } = Layout;
 
-const LoginContainer = () => {
+const LoginPage = () => {
+  
+    const navigate = useNavigate()
+
+    
   return (
     <React.Fragment>
       <Layout>
-        {/* Header */}
-
         <Layout>
           <Content className="BodyCotainer">
             <div className="Logo">
@@ -61,6 +69,7 @@ const LoginContainer = () => {
                 </video>
 
                 <div className="ButtonContainer">
+                
                   <Button
                     type="primary"
                     shape="round"
@@ -73,10 +82,13 @@ const LoginContainer = () => {
                       marginTop: "1rem",
                       background: "rgba(0,212,255,1) ",
                     }}
+                    onClick={()=>{
+                      navigate("/Welcome")
+                    }}
                   >
                     Learn More <ArrowRightOutlined />
                   </Button>
-
+                  
                   <Button
                     type="primary"
                     shape="round"
@@ -113,7 +125,6 @@ const LoginContainer = () => {
             <footer className="LoginFooter">
               <small>Copyright ©2022 RMIT-Finding. All Right Reserved</small>
             </footer>
-
           </Content>
         </Layout>
       </Layout>
@@ -121,4 +132,4 @@ const LoginContainer = () => {
   );
 };
 
-export default LoginContainer;
+export default LoginPage;

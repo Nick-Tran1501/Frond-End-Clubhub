@@ -34,6 +34,8 @@ const sidebar = () => {
           style={{ height: '100%', borderRight: 0 }}
           items={item2}
         />
+
+        
     </div>
   );
 }
