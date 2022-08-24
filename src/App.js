@@ -16,13 +16,13 @@ function App() {
     <div className="App">
           <Routes>
             <Route path='/*' element={<LoginPage/>}/>
-            {/* <Route path='/register' element={<Register/>}/> */}
+            <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
-            <Route path='*' element={alert("404 Not Found")}/>
+            {/* <Route path='*' element={alert("404 Not Found")}/> */}
           </Routes>
           
        {/* <LoginPage/> */}
-        <Home/>
+        {/* <Home/> */}
         {/*<Welcome/> */}
 
 

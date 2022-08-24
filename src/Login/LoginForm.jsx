@@ -24,35 +24,20 @@ const LoginForm = () => {
   });
 
   
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const response = await axios.get("https://reqres.in/api/login");
-  //     return response;
-  //   };
-  //   getData()
-  //     .then((response) => {
-  //       console.log(response.data.data[0].name);
-  //       console.log(response.data.data[0].year);
-  //       return response;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token') 
     axios.post("https://rmit-club.herokuapp.com/api/auth/signin",{
       
-      // headers:{'Authorization': `Bearer ${token}`},
+      headers:{'Authorization': `Bearer ${token}`},
       email: user.username,
       password: user.password
     })
     .then(response =>
       console.log(response)
-      
-      
+
       )  
     .catch((err) => {
       console.error(err);

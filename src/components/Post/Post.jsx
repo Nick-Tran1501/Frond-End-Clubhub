@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
 import { Image, Button, Comment, Form, Input, List, Carousel, Modal } from "antd";
@@ -13,9 +13,34 @@ import {
 } from "@ant-design/icons";
 import moment from "moment";
 
+import axios from "axios"
+
 const { TextArea } = Input;
 
+
+
+
 const Post = () => {
+  const [userProfile,setUserProfile]=useState({})
+
+  useEffect(()=> {
+    
+      // const token = localStorage.getItem('token')
+      axios.get("https://rmit-club.herokuapp.com/api/user",
+        {
+          headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
+        }
+      )
+      .then(response => setUserProfile(response.data))
+      .catch(err => console.log(err))
+    
+    
+    
+  },[])
+  
+
+  
+
   // ------Show Comments-----
   const [show, setShow] = useState(false);
 
@@ -148,7 +173,7 @@ const Post = () => {
           {/* Profile Image */}
           <div className="ProfileImage">
             <img
-              src={require("../../image/Image1.jpg")}
+              src={userProfile.avatarUrl}
               alt="Profile"
               width="100%"
               height="100%"
@@ -167,7 +192,7 @@ const Post = () => {
                   fontSize:"18px"
                 }}
               >
-                Nam
+                {userProfile.username}
               </p>
             </div>
 
