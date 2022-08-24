@@ -22,8 +22,8 @@
   padding: 0;
   margin: 0;
   outline: 0;
-  text-decoration: none;
-  list-style: none;
+  /* text-decoration: none; */
+  /* list-style: none; */
   border: none;
   /* border: 1px solid red; */
 }
@@ -135,63 +135,48 @@ body {
 
 /* CREATE POST SECTION */
 
-#overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.5);
-  width: 100%;
-  height: 100%;
-  z-index: 15;
-  transition: all 0.5s ease;
-  display: grid;
-  place-items: center;
-  display: none;
-}
-
 #post_form {
-  width: 39.5%;
+  width: 100%;
   border-radius: var(--card_border_radius);
   background: var(--color_white);
   align-items: center;
   padding: var(--card_padding);
   position: relative;
   transition: all 0.5s ease-in-out;
+  /* background-color: black; */
 }
 
-.pd-left .pdl-row .upload_image .form_title {
+.upload_image .form_title {
   border-bottom: 2px solid var(--color_light);
   display: flex;
   justify-content: center;
   position: relative;
+  align-items: center;
 }
 
-.pd-left .pdl-row .upload_image .form_title #close_btn {
+.upload_image .form_title #close_btn {
   position: absolute;
   right: 0.2rem;
   top: 0.1rem;
 }
 
-.pd-left .pdl-row .upload_image .user_infor {
+.upload_image .user_infor {
   display: flex;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
-.pd-left .pdl-row .upload_image #mode {
+.upload_image #mode {
   border: 1px solid var(--color_dark);
   border-radius: 4px;
 }
 
-.pd-left .pdl-row .upload_image .caption {
+.upload_image .caption {
   margin: 1rem 0;
 }
 
-.pd-left .pdl-row .upload_image label{
+.upload_image label{
   cursor: pointer;
   background: var(--color_light);
   border-radius: var(--card_border_radius);
@@ -203,15 +188,15 @@ body {
   margin-bottom: 1rem;
 }
 
-.pd-left .pdl-row .upload_image label i {
+.upload_image label i {
   font-size: 3rem;
 }
 
-.pd-left .pdl-row .upload_image input[type="file"] {
+.upload_image input[type="file"] {
   display: none;
 }
 
-.pd-left .pdl-row .upload_image input[type="submit"] {
+.upload_image input[type="submit"] {
   width: 100%;
 }
 
@@ -285,6 +270,7 @@ body {
 
 .img-list div img {
   width: 100%;
+  height: 100%;
 }
 
 .MediaImage{

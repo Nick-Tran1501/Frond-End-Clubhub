@@ -1,59 +1,118 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "../profile.css";
 import "antd/dist/antd.css";
-import { Image, Button, Comment, Form, Input, List, Carousel, Modal } from "antd";
-import {
-  EditOutlined,
-  LikeOutlined,
-  ShareAltOutlined,
-  CommentOutlined,
-  LeftOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
+import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
 
+function getStoredInfo() {
+    const storedInfo = localStorage.getItem("studentID");
+    if (!storedInfo) return {
+        name: "",
+        education: "",
+        work: "",
+        live: "",
+        email: "",
+        description: "",
+        birthday: "",
+        graduation: ""
+    }
+    return JSON.parse(storedInfo);
+}
 
 const Profile_main_side = () => {
+    const [modal3, setModal3] = useState(false);
+    const [modal4, setModal4] = useState(false);
+
+    const [info, setInfo] = useState(getStoredInfo)
+
+    useEffect(() => {
+        localStorage.setItem("studentID", JSON.stringify(info));
+    }, [info])
+
+    const showModal3 = () => {
+        setModal3(true);
+    };
+
+    const showModal4 = () => {
+        setModal4(true);
+    };
+    const handleOk = () => {
+        setModal3(false);
+        setModal4(false);
+    };
+
+    const handleCancel = () => {
+        setModal3(false);
+        setModal4(false);
+    };
+
+    function handleSubmit (event) {
+        event.preventDefault();
+        alert("Hello")
+    }
+
+    function handleChange (event) {
+        setInfo((prevInfo) => ({
+            ...prevInfo,
+            [event.target.name]: [event.target.value],
+        }))
+    }
   return (
     <div className="main-left">
         <div className="ml intro">
             <div className="it it-row1">
-            <h3>Intro</h3>
-            <a href="#">Edit</a>
+                <h3>Intro</h3>
+                <a onClick={showModal3}>Edit</a>
             </div>
             <div className="it it-row2">
-            <div className="p-row">
-                <i className="fa-solid fa-graduation-cap"></i>
-                <div className="p-note">
-                <p>Graduate at RMIT University</p>
+                <div className="p-row">
+                    <i className="fa-solid fa-graduation-cap"></i>
+                    <div className="p-note">
+                    <p>Graduate at {info.education}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-briefcase-fill"></i>
+                    <div className="p-note">
+                    <p>Work in {info.work}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-house-fill"></i>
+                    <div className="p-note">
+                    <p>Live in {info.live}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-envelope-fill"></i>
+                    <div className="p-note">
+                    <p>{info.email}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-blockquote-left"></i>
+                    <div className="p-note">
+                    <p>
+                        "{info.description}"
+                    </p>
+                    </div>
                 </div>
             </div>
-            <div className="p-row">
-                <i className="bi bi-briefcase-fill"></i>
-                <div className="p-note">
-                <p>Work in BKAV company</p>
-                </div>
-            </div>
-            <div className="p-row">
-                <i className="bi bi-house-fill"></i>
-                <div className="p-note">
-                <p>Live in Hanoi</p>
-                </div>
-            </div>
-            <div className="p-row">
-                <i className="bi bi-envelope-fill"></i>
-                <div className="p-note">
-                <p>zet@gmail.com</p>
-                </div>
-            </div>
-            <div className="p-row">
-                <i className="bi bi-blockquote-left"></i>
-                <div className="p-note">
-                <p>
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit.."
-                </p>
-                </div>
-            </div>
-            </div>
+            <Modal title="Change personal information" visible={modal3} onOk={handleOk} onCancel={handleCancel}>
+                <form onSubmit={handleSubmit} className="upload_image" id="post_form">
+                    <div className="user_infor">
+                        <div className="profile_picture">
+                            <img src="image/default_avata_girl.png" alt="profile" />
+                        </div>
+                        <p>Doraemon</p>
+                    </div>
+
+                    <input type="text" placeholder='Enter your education' name="education" onChange={handleChange} value={info.education} /> {/* should declare the value = formData.name because sth called contrilled components */}
+                    <input type="text" placeholder='Enter your workplace' name="work" onChange={handleChange} value={info.work} />
+                    <input type="text" placeholder='Enter your place' name="live" onChange={handleChange} value={info.live} />
+                    <input type="text" placeholder='Email' name="email" onChange={handleChange} value={info.email} />
+                    <input type="text" placeholder='Enter your description' name="description" onChange={handleChange} value={info.description} />
+                </form>
+            </Modal>
         </div>
 
         <div className="ml media">
@@ -63,61 +122,46 @@ const Profile_main_side = () => {
                     <a href="#">All images</a>
                 </div>
             </div>
-            <div className="MediaImage">
-                <Carousel
-                dots={false}
-                arrows
-                prevArrow={<LeftOutlined />}
-                nextArrow={<RightOutlined />}
-                style={{
-                    width:"100%",
-                    paddingRight: "1rem",
-                }}
-                >
+            <div className="img-list md">
+                
                 <Image
                     width="100%"
-                    height="10rem"
+                    height="5rem"
                     src={require("../../../image/Image1.jpg")}
-                    className="Images"
+                    className="Images img"
                 />
                 <Image
                     width="100%"
-                    height="10rem"
+                    height="5rem"
                     src={require("../../../image/Image2.jpg")}
                     className="Images"
                 />
                 <Image
                     width="100%"
-                    height="10rem"
+                    height="5rem"
                     src={require("../../../image/Image3.jpg")}
                     className="Images"
                 />
                 <Image
                     width="100%"
-                    height="10rem"
+                    height="5rem"
                     src={require("../../../image/ClubHub_Trans.png")}
                     className="Images"
                 />
                 <Image
                     width="100%"
-                    height="10rem"
+                    height="5rem"
                     src={require("../../../image/Galaxy-login.png")}
                     className="Images"
                 />
                 <Image
                     width="100%"
-                    height="10rem"
+                    height="5rem"
                     src={require("../../../image/Image3.jpg")}
                     className="Images"
                 />
-                </Carousel>
+               
             </div>
-            {/* <div className="md img-list">
-                <div><img src="image\Image4.JPG" alt="media1" className="img" /></div>
-                <div><img src="image\Image4.JPG" alt="media2" className="img" /></div>
-                <div><img src="image\Image4.JPG" alt="media1" className="img" /></div>
-                <div><img src="image\Image4.JPG" alt="media2" className="img" /></div>
-            </div> */}
         </div>
 
         <div className="ml friend-list">
@@ -131,29 +175,43 @@ const Profile_main_side = () => {
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Doraemon</div>
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Shizuka</div>
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Chaien</div>
-                {/* <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Suneo</div> */}
+                <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Suneo</div>
             </div>
         </div>
 
         <div className="ml event">
             <div className="it it-row1">
-            <h3>Event</h3>
-            <a href="#">Edit</a>
+                <h3>Event</h3>
+                <a onClick={showModal4}>Edit</a>
             </div>
             <div className="p-row">
-            <i className="fas fa-birthday-cake"></i>
-            <div className="p-note">
-                <h4>Birthday !</h4>
-                <p>June 11th</p>
-            </div>
+                <i className="fas fa-birthday-cake"></i>
+                <div className="p-note">
+                    <h3>Birthday !</h3>
+                    <p>{info.birthday}</p>
+                </div>
             </div>
             <div className="p-row">
-            <i className="fa-solid fa-user-graduate"></i>
-            <div className="p-note">
-                <h4>Graduated from RMIT University</h4>
-                <p>December 31st</p>
+                <i className="fa-solid fa-user-graduate"></i>
+                <div className="p-note">
+                    <h3>Graduated from {info.education}</h3>
+                    <p>{info.graduation}</p>
+                </div>
             </div>
-            </div>
+            <Modal title="Change events" visible={modal4} onOk={handleOk} onCancel={handleCancel}>
+                <form onSubmit={handleSubmit} className="upload_image" id="post_form">
+                    <div className="user_infor">
+                        <div className="profile_picture">
+                            <img src="image/default_avata_girl.png" alt="profile" />
+                        </div>
+                        <p>Doraemon</p>
+                    </div>
+
+                    {/* <DatePicker onChange={handleChange} /> */}
+                    <input type="date" placeholder='Enter your birthday' name="birthday" onChange={handleChange} value={info.birthday} /> {/* should declare the value = formData.name because sth called contrilled components */}
+                    <input type="date" placeholder='Enter your graduation' name="graduation" onChange={handleChange} value={info.graduation} />
+                </form>
+            </Modal>
         </div>
     </div>
   )
