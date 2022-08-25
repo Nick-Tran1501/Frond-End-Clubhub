@@ -57,7 +57,7 @@ const sidebar = () => {
     <div className="sideContainer">
 
       
-        <Menu
+        {/* <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
@@ -65,7 +65,7 @@ const sidebar = () => {
           items={items}
 
           // items={item2}
-        />
+        /> */}
 
 
       <Row>
