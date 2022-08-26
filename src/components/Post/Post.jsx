@@ -25,10 +25,12 @@ const Post = () => {
 
   useEffect(()=> {
     
-      // const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
       axios.get("https://rmit-club.herokuapp.com/api/user",
         {
           headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
+           
+          // ${token}
         }
       )
       .then(response => setUserProfile(response.data))
