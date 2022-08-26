@@ -19,7 +19,7 @@ import axios from "axios";
 
 const LoginForm = () => {
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -28,11 +28,9 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token') 
     axios.post("https://rmit-club.herokuapp.com/api/auth/signin",{
       
-      headers:{'Authorization': `Bearer ${token}`},
-      email: user.username,
+      email: user.email,
       password: user.password
     })
     .then(response =>
@@ -160,6 +158,7 @@ const LoginForm = () => {
               height: "3rem",
               marginTop: "1rem",
             }}
+
           >
             Login
           </Button>
