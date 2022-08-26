@@ -7,7 +7,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 import {Route,Routes, Link } from "react-router-dom";
 
-
+import axios from "axios"
 import { Col, Row } from 'antd';
 
 
@@ -26,6 +26,25 @@ const Checked = (e) => {
 const onChange = (date, dateString) => {
   console.log(date, dateString);
 };
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem('token') 
+  axios.post("https://rmit-club.herokuapp.com/api/auth/signin",{
+    
+    headers:{'Authorization': `Bearer ${token}`},
+    
+  })
+  .then(response =>
+    console.log(response)
+    
+    
+    )  
+  .catch((err) => {
+    console.error(err);
+  });
+}
 
 const dateFormatList = ['DD/MM/YYYY'];
 const Register = () => {
@@ -312,7 +331,7 @@ const Register = () => {
         
         <Checkbox onChange={Checked}
           style={{
-            fontSize:"18px",
+            fontSize:"15px",
             width:"100%",
             
           }}
@@ -341,7 +360,7 @@ const Register = () => {
             style={{
               width:"35rem",
               height:"3rem",
-              marginTop:"1rem"
+              marginTop:"0.3rem"
               
             }}
           >
