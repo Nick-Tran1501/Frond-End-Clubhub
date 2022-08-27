@@ -39,11 +39,10 @@ const LoginForm = () => {
       },
     })
     .then(response =>
-     { console.log(response)
+     { 
       localStorage.setItem("token",response.data.accessToken)
       console.log(localStorage.getItem("token"))
       navigate("/home")
-      
     }
       
       )  
