@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./navbar.css";
+import "./NavBar.css";
 import "antd/dist/antd.css";
 import {
   HomeFilled,
@@ -10,7 +10,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import ClubLogo from "../../image/ClubHub_Trans.png";
 import { Col, Row, AutoComplete, Input} from "antd";
-import Option from "./navbarOption";
+import Option from "./NavbarOption";
 import {useEffect}  from "react";
 import axios from "axios"
 // Test function of autocomplete
