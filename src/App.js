@@ -28,11 +28,11 @@ function App() {
         {/* </Routes> */}
           
        {/* <LoginPage/> */}
-        {/* <Home/> */}
+        <Home/>
         {/*<Welcome/> */}
 
 
-        {/* <Profile /> */}
+        <Profile />
     </div>
   );
 }
