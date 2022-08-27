@@ -37,7 +37,7 @@ const Register = () => {
     e.preventDefault();
     axios({
       method: "post",
-      url: "https://rmit-club.herokuapp.com/api/auth/signup",
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signup",
       data: {
         name: userDetail.name,
         email: userDetail.email,
