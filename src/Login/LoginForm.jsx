@@ -32,7 +32,7 @@ const LoginForm = () => {
     e.preventDefault();
     axios({
       method: "post",
-      url: "https://rmit-club.herokuapp.com/api/auth/signin",
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signin",
       data:{
         email: user.email,
         password: user.password

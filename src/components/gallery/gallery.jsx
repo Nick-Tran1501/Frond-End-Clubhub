@@ -3,11 +3,6 @@ import './gallery.css';
 import club_1 from "../../image/clubs-cheer.jpg"
 import club_2 from "../../image/club-cheer_2.png"
 import avatar from "../../image/avatar.png"
-// import Aos from 'aos';
-// import "aos/dist/aos.css"
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import { useEffect } from 'react';
 import teammate from './team_data'
 

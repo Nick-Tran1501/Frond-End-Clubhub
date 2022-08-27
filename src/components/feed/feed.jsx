@@ -4,7 +4,7 @@ import axios from "axios"
 import './feed.css';
 import PostList from '../PostList/PostList';
 
-const feed = () => {
+const Feed = () => {
   
   // ---------Data Collection----------
   const [postData,setPostData] =useState([])
@@ -12,7 +12,7 @@ const feed = () => {
   useEffect(()=>{
     axios({
       method:"get",
-      url:"https://rmit-club.herokuapp.com/api/posts/",
+      url:"https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
     .then(response => {
       // console.log(response.data)
@@ -33,4 +33,4 @@ const feed = () => {
   )
 }
 
-export default feed
+export default Feed;

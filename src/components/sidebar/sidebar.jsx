@@ -59,7 +59,7 @@ const sidebar = () => {
   useEffect(()=> {
     
       const token = localStorage.getItem('token')
-      axios.get("https://rmit-club.herokuapp.com/api/user",
+      axios.get("https://rmit-club-dhyty.ondigitalocean.app/api/user",
         {
           headers:{'Authorization': `Bearer ${token}`}
         }
