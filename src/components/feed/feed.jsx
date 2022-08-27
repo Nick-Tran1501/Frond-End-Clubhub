@@ -12,7 +12,7 @@ const feed = () => {
   useEffect(()=>{
     axios({
       method:"get",
-      url:"https://rmit-club.herokuapp.com/api/posts/",
+      url:"https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
     .then(response => {
       // console.log(response.data)
