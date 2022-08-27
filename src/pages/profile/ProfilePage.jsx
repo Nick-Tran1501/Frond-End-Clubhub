@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import "./profile.css";
-import Navbar from '../../components/navbar/navbar';
-import Footer from '../../components/footer/footer';
-import Sidebar from '../../components/sidebar/sidebar';
+import "./ProfilePage.css";
+import Navbar from '../../components/navbar/NavBar';
+import Footer from '../../components/footer/Footer';
+import Sidebar from '../../components/sidebar/SideBar';
 import "antd/dist/antd.css";
 import Profile_bg from './components/Profile_bg';
 import Profile_main_side from './components/Profile_main_side';

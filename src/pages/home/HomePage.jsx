@@ -1,9 +1,9 @@
 import React from "react";
-import Navbars from "../../components/navbar/navbar";
-import Sidebars from "../../components/sidebar/sidebar";
-import Feed from "../../components/feed/feed";
-import Rightbars from "../../components/rightbar/rightbar";
-import "./home.css";
+import Navbars from "../../components/navbar/NavBar";
+import Sidebars from "../../components/sidebar/SideBar";
+import Feed from "../../components/feed/Feed";
+import Rightbars from "../../components/rightbar/RightBar";
+import "./HomePage.css";
 import "antd/dist/antd.css";
 import { Col, Row} from "antd";
 
