@@ -3,14 +3,13 @@ import "./navbar.css";
 import "antd/dist/antd.css";
 import {
   HomeFilled,
-  UserOutlined,
+  
   FlagFilled,
   BellFilled,
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
-import userAvatar from "../../image/42527221_688413261531308_7133408386179137536_n.jpg";
 import ClubLogo from "../../image/ClubHub_Trans.png";
-import { Col, Row, AutoComplete, Input, Avatar } from "antd";
+import { Col, Row, AutoComplete, Input} from "antd";
 import Option from "./navbarOption";
 import {useEffect}  from "react";
 import axios from "axios"
@@ -56,10 +55,10 @@ const Navbar = () => {
 
   useEffect(()=> {
     
-      // const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
       axios.get("https://rmit-club.herokuapp.com/api/user",
         {
-          headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
+          headers:{'Authorization': `Bearer ${token}`}
         }
       )
       .then(response => setUserProfile(response.data))

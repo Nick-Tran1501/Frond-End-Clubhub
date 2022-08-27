@@ -2,11 +2,12 @@ import Post from "../Post/Post";
 import React from "react";
 
 
-const PostList = (data) => {
+const PostList = () => {
  return(
   <React.Fragment>
+   
     <Post/>
-    <Post/>
+    
   </React.Fragment>
  )
 }

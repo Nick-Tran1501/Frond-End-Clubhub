@@ -1,6 +1,6 @@
-import React, {useEffect,useState} from "react";
+import React from "react";
 import { Routes, Route} from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 
 import "antd/dist/antd.min.css";

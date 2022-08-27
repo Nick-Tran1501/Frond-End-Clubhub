@@ -5,8 +5,7 @@ import Home from './pages/home/home';
 import Welcome from './pages/welcome/welcome';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from './pages/profile/profile'
-import {Route,Routes, Router,Link} from "react-router-dom"
-import Register from './Login/Register';
+import {Route,Routes} from "react-router-dom"
 
 function App() {
 
@@ -18,19 +17,16 @@ function App() {
             <Route path='/*' element={<LoginPage/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
+            <Route path='/profile' element={<Profile/>}/>
+
             {/* <Route path='*' element={alert("404 Not Found")}/> */}
           </Routes>
           
 
        {/* <LoginPage/> */}
-
-       <LoginPage/>
-
-        <Home/>
+        {/* <Home/>
         <Welcome/>
-
-
-        <Profile />
+        <Profile /> */}
     </div>
   );
 }
