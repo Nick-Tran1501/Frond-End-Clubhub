@@ -3,7 +3,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 
-import "../css/Login.css";
+import "../../components/loginform/LoginRegister.css";
 import { Link } from "react-router-dom";
 
 import { Button, Form, Input, Checkbox, Tooltip } from "antd";
