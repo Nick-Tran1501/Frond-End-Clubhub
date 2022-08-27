@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "../css/Login.css";
 import { Button, Form, Input, DatePicker, Select, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
-import { Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 import { Col, Row } from "antd";
-import { getValue } from "@testing-library/user-event/dist/utils";
 
 const { Option } = Select;
 
@@ -32,10 +31,7 @@ const Register = () => {
     phone: "",
   });
 
-  const [passwordCheck, setPasswordCheck] = useState({
-    password: "",
-    retype: "",
-  });
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();

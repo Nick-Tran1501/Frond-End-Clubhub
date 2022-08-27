@@ -34,9 +34,6 @@
 }
 
 .ProfileImage{
-  height: 4rem;
-  border: 1px solid;
-  border-radius: 50%;
   flex-basis: 7%;
   width: 100%;
 }
