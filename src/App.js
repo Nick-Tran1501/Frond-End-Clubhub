@@ -24,9 +24,9 @@ function App() {
           
 
        {/* <LoginPage/> */}
-        {/* <Home/>
-        <Welcome/>
-        <Profile /> */}
+        {/* <Home/> */}
+        {/* <Welcome/> */}
+        <Profile />
     </div>
   );
 }
