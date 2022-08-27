@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Button, Comment, Form, Input, List, Carousel, Modal } from "antd";
+import { Image, Button, Comment, Form, Input, List, Carousel, Modal, Avatar } from "antd";
 import {
   EditOutlined,
   LikeOutlined,
@@ -174,16 +174,7 @@ const Post = () => {
         <div className="PostHeader">
           {/* Profile Image */}
           <div className="ProfileImage">
-            <img
-              src={userProfile.avatarUrl}
-              alt="Profile"
-              width="100%"
-              height="100%"
-              style={{
-                borderRadius: "50%",
-                objectFit:"cover"
-              }}
-            />
+            <Avatar size={60} src={userProfile.avatarUrl} className="sideAvatar" />
           </div>
           {/* Post Info */}
           <div className="PostInfo">

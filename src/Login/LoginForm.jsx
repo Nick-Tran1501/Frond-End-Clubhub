@@ -14,7 +14,7 @@ import {
 } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useNavigate } from "react";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -23,23 +23,25 @@ const LoginForm = () => {
     password: "",
   });
 
-  
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("https://rmit-club.herokuapp.com/api/auth/signin",{
-      
-      email: user.email,
-      password: user.password
+    axios({
+      method: "get",
+      url: "https://rmit-club.herokuapp.com/api/auth/signin",
+      data:{
+        email: user.email,
+        password: user.password,
+      },
     })
     .then(response =>
       console.log(response)
-
       )  
     .catch((err) => {
       console.error(err);
     });
+    
   }
 
   const OnChange = (e) => {
@@ -76,7 +78,7 @@ const LoginForm = () => {
           <Form.Item>
             <Input
               size="large"
-              placeholder="Enter Your Username"
+              placeholder="Enter Your Email"
               allowClear="true"
               prefix={<UserOutlined />}
               suffix={
@@ -92,7 +94,7 @@ const LoginForm = () => {
                 color: "white",
               }}
               onChange={(e) =>{
-                setUser({...user, username: e.target.value})
+                setUser({...user, email: e.target.value})
               }}
             
               className="LoginItems"

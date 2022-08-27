@@ -22,11 +22,11 @@ function App() {
           </Routes>
           
        {/* <LoginPage/> */}
-        {/* <Home/> */}
-        {/*<Welcome/> */}
+        <Home/>
+        <Welcome/>
 
 
-        {/* <Profile /> */}
+        <Profile />
     </div>
   );
 }
