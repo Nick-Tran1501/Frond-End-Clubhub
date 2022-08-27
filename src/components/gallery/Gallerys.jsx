@@ -1,5 +1,5 @@
 import React from 'react';
-import './Gallery.css';
+import './Gallerys.css';
 import club_1 from "../../image/clubs-cheer.jpg"
 import club_2 from "../../image/club-cheer_2.png"
 import avatar from "../../image/avatar.png"

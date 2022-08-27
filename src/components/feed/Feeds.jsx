@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState,useEffect} from 'react';
 import axios from "axios"
-import './Feed.css';
+import './Feeds.css';
 import PostList from '../postlist/PostList';
 
 const Feed = () => {

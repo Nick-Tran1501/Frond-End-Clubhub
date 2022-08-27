@@ -1,9 +1,9 @@
 import React from "react";
 import "./WelcomePage.css";
 import Navbars from "../../components/navbar/NavBar";
-import Hero from "../../components/hero/Hero";
-import Gallery from "../../components/gallery/Gallery";
-import Footer from "../../components/footer/Footer";
+import Hero from "../../components/hero/Heros";
+import Gallery from "../../components/gallery/Gallerys";
+import Footer from "../../components/footer/Footers";
 
 const welcome = () => {
   return (

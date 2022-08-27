@@ -49,7 +49,7 @@ const searchResult = (query) =>
       };
     });
 
-const Navbar = () => {
+const NavBar = () => {
   // Manange the Handling Search,
   const [userProfile,setUserProfile]=useState({})
 
@@ -120,4 +120,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;
