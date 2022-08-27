@@ -23,14 +23,11 @@ function App() {
           
 
        {/* <LoginPage/> */}
-
-       <LoginPage/>
-
         <Home/>
         <Welcome/>
 
 
-        <Profile />
+        <Profile /> */}
     </div>
   );
 }
