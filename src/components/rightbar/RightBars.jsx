@@ -1,7 +1,7 @@
 import React from 'react';
-import './RightBar.css';
-import RecommendClub from "../recommendclub/RecommendClub";
-import UpcomingEvent from "../upcomingevent/UpcomingEvent";
+import './RightBars.css';
+import RecommendClub from "../recommendclubs/RecommendClubs";
+import UpcomingEvent from "../upcomingevents/UpcomingEvents";
 import "antd/dist/antd.min.css";
 
 

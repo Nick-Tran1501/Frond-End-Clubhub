@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import { Button, Modal } from 'antd';
 
 
-const Profile_bg = () => {
+const ProfileBg = () => {
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
 
@@ -113,4 +113,4 @@ const Profile_bg = () => {
   )
 }
 
-export default Profile_bg
+export default ProfileBg;

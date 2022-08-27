@@ -1,6 +1,6 @@
 import { Badge } from "antd";
 import React from "react";
-import "./NavbarOption.css";
+import "./NavbarOptions.css";
 import {Avatar} from "antd";
 
 

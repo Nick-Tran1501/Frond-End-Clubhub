@@ -2,7 +2,7 @@
 import React, {useState,useEffect} from 'react';
 import axios from "axios"
 import './Feeds.css';
-import PostList from '../postlist/PostList';
+import PostList from '../postlists/PostList';
 
 const Feed = () => {
   
