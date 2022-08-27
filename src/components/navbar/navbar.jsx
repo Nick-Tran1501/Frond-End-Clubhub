@@ -12,7 +12,8 @@ import userAvatar from "../../image/42527221_688413261531308_7133408386179137536
 import ClubLogo from "../../image/ClubHub_Trans.png";
 import { Col, Row, AutoComplete, Input, Avatar } from "antd";
 import Option from "./navbarOption";
-
+import {useEffect}  from "react";
+import axios from "axios"
 // Test function of autocomplete
 
 const getRandomInt = (max, min = 0) =>
@@ -51,6 +52,20 @@ const searchResult = (query) =>
 
 const Navbar = () => {
   // Manange the Handling Search,
+  const [userProfile,setUserProfile]=useState({})
+
+  useEffect(()=> {
+    
+      // const token = localStorage.getItem('token')
+      axios.get("https://rmit-club.herokuapp.com/api/user",
+        {
+          headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
+        }
+      )
+      .then(response => setUserProfile(response.data))
+      .catch(err => console.log(err))
+  
+  },[])
 
   const [options, setOptions] = useState([]);
 
@@ -82,7 +97,7 @@ const Navbar = () => {
                 <Input.Search
                   size="large"
                   placeholder="input here"
-                  style={{}}
+                  
                 />
               </AutoComplete>
             </Col>
@@ -98,7 +113,7 @@ const Navbar = () => {
             <Option Icon={FlagFilled} title="My club" />
             <Option Icon={FlagFilled} title="My club" />
             <Option Icon={BellFilled} title="Nofication" />
-            <Option avatar={userAvatar} />
+            <Option avatar={userProfile.avatarUrl} />
           </div>
         </Col>
       </Row>

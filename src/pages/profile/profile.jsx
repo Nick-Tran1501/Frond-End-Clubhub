@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "./profile.css";
 import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer/footer';

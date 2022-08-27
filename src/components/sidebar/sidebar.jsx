@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useEffect,useState} from "react";
 import "./sidebar.css";
 import "antd/dist/antd.css";
 import { Avatar, Menu, Col, Row } from "antd";
@@ -11,6 +12,8 @@ import {
   SettingOutlined,
   EditFilled,
 } from "@ant-design/icons";
+
+import axios from "axios"
 
 // Dropdown Menu
 function getItem(label, key, icon, children, type) {
@@ -53,11 +56,27 @@ const sidebar = () => {
     console.log("click ", e);
   };
 
+  const [userProfile,setUserProfile]=useState({})
+
+  useEffect(()=> {
+    
+      // const token = localStorage.getItem('token')
+      axios.get("https://rmit-club.herokuapp.com/api/user",
+        {
+          headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
+        }
+      )
+      .then(response => setUserProfile(response.data))
+      .catch(err => console.log(err))
+  
+  },[])
+
+
   return (
     <div className="sideContainer">
 
       
-        <Menu
+        {/* <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
@@ -65,15 +84,15 @@ const sidebar = () => {
           items={items}
 
           // items={item2}
-        />
+        /> */}
 
 
       <Row>
       <Col xs={24} lg={24} className="sideTop">
-        <img src={profileImg} alt="" />
-        <Avatar size={60} icon={<UserOutlined />} className="sideAvatar" />
-        <h2>Johnny Dangg</h2>
-        <h4>jonnydang12@gmail.com</h4>
+        <img src={userProfile.avatarUrl} alt="backgorundImage" />
+        <Avatar size={60} src={userProfile.avatarUrl} className="sideAvatar" />
+        <h2>{userProfile.username}</h2>
+        <h4>{userProfile.email}</h4>
       </Col>
       </Row>
 

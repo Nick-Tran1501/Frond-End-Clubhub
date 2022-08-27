@@ -100,6 +100,9 @@ const LoginPage = () => {
                       height: "3rem",
                       marginTop: "1rem",
                     }}
+                    onClick={() =>{
+                      navigate("/home")
+                    }}
                   >
                     Visit as Guest
                   </Button>

@@ -19,8 +19,20 @@ function App() {
           </Routes> */}
 
       {/* <Home/> */}
-      <Profile />
+      {/* <Profile /> */}
       
+
+            {/* <Route path='/home' element={<Home/>}/>
+            <Route path='/welcome' element={<Welcome/>}/> */}
+            {/* <Route path='*' element={alert("404 Not Found")}/> */}
+        {/* </Routes> */}
+          
+       {/* <LoginPage/> */}
+        {/* <Home/> */}
+        {/*<Welcome/> */}
+
+
+        {/* <Profile /> */}
     </div>
   );
 }
