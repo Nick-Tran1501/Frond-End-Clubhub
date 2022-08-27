@@ -4,7 +4,7 @@ import axios from "axios"
 import './Feed.css';
 import PostList from '../postlist/PostList';
 
-const feed = () => {
+const Feed = () => {
   
   // ---------Data Collection----------
   const [postData,setPostData] =useState([])
@@ -33,4 +33,4 @@ const feed = () => {
   )
 }
 
-export default feed
+export default Feed;
