@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "./ProfilePage.css";
 import Navbar from '../../components/navbar/NavBar';
-import Footer from '../../components/footer/Footer';
+import Footer from '../../components/footer/Footers';
 import Sidebar from '../../components/sidebar/SideBar';
 import "antd/dist/antd.css";
 import Profile_bg from './components/Profile_bg';

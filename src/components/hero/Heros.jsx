@@ -1,8 +1,8 @@
 import React from 'react';
-import './Hero.css';
+import './Heros.css';
 // import Typical from 'react-typical';
 
-const hero = () => {
+const Hero = () => {
   return (
     <div className='heroContainer'>
       <div className='hero'>
@@ -28,4 +28,4 @@ const hero = () => {
   )
 }
 
-export default hero
+export default Hero;
