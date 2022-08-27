@@ -2,22 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 20px 0 0;
+    margin: 5px 20px 0 0;
     color: gray;
     cursor: pointer;
-    padding: 18px;
+    padding: 10px;
     height: 100%;
     border-radius: 10px;
 }
 
 .navOption:hover{
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 .navIcon{
     object-fit: cover;
     font-size: 1.2rem;
-
+    
 }
 
 .navOption_title {
