@@ -4,10 +4,8 @@ import "./sidebar.css";
 import "antd/dist/antd.css";
 import { Avatar, Menu, Col, Row } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
-import profileImg from "../../image/Galaxy-login.png";
 import {
   MailOutlined,
-  UserOutlined,
   AppstoreOutlined,
   SettingOutlined,
   EditFilled,
@@ -60,10 +58,10 @@ const sidebar = () => {
 
   useEffect(()=> {
     
-      // const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
       axios.get("https://rmit-club.herokuapp.com/api/user",
         {
-          headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
+          headers:{'Authorization': `Bearer ${token}`}
         }
       )
       .then(response => setUserProfile(response.data))

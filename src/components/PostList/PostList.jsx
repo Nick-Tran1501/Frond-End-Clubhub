@@ -2,11 +2,19 @@ import Post from "../Post/Post";
 import React from "react";
 
 
-const PostList = (data) => {
+const PostList = ({data}) => {
+  console.log(data)
+
  return(
   <React.Fragment>
-    <Post/>
-    <Post/>
+   {data.map(post => 
+    
+    <Post
+      data={post}
+    />
+    
+   )}
+    
   </React.Fragment>
  )
 }

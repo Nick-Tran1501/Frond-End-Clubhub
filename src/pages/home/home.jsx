@@ -8,9 +8,10 @@ import "antd/dist/antd.css";
 import { Col, Row} from "antd";
 
 const Home = () => {
+  
   return (
     <div className="homeContainer">
-  
+
         <Row>
           <Col span={24} >
             <Navbars />

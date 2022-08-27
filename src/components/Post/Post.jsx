@@ -11,6 +11,8 @@ import {
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
+
+
 import moment from "moment";
 
 import axios from "axios"
@@ -20,25 +22,21 @@ const { TextArea } = Input;
 
 
 
-const Post = () => {
+const Post = ({data}) => {
   const [userProfile,setUserProfile]=useState({})
 
-  useEffect(()=> {
+  // useEffect(()=> {
     
-      const token = localStorage.getItem('token')
-      axios.get("https://rmit-club.herokuapp.com/api/user",
-        {
-          headers:{'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDViNDk0NjBkMGIzZjBkYzkzOTc5MSIsImlhdCI6MTY2MTMyMTcxMn0.f7l5qNzDY_cXuxjWwuNcNV8ZnzDoHVPjnq5eZ3YinTM`}
-           
-          // ${token}
-        }
-      )
-      .then(response => setUserProfile(response.data))
-      .catch(err => console.log(err))
+  //     const token = localStorage.getItem('token')
+  //     axios.get("https://rmit-club.herokuapp.com/api/user",
+  //       {
+  //         headers:{'Authorization': `Bearer ${token}`}
+  //       }
+  //     )
+  //     .then(response => setUserProfile(response.data))
+  //     .catch(err => console.log(err))
     
-    
-    
-  },[])
+  // },[])
   
 
   
@@ -47,9 +45,19 @@ const Post = () => {
   const [show, setShow] = useState(false);
 
   // -------Like Count--------
-  const [likeCount, setLikeCount] = useState(0);
-  const handleLike = () => {
-    setLikeCount((prevState) => prevState + 1);
+  const token = localStorage.getItem("token")
+  const handleLike = (postId) => {
+    axios(
+      {
+        headers:{'Authorization': `Bearer ${token}`},
+        method:"post",
+        url:"https://rmit-club.herokuapp.com/api/posts/like",
+        data:{
+          postId,
+        }
+      }
+    )
+    
   };
 
 
@@ -174,7 +182,7 @@ const Post = () => {
         <div className="PostHeader">
           {/* Profile Image */}
           <div className="ProfileImage">
-            <Avatar size={60} src={userProfile.avatarUrl} className="sideAvatar" />
+            <Avatar size={60} src={data.author.avatarUrl} className="sideAvatar" />
           </div>
           {/* Post Info */}
           <div className="PostInfo">
@@ -185,7 +193,7 @@ const Post = () => {
                   fontSize:"18px"
                 }}
               >
-                {userProfile.username}
+                {data.author.username}
               </p>
             </div>
 
@@ -197,7 +205,7 @@ const Post = () => {
                   fontSize:"12px"
                 }}
               >
-                Today
+                {data.createAt}
               </p>
             </div>
             <div
@@ -207,7 +215,7 @@ const Post = () => {
                 fontSize:"12px"
               }}
             >
-              <p>RMIT University</p>
+              <p>{data.location}</p>
             </div>
           </div>
           {/* Post Setting */}
@@ -247,18 +255,7 @@ const Post = () => {
         <div className="PostContent">
           <div className="Content">
             <ReadMore>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum quam
-              ratione natus laudantium? Sint est, inventore ipsa totam sunt
-              tempore, laboriosam veniam voluptatem voluptas, illum at
-              blanditiis omnis quasi unde in quae. Dolorem dolor deserunt
-              accusamus quas officia, esse atque, in vero expedita soluta
-              debitis, natus sint ipsam magnam repudiandae nisi aspernatur vel
-              tenetur dignissimos pariatur possimus delectus. Sed, ratione.
-              Neque ipsum omnis laborum perspiciatis repellendus. Minus
-              provident molestiae dolorem eum iure. Aliquam saepe odit culpa
-              laudantium possimus, nam maiores est quaerat adipisci, vero modi,
-              ipsa rerum commodi nostrum dignissimos facilis pariatur ullam sint
-              assumenda aperiam fugit. Iure, quidem possimus.
+              {data.content}
             </ReadMore>
           </div>
 
@@ -273,48 +270,26 @@ const Post = () => {
                 paddingRight: "1rem",
               }}
             >
-              <Image
-                width="100%"
-                height="20rem"
-                src={require("../../image/Image1.jpg")}
-                className="Images"
-              />
-              <Image
-                width="100%"
-                height="20rem"
-                src={require("../../image/Image2.jpg")}
-                className="Images"
-              />
-              <Image
-                width="100%"
-                height="20rem"
-                src={require("../../image/Image3.jpg")}
-                className="Images"
-              />
-              <Image
-                width="100%"
-                height="20rem"
-                src={require("../../image/ClubHub_Trans.png")}
-                className="Images"
-              />
-              <Image
-                width="100%"
-                height="20rem"
-                src={require("../../image/Galaxy-login.png")}
-                className="Images"
-              />
-              <Image
-                width="100%"
-                height="20rem"
-                src={require("../../image/Image3.jpg")}
-                className="Images"
-              />
+              {data.images.map(image => {
+                
+                return(
+
+                  <Image
+                    key={data._id}
+                    width="100%"
+                    height="20rem"
+                    src={image}
+                    className="Images"
+                  />
+                )
+              })}
+              
             </Carousel>
           </div>
 
           <div className="PostResult">
             <div className="ReactResult">
-              <p>{likeCount}</p>
+              <p>{data.likes.length}</p>
             </div>
 
             <div className="ResultIcon">
@@ -333,7 +308,7 @@ const Post = () => {
 
         {/* -------Post Footer------ */}
         <div className="PostFooter">
-          <button className="Button" onClick={handleLike}>
+          <button className="Button" onClick={() => handleLike(data._id)}>
             <div className="ActionButtons">
               <p>Like</p>
               <LikeOutlined className="ButtonIcons" />
