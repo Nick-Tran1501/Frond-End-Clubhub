@@ -1,7 +1,7 @@
 import React from "react";
 import Clubs from "./Clubs";
 import "antd/dist/antd.min.css";
-import "./RecommendClub.css"
+import "./RecommendClubs.css"
 import { Button } from "antd";
 import {
   ArrowRightOutlined

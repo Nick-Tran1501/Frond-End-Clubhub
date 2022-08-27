@@ -1,4 +1,4 @@
-import "./UpcomingEvent.css";
+import "./UpcomingEvents.css";
 import React from "react";
 import "antd/dist/antd.min.css";
 import { Image } from "antd";
