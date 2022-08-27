@@ -25,6 +25,7 @@ const Home = () => {
             md: 1,
             lg: 1,
           }}
+          className="container"
         >
           <Col xs={0} sm={0} md={4} lg={4} xl={4}>
             <Sidebars />
