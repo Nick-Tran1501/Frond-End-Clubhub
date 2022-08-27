@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "../profile.css";
+import "../ProfilePage.css";
 import "antd/dist/antd.css";
 import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
 

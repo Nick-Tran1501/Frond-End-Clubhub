@@ -4,19 +4,19 @@ import { useNavigate} from "react-router-dom";
 
 
 import "antd/dist/antd.min.css";
-import "../css/Login.css";
+import "./LoginPage.css";
 
 
 import { ArrowRightOutlined } from "@ant-design/icons";
-import backgroundVid from "../image/bg-vid2.mp4";
-import ClubLogo from "../image/ClubHub_Trans.png";
+import backgroundVid from "../../image/bg-vid2.mp4";
+import ClubLogo from "../../image/ClubHub_Trans.png";
 
 import { Col, Row } from "antd";
 import { Layout } from "antd";
 import { Button } from "antd";
 
-import LoginForm from "../Login/LoginForm";
-import Register from "../Login/Register";
+import LoginForm from "../../components/loginform/LoginForm";
+import Register from "../../components/registerform/RegisterForm";
 
 
 const { Content } = Layout;

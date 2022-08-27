@@ -1,10 +1,10 @@
 import './App.css';
 import 'antd/dist/antd.css'
-import LoginPage from './Login/Login';
-import Home from './pages/home/home';
-import Welcome from './pages/welcome/welcome';
+import LoginPage from './pages/loginpage/LoginPage';
+import Home from './pages/home/HomePage';
+import Welcome from './pages/welcome/WelcomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Profile from './pages/profile/profile'
+import Profile from './pages/profile/ProfilePage'
 import {Route,Routes} from "react-router-dom"
 
 function App() {
@@ -24,9 +24,9 @@ function App() {
           
 
        {/* <LoginPage/> */}
-        {/* <Home/> */}
+        <Home/>
         {/* <Welcome/> */}
-        <Profile />
+        {/* <Profile /> */}
     </div>
   );
 }
