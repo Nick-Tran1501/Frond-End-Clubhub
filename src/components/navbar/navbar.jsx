@@ -53,18 +53,18 @@ const Navbar = () => {
   // Manange the Handling Search,
   const [userProfile,setUserProfile]=useState({})
 
-  useEffect(()=> {
+  // useEffect(()=> {
     
-      const token = localStorage.getItem('token')
-      axios.get("https://rmit-club.herokuapp.com/api/user",
-        {
-          headers:{'Authorization': `Bearer ${token}`}
-        }
-      )
-      .then(response => setUserProfile(response.data))
-      .catch(err => console.log(err))
+  //     const token = localStorage.getItem('token')
+  //     axios.get("https://rmit-club.herokuapp.com/api/user",
+  //       {
+  //         headers:{'Authorization': `Bearer ${token}`}
+  //       }
+  //     )
+  //     .then(response => setUserProfile(response.data))
+  //     .catch(err => console.log(err))
   
-  },[])
+  // },[])
 
   const [options, setOptions] = useState([]);
 
