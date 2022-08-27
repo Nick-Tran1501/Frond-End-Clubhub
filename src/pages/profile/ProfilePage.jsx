@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "./ProfilePage.css";
 import Navbar from '../../components/navbar/NavBars';
 import Footer from '../../components/footer/Footers';
-import Sidebar from '../../components/sidebar/SideBar';
+import Sidebar from '../../components/sidebar/sidebar';
 import "antd/dist/antd.css";
 import Profile_bg from './components/ProfileBg';
 import Profile_main_side from './components/ProfileSide';

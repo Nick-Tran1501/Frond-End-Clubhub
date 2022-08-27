@@ -21,12 +21,7 @@ function App() {
 
             {/* <Route path='*' element={alert("404 Not Found")}/> */}
           </Routes>
-          
-
-       {/* <LoginPage/> */}
-        <Home/>
-        {/* <Welcome/> */}
-        {/* <Profile /> */}
+        
     </div>
   );
 }
