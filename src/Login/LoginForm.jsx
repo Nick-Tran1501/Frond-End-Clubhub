@@ -4,7 +4,7 @@ import React from "react";
 import "antd/dist/antd.css";
 
 import "../css/Login.css";
-import { Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Button, Form, Input, Checkbox, Tooltip } from "antd";
 import {
@@ -14,10 +14,13 @@ import {
 } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
-import { useState, useEffect, useNavigate } from "react";
+import { useState} from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginForm = () => {
+
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -28,18 +31,27 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios({
-      method: "get",
+      method: "post",
       url: "https://rmit-club.herokuapp.com/api/auth/signin",
       data:{
         email: user.email,
-        password: user.password,
+        password: user.password
       },
     })
     .then(response =>
-      console.log(response)
+     { console.log(response)
+      localStorage.setItem("token",response.data.accessToken)
+      console.log(localStorage.getItem("token"))
+      navigate("/home")
+      
+    }
+      
       )  
     .catch((err) => {
+      console.log("false")
+      alert("Wrong Input")
       console.error(err);
+
     });
     
   }
