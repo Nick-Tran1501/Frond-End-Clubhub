@@ -4,13 +4,13 @@ import Navbar from '../../components/navbar/NavBars';
 import Footer from '../../components/footer/Footers';
 import Sidebar from '../../components/sidebar/sidebar';
 import "antd/dist/antd.css";
-import Profile_bg from './components/ProfileBg';
-import Profile_main_side from './components/ProfileSide';
-import Profile_main_post from './components/ProfilePost';
+import ProfileBg from './components/ProfileBg';
 import { Col, Row,Layout } from "antd";
 import ProfileIntro from './components/ProfileIntro';
 import ProfileMember from './components/ProfileMember';
 import ProfileMedia from './components/ProfileMedia';
+import ProfileSide from './components/ProfileSide';
+import ProfilePost from './components/ProfilePost';
 
 
 const Profile = () => {
@@ -33,7 +33,7 @@ const Profile = () => {
       <div className='container'>
       <Row>
         <Col span={24} >
-          <Profile_bg page={page} changePage={changePage} />
+          <ProfileBg page={page} changePage={changePage} />
         </Col>
       </Row>
 
@@ -41,11 +41,11 @@ const Profile = () => {
         {page === "post" && (
             <Row className="main-content">
               <Col xs={24} sm={24} md={7} lg={7} xl={7} >
-                <Profile_main_side />
+                <ProfileSide page={page} changePage={changePage} />
               </Col>
 
               <Col xs={24} sm={24} md={17} lg={17} xl={17} >
-                <Profile_main_post />
+                <ProfilePost />
               </Col>
             </Row>
           )

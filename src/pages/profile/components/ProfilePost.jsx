@@ -4,7 +4,7 @@ import Feed from '../../../components/feed/Feeds';
 import "antd/dist/antd.css";
 import { Modal } from 'antd';
 
-export default function Profile_main_post() {
+export default function ProfilePost() {
     const [post, setPost] = useState(false);
 
     const showPost = () => {

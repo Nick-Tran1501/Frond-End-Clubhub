@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import { Button, Modal } from 'antd';
 
 
-const ProfileBg = () => {
+const ProfileBg = ({page, changePage}) => {
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
 

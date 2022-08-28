@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
 import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
+import { Col, Row,Layout } from "antd";
 
 function getStoredInfo() {
     const storedInfo = localStorage.getItem("studentID");
@@ -19,7 +20,7 @@ function getStoredInfo() {
 }
 
 
-const ProfileSide = () => {
+const ProfileSide = ({page, changePage}) => {
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);
 
@@ -120,56 +121,66 @@ const ProfileSide = () => {
             <div className="md it-row1">
                 <div className='row1-title'>
                     <h3>Media</h3>
-                    <a href="#">All images</a>
+                    <a onClick={() => changePage("media")}>All images</a>
                 </div>
             </div>
-            <div className="img-list md">
-                
-                <Image
-                    width="100%"
-                    height="5rem"
-                    src={require("../../../image/Image1.jpg")}
-                    className="Images img"
-                />
-                <Image
-                    width="100%"
-                    height="5rem"
-                    src={require("../../../image/Image2.jpg")}
-                    className="Images"
-                />
-                <Image
-                    width="100%"
-                    height="5rem"
-                    src={require("../../../image/Image3.jpg")}
-                    className="Images"
-                />
-                <Image
-                    width="100%"
-                    height="5rem"
-                    src={require("../../../image/ClubHub_Trans.png")}
-                    className="Images"
-                />
-                <Image
-                    width="100%"
-                    height="5rem"
-                    src={require("../../../image/Galaxy-login.png")}
-                    className="Images"
-                />
-                <Image
-                    width="100%"
-                    height="5rem"
-                    src={require("../../../image/Image3.jpg")}
-                    className="Images"
-                />
-               
-            </div>
+            <Row className="memGalery">
+                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                    <Image
+                        width="100%"
+                        height="6rem"
+                        src={require("../../../image/Image1.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                    <Image
+                        width="100%"
+                        height="6rem"
+                        src={require("../../../image/Image1.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                    <Image
+                        width="100%"
+                        height="6rem"
+                        src={require("../../../image/Image1.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                    <Image
+                        width="100%"
+                        height="6rem"
+                        src={require("../../../image/Image2.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                    <Image
+                        width="100%"
+                        height="6rem"
+                        src={require("../../../image/Image3.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                    <Image
+                        width="100%"
+                        height="6rem"
+                        src={require("../../../image/Image3.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+            </Row>
         </div>
 
         <div className="ml friend-list">
             <div className="fr it-row1">
                 <div className='row1-title'>
                     <h3>Members</h3>
-                    <a href="#">All members</a>
+                    <a onClick={() => changePage("member")}>All members</a>
                 </div>
             </div>
             <div className='p-row mem-tag'>
