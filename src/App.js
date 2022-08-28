@@ -1,8 +1,9 @@
 
 
 import './App.css';
-import 'antd/dist/antd.css';
-import LoginPage from './pages/login/LoginPage';
+
+import 'antd/dist/antd.css'
+import LoginPage from './pages/loginpage/LoginPage';
 import Home from './pages/home/HomePage';
 import Welcome from './pages/welcome/WelcomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,26 +21,6 @@ function App() {
             <Route path='*' element={alert("404 Not Found")}/>
           </Routes> */}
 
-      {/* <Home/> */}
-      {/* <Profile /> */}
-
-
-      {/* <Route path='/home' element={<Home/>}/>
-            <Route path='/welcome' element={<Welcome/>}/> */}
-      <Route path="/profile" element={<Profile />} />
-
-      {/* <Route path='*' element={alert("404 Not Found")}/> */}
-      {/* </Routes> */}
-
-      {/* <LoginPage/> */}
-      {/* <Home/>
-        <Welcome/>
-        <Profile /> */}
-
-       {/* <LoginPage/> */}
-        <Home/>
-        {/* <Welcome/> */}
-        {/* <Profile /> */}
 
 
     </div>

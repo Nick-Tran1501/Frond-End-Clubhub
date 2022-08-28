@@ -4,7 +4,7 @@ import { useNavigate} from "react-router-dom";
 
 
 import "antd/dist/antd.min.css";
-import "../../components/loginform/LoginRegister.css";
+import "./LoginPage.css";
 
 
 import { ArrowRightOutlined } from "@ant-design/icons";

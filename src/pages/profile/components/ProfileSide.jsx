@@ -18,12 +18,8 @@ function getStoredInfo() {
     return JSON.parse(storedInfo);
 }
 
-// postComponent
-// loginComponent
 
-
-
-const Profile_main_side = () => {
+const ProfileSide = () => {
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);
 
@@ -222,4 +218,4 @@ const Profile_main_side = () => {
   )
 }
 
-export default Profile_main_side
+export default ProfileSide;
