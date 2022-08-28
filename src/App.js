@@ -10,19 +10,19 @@ import {Route,Routes} from "react-router-dom"
 function App() {
   return (
     <div className="App">
-          {/* <Routes>
+          <Routes>
             <Route path='/*' element={<LoginPage/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
             <Route path='/profile' element={<Profile/>}/>
-          </Routes> */}
+          </Routes>
 
 
 
-       <LoginPage/>
+       {/* <LoginPage/>
         <Home/>
         <Welcome/>
-        <Profile />
+        <Profile /> */}
     </div>
   );
 }
