@@ -6,8 +6,7 @@
   background-color: white;
   box-shadow: 1px 2px 5px #888888;
   z-index: 10;  
-    /* position: sticky;
-  top: 0; */
+  height: 7vh;
 }
 
 .nContainer {
@@ -26,8 +25,9 @@
 }
 
 .navLeft > img {
+  width: 100%;
   object-fit: contain;
-  height: 5rem;
+  height: 7rem;
   margin-left: 2rem;
 }
 

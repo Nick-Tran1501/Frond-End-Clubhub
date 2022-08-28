@@ -22,9 +22,9 @@ const Home = () => {
         <Row
           gutter={{
             xs: 0,
-            sm: 1,
-            md: 1,
-            lg: 1,
+            sm: 15,
+            md: 15,
+            lg: 15,
           }}
           className="hContainer"
         >
