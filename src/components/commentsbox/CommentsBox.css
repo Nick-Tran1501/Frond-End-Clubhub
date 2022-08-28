@@ -1,0 +1,29 @@
+.CommentsBoxContainer{
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  height: auto;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.CommentBox{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+
+.OwnerAvatar{
+  min-width: 30px;
+}
+
+.InputComment{
+  width: 90%;
+  border: 2px solid;
+}
+
+.SubmitButtonContainer{
+  display: flex;
+  justify-content: flex-end;
+}
