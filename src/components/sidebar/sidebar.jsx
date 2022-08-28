@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect,useState} from "react";
-import "./sideBar.css";
+import "./sidebar.css";
 import "antd/dist/antd.css";
 import { Avatar, Menu, Col, Row } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
