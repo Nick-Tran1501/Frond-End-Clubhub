@@ -1,6 +1,6 @@
 import React from "react";
 import Navbars from "../../components/navbar/NavBars";
-import Sidebars from "../../components/sidebar/sidebar";
+import Sidebars from "../../components/sidebar/Sidebars";
 import Feed from "../../components/feed/Feeds";
 import Rightbars from "../../components/rightbar/RightBars";
 import "./HomePage.css";
