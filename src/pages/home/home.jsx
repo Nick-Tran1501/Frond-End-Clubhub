@@ -26,13 +26,13 @@ const Home = () => {
             md: 1,
             lg: 1,
           }}
-          className="container"
+          className="hContainer"
         >
           <Col xs={0} sm={0} md={4} lg={4} xl={4}>
             <Sidebars />
           </Col>
 
-          <Col xs={24} sm={18} md={14} lg={14} xl={14}>
+          <Col xs={24} sm={18} md={14} lg={14} xl={14} style={{marginTop: "2rem"}}>
             <Feed/>
           </Col>
 

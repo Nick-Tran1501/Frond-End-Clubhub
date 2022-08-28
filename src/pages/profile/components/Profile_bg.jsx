@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import { Button, Modal } from 'antd';
 
 
-const Profile_bg = () => {
+const Profile_bg = ({page, changePage}) => {
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
 
@@ -35,7 +35,7 @@ const Profile_bg = () => {
     <div>
         {/* <!-- profile-cover --> */}
         <div className="ab bg-image">
-            <button className="btn btn-sm" onClick={showModal1}>Edit cover image</button>
+            <button className="btn btn-sm edit_cover_btn" onClick={showModal1}>Edit cover image</button>
             <Modal title="Change cover image" visible={modal1} onOk={handleOk} onCancel={handleCancel}>
                 <form className="upload_image" id="post_form">
                     <div className="user_infor">
@@ -61,8 +61,8 @@ const Profile_bg = () => {
                 <div className="pdl-row">
                     <img className="pfi-img" onClick={showModal2} src="image/avatar.png" alt="profile-image" id="profile_btn" />
                     <div>
-                        <h1>Doraemon</h1>
-                        <p>52 friends, 5 muture friends</p>
+                        <h1>CLUB NAME</h1>
+                        <p>Description</p>
                         <div className="fr-list">
                             <img src="image/Image1.jpg" alt="" />
                             <img src="image/Image2.jpg" alt="" />
@@ -99,14 +99,12 @@ const Profile_bg = () => {
 
 
             <div className="pd-right">
-            <ul className="link">
-                <li><a href="#">Post</a></li>
-                <li><a href="#">Intro</a></li>
-                <li><a href="#">Friends</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
+                <ul className="link">
+                    <li><button onClick={() => changePage("post")} className={page === "post" ? 'profileComp active' : "profileComp"}>Post</button></li>
+                    <li><button onClick={() => changePage("intro")} className={page === "intro" ? 'profileComp active' : "profileComp"}>Intro</button></li>
+                    <li><button onClick={() => changePage("member")} className={page === "member" ? 'profileComp active' : "profileComp"}>Members</button></li>
+                    <li><button onClick={() => changePage("media")} className={page === "media" ? 'profileComp active' : "profileComp"}>Images</button></li>
+                </ul>
             </div>
         </div>
     </div>

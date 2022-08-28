@@ -167,24 +167,53 @@ const Profile_main_side = () => {
         <div className="ml friend-list">
             <div className="fr it-row1">
                 <div className='row1-title'>
-                    <h3>Friends</h3>
-                    <a href="#">All friends</a>
+                    <h3>Members</h3>
+                    <a href="#">All members</a>
                 </div>
             </div>
-            <div className="fr img-list">
+            <div className='p-row mem-tag'>
+                <img src='image/Image1.jpg' />
+                <div className='memInfo'>
+                    <h3>Doraemon</h3>
+                    <p>Role: Club President</p>
+                </div>
+            </div>
+            <div className='p-row mem-tag'>
+                <img src='image/Image1.jpg' />
+                <div className='memInfo'>
+                    <h3>Doraemon</h3>
+                    <p>Role: Club President</p>
+                </div>
+            </div>
+            <div className='p-row mem-tag'>
+                <img src='image/Image1.jpg' />
+                <div className='memInfo'>
+                    <h3>Doraemon</h3>
+                    <p>Role: Club President</p>
+                </div>
+            </div>
+            <div className='p-row mem-tag'>
+                <img src='image/Image1.jpg' />
+                <div className='memInfo'>
+                    <h3>Doraemon</h3>
+                    <p>Role: Club President</p>
+                </div>
+            </div>
+            {/* <div className="fr img-list">
+                
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Doraemon</div>
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Shizuka</div>
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Chaien</div>
                 <div><img src="image/Image1.jpg" alt="Mrs Y" className="img" />Suneo</div>
-            </div>
+            </div> */}
         </div>
 
         <div className="ml event">
             <div className="it it-row1">
-                <h3>Event</h3>
+                <h3>Events</h3>
                 <a onClick={showModal4}>Edit</a>
             </div>
-            <div className="p-row">
+            {/* <div className="p-row">
                 <i className="fas fa-birthday-cake"></i>
                 <div className="p-note">
                     <h3>Birthday !</h3>
@@ -197,7 +226,7 @@ const Profile_main_side = () => {
                     <h3>Graduated from {info.education}</h3>
                     <p>{info.graduation}</p>
                 </div>
-            </div>
+            </div> */}
             <Modal title="Change events" visible={modal4} onOk={handleOk} onCancel={handleCancel}>
                 <form onSubmit={handleSubmit} className="upload_image" id="post_form">
                     <div className="user_infor">

@@ -97,7 +97,7 @@ const sidebar = () => {
       <Menu
         className="sideStats"
         onClick={onClick}
-        style={{}}
+        style={{boxShadow: "1px 2px 5px #888888"}}
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={[""]}
         mode="inline"

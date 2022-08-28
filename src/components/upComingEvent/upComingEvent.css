@@ -4,6 +4,7 @@
   flex-flow: column nowrap;
   align-items: flex-start;
   gap: 1rem;
+  box-shadow: 1px 2px 5px #888888;
 }
 
 .EventInfo{

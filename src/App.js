@@ -24,7 +24,7 @@ function App() {
           
 
        {/* <LoginPage/> */}
-        {/* <Home/> */}
+        <Home/>
         {/* <Welcome/> */}
         <Profile />
     </div>
