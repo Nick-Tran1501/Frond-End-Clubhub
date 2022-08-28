@@ -89,20 +89,22 @@
   opacity: 0.9;
   height: 20px;
   width: 20px;
-  right: 0px;
+  right: 0;
   z-index: 1;
   margin: 0;
+
 }
 
 .ant-carousel .slick-prev{
-  font-size: 25px;
+  font-size: 20px;
   color: black;
   opacity: 0.9;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   left: 0;
   z-index: 1;
   margin: 0;
+
 }
 
 
