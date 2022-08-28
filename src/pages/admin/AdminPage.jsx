@@ -11,11 +11,14 @@ import {
   Input,
   Typography,
   Table,
-  Search,
-  Form,
+  //   Search,
+  //   Form,
   Menu,
   Dropdown,
   Space,
+  Popconfirm,
+  message,
+  //   Select,
 } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
@@ -26,12 +29,27 @@ function AdminPage() {
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
 
+  const handleRole = (e) => {
+    // message.info("Click on menu item.");
+    const result = roleList.props.items;
+    const newRole = result.filter((item) => item.key === e.key);
+    console.log(newRole[0].label);
+  };
+
+  //  delete handle
+  const handleDelete = (key) => {
+    const newData = data.filter((item) => item.key !== key);
+    setData(newData);
+  };
+
   //  test table
   const roleList = (
     <Menu
+      onClick={handleRole}
       items={[
         {
           key: "1",
+          value: "President",
           label: "President",
         },
         {
@@ -44,11 +62,43 @@ function AdminPage() {
         },
         {
           key: "4",
-          label: ",Members",
+          label: "Member",
         },
       ]}
     />
   );
+
+  const [data, setData] = useState([
+    {
+      key: "0",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "1",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "2",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+  ]);
+
+  //   define table columns
   const columns = [
     {
       title: "Name",
@@ -66,8 +116,14 @@ function AdminPage() {
       width: "5%",
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      title: "Join Date",
+      dataIndex: "joinDate",
+      width: "10%",
+    },
+
+    {
+      title: "Email",
+      dataIndex: "email",
       width: "30%",
     },
     {
@@ -79,36 +135,32 @@ function AdminPage() {
       title: "Change Role",
       dataIndex: "Remove",
       width: "10%",
-      render: () => (
+      render: (_, record) => (
         <Space size="middle">
           <Dropdown overlay={roleList}>
-            <a>
-              More <DownOutlined />
+            <a onClick={(e) => e.preventDefault()}>
+              Select Role
+              <DownOutlined />
             </a>
           </Dropdown>
         </Space>
       ),
     },
     {
-      title: "Remove",
-      dataIndex: "remove",
+      title: "operation",
+      dataIndex: "operation",
       width: "10%",
+      render: (_, record) =>
+        data.length >= 1 ? (
+          <Popconfirm
+            title="Are you sure to remove this person ?"
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <a> Remove </a>
+          </Popconfirm>
+        ) : null,
     },
   ];
-
-  const data = [];
-
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      key: i,
-      name: `Edward King ${i}`,
-      age: 32,
-      address: `London, Park Lane no. ${i}`,
-      gender: "Male",
-      role: "Onchange",
-      remove: "Button"
-    });
-  }
 
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
