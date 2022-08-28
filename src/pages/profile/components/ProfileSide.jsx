@@ -18,6 +18,7 @@ function getStoredInfo() {
     return JSON.parse(storedInfo);
 }
 
+
 const ProfileSide = () => {
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);

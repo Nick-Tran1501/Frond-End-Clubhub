@@ -7,21 +7,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from './pages/profile/ProfilePage'
 import {Route,Routes} from "react-router-dom"
 
+
 function App() {
-
- 
-
   return (
     <div className="App">
-          <Routes>
+          {/* <Routes>
             <Route path='/*' element={<LoginPage/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
             <Route path='/profile' element={<Profile/>}/>
+          </Routes> */}
 
-            {/* <Route path='*' element={alert("404 Not Found")}/> */}
-          </Routes>
-        
+
+
     </div>
   );
 }
