@@ -2,17 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import {
-  Image,
-  Button,
-  Comment,
-  Form,
-  Input,
-  List,
-  Carousel,
-  Modal,
-  Avatar,
-} from "antd";
+import { Image, Carousel, Modal, Avatar } from "antd";
 import {
   EditOutlined,
   LikeOutlined,
@@ -25,8 +15,6 @@ import CommentsBox from "../commentsbox/CommentsBox";
 import moment from "moment";
 
 import axios from "axios";
-
-const { TextArea } = Input;
 
 const Post = ({ data }) => {
   const [userProfile, setUserProfile] = useState({});
@@ -55,27 +43,6 @@ const Post = ({ data }) => {
       },
     });
   };
-
-  // -------Comment Box-------
-  const Editor = ({ onChange, onSubmit, submitting, value }) => (
-    <>
-      <Form.Item>
-        <TextArea rows={4} onChange={onChange} value={value} />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          htmlType="submit"
-          loading={submitting}
-          onClick={onSubmit}
-          type="primary"
-        >
-          Add Comment
-        </Button>
-      </Form.Item>
-    </>
-  );
-  
-  
 
   // ------------Read More--------------
   const ReadMore = ({ children }) => {
@@ -111,9 +78,6 @@ const Post = ({ data }) => {
     console.log(e);
     setVisible(false);
   };
-
- 
-  
 
   return (
     <React.Fragment>
@@ -235,7 +199,7 @@ const Post = ({ data }) => {
             </div>
 
             <div className="CommentsResult">
-              <p style={{ fontSize: "18px", paddingTop: "5px" }}>100</p>
+              <p style={{ fontSize: "18px", paddingTop: "5px" }}>{data.comments.length}</p>
               <span className="commentsIcon">
                 <CommentOutlined></CommentOutlined>
               </span>
@@ -273,7 +237,7 @@ const Post = ({ data }) => {
           </button>
         </div>
 
-        {show && <CommentsBox />}
+        {show && <CommentsBox data={data.comments} postId={data._id} userimage={data.author.avatarUrl} />}
       </div>
     </React.Fragment>
   );
