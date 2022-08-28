@@ -8,25 +8,16 @@ const CommentsBox = ({ data, postId, userimage }) => {
   const { TextArea } = Input;
 
   const openNotificationWithIcon = (type) => {
-
-    if(type === "success"){
-      notification["success"]
-      ({
+    if (type === "success") {
+      notification["success"]({
         message: "Notification Title",
-        description:
-          "Comment Successfully",
-        
-      })
-      
-    }
-    else{
-      notification["error"]
-      ({
+        description: "Comment Successfully",
+      });
+    } else {
+      notification["error"]({
         message: "Notification Title",
-        description:
-          "Please enter your comment",
-      })
-      
+        description: "Please enter your comment",
+      });
     }
   };
 
@@ -45,17 +36,11 @@ const CommentsBox = ({ data, postId, userimage }) => {
     })
       .then((response) => {
         console.log(response);
-        return(
-          <Space>
-            {openNotificationWithIcon("success")}
-          </Space>
-        )
+        return <Space>{openNotificationWithIcon("success")}</Space>;
       })
       .catch((error) => {
         console.log(error);
-        <Space>
-            {openNotificationWithIcon("error")}
-          </Space>
+        <Space>{openNotificationWithIcon("error")}</Space>;
       });
   };
 
@@ -63,12 +48,7 @@ const CommentsBox = ({ data, postId, userimage }) => {
     <React.Fragment>
       <div className="CommentsBoxContainer">
         <div className="CommentBox">
-          <Avatar
-            size={30}
-            src={
-              userimage
-            }
-          />
+          <Avatar size={30} src={userimage} />
           <TextArea
             rows={5}
             maxLength={500}
@@ -84,7 +64,7 @@ const CommentsBox = ({ data, postId, userimage }) => {
             type="primary"
             onClick={() => {
               handleComment(postId);
-              setContents("")
+              setContents("");
             }}
           >
             Submit
