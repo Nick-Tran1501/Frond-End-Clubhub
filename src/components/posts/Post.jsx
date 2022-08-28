@@ -172,7 +172,6 @@ const Post = ({ data }) => {
               nextArrow={<RightOutlined />}
               style={{
                 width: "100%",
-                paddingRight: "1rem",
               }}
             >
               {data.images.map((image) => {

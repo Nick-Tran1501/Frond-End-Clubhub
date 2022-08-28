@@ -200,7 +200,7 @@
     background-color: rgba(0, 213, 255, 0.79);
 }
 .slick-slide div {
-    margin: 0 30px;
+    margin: 0 10px 0 0;
     outline: none;
 }
 .slick-list {

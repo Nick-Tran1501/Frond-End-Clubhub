@@ -26,8 +26,6 @@ function App() {
        {/* <LoginPage/> */}
         <Home/>
         {/* <Welcome/> */}
-        {/* <Profile /> */}
-
     </div>
   );
 }
