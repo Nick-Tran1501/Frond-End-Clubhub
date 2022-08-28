@@ -1,11 +1,9 @@
-import axios from "axios";
 import React from "react";
 import "./Comment.css";
-import { Avatar, Input } from "antd";
+import { Avatar} from "antd";
 
-const { TextArea } = Input;
 
-const Comment = () => {
+const Comment = ({data}) => {
   return (
     <React.Fragment>
       <div className="CommentContainer">
@@ -13,17 +11,17 @@ const Comment = () => {
           <Avatar
             size={30}
             src={
-              "https://www.24h.com.vn/cong-nghe-thong-tin/da-co-the-tao-den-5-profile-cho-mot-tai-khoan-facebook-c55a1378024.html"
+              data.author.avatarUrl
             }
             className="OwnerAvatar"
           />
           <div className="UserComment">
             <div className="CommentOwner">
-              <p>Nick</p>
+              <p>{data.author.username}</p>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, fuga?</p>
+            <p>{data.content}</p>
             <div className="CommentTime">
-              <p>9:00 Am</p>
+              <p>{data.createAt}</p>
             </div>
           </div>
 

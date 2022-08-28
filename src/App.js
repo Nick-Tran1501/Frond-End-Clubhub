@@ -5,6 +5,9 @@ import Home from './pages/home/HomePage';
 import Welcome from './pages/welcome/WelcomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from './pages/profile/ProfilePage'
+
+import AdminPage from './pages/admin/AdminPage';
+
 import {Route,Routes} from "react-router-dom"
 
 function App() {
@@ -17,12 +20,12 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
           </Routes>
 
-
+          <AdminPage/>
+          
 
        {/* <LoginPage/> */}
         <Home/>
         {/* <Welcome/> */}
-        <Profile />
     </div>
   );
 }
