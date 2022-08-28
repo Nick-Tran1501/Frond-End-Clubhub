@@ -1,10 +1,10 @@
 import { Badge } from "antd";
 import React from "react";
-import "./navbarOption.css";
+import "./NavbarOptions.css";
 import {Avatar} from "antd";
 
 
-const navbarOption = ({avatar, Icon, title}) => {
+const NavbarOption = ({avatar, Icon, title}) => {
   return (
     <div className="navOption">
        
@@ -19,4 +19,4 @@ const navbarOption = ({avatar, Icon, title}) => {
   );
 };
 
-export default navbarOption;
+export default NavbarOption;

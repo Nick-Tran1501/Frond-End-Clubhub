@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import "../profile.css";
-import Feed from '../../../components/feed/feed';
+import "../ProfilePage.css";
+import Feed from '../../../components/feed/Feeds';
 import "antd/dist/antd.css";
 import { Modal } from 'antd';
 

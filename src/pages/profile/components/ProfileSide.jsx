@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "../profile.css";
+import "../ProfilePage.css";
 import "antd/dist/antd.css";
 import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
 
@@ -18,7 +18,8 @@ function getStoredInfo() {
     return JSON.parse(storedInfo);
 }
 
-const Profile_main_side = () => {
+
+const ProfileSide = () => {
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);
 
@@ -246,4 +247,4 @@ const Profile_main_side = () => {
   )
 }
 
-export default Profile_main_side
+export default ProfileSide;

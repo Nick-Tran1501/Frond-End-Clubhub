@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import "./profile.css";
-import Navbar from '../../components/navbar/navbar';
-import Footer from '../../components/footer/footer';
+import "./ProfilePage.css";
+import Navbar from '../../components/navbar/NavBars';
+import Footer from '../../components/footer/Footers';
 import Sidebar from '../../components/sidebar/sidebar';
 import "antd/dist/antd.css";
-import Profile_bg from './components/Profile_bg';
-import Profile_main_side from './components/Profile_main_side';
-import Profile_main_post from './components/Profile_main_post';
+import Profile_bg from './components/ProfileBg';
+import Profile_main_side from './components/ProfileSide';
+import Profile_main_post from './components/ProfilePost';
 import { Col, Row,Layout } from "antd";
 import ProfileIntro from './components/ProfileIntro';
 import ProfileMember from './components/ProfileMember';

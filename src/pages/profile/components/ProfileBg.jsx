@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import "../profile.css";
+import "../ProfilePage.css";
 import "antd/dist/antd.css";
 import { Button, Modal } from 'antd';
 
 
-const Profile_bg = ({page, changePage}) => {
+const ProfileBg = () => {
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
 
@@ -111,4 +111,4 @@ const Profile_bg = ({page, changePage}) => {
   )
 }
 
-export default Profile_bg
+export default ProfileBg;

@@ -1,4 +1,4 @@
-import Post from "../Post/Post";
+import Post from "../posts/Post";
 import React from "react";
 
 
