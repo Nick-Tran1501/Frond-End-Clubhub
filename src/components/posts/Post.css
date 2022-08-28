@@ -13,13 +13,14 @@
   flex-flow: column nowrap;
   justify-content: space-around;
   padding: 1rem;
-  width: 95%;
+  width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: white;
   border: 2px solid #E5E7E9;
   border-radius: 5px ;
-  
+  margin-bottom: 1rem;
+  box-shadow: 1px 2px 5px #888888;
 }
 
 /* -----Post Header------ */

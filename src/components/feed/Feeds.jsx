@@ -26,9 +26,11 @@ const Feed = () => {
   // console.log(postData)
   return (
     <div className='feedContainer'> 
-      <PostList 
-        data={postData}
-      />
+      <div id='inner'>
+        <PostList 
+          data={postData}
+        />
+      </div>
     </div>
   )
 }

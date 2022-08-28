@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+.CommentContainer{
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+
+  height: auto;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+.Comment{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+
+.CommentOwner{
+  font-size: 15px;
+  font-family: 'Lato', sans-serif;
+
+}
+
+.UserComment{
+  border-radius: 10px ;
+  border: 1px solid;
+  background-color: #2474E1;
+  color: white;
+  padding: 0.5rem 0.8rem 0rem 0.8rem;
+  text-align: justify;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.CommentTime{
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0.6;
+  font-size: 11px;
+}

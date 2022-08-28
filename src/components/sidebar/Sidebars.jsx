@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect,useState} from "react";
-import "./sidebar.css";
+import "./SideBars.css";
 import "antd/dist/antd.css";
 import { Avatar, Menu, Col, Row } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -97,7 +97,7 @@ const sidebar = () => {
       <Menu
         className="sideStats"
         onClick={onClick}
-        style={{}}
+        style={{boxShadow: "1px 2px 5px #888888"}}
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={[""]}
         mode="inline"

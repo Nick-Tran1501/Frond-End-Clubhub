@@ -10,20 +10,24 @@ import AdminPage from './pages/admin/AdminPage';
 
 import {Route,Routes} from "react-router-dom"
 
-
 function App() {
   return (
     <div className="App">
-          {/* <Routes>
+          <Routes>
             <Route path='/*' element={<LoginPage/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
             <Route path='/profile' element={<Profile/>}/>
-          </Routes> */}
+          </Routes>
 
           <AdminPage/>
-
           
+
+       {/* <LoginPage/> */}
+        <Home/>
+        {/* <Welcome/> */}
+        {/* <Profile /> */}
+
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Button, Comment, Form, Input, List, Carousel, Modal, Avatar } from "antd";
+import { Image, Carousel, Modal, Avatar } from "antd";
 import {
   EditOutlined,
   LikeOutlined,
@@ -11,132 +11,37 @@ import {
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-
-
+import CommentsBox from "../commentsbox/CommentsBox";
 import moment from "moment";
 
-import axios from "axios"
+import axios from "axios";
 
-const { TextArea } = Input;
-
-
-
-
-const Post = ({data}) => {
-  const [userProfile,setUserProfile]=useState({})
-
-  // useEffect(()=> {
-    
-  //     const token = localStorage.getItem('token')
-  //     axios.get("https://rmit-club.herokuapp.com/api/user",
-  //       {
-  //         headers:{'Authorization': `Bearer ${token}`}
-  //       }
-  //     )
-  //     .then(response => setUserProfile(response.data))
-  //     .catch(err => console.log(err))
-    
-  // },[])
-  
-
-  
+const Post = ({ data }) => {
+  const [userProfile, setUserProfile] = useState({});
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => setUserProfile(response.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   // ------Show Comments-----
   const [show, setShow] = useState(false);
 
   // -------Like Count--------
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const handleLike = (postId) => {
-    axios(
-      {
-        headers:{'Authorization': `Bearer ${token}`},
-        method:"post",
-        url:"https://rmit-club.herokuapp.com/api/posts/like",
-        data:{
-          postId,
-        }
-      }
-    )
-    
-  };
-
-
-
- // -------Comment Box-------
-  const Editor = ({ onChange, onSubmit, submitting, value }) => (
-    <>
-      <Form.Item>
-        <TextArea rows={4} onChange={onChange} value={value} />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          htmlType="submit"
-          loading={submitting}
-          onClick={onSubmit}
-          type="primary"
-        >
-          Add Comment
-        </Button>
-      </Form.Item>
-    </>
-  );
-
-  // --------Comments----------
-  const CommentList = ({ comments }) => (
-    <List
-      dataSource={comments}
-      header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
-      itemLayout="horizontal"
-      renderItem={(props) => <Comment {...props} />}
-    />
-  );
- 
-  const CommentsContainer = () => {
-    const [comments, setComments] = useState([]);
-    const [submitting, setSubmitting] = useState(false);
-    const [value, setValue] = useState("");
-
-    const handleSubmit = () => {
-      if (!value) return;
-      setSubmitting(true);
-
-      setTimeout(() => {
-        setSubmitting(false);
-        setValue("");
-        setComments([
-          ...comments,
-          {
-            author: "Han Solo",
-            avatar: Image,
-            content: <p>{value}</p>,
-            datetime: moment().fromNow(),
-          },
-        ]);
-      }, 1000);
-    };
-
-    const handleChange = (e) => {
-      setValue(e.target.value);
-    };
-
-    return (
-      <div>
-        <Comment
-          avatar={
-            <Image width="100%" src={require("../../image/Image1.jpg")} />
-          }
-          content={
-            <Editor
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-              submitting={submitting}
-              value={value}
-            />
-          }
-        />
-        {comments.length > 0 && <CommentList comments={comments} />}
-      </div>
-    );
+    axios({
+      headers: { Authorization: `Bearer ${token}` },
+      method: "post",
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/like",
+      data: {
+        postId,
+      },
+    });
   };
 
   // ------------Read More--------------
@@ -155,7 +60,6 @@ const Post = ({data}) => {
       </p>
     );
   };
-
 
   // edit Box
 
@@ -182,7 +86,11 @@ const Post = ({data}) => {
         <div className="PostHeader">
           {/* Profile Image */}
           <div className="ProfileImage">
-            <Avatar size={60} src={data.author.avatarUrl} className="sideAvatar" />
+            <Avatar
+              size={60}
+              src={data.author.avatarUrl}
+              className="sideAvatar"
+            />
           </div>
           {/* Post Info */}
           <div className="PostInfo">
@@ -190,7 +98,7 @@ const Post = ({data}) => {
               <p
                 style={{
                   fontWeight: "bold",
-                  fontSize:"18px"
+                  fontSize: "18px",
                 }}
               >
                 {data.author.username}
@@ -202,7 +110,7 @@ const Post = ({data}) => {
                 style={{
                   opacity: "0.6",
                   fontWeight: "bold",
-                  fontSize:"12px"
+                  fontSize: "12px",
                 }}
               >
                 {data.createAt}
@@ -212,7 +120,7 @@ const Post = ({data}) => {
               style={{
                 opacity: "0.6",
                 fontWeight: "bold",
-                fontSize:"12px"
+                fontSize: "12px",
               }}
             >
               <p>{data.location}</p>
@@ -238,7 +146,6 @@ const Post = ({data}) => {
               okButtonProps={{
                 // functin here
                 disabled: true,
-                
               }}
               cancelButtonProps={{
                 disabled: false,
@@ -254,9 +161,7 @@ const Post = ({data}) => {
         {/* -----Post Content----- */}
         <div className="PostContent">
           <div className="Content">
-            <ReadMore>
-              {data.content}
-            </ReadMore>
+            <ReadMore>{data.content}</ReadMore>
           </div>
 
           <div className="PostImage">
@@ -266,14 +171,12 @@ const Post = ({data}) => {
               prevArrow={<LeftOutlined />}
               nextArrow={<RightOutlined />}
               style={{
-                width:"100%",
+                width: "100%",
                 paddingRight: "1rem",
               }}
             >
-              {data.images.map(image => {
-                
-                return(
-
+              {data.images.map((image) => {
+                return (
                   <Image
                     key={data._id}
                     width="100%"
@@ -281,9 +184,8 @@ const Post = ({data}) => {
                     src={image}
                     className="Images"
                   />
-                )
+                );
               })}
-              
             </Carousel>
           </div>
 
@@ -297,13 +199,13 @@ const Post = ({data}) => {
             </div>
 
             <div className="CommentsResult">
-              <p style={{ fontSize: "18px", paddingTop: "5px" }}>100</p>
+              <p style={{ fontSize: "18px", paddingTop: "5px" }}>{data.comments.length}</p>
               <span className="commentsIcon">
                 <CommentOutlined></CommentOutlined>
               </span>
             </div>
           </div>
-          <hr/>
+          <hr />
         </div>
 
         {/* -------Post Footer------ */}
@@ -335,7 +237,7 @@ const Post = ({data}) => {
           </button>
         </div>
 
-        {show && <CommentsContainer />}
+        {show && <CommentsBox data={data.comments} postId={data._id} userimage={data.author.avatarUrl} />}
       </div>
     </React.Fragment>
   );

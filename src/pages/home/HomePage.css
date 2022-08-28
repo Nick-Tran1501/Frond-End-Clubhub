@@ -10,8 +10,9 @@
     flex-direction: column;
 }
 
-.container {
+.hContainer {
     align-self: center;
+    width: 85%;
 }
 
 

@@ -4,7 +4,7 @@ import Feed from '../../../components/feed/Feeds';
 import "antd/dist/antd.css";
 import { Modal } from 'antd';
 
-export default function Profile_main_post() {
+export default function ProfilePost() {
     const [post, setPost] = useState(false);
 
     const showPost = () => {
@@ -20,13 +20,16 @@ export default function Profile_main_post() {
     };
     return (
         <div className='main-post'>
-            <form className="account">
-                <div className="profile_picture">
-                    <img src="image/avatar.png" alt="profile" /> 
-                </div>
-                <input type="text" placeholder="What's on your mind?" id="caption" onClick={showPost} />
-                <label className="btn btn_primary" id="post_btn" onClick={showPost}>Post</label>
-            </form>
+            <div className='postInput mpost'>
+                <form className="account">
+                    <div className="profile_picture">
+                        <img src="image/avatar.png" alt="profile" /> 
+                    </div>
+                    <input type="text" placeholder="What's on your mind?" id="caption" onClick={showPost} />
+                    <label className="btn btn_primary" id="post_btn" onClick={showPost}>Post</label>
+                </form>
+            </div>
+            
 
             <Modal title="Post" visible={post} onOk={handleOk} onCancel={handleCancel}>
                 <form  onSubmit={handleOk} className="upload_image" id="post_form">

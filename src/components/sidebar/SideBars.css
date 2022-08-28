@@ -26,6 +26,7 @@
     border-top-right-radius: 10px;
     background-color: white;
     padding-bottom: 10px;
+    box-shadow: 1px 0px 3px #888888;
 }
 
 .sideTop h2{
@@ -81,6 +82,7 @@
     background-color: white;
     border-radius: 10px;
     margin-top: 10px;
+    box-shadow: 1px 2px 5px #888888;
 }
 
 .sideRecentItem{
@@ -108,6 +110,7 @@
     margin: 20px 0 20px 0;
     display: flex;
     flex-direction: column;
+    box-shadow: 1px 2px 5px #888888;
 }
 
 .sideAdvertise > h2 {

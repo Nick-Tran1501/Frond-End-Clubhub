@@ -79,43 +79,45 @@ const NavBar = () => {
   // Render the View
   return (
     <div className="navbar--container">
-      <Row>
-        <Col lg={24} className="navLeft">
-          <img src={ClubLogo} alt="" />
+      <div className="nContainer">
+        <Row>
+          <Col lg={24} className="navLeft">
+            <img src={ClubLogo} alt="" />
+          </Col>
+        </Row>
 
-          {/* Nav Search Bar */}
-          <Row>
-            <Col className="navSearch">
-              <AutoComplete
-                dropdownMatchSelectWidth={252}
-                style={{}}
-                options={options}
-                onSelect={onSelect}
-                onSearch={handleSearch}
-              >
-                <Input.Search
-                  size="large"
-                  placeholder="input here"
-                  
-                />
-              </AutoComplete>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+        {/* Nav Search Bar */}
+        <Row className="searchBar">
+          <Col span={24} className="navSearch">
+            <AutoComplete
+              dropdownMatchSelectWidth={252}
+              style={{}}
+              options={options}
+              onSelect={onSelect}
+              onSearch={handleSearch}
+              className="searchInput"
+            >
+              <Input.Search
+                size="large"
+                placeholder="Search"
+              />
+            </AutoComplete>
+          </Col>
+        </Row>
 
-      {/* Nav Right Icon */}
-      <Row>
-        <Col xs={0} md={0} lg={24}>
-          <div className="navRight">
-            <Option Icon={HomeFilled} title="Home" />
-            <Option Icon={FlagFilled} title="My club" />
-            <Option Icon={FlagFilled} title="My club" />
-            <Option Icon={BellFilled} title="Nofication" />
-            <Option avatar={userProfile.avatarUrl} />
-          </div>
-        </Col>
-      </Row>
+        {/* Nav Right Icon */}
+        <Row>
+          <Col xs={0} md={0} lg={24}>
+            <div className="navRight">
+              <Option Icon={HomeFilled} title="Home" />
+              <Option Icon={FlagFilled} title="My club" />
+              <Option Icon={FlagFilled} title="My club" />
+              <Option Icon={BellFilled} title="Nofication" />
+              <Option avatar={userProfile.avatarUrl} />
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 };
