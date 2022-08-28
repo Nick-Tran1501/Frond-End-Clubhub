@@ -36,7 +36,7 @@ const Home = () => {
             <Feed/>
           </Col>
 
-          <Col xs={0} sm={6} md={6} lg={6} xl={6}>
+          <Col xs={0} sm={6} md={6} lg={6} xl={6} style={{marginTop: "2rem"}}>
             <Rightbars/>
           </Col>
           
