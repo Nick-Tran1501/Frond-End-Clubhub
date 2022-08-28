@@ -1,6 +1,6 @@
 import React from "react";
 import Navbars from "../../components/navbar/NavBars";
-import Sidebars from "../../components/sidebar/sidebar";
+import Sidebars from "../../components/sidebar/Sidebars";
 import Feed from "../../components/feed/Feeds";
 import Rightbars from "../../components/rightbar/RightBars";
 import "./HomePage.css";
@@ -36,7 +36,7 @@ const Home = () => {
             <Feed/>
           </Col>
 
-          <Col xs={0} sm={6} md={6} lg={6} xl={6}>
+          <Col xs={0} sm={6} md={6} lg={6} xl={6} style={{marginTop: "2rem"}}>
             <Rightbars/>
           </Col>
           

@@ -19,10 +19,10 @@ function App() {
 
 
 
-       {/* <LoginPage/>
+       {/* <LoginPage/> */}
         <Home/>
-        <Welcome/>
-        <Profile /> */}
+        {/* <Welcome/> */}
+        {/* <Profile /> */}
     </div>
   );
 }
