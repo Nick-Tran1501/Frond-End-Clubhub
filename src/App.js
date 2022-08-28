@@ -22,7 +22,7 @@ function App() {
        {/* <LoginPage/> */}
         <Home/>
         {/* <Welcome/> */}
-        {/* <Profile /> */}
+        <Profile />
     </div>
   );
 }
