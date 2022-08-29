@@ -8,24 +8,27 @@ import Profile from './pages/profile/ProfilePage'
 
 import AdminPage from './pages/admin/AdminPage';
 
-import {Route,Routes} from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 
 function App() {
   return (
     <div className="App">
-          <Routes>
+      {/* <Routes>
             <Route path='/*' element={<LoginPage/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
             <Route path='/profile' element={<Profile/>}/>
-          </Routes>
+          </Routes> */}
 
-          {/* <AdminPage/> */}
-          
 
-       {/* <LoginPage/> */}
-        <Home/>
-        {/* <Welcome/> */}
+      
+      {/* <LoginPage/> */}
+      <Welcome />
+
+
+      {/* Tuan's area ---- command if you want do not delete it*/}
+            {/* <AdminPage /> */}
+      {/* ----------------------------------------------------------------  */}
     </div>
   );
 }
