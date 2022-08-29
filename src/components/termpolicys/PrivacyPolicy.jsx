@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
-import PrivacyText from "./PrivacyPolicy.txt";
+import PrivacyForm from "./PrivacyForm";
 
 const PrivacyPolicy = () => {
   const [modal2Visible, setModal2Visible] = useState(false);
-  const [text, setText] = useState();
 
-  fetch(PrivacyText)
-    .then((response) => response.text())
-    .then((textContent) => {
-      setText(textContent);
-    });
 
   return (
     <>
@@ -23,9 +17,9 @@ const PrivacyPolicy = () => {
         visible={modal2Visible}
         onOk={() => setModal2Visible(false)}
         onCancel={() => setModal2Visible(false)}
-        style={{height: "300px", overflowY:'auto' }}
+        style={{}}
       >
-        {text}
+        <PrivacyForm/>
       </Modal>
     </>
   );
