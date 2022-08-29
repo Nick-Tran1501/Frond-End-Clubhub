@@ -55,13 +55,10 @@ const LoginForm = () => {
   const checkEmailValid = (input) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
     const emptyInput = "";
-    console.log(input);
     if (!emailRegex.test(input) && !emptyInput.match(input)) {
       document.querySelector(".EmailWarning").style.visibility = "visible";
 
-      console.log("Invalid Email");
     } else {
-      console.log("valid");
       document.querySelector(".EmailWarning").style.visibility = "hidden";
 
       setUser({ ...user, email: input });
@@ -76,7 +73,6 @@ const LoginForm = () => {
       document.querySelector(".PasswordWarning").style.visibility = "visible";
       
     } else {
-      console.log("valid");
       document.querySelector(".PasswordWarning").style.visibility = "hidden";
       setUser({ ...user, password: input });
     }
@@ -185,7 +181,7 @@ const LoginForm = () => {
                 color: "red",
                 fontSize: "12px",
                 paddingTop: "3px",
-                visibility: "visible",
+                visibility: "hidden",
                 height: "2px",
               }}
             >
