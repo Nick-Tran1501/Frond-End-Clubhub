@@ -15,10 +15,10 @@ const TermCondition = () => {
   return (
     <>
       <Button type="primary" onClick={() => setModal2Visible(true)}>
-        Privacy Policy
+        Term Condition
       </Button>
       <Modal
-        title="Privacy Policy"
+        title="Term Condition"
         centered
         visible={modal2Visible}
         onOk={() => setModal2Visible(false)}

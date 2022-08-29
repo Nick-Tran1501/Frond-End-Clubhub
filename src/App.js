@@ -4,7 +4,8 @@ import LoginPage from './pages/loginpage/LoginPage';
 import Home from './pages/home/HomePage';
 import Welcome from './pages/welcome/WelcomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Profile from './pages/profile/ProfilePage'
+import Profile from './pages/profile/ProfilePage';
+import PrivacyPage from './components/termpolicys/PrivacyPolicy'
 
 import AdminPage from './pages/admin/AdminPage';
 
@@ -23,9 +24,8 @@ function App() {
 
       
       {/* <LoginPage/> */}
-      <Welcome />
-
-
+      {/* <Welcome /> */}
+      <PrivacyPage/>
       {/* Tuan's area ---- command if you want do not delete it*/}
             {/* <AdminPage /> */}
       {/* ----------------------------------------------------------------  */}
