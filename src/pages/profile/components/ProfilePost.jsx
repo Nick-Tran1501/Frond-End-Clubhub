@@ -47,7 +47,7 @@ export default function ProfilePost() {
                     </select>
 
                     <div className="caption">
-                        <input type="text" name="text" placeholder="What's on your mind?" />
+                        <input type="text" name="text" placeholder="What's on your mind?" className='inputField' style={{width: "100%"}} />
                     </div>
 
                     <div className="file_img" id="post_upload">

@@ -5,6 +5,7 @@ import { Button, Modal } from 'antd';
 
 
 const ProfileBg = ({page, changePage}) => {
+
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
 
@@ -28,7 +29,8 @@ const ProfileBg = ({page, changePage}) => {
     };
 
     const handleFile = (event) => {
-        console.log(event.target.files[0])
+        const file = event.target.files[0];
+        console.log(file)
     }
 
   return (
@@ -101,7 +103,7 @@ const ProfileBg = ({page, changePage}) => {
             <div className="pd-right">
                 <ul className="link">
                     <li><button onClick={() => changePage("post")} className={page === "post" ? 'profileComp active' : "profileComp"}>Post</button></li>
-                    <li><button onClick={() => changePage("intro")} className={page === "intro" ? 'profileComp active' : "profileComp"}>Intro</button></li>
+                    <li><button onClick={() => changePage("intro")} className={page === "intro" ? 'profileComp active' : "profileComp"}>About</button></li>
                     <li><button onClick={() => changePage("member")} className={page === "member" ? 'profileComp active' : "profileComp"}>Members</button></li>
                     <li><button onClick={() => changePage("media")} className={page === "media" ? 'profileComp active' : "profileComp"}>Images</button></li>
                 </ul>
