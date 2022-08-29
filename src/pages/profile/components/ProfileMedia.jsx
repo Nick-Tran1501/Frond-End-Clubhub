@@ -10,7 +10,7 @@ const ProfileMedia = () => {
         <Row className="ml media">
             <Col span={24} className="md it-row1">
                 <div className='row1-title'>
-                    <h3>Media</h3>
+                    <h3>Images</h3>
                 </div>
             </Col>
             <Row className="memGalery">

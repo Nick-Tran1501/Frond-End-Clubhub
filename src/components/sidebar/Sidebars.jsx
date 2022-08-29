@@ -117,6 +117,10 @@ const sidebar = () => {
         <a href="https://www.rmit.edu.vn/vi"> Click Here </a>
       </div>
 
+      <div className="sideFooter">
+        <p> Copyright ©2022 RMIT-Finding. All Right Reserved </p>
+      </div>
+
     </div>
   );
 };

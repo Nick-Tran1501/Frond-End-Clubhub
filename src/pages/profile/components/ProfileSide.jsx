@@ -8,13 +8,12 @@ function getStoredInfo() {
     const storedInfo = localStorage.getItem("studentID");
     if (!storedInfo) return {
         name: "",
-        education: "",
-        work: "",
-        live: "",
+        location: "",
+        president: "",
         email: "",
         description: "",
-        birthday: "",
-        graduation: ""
+        title: "",
+        date: ""
     }
     return JSON.parse(storedInfo);
 }
@@ -69,19 +68,19 @@ const ProfileSide = ({page, changePage}) => {
                 <div className="p-row">
                     <i className="fa-solid fa-graduation-cap"></i>
                     <div className="p-note">
-                    <p>Graduate at {info.education}</p>
+                    <p>Graduate at {info.name}</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-briefcase-fill"></i>
                     <div className="p-note">
-                    <p>Work in {info.work}</p>
+                    <p>Work in {info.location}</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-house-fill"></i>
                     <div className="p-note">
-                    <p>Live in {info.live}</p>
+                    <p>Live in {info.president}</p>
                     </div>
                 </div>
                 <div className="p-row">
@@ -100,7 +99,7 @@ const ProfileSide = ({page, changePage}) => {
                 </div>
             </div>
             <Modal title="Change personal information" visible={modal3} onOk={handleOk} onCancel={handleCancel}>
-                <form onSubmit={handleSubmit} className="upload_image" id="post_form">
+                <form onSubmit={handleSubmit} className="upload_image" id="post_info">
                     <div className="user_infor">
                         <div className="profile_picture">
                             <img src="image/default_avata_girl.png" alt="profile" />
@@ -108,11 +107,19 @@ const ProfileSide = ({page, changePage}) => {
                         <p>Doraemon</p>
                     </div>
 
-                    <input type="text" placeholder='Enter your education' name="education" onChange={handleChange} value={info.education} /> {/* should declare the value = formData.name because sth called contrilled components */}
-                    <input type="text" placeholder='Enter your workplace' name="work" onChange={handleChange} value={info.work} />
-                    <input type="text" placeholder='Enter your place' name="live" onChange={handleChange} value={info.live} />
-                    <input type="text" placeholder='Email' name="email" onChange={handleChange} value={info.email} />
-                    <input type="text" placeholder='Enter your description' name="description" onChange={handleChange} value={info.description} />
+                    <div className='inputFields'>
+                        <h5>Club Name:</h5>
+                        <input type="text" placeholder='Enter club name' name="name" onChange={handleChange} value={info.name} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
+                        <h5>Location:</h5>
+                        <input type="text" placeholder='Enter location' name="location" onChange={handleChange} value={info.location} className="inputField" />
+                        <h5>President:</h5>
+                        <input type="text" placeholder='Enter president' name="president" onChange={handleChange} value={info.president} className="inputField" />
+                        <h5>Email:</h5>
+                        <input type="text" placeholder='Email' name="email" onChange={handleChange} value={info.email} className="inputField" />
+                        <h5>Description:</h5>
+                        <input type="text" placeholder='Enter your description' name="description" onChange={handleChange} value={info.description} className="inputField" />
+                    </div>
+                    
                 </form>
             </Modal>
         </div>
@@ -120,12 +127,12 @@ const ProfileSide = ({page, changePage}) => {
         <div className="ml media">
             <div className="md it-row1">
                 <div className='row1-title'>
-                    <h3>Media</h3>
+                    <h3>Images</h3>
                     <a onClick={() => changePage("media")}>All images</a>
                 </div>
             </div>
             <Row className="memGalery">
-                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
                         height="6rem"
@@ -133,7 +140,7 @@ const ProfileSide = ({page, changePage}) => {
                         className="Images img"
                     />
                 </Col>
-                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
                         height="6rem"
@@ -141,7 +148,7 @@ const ProfileSide = ({page, changePage}) => {
                         className="Images img"
                     />
                 </Col>
-                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
                         height="6rem"
@@ -149,7 +156,7 @@ const ProfileSide = ({page, changePage}) => {
                         className="Images img"
                     />
                 </Col>
-                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
                         height="6rem"
@@ -157,7 +164,7 @@ const ProfileSide = ({page, changePage}) => {
                         className="Images img"
                     />
                 </Col>
-                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
                         height="6rem"
@@ -165,7 +172,7 @@ const ProfileSide = ({page, changePage}) => {
                         className="Images img"
                     />
                 </Col>
-                <Col xs={24} sm={24} md={17} lg={17} xl={8}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
                         height="6rem"
@@ -239,6 +246,13 @@ const ProfileSide = ({page, changePage}) => {
                     <p>{info.graduation}</p>
                 </div>
             </div> */}
+
+            <div className='p-row'>
+                <div className='p-note'>
+                    <h3>{info.title}</h3>
+                    <p>{info.date}</p>
+                </div>
+            </div>
             <Modal title="Change events" visible={modal4} onOk={handleOk} onCancel={handleCancel}>
                 <form onSubmit={handleSubmit} className="upload_image" id="post_form">
                     <div className="user_infor">
@@ -248,9 +262,14 @@ const ProfileSide = ({page, changePage}) => {
                         <p>Doraemon</p>
                     </div>
 
-                    {/* <DatePicker onChange={handleChange} /> */}
-                    <input type="date" placeholder='Enter your birthday' name="birthday" onChange={handleChange} value={info.birthday} /> {/* should declare the value = formData.name because sth called contrilled components */}
-                    <input type="date" placeholder='Enter your graduation' name="graduation" onChange={handleChange} value={info.graduation} />
+                    <div className='inputFields'>
+                        {/* <DatePicker onChange={handleChange} /> */}
+                        <h5>Event Title:</h5>
+                        <input type="text" placeholder='Enter event title' name="title" onChange={handleChange} value={info.title} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
+                        <h5>Event Date:</h5>
+                        <input type="date" placeholder='Enter date event' name="date" onChange={handleChange} value={info.date} className="inputField" />
+                    </div>
+                    
                 </form>
             </Modal>
         </div>
