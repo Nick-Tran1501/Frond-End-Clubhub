@@ -8,7 +8,6 @@ import Profile from './pages/profile/ProfilePage'
 
 import AdminPage from './pages/admin/AdminPage';
 
-import PrivacyPolicy from './components/TermPolicy/PrivacyPolicy';
 import {Route,Routes} from "react-router-dom"
 
 function App() {
@@ -25,9 +24,8 @@ function App() {
           
 
        {/* <LoginPage/> */}
-        {/* <Home/> */}
+        <Home/>
         {/* <Welcome/> */}
-        <PrivacyPolicy/>
     </div>
   );
 }
