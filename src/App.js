@@ -20,15 +20,9 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
           </Routes> */}
 
-
-      
-      {/* <LoginPage/> */}
-      <Welcome />
-
-
       {/* Tuan's area ---- command if you want do not delete it*/}
-            {/* <AdminPage /> */}
-      {/* ----------------------------------------------------------------  */}
+            <AdminPage />
+      {/* -------------------------------------------------------- */}
     </div>
   );
 }
