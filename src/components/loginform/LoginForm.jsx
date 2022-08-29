@@ -40,10 +40,7 @@ const LoginForm = () => {
         navigate("/home");
       })
       .catch((err) => {
-        setUser({ ...user, email: "" });
-        setUser({ ...user, password: "" });
         alert("Wrong Email or Password");
-        navigate("/");
         console.error(err);
       });
   };
