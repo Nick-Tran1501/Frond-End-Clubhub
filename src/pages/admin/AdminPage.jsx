@@ -18,56 +18,26 @@ import {
   Space,
   Popconfirm,
   message,
+  Button,
   //   Select,
 } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+
+import {
+  DownOutlined,
+  CheckOutlined,
+  CloseSquareFilled,
+} from "@ant-design/icons";
 
 // ----------------------------------------------------------------
 
 function AdminPage() {
+  // -------- attributes --------------------------------
   const { Text, Link } = Typography;
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
+  // const [role, setRole] = useState(" ");
 
-  const handleRole = (e) => {
-    // message.info("Click on menu item.");
-    const result = roleList.props.items;
-    const newRole = result.filter((item) => item.key === e.key);
-    console.log(newRole[0].label);
-  };
-
-  //  delete handle
-  const handleDelete = (key) => {
-    const newData = data.filter((item) => item.key !== key);
-    setData(newData);
-  };
-
-  //  test table
-  const roleList = (
-    <Menu
-      onClick={handleRole}
-      items={[
-        {
-          key: "1",
-          value: "President",
-          label: "President",
-        },
-        {
-          key: "2",
-          label: "Vice President",
-        },
-        {
-          key: "3",
-          label: "Content Writer",
-        },
-        {
-          key: "4",
-          label: "Member",
-        },
-      ]}
-    />
-  );
-
+  // table data
   const [data, setData] = useState([
     {
       key: "0",
@@ -96,9 +66,167 @@ function AdminPage() {
       email: "student@gmail.com",
       role: "President",
     },
+    {
+      key: "3",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "4",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "5",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "6",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "7",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "8",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "9",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "10",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "11",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "12",
+      name: "Edward King 0",
+      age: "32",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
   ]);
 
-  //   define table columns
+  //  ------- Functions --------------------------------
+
+  // handle select role
+  const handleRole = (e) => {
+    // message.info("Click on menu item.");
+    const roleObj = roleList.props.items;
+    const roleResult = roleObj.filter((item) => item.key === e.key);
+    const newRole = roleResult[0].label;
+    return newRole;
+    // console.log(newRole);
+    // const newData = data.filter((item) => item.key !== key);
+    // setData(newData);
+    // setRole(newRole);
+  };
+
+  // const updateRole = async (key) => {
+  // console.log(key);
+  // const newData = data.filter((item) => item.key === key);
+  // const newRole =  await handleRole();
+  // console.log(newData + " "  + newRole);
+  // setData({ ...newData, role: await handleRole() });
+  // };
+
+  //  delete handle
+  const handleDelete = (key) => {
+    const newData = data.filter((item) => item.key !== key);
+    setData(newData);
+  };
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log(
+      "params --- ",
+      "pag:",
+      pagination,
+      "filters: ",
+      filters,
+      "sorter: ",
+      sorter,
+      "extra: ",
+      extra
+    );
+  };
+
+  // Table atributes
+  const roleList = (
+    <Menu
+      onClick={handleRole}
+      items={[
+        {
+          key: "1",
+          label: "President",
+        },
+        {
+          key: "2",
+          label: "Vice President",
+        },
+        {
+          key: "3",
+          label: "Content Writer",
+        },
+        {
+          key: "4",
+          label: "Member",
+        },
+      ]}
+    />
+  );
+
+  //  Define table columns
   const columns = [
     {
       title: "Name",
@@ -138,7 +266,8 @@ function AdminPage() {
       render: (_, record) => (
         <Space size="middle">
           <Dropdown overlay={roleList}>
-            <a onClick={(e) => e.preventDefault()}>
+            {/* <a onClick={() => updateRole(record.key)}> */}
+            <a>
               Select Role
               <DownOutlined />
             </a>
@@ -162,10 +291,7 @@ function AdminPage() {
     },
   ];
 
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
-
+  // return
   return (
     <div className="container">
       {/* header title */}
@@ -205,6 +331,16 @@ function AdminPage() {
             dataSource={data}
             onChange={onChange}
           />
+          <Button
+            type="primary"
+            icon={<CheckOutlined />}
+            style={{ color: "#95de64"
+            }}
+          >
+            Save change
+          </Button>
+
+          
         </Col>
 
         <Col className="request-title" span={24}>
