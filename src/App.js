@@ -14,17 +14,17 @@ function App() {
   return (
     <div className="App">
           <Routes>
-            <Route path='/*' element={<LoginPage/>}/>
+            {/* <Route path='/*' element={<LoginPage/>}/> */}
             <Route path='/home' element={<Home/>}/>
             <Route path='/welcome' element={<Welcome/>}/>
             <Route path='/profile' element={<Profile/>}/>
           </Routes>
 
-          <AdminPage/>
+          {/* <AdminPage/> */}
           
 
        {/* <LoginPage/> */}
-        <Home/>
+        {/* <Home/> */}
         {/* <Welcome/> */}
     </div>
   );
