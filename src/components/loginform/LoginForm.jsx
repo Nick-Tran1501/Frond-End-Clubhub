@@ -14,49 +14,72 @@ import {
 } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
-import { useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginForm = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios({
       method: "post",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signin",
-      data:{
+      data: {
         email: user.email,
-        password: user.password
+        password: user.password,
       },
     })
-    .then(response =>
-     { 
-      localStorage.setItem("token",response.data.accessToken)
-      console.log(localStorage.getItem("token"))
-      navigate("/home")
-    }
-      
-      )  
-    .catch((err) => {
-      console.log("false")
-      alert("Wrong Input")
-      console.error(err);
-
-    });
-    
-  }
+      .then((response) => {
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/home");
+      })
+      .catch((err) => {
+        setUser({ ...user, email: "" });
+        setUser({ ...user, password: "" });
+        alert("Wrong Email or Password");
+        navigate("/");
+        console.error(err);
+      });
+  };
 
   const OnChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
+  };
+
+  const checkEmailValid = (input) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
+    const emptyInput = "";
+    console.log(input);
+    if (!emailRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".EmailWarning").style.visibility = "visible";
+
+      console.log("Invalid Email");
+    } else {
+      console.log("valid");
+      document.querySelector(".EmailWarning").style.visibility = "hidden";
+
+      setUser({ ...user, email: input });
+    }
+  };
+
+  const checkPasswordValid = (input) => {
+    const emptyInput = "";
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".PasswordWarning").style.visibility = "visible";
+      
+    } else {
+      console.log("valid");
+      document.querySelector(".PasswordWarning").style.visibility = "hidden";
+      setUser({ ...user, password: input });
+    }
   };
 
   return (
@@ -93,7 +116,7 @@ const LoginForm = () => {
               allowClear="true"
               prefix={<UserOutlined />}
               suffix={
-                <Tooltip title="Username is your personal username that you have registered">
+                <Tooltip title="Input Your Email">
                   <InfoCircleOutlined
                     style={{
                       color: "white",
@@ -104,13 +127,25 @@ const LoginForm = () => {
               style={{
                 color: "white",
               }}
-              onChange={(e) =>{
-                setUser({...user, email: e.target.value})
+              onChange={(e) => {
+                checkEmailValid(e.target.value);
               }}
-            
+              id="EmailInput"
               className="LoginItems"
               required
             />
+            <p
+              className="EmailWarning"
+              style={{
+                color: "red",
+                fontSize: "12px",
+                paddingTop: "3px",
+                visibility: "hidden",
+                height: "10px",
+              }}
+            >
+              Warning: Incorrect Email
+            </p>
           </Form.Item>
 
           <Form.Item>
@@ -132,9 +167,10 @@ const LoginForm = () => {
                   />
                 )
               }
-              onChange={(e) =>{
-                setUser({...user, password: e.target.value})
+              onChange={(e) => {
+                checkPasswordValid(e.target.value);
               }}
+              id="PasswordInput"
               prefix={<LockOutlined />}
               className="LoginItems"
               allowClear="true"
@@ -143,6 +179,18 @@ const LoginForm = () => {
                 color: "white",
               }}
             />
+            <p
+              className="PasswordWarning"
+              style={{
+                color: "red",
+                fontSize: "12px",
+                paddingTop: "3px",
+                visibility: "visible",
+                height: "2px",
+              }}
+            >
+              Warning: Incorrect Password
+            </p>
           </Form.Item>
 
           <Form.Item
@@ -171,7 +219,6 @@ const LoginForm = () => {
               height: "3rem",
               marginTop: "1rem",
             }}
-
           >
             Login
           </Button>
