@@ -21,9 +21,9 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
           </Routes> */}
 
-
+          <Home/>
       {/* Tuan's area ---- command if you want do not delete it*/}
-            <AdminPage />
+            {/* <AdminPage /> */}
       {/* -------------------------------------------------------- */}
     </div>
   );
