@@ -29,9 +29,8 @@ const Register = () => {
     dob: "",
     gender: "",
     phone: "",
+    retype: "",
   });
-
- 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,14 +51,104 @@ const Register = () => {
       .catch((err) => {
         console.error(err);
       });
-     
   };
 
   // ------------Get Date value Function----------
   const onChange = (date, dateString) => {
+
     setUserDetail({ ...userDetail, dob: dateString });
   };
+  // --------Validate Functions----------
 
+  // ----------------Validate Fullname------
+  const checkNamelValid = (input) => {
+    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,2}$/;
+    const emptyInput = "";
+    if (!fullNameRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".FullNameWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".FullNameWarning").style.visibility = "hidden";
+
+      setUserDetail({ ...userDetail, name: input });
+    }
+  };
+
+  // ------------ Validate Email Function----------
+  const checkEmailValid = (input) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
+    const emptyInput = "";
+    if (!emailRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".EmailWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".EmailWarning").style.visibility = "hidden";
+
+      setUserDetail({ ...userDetail, email: input });
+    }
+  };
+
+  // -------- Validate Password Function----------
+  const checkPasswordValid = (input) => {
+    const emptyInput = "";
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".PasswordWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".PasswordWarning").style.visibility = "hidden";
+      setUserDetail({ ...userDetail, password: input });
+    }
+  };
+  // -------- Validate Re-Type Password Function----------
+
+  // const checkPasswordRetypeValid = () => {
+  //   if (userDetail.retype === userDetail.password) {
+  //     document.querySelector(".RetypePasswordWarning").style.visibility =
+  //       "hidden";
+  //   } else {
+  //     document.querySelector(".RetypePasswordWarning").style.visibility =
+  //       "visible";
+  //   }
+  // };
+
+  //-------- Validate Phone Function----------
+  const checkPhoneValid = (input) => {
+    const emailRegex = /^[0-9]{8,10}$/;
+    const emptyInput = "";
+    if (!emailRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".PhoneWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".PhoneWarning").style.visibility = "hidden";
+
+      setUserDetail({ ...userDetail, phone: input });
+    }
+  };
+
+  // -------- Validate DOB Function----------
+
+  // -------- Validate Username Function----------
+  const checkUsernamelValid = (input) => {
+    const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?: [A-Z][a-zA-Z]*)$/;
+    const emptyInput = "";
+    if (!UsernameRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".UsernameWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".UsernameWarning").style.visibility = "hidden";
+      setUserDetail({ ...userDetail, username: input });
+    }
+  };
+
+  //----------Validate Gender Function----------
+  const checkGenderlValid = (input) => {
+    const emptyInput = "";
+
+    if (!emptyInput.match(input)) {
+      document.querySelector(".GenderWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".GenderWarning").style.visibility = "hidden";
+
+      setUserDetail({ ...userDetail, gender: input });
+    }
+  };
 
   return (
     <React.Fragment>
@@ -106,7 +195,7 @@ const Register = () => {
               <Form.Item
                 className="ItemsContainer"
                 onChange={(e) => {
-                  setUserDetail({ ...userDetail, name: e.target.value });
+                  checkNamelValid(e.target.value);
                 }}
               >
                 <h3
@@ -129,13 +218,24 @@ const Register = () => {
                   allowClear="true"
                   required
                 />
+                <p
+                  className="FullNameWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Hint: Word Only
+                </p>
               </Form.Item>
 
               {/* Email*/}
               <Form.Item
                 onChange={(e) => {
-                  setUserDetail({ ...userDetail, email: e.target.value });
-                  console.log(e.target.value);
+                  checkEmailValid(e.target.value);
                 }}
               >
                 <h3
@@ -158,12 +258,25 @@ const Register = () => {
                   allowClear="true"
                   required
                 />
+
+                <p
+                  className="EmailWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Example: s1234567@rmit.edu.vn
+                </p>
               </Form.Item>
 
               {/* Phone */}
               <Form.Item
                 onChange={(e) => {
-                  setUserDetail({ ...userDetail, phone: e.target.value });
+                  checkPhoneValid(e.target.value);
                 }}
               >
                 <h3
@@ -182,17 +295,29 @@ const Register = () => {
                   style={{
                     color: "white",
                   }}
+                  maxLength="10"
                   className="RegisterItems"
                   allowClear="true"
                   required
                 />
+                <p
+                  className="PhoneWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Hint: Number Only, maxinum 10 numbers
+                </p>
               </Form.Item>
 
               {/* Password */}
               <Form.Item
                 onChange={(e) => {
-                  setUserDetail({ ...userDetail, password: e.target.value });
-                  
+                  checkPasswordValid(e.target.value);
                 }}
               >
                 <h3
@@ -231,6 +356,19 @@ const Register = () => {
                   allowClear="true"
                   required
                 />
+                <p
+                  className="PasswordWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  At least 8 characters include 1 capitalized, 1 special
+                  character, and 1 number
+                </p>
               </Form.Item>
             </Col>
 
@@ -259,7 +397,7 @@ const Register = () => {
                 <DatePicker
                   size="large"
                   format={dateFormatList}
-                  placeholder="Your Birthday"
+                  placeholder="Your Date Of Birth"
                   className="RegisterItems"
                   style={{
                     color: "white",
@@ -268,6 +406,18 @@ const Register = () => {
                   inputReadOnly={true}
                   allowClear={true}
                 />
+                <p
+                  className="PasswordWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Please Choose your birthday
+                </p>
               </Form.Item>
 
               {/* Gender */}
@@ -284,7 +434,7 @@ const Register = () => {
                 <Select
                   size="large"
                   onChange={(value) => {
-                    setUserDetail({ ...userDetail, gender: value });
+                    checkGenderlValid(value);
                   }}
                   className="RegisterItems"
                   style={{
@@ -297,12 +447,24 @@ const Register = () => {
                   <Option value="Male">Male</Option>
                   <Option value="Female">Female</Option>
                 </Select>
+                <p
+                  className="GenderWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Please Select Your Gender
+                </p>
               </Form.Item>
 
               {/* Username */}
               <Form.Item
                 onChange={(e) => {
-                  setUserDetail({ ...userDetail, username: e.target.value });
+                  checkUsernamelValid(e.target.value);
                 }}
               >
                 <h3
@@ -326,11 +488,31 @@ const Register = () => {
                   allowClear="true"
                   required
                 />
+                <p
+                  className="UsernameWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Input username
+                </p>
               </Form.Item>
 
               {/* Re-type Password  */}
               <Form.Item
-                
+              // onChange={(e) => {
+              //   setUserDetail({ ...userDetail, retype: e.target.value });
+              //   if(e.target.value === userDetail.password){
+              //     document.querySelector(".RetypePasswordWarning").style.visibility = "visible";
+              //   }
+              //   else{
+              //     document.querySelector(".RetypePasswordWarning").style.visibility = "hidden";
+              //   }
+              // }}
               >
                 <h3
                   style={{
@@ -338,7 +520,6 @@ const Register = () => {
                     textAlign: "left",
                     fontSize: "15px",
                   }}
-
                 >
                   Re-type Password:
                 </h3>
@@ -369,6 +550,18 @@ const Register = () => {
                   allowClear="true"
                   required
                 />
+                <p
+                  className="RetypePasswordWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  {/* Error: Password Not Match */}
+                </p>
               </Form.Item>
             </Col>
           </Row>
