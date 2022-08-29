@@ -126,7 +126,7 @@ const LoginPage = () => {
               </Col>
             </Row>
             <footer className="LoginFooter">
-              <small>Copyright ©2022 RMIT-Finding. All Right Reserved</small>
+              <small>Copyright ©2022 RMIT-Club-Hub. All Right Reserved</small>
             </footer>
           </Content>
         </Layout>
