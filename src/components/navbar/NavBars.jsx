@@ -111,7 +111,6 @@ const NavBar = () => {
             <div className="navRight">
               <Option Icon={HomeFilled} title="Home" />
               <Option Icon={FlagFilled} title="My club" />
-              <Option Icon={FlagFilled} title="My club" />
               <Option Icon={BellFilled} title="Nofication" />
               <Option avatar={userProfile.avatarUrl} />
             </div>
