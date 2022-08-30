@@ -16,10 +16,14 @@
   flex-flow: column nowrap;
   justify-content: space-around;
   gap: 0.2rem;
+  width: 100%;
 }
 
 .JoinButton{
-  width: 9rem;
+  width: fit-content;
   border: 1px solid #4D5364;
   border-radius: 32px;
+  display: inline-block;
+  text-align: center;
+  align-self: center;
 }

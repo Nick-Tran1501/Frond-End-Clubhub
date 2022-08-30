@@ -28,7 +28,7 @@ function App() {
 
           {/* <AdminPage/> */}
           
-
+<HomePage />
           
       {/* Tuan's area ---- command if you want do not delete it*/}
             {/* <AdminPage /> */}
