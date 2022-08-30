@@ -29,12 +29,6 @@ function App() {
           {/* <AdminPage/> */}
           
 
-       {/* <LoginPage/> */}
-        {/* <Home/> */}
-        {/* <Welcome/> */}
-
-
-          <Home/>
           
       {/* Tuan's area ---- command if you want do not delete it*/}
             {/* <AdminPage /> */}

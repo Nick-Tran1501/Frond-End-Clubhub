@@ -59,7 +59,7 @@ const sidebar = () => {
   useEffect(()=> {
     
       const token = localStorage.getItem('token')
-      axios.get("https://rmit-club-dhyty.ondigitalocean.app/api/user",
+      axios.get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile",
         {
           headers:{'Authorization': `Bearer ${token}`}
         }
@@ -118,7 +118,7 @@ const sidebar = () => {
       </div>
 
       <div className="sideFooter">
-        <p> Copyright ©2022 RMIT-Finding. All Right Reserved </p>
+        <p> Copyright ©2022 RMIT CLUB HUB. All Right Reserved </p>
       </div>
 
     </div>

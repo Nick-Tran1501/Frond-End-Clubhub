@@ -62,7 +62,7 @@ const Register = () => {
 
   // ----------------Validate Fullname------
   const checkNamelValid = (input) => {
-    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,2}$/;
+    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,5}$/;
     const emptyInput = "";
     if (!fullNameRegex.test(input) && !emptyInput.match(input)) {
       document.querySelector(".FullNameWarning").style.visibility = "visible";
@@ -228,7 +228,7 @@ const Register = () => {
                     height: "1px",
                   }}
                 >
-                  Hint: Word Only
+                  Hint: Word Only, Space between words
                 </p>
               </Form.Item>
 
