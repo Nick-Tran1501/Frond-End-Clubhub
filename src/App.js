@@ -30,8 +30,11 @@ function App() {
       
           
       {/* Tuan's area ---- command if you want do not delete it*/}
+          {/* <HomePage/> */}
+          {/* <WelcomePage/> */}
             <AdminPage />
             {/* <TableComponent/> */}
+            {/* <ProfilePage /> */}
 
       {/* -------------------------------------------------------- */}
 
