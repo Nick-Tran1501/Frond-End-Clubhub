@@ -21,7 +21,7 @@ const Post = ({ data }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user", {
+      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => setUserProfile(response.data))
@@ -128,11 +128,25 @@ const Post = ({ data }) => {
           </div>
           {/* Post Setting */}
           <div className="PostSetting">
+            {data.updateAt ?
+            <p
+              style={{
+                opacity: "0.6",
+                paddingTop: "13px",
+              }}
+            >
+              Updated:{data?.updateAt}
+            </p>
+            : ""
+            }
             <button
               style={{
-                padding: "0",
+                padding: "0 ",
+                margin: "0 0 2rem 0",
                 border: "none",
                 background: "none",
+                fontSize: "1.4rem",
+                height: "64px",
               }}
               onClick={showModal}
             >
@@ -177,10 +191,10 @@ const Post = ({ data }) => {
               {data.images.map((image) => {
                 return (
                   <Image
-                    key={data._id}
+                    key={image.key}
                     width="100%"
                     height="20rem"
-                    src={image}
+                    src={image.url}
                     className="Images"
                   />
                 );
@@ -198,7 +212,9 @@ const Post = ({ data }) => {
             </div>
 
             <div className="CommentsResult">
-              <p style={{ fontSize: "18px", paddingTop: "5px" }}>{data.comments.length}</p>
+              <p style={{ fontSize: "18px", paddingTop: "5px" }}>
+                {data.comments.length}
+              </p>
               <span className="commentsIcon">
                 <CommentOutlined></CommentOutlined>
               </span>
@@ -236,7 +252,13 @@ const Post = ({ data }) => {
           </button>
         </div>
 
-        {show && <CommentsBox data={data.comments} postId={data._id} userimage={data.author.avatarUrl} />}
+        {show && (
+          <CommentsBox
+            data={data.comments}
+            postId={data._id}
+            userimage={data.author.avatarUrl}
+          />
+        )}
       </div>
     </React.Fragment>
   );
