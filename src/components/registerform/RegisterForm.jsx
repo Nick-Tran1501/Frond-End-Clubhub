@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "../../pages/loginpage/LoginPage.css";
-import { Button, Form, Input, DatePicker, Select, Checkbox } from "antd";
+import { Button, Form, Input, DatePicker, Select, Checkbox, Modal } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import { Col, Row } from "antd";
+import PrivacyForm from "../termpolicys/PrivacyForm";
 
 const { Option } = Select;
 
@@ -32,12 +33,9 @@ const Register = () => {
     retype: "",
   });
 
-  
   // ------------Get Date value Function----------
   const onChange = (date, dateString) => {
-    
-      setUserDetail({ ...userDetail, dob: dateString });
-
+    setUserDetail({ ...userDetail, dob: dateString });
   };
   // --------Validate Functions----------
 
@@ -49,7 +47,6 @@ const Register = () => {
       document.querySelector(".FullNameWarning").style.visibility = "visible";
     } else {
       document.querySelector(".FullNameWarning").style.visibility = "hidden";
-
     }
   };
 
@@ -77,7 +74,6 @@ const Register = () => {
     }
   };
 
-
   // -------- Validate Password Function----------
   const checkPasswordValid = (input) => {
     const emptyInput = "";
@@ -100,8 +96,6 @@ const Register = () => {
         "visible";
     }
   };
-
-  
 
   // -------- Validate DOB Function----------
 
@@ -129,19 +123,17 @@ const Register = () => {
     }
   };
 
-
   const handleSubmit = (e) => {
     // -----Left Column Input -----
-    checkNamelValid(userDetail.name)
-    checkEmailValid(userDetail.email)
-    checkPhoneValid(userDetail.phone)
-    checkPasswordValid(userDetail.password)
+    checkNamelValid(userDetail.name);
+    checkEmailValid(userDetail.email);
+    checkPhoneValid(userDetail.phone);
+    checkPasswordValid(userDetail.password);
 
     // -----Right Column Input -----
-    checkGenderlValid(userDetail.gender)
-    checkUsernamelValid(userDetail.username)
-    checkPasswordRetypeValid()
-    
+    checkGenderlValid(userDetail.gender);
+    checkUsernamelValid(userDetail.username);
+    checkPasswordRetypeValid();
 
     //
     e.preventDefault();
@@ -164,6 +156,9 @@ const Register = () => {
       });
   };
 
+  //Handle to pop up the Modal
+  const [modal2Visible, setModal2Visible] = useState(false);
+  const [modal1Visible, setModal1Visible] = useState(false);
   return (
     <React.Fragment>
       <div className="RegisterCotainer">
@@ -209,7 +204,7 @@ const Register = () => {
               <Form.Item
                 className="ItemsContainer"
                 onChange={(e) => {
-                  setUserDetail({...userDetail, name: e.target.value});
+                  setUserDetail({ ...userDetail, name: e.target.value });
                 }}
               >
                 <h3
@@ -583,9 +578,36 @@ const Register = () => {
               width: "100%",
             }}
           >
-            I agree to all the <span className="Agreement">Term</span>,
-            <span className="Agreement"> Privacy Policy</span>, and
-            <span className="Agreement"> Fees</span>
+            I agree to all the &nbsp;
+            <span className="Agreement" onClick={() => setModal2Visible(true)}>
+              Privacy Policy
+            </span>
+            <Modal
+              title="Privacy Policy"
+              centered
+              visible={modal2Visible}
+              onOk={() => setModal2Visible(false)}
+              onCancel={() => setModal2Visible(false)}
+              style={{}}
+            >
+              <PrivacyForm />
+            </Modal>
+
+            , and
+            &nbsp;
+            <span className="Agreement" onClick={() => setModal1Visible(true)}>
+              Term Condition
+            </span>
+            <Modal
+              title="Privacy Policy"
+              centered
+              visible={modal1Visible}
+              onOk={() => setModal1Visible(false)}
+              onCancel={() => setModal1Visible(false)}
+              style={{}}
+            >
+              <PrivacyForm />
+            </Modal>
           </Checkbox>
 
           <Button

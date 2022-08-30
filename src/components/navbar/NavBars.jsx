@@ -9,7 +9,16 @@ import {
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ClubLogo from "../../image/ClubHub_Trans.png";
-import { Col, Row, AutoComplete, Input, Avatar, Popover } from "antd";
+import {
+  Col,
+  Row,
+  AutoComplete,
+  Input,
+  Avatar,
+  Popover,
+  Dropdown,
+  Menu,
+} from "antd";
 import Option from "./NavbarOptions";
 import { useEffect } from "react";
 import axios from "axios";
@@ -80,13 +89,92 @@ const NavBar = () => {
     console.log("onSelect", value);
   };
 
-  // Handle the username, signout in avatar (will put into another component)
-  const text = <span>Username</span>;
-  const content = (
-    <div>
-      <p>Sign Out</p>
-    </div>
+  // Handle the nofication from "Club" navigation option
+  const clubMenu = (
+    // List of nofication
+    <Menu
+      items={[
+        {
+          key: "1",
+          label: (
+            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
+              First news
+            </a>
+          ),
+        },
+
+        {
+          type:'divider'
+        },
+
+        {
+          key: "2",
+          label: (
+            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
+              Second news
+            </a>
+          ),
+        },
+
+        {
+          type:'divider'
+        },
+
+        {
+          key: "3",
+          label: (
+            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
+              Third news
+            </a>
+          ),
+        },
+      ]}
+    />
   );
+
+  // Handle the nofication from "Nofication" navigation option
+  const nofiMenu = (
+    // List of nofication
+    <Menu
+      items={[
+        {
+          key: "1",
+          label: (
+            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
+              First news
+            </a>
+          ),
+        },
+
+        {
+          type:'divider'
+        },
+
+        {
+          key: "2",
+          label: (
+            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
+              Second news
+            </a>
+          ),
+        },
+
+        {
+          type:'divider'
+        },
+
+        {
+          key: "3",
+          label: (
+            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
+              Third news
+            </a>
+          ),
+        },
+      ]}
+    />
+  );
+
   // Render the View
   return (
     <div className="navbar--container">
@@ -118,25 +206,27 @@ const NavBar = () => {
           <Row>
             <Col xs={0} md={0} lg={24}>
               <div className="navOptions d-flex">
+                {/* Navigate HomePage */}
                 <Option Icon={HomeFilled} title="Home" />
-                <Option Icon={FlagFilled} title="My club" />
-                <Option Icon={BellFilled} title="Nofication" />
+
+                {/* My Club Dropdown */}
+                <Dropdown overlay={clubMenu} placement="bottom" trigger={['click']}>
+                  <div>
+                    <Option Icon={FlagFilled} title="Club" />
+                  </div>
+                </Dropdown>
+
+                {/* Nofication Dropdown */}
+                <Dropdown overlay={nofiMenu} placement='bottom' trigger={['click']}>
+                  <div>
+                    <Option Icon={BellFilled} title="Nofication" />
+                  </div>
+                </Dropdown>
               </div>
             </Col>
           </Row>
           <div className="navAvatar">
-            <Popover
-              placement="bottomRight"
-              title={text}
-              content={content}
-              trigger='click'
-            >
-              <Avatar
-                className="userImg"
-                size="large"
-                icon={<UserOutlined />}
-              />
-            </Popover>
+            <Avatar className="userImg" size="large" icon={<UserOutlined />} />
           </div>
         </div>
       </div>
