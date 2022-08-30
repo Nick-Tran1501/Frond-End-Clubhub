@@ -415,6 +415,7 @@ function AdminPage() {
       address: "Sam Address",
     },
   ]);
+
   const columns = [
     {
       title: "ID",
@@ -466,6 +467,7 @@ function AdminPage() {
       return [...pre, newStudent];
     });
   };
+
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -478,66 +480,155 @@ function AdminPage() {
       },
     });
   };
+
   const onEditStudent = (record) => {
     setIsEditing(true);
     setEditingStudent({ ...record });
   };
+
   const resetEditing = () => {
     setIsEditing(false);
     setEditingStudent(null);
   };
 
-  return (
-    <div className="Container">
-        {/* <Button onClick={onAddStudent}> Add a new Student</Button> */}
-        <Table columns={columns} dataSource={dataSource}></Table>
+  // Add new student
 
-        <Modal
-          title="Edit Student"
-          visible={isEditing}
-          okText="Save"
-          onCancel={() => {
-            resetEditing();
-          }}
-          onOk={() => {
-            setDataSource((pre) => {
-              return pre.map((student) => {
-                if (student.id === editingStudent.id) {
-                  return editingStudent;
-                } else {
-                  return student;
-                }
-              });
+  const { Option } = Select;
+
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      offset: 8,
+      span: 16,
+    },
+  };
+
+  const [form] = Form.useForm();
+
+  const onFinish = (values) => {
+    console.log(values);
+  };
+
+  const onReset = () => {
+    form.resetFields();
+  };
+
+ 
+
+  return (
+    <div className="container">
+      <Button onClick={onAddStudent}> Add a new Student</Button>
+      <Table columns={columns} dataSource={dataSource}></Table>
+      <Modal
+        title="Edit Student"
+        visible={isEditing}
+        okText="Save"
+        onCancel={() => {
+          resetEditing();
+        }}
+        onOk={() => {
+          setDataSource((pre) => {
+            return pre.map((student) => {
+              if (student.id === editingStudent.id) {
+                return editingStudent;
+              } else {
+                return student;
+              }
             });
-            resetEditing();
+          });
+          resetEditing();
+        }}
+      >
+        <Input
+          value={editingStudent?.name}
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, name: e.target.value };
+            });
           }}
+        />
+        <Input
+          value={editingStudent?.email}
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, email: e.target.value };
+            });
+          }}
+        />
+        <Input
+          value={editingStudent?.address}
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, address: e.target.value };
+            });
+          }}
+        />
+      </Modal>
+
+
+
+      {/* add new student  */}
+      
+      <Form 
+        {...layout}
+         form={form} 
+         name="control-hooks" 
+         onFinish={onFinish}
+      >
+
+        <Form.Item
+          name="StudentID"
+          label="Student ID"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
-          
-          <Input
-            value={editingStudent?.name}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, name: e.target.value };
-              });
-            }}
-          />
-          <Input
-            value={editingStudent?.email}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, email: e.target.value };
-              });
-            }}
-          />
-          <Input
-            value={editingStudent?.address}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, address: e.target.value };
-              });
-            }}
-          />
-        </Modal>
+          <Input />
+        </Form.Item>
+
+
+        <Form.Item
+          name="Role"
+          label="Role"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            placeholder="Select a specific role for new studetn"
+            // onChange={onGenderChange}
+            allowClear
+          >
+            <Option value="President">President</Option>
+            <Option value="Vice President"> Vice President</Option>
+            <Option value="Content Writer"> Content Writer</Option>
+            <Option value="Member"> Member</Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item 
+          {...tailLayout}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+          <Button htmlType="button" onClick={onReset}>
+            Reset
+          </Button>
+        </Form.Item>
+
+      </Form>
 
     </div>
   );
