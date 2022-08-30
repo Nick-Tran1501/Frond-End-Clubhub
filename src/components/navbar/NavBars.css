@@ -3,10 +3,10 @@
   display: flex;
   justify-content: center;
   /* border-bottom: 0.1px solid lightgray; */
-  background-color: grey;
+  background-color: #b1a296;
   box-shadow: 1px 2px 5px #888888;
   z-index: 10;  
-  height: 5vh;
+  height: 7vh;
 }
 
 .nContainer {
@@ -51,6 +51,10 @@
 
 .navRight{
   display: flex;
+}
+
+.navAvatar{
+  
 }
 
 .userImg{

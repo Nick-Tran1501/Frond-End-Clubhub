@@ -1,7 +1,16 @@
+/* Import font */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Pacifico&family=Roboto:wght@100&display=swap");
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
+}
+
+body{
+    font-family: "Noto Sans", cursive;
+    font-weight: 600;
 }
 
 .homeContainer {
