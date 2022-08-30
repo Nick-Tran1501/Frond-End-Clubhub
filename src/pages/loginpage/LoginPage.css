@@ -255,3 +255,11 @@
   font-size: 18px;
   font-weight: bolder;
 }
+
+.ant-modal-title{
+  color: white
+}
+.ant-modal-header,.ant-modal-body,.ant-modal-footer{
+  border: none;
+  background-color: #5B778B;
+}

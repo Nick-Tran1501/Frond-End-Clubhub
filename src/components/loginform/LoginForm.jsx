@@ -6,11 +6,11 @@ import "antd/dist/antd.css";
 import "../../pages/loginpage/LoginPage.css";
 import { Link } from "react-router-dom";
 
-import { Button, Form, Input, Checkbox, Tooltip } from "antd";
+import { Button, Form, Input, Checkbox, Tooltip, Modal } from "antd";
 import {
-  UserOutlined,
   InfoCircleOutlined,
   LockOutlined,
+  MailOutlined 
 } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -20,12 +20,19 @@ import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
   const [user, setUser] = useState({
     email: "",
     password: "",
+    forgetemail: "",
   });
-
+  const onReset = () => {
+    form.resetFields();
+  };
   const handleSubmit = (e) => {
+    checkEmailValid(user.email)
+    checkPasswordValid(user.password)
+
     e.preventDefault();
     axios({
       method: "post",
@@ -40,6 +47,7 @@ const LoginForm = () => {
         navigate("/home");
       })
       .catch((err) => {
+        onReset()
         alert("Wrong Email or Password");
         console.error(err);
       });
@@ -49,6 +57,8 @@ const LoginForm = () => {
     console.log(`checked = ${e.target.checked}`);
   };
 
+
+  // -----Login Validate-----
   const checkEmailValid = (input) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
     const emptyInput = "";
@@ -75,6 +85,52 @@ const LoginForm = () => {
     }
   };
 
+
+  //Forget Password
+
+  const [visible, setVisible] = useState(false);
+  const showModal = () => {
+    setVisible(true);
+  };
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setVisible(false);
+  };
+
+  const checkForgetEmailValid = (input) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
+    const emptyInput = "";
+    if (!emailRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".ForgetWarning").style.visibility = "visible";
+
+    } else {
+      document.querySelector(".ForgetWarning").style.visibility = "hidden";
+
+      setUser({ ...user, forgetmail: input });
+    }
+  };
+
+  const forgetPassword = (e) => {
+    checkForgetEmailValid(user.forgetemail)
+    e.preventDefault();
+    axios({
+      method: "post",
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/password-reset",
+      data: {
+        email: user.forgetemail,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  }
+  
+  
+
   return (
     <React.Fragment>
       <div className="LoginCotainer">
@@ -95,19 +151,23 @@ const LoginForm = () => {
         <h1>Login</h1>
 
         <Form
+        name="LoginForm"
           className="InputForm"
           style={{
             color: "white",
           }}
+          form={form}
           onSubmitCapture={handleSubmit}
+          
         >
-          <div></div>
-          <Form.Item>
+          <Form.Item
+            name="email"
+          >
             <Input
               size="large"
               placeholder="Enter Your Email"
               allowClear="true"
-              prefix={<UserOutlined />}
+              prefix={<MailOutlined/>}
               suffix={
                 <Tooltip title="Input Your Email">
                   <InfoCircleOutlined
@@ -121,7 +181,8 @@ const LoginForm = () => {
                 color: "white",
               }}
               onChange={(e) => {
-                checkEmailValid(e.target.value);
+                // checkEmailValid(e.target.value);
+                setUser({ ...user, email: e.target.value });
               }}
               id="EmailInput"
               className="LoginItems"
@@ -141,7 +202,9 @@ const LoginForm = () => {
             </p>
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item
+            name="password"
+          >
             <Input.Password
               size="large"
               placeholder="Enter Your Password"
@@ -161,7 +224,7 @@ const LoginForm = () => {
                 )
               }
               onChange={(e) => {
-                checkPasswordValid(e.target.value);
+                setUser({ ...user, password: e.target.value });
               }}
               id="PasswordInput"
               prefix={<LockOutlined />}
@@ -226,6 +289,7 @@ const LoginForm = () => {
               textDecoration: "underline",
               color: "white",
             }}
+            onClick={showModal}
           >
             <p
               style={{
@@ -235,6 +299,43 @@ const LoginForm = () => {
               Forget Password
             </p>
           </Button>
+          <Modal
+        title="Forget Password"
+        visible={visible}
+        onOk={forgetPassword}
+        onCancel={handleCancel}
+        
+        centered
+        bodyStyle={{
+          backgroundColor:"#5B778B",
+        }}
+      >
+          <Input size="large" placeholder="Input Your Email" prefix={<MailOutlined 
+            style={{
+              color: "white",
+              marginRight: "10px"
+            }}
+          />}
+            onChange={(e) => setUser({...user, forgetemail: e.target.value})}
+            style={{
+
+              backgroundColor: "#44505F",
+            }}
+          />
+           <p
+              className="ForgetWarning"
+              style={{
+                color: "red",
+                fontSize: "12px",
+                paddingTop: "3px",
+                visibility: "hidden",
+                height: "10px",
+              }}
+            >
+              Warning: Incorrect Email
+            </p>
+        
+      </Modal>
         </div>
       </div>
     </React.Fragment>
