@@ -32,406 +32,93 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+
 import { render } from "@testing-library/react";
+import { Tab } from "react-bootstrap";
 
 // ----------------------------------------------------------------
 
 function AdminPage() {
   // -------- attributes --------------------------------
-  //   const { Text, Link } = Typography;
-  //   const { Search } = Input;
-  //   const { Option } = Select;
-  //   const onSearch = (value) => console.log(value);
-
-  //   // select options
-  //   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-  //   const onSelectChange = (newSelectedRowKeys) => {
-  //     console.log("selectedRowKeys changed: ", selectedRowKeys);
-  //     setSelectedRowKeys(newSelectedRowKeys);
-  //   };
-
-  //   const rowSelection = {
-  //     selectedRowKeys,
-  //     onChange: onSelectChange,
-  //     selections: [
-  //       Table.SELECTION_ALL,
-  //       // Table.SELECTION_INVERT,
-  //       Table.SELECTION_NONE,
-  //       {
-  //         key: "odd",
-  //         text: "Select Odd Row",
-  //         onSelect: (changableRowKeys) => {
-  //           let newSelectedRowKeys = [];
-  //           newSelectedRowKeys = changableRowKeys.filter((_, index) => {
-  //             if (index % 2 !== 0) {
-  //               return false;
-  //             }
-
-  //             return true;
-  //           });
-  //           setSelectedRowKeys(newSelectedRowKeys);
-  //         },
-  //       },
-  //       {
-  //         key: "even",
-  //         text: "Select Even Row",
-  //         onSelect: (changableRowKeys) => {
-  //           let newSelectedRowKeys = [];
-  //           newSelectedRowKeys = changableRowKeys.filter((_, index) => {
-  //             if (index % 2 !== 0) {
-  //               return true;
-  //             }
-
-  //             return false;
-  //           });
-  //           setSelectedRowKeys(newSelectedRowKeys);
-  //         },
-  //       },
-  //     ],
-  //   };
+  const { Link } = Typography;
+  const { Search } = Input;
+  const { Option } = Select;
+  const onSearch = (value) => console.log(value);
 
   //   //  ------- Functions --------------------------------
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log(
+      "params --- ",
+      "pag:",
+      pagination,
+      "filters: ",
+      filters,
+      "sorter: ",
+      sorter,
+      "extra: ",
+      extra
+    );
+  };
 
-  //   const handleChange = (value) => {
-  //     console.log(`selected ${value}`);
-  //     // console.log(value.target);
-  //   };
+  // Table data
 
-  //   const onChange = (pagination, filters, sorter, extra) => {
-  //     console.log(
-  //       "params --- ",
-  //       "pag:",
-  //       pagination,
-  //       "filters: ",
-  //       filters,
-  //       "sorter: ",
-  //       sorter,
-  //       "extra: ",
-  //       extra
-  //     );
-  //   };
+  const sampleData = [];
+  for (let i = 0; i < 46; i++) {
+    const randomNumber = parseInt(Math.random() * 1000);
+    sampleData.push({
+      key: i,
+      id: randomNumber,
+      name: `Em tuấn thứ ${i}`,
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Content Writer",
+    });
+  }
+  const [dataSource, setDataSource] = useState(sampleData);
+  // new code
 
-  //   const updateList = (a) => {
-  //     if (a != 0) {
-  //       console.log(a);
-  //     } else {
-  //       console.log("Not Things Changes");
-  //     }
-  //   };
-
-  //   // table data
-  //   const [data, setData] = useState([
-  //     {
-  //       key: "0",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "Content Writer",
-  //     },
-  //     {
-  //       key: "1",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "2",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "3",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "4",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "5",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "6",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "7",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "8",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "9",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "10",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "11",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //     {
-  //       key: "12",
-  //       name: "Edward King 0",
-  //       age: "32",
-  //       gender: "Male",
-  //       joinDate: "12/11/2021",
-  //       email: "student@gmail.com",
-  //       role: "President",
-  //     },
-  //   ]);
-
-  //   const columns = [
-  //     {
-  //       title: "Name",
-  //       dataIndex: "name",
-  //       width: "20%",
-  //     },
-  //     {
-  //       title: "Age",
-  //       dataIndex: "age",
-  //       width: "5%",
-  //     },
-  //     {
-  //       title: "Gender",
-  //       dataIndex: "gender",
-  //       width: "5%",
-  //     },
-  //     {
-  //       title: "Join Date",
-  //       dataIndex: "joinDate",
-  //       width: "10%",
-  //     },
-
-  //     {
-  //       title: "Email",
-  //       dataIndex: "email",
-  //       width: "30%",
-  //     },
-  //     {
-  //       title: "Role",
-  //       dataIndex: "Role",
-  //       width: "20%",
-  //       render: (_, record) => (
-  //         // Test new select
-  //         <Select
-  //           defaultValue={data[record.key].role}
-  //           style={{
-  //             width: "100%",
-  //           }}
-  //           onChange={handleChange}
-  //         >
-  //           <Option value="President">President</Option>
-  //           <Option value="Vice President"> Vice President</Option>
-  //           <Option value="Content Writer"> Content Writer</Option>
-  //           <Option value="Member"> Member</Option>
-  //         </Select>
-  //       ),
-  //     },
-  //     Table.SELECTION_COLUMN,
-  //     // {
-  //     //   title: 'Remove',
-  //     //   dataIndex: 'Remove',
-  //     //   key: 'Remove',
-  //     // },
-  //     // {
-  //     //   title: "operation",
-  //     //   dataIndex: "operation",
-  //     //   width: "10%",
-  //     //   render: (_, record) =>
-  //     //     data.length >= 1 ? (
-  //     //       <Popconfirm
-  //     //         title="Are you sure to remove this person ?"
-  //     //         onConfirm={() => handleDelete(record.key)}
-  //     //       >
-  //     //         <Button type="primary" danger>
-  //     //             Remove
-  //     //         </Button>
-
-  //     //       </Popconfirm>
-  //     //     ) : null,
-  //     // },
-  //   ];
-
-  //   return (
-  //     <div className="container">
-  //       {/* header title */}
-  //       <Row className="title-container">
-  //         <Col className="title-content" span={24}>
-  //           <h1> Admin Page </h1>
-  //         </Col>
-  //       </Row>
-  //       {/* header search bar */}
-  //       <Row className="header-container">
-  //         <Col className="header-body" span={6}>
-  //           <Link href="" target="_blank">
-  //             Back To Home Page (logo)
-  //           </Link>
-  //         </Col>
-  //         <Col className="header-body" span={18}>
-  //           <Search
-  //             className="search-bar"
-  //             placeholder="Input Club Name"
-  //             size="large"
-  //             onSearch={onSearch}
-  //             enterButton
-  //           />
-  //         </Col>
-  //       </Row>
-
-  //       {/* body */}
-  //       <Row className="club-container">
-  //         <Col className="member-table" span={24}>
-  //           <h2> Club members table </h2>
-  //           <p> Club Name: Sample Club </p>
-  //           <p>Total members : Number</p>
-
-  //           {/* render back */}
-  //           <Table
-  //             bordered
-  //             rowSelection={rowSelection}
-  //             columns={columns}
-  //             dataSource={data}
-  //             onChange={onChange}
-  //             pagination={{
-  //               position: ["bottomCenter"],
-  //             }}
-  //           />
-  // {/*
-  //           <Button
-  //             type="primary"
-  //             icon={<CheckOutlined />}
-  //             style={{
-  //               backgroundColor: "#95de64",
-  //               color: "Black",
-  //             }}
-  //             onClick={() => updateList(selectedRowKeys)}
-  //           >
-  //             Save change
-  //           </Button> */}
-
-  //           {/* <Button type="danger" icon={<CloseOutlined />} onClick={resetChange}>
-  //             Reset Change
-  //           </Button> */}
-  //         </Col>
-
-  //         <Col className="request-title" span={24}>
-  //           <h2> Create new club page request</h2>
-  //         </Col>
-  //         <Col className="request-table" span={24}>
-  //           <h2> Request list </h2>
-  //         </Col>
-  //       </Row>
-
-  // </div>
-  // );
-
-  // new Table
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
-  const [dataSource, setDataSource] = useState([
-    {
-      id: 1,
-      name: "John",
-      email: "john@gmail.com",
-      address: "John Address",
-    },
-    {
-      id: 2,
-      name: "David",
-      email: "david@gmail.com",
-      address: "David Address",
-    },
-    {
-      id: 3,
-      name: "James",
-      email: "james@gmail.com",
-      address: "James Address",
-    },
-    {
-      id: 4,
-      name: "Sam",
-      email: "sam@gmail.com",
-      address: "Sam Address",
-    },
-  ]);
 
   const columns = [
     {
       title: "ID",
       dataIndex: "id",
+      width: "5%",
     },
     {
       title: "Name",
       dataIndex: "name",
+    },
+
+    {
+      title: "Join Date",
+      dataIndex: "joinDate",
     },
     {
       title: "Email",
       dataIndex: "email",
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      title: "Role",
+      dataIndex: "role",
+      width: "20%",
+      // render: (_, record) => (
+      //   // Test new select
+      //   <Select
+      //     defaultValue={dataSource[record.key].role}
+      //     style={{
+      //       width: "100%",
+      //     }}
+      //     onChange={handleChange}
+      //   >
+      //     <Option value="President">President</Option>
+      //     <Option value="Vice President"> Vice President</Option>
+      //     <Option value="Content Writer"> Content Writer</Option>
+      //     <Option value="Member"> Member</Option>
+      //   </Select>
+      // ),
     },
     {
       title: "Actions",
@@ -455,13 +142,17 @@ function AdminPage() {
     },
   ];
 
+  // -------- CRUD Functions ---------------
   const onAddStudent = () => {
     const randomNumber = parseInt(Math.random() * 1000);
     const newStudent = {
+      key: randomNumber,
       id: randomNumber,
-      name: "Name " + randomNumber,
-      email: randomNumber + "@gmail.com",
-      address: "Address " + randomNumber,
+      name: `Em tuấn thứ ${randomNumber}`,
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Content Writer",
     };
     setDataSource((pre) => {
       return [...pre, newStudent];
@@ -475,6 +166,7 @@ function AdminPage() {
       okType: "danger",
       onOk: () => {
         setDataSource((pre) => {
+          // console.log(record.id);
           return pre.filter((student) => student.id !== record.id);
         });
       },
@@ -491,9 +183,7 @@ function AdminPage() {
     setEditingStudent(null);
   };
 
-  // Add new student
-
-  const { Option } = Select;
+  // Add new student input
 
   const layout = {
     labelCol: {
@@ -503,6 +193,7 @@ function AdminPage() {
       span: 16,
     },
   };
+
   const tailLayout = {
     wrapperCol: {
       offset: 8,
@@ -520,116 +211,179 @@ function AdminPage() {
     form.resetFields();
   };
 
- 
+  // -------
 
   return (
     <div className="container">
-      <Button onClick={onAddStudent}> Add a new Student</Button>
-      <Table columns={columns} dataSource={dataSource}></Table>
-      <Modal
-        title="Edit Student"
-        visible={isEditing}
-        okText="Save"
-        onCancel={() => {
-          resetEditing();
-        }}
-        onOk={() => {
-          setDataSource((pre) => {
-            return pre.map((student) => {
-              if (student.id === editingStudent.id) {
-                return editingStudent;
-              } else {
-                return student;
-              }
-            });
-          });
-          resetEditing();
-        }}
-      >
-        <Input
-          value={editingStudent?.name}
-          onChange={(e) => {
-            setEditingStudent((pre) => {
-              return { ...pre, name: e.target.value };
-            });
-          }}
-        />
-        <Input
-          value={editingStudent?.email}
-          onChange={(e) => {
-            setEditingStudent((pre) => {
-              return { ...pre, email: e.target.value };
-            });
-          }}
-        />
-        <Input
-          value={editingStudent?.address}
-          onChange={(e) => {
-            setEditingStudent((pre) => {
-              return { ...pre, address: e.target.value };
-            });
-          }}
-        />
-      </Modal>
+      {/* header title */}
+      <Row className="title-container">
+        <Col className="title-content" span={24}>
+          <h1> Admin Page </h1>
+        </Col>
+      </Row>
+      {/* header search bar */}
+      <Row className="header-container">
+        <Col className="header-body" span={6}>
+          <Link href="" target="_blank">
+            Back To Home Page (logo)
+          </Link>
+        </Col>
+        <Col className="header-body" span={18}>
+          <Search
+            className="search-bar"
+            placeholder="Input Club Name"
+            size="large"
+            onSearch={onSearch}
+            enterButton
+          />
+        </Col>
+      </Row>
 
+      {/* body */}
+      <Row className="club-container">
+        <Col className="member-table" span={24}>
+          <h2> Club members table </h2>
+          <p> Club Name: Sample Club </p>
+          <p>Total members : Number</p>
 
+          <Button onClick={onAddStudent}> Add a new Student </Button>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={dataSource}
+            onChange={onChange}
+            pagination={{
+              position: ["bottomCenter"],
+            }}
+          />
 
-      {/* add new student  */}
-      
-      <Form 
-        {...layout}
-         form={form} 
-         name="control-hooks" 
-         onFinish={onFinish}
-      >
-
-        <Form.Item
-          name="StudentID"
-          label="Student ID"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-
-        <Form.Item
-          name="Role"
-          label="Role"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select
-            placeholder="Select a specific role for new studetn"
-            // onChange={onGenderChange}
-            allowClear
+          <Modal
+            title="Edit Student"
+            visible={isEditing}
+            okText="Save"
+            onCancel={() => {
+              resetEditing();
+            }}
+            onOk={() => {
+              setDataSource((pre) => {
+                return pre.map((student) => {
+                  if (student.id === editingStudent.id) {
+                    return editingStudent;
+                  } else {
+                    return student;
+                  }
+                });
+              });
+              resetEditing();
+            }}
           >
-            <Option value="President">President</Option>
-            <Option value="Vice President"> Vice President</Option>
-            <Option value="Content Writer"> Content Writer</Option>
-            <Option value="Member"> Member</Option>
-          </Select>
-        </Form.Item>
+            <Input
+              value={editingStudent?.name}
+              onChange={(e) => {
+                setEditingStudent((pre) => {
+                  return { ...pre, name: e.target.value };
+                });
+              }}
+            />
+            <Input
+              value={editingStudent?.email}
+              onChange={(e) => {
+                setEditingStudent((pre) => {
+                  return { ...pre, email: e.target.value };
+                });
+              }}
+            />
+            <Input
+              value={editingStudent?.role}
+              onChange={(e) => {
+                setEditingStudent((pre) => {
+                  return { ...pre, role: e.target.value };
+                });
+              }}
+            />
 
-        <Form.Item 
-          {...tailLayout}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-          <Button htmlType="button" onClick={onReset}>
-            Reset
-          </Button>
-        </Form.Item>
+            <Select
+              defaultValue={editingStudent?.role}
+              style={{
+                width: "100%",
+              }}
+              // onChange={handleChange}
+              onChange={(e) => {
+                // console.log(e);
+                setEditingStudent((pre) => {
+                  return { ...pre, role: e };
+                });
+              }}
+            >
+              <Option value="President">President</Option>
+              <Option value="Vice President"> Vice President</Option>
+              <Option value="Content Writer"> Content Writer</Option>
+              <Option value="Member"> Member</Option>
 
-      </Form>
+            </Select>
 
+          </Modal>
+        </Col>
+        <Col className="request-title" span={24}>
+          <h2> Create new club page request</h2>
+          <div className="add-new-student">
+          <Form
+            {...layout}
+            form={form}
+            name="control-hooks"
+            onFinish={onFinish}
+          >
+            <Form.Item
+              name="StudentID"
+              label="Student ID"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="Role"
+              label="Role"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select
+                placeholder="Select a specific role for new studetn"
+                // onChange={onGenderChange}
+                allowClear
+              >
+                <Option value="President">President</Option>
+                <Option value="Vice President"> Vice President</Option>
+                <Option value="Content Writer"> Content Writer</Option>
+                <Option value="Member"> Member</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+              <Button htmlType="button" onClick={onReset}>
+                Reset
+              </Button>
+            </Form.Item>
+          </Form>
+
+          </div>
+
+
+        </Col>
+        <Col className="request-table" span={24}>
+          <h2> Request list </h2>
+        </Col>
+      </Row>
     </div>
   );
 }
