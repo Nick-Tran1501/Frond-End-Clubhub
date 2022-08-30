@@ -10,6 +10,7 @@ const PostList = ({data}) => {
    {data.map(post => 
     
     <Post
+      key={post._id}
       data={post}
     />
     

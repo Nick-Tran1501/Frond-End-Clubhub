@@ -1,16 +1,15 @@
 .feedContainer{
-    height: 100vh;
+    height: 95vh;
     width: 100%;
     overflow: hidden;
     border-radius: 10px;
 }
 
 #inner{
-    width: 98.4%;
+    width: 100%;
     overflow: auto;
     height: 100%;
-    padding-right: 40px;
-    margin-left: 0.7rem;
+    padding: 10px;
 }
 
 ::-webkit-scrollbar{
