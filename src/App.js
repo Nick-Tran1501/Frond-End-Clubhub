@@ -6,10 +6,10 @@ import WelcomePage from './pages/welcome/WelcomePage';
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfilePage from './pages/profile/ProfilePage'
 import Profile from './pages/profile/ProfilePage';
-import PrivacyPage from './components/termpolicys/PrivacyPolicy'
+
 import AdminPage from './pages/admin/AdminPage';
 import { Route, Routes } from "react-router-dom"
-import PrivacyPolicy from './components/termpolicys/PrivacyPolicy';
+
 import TableComponent from './pages/admin/components/TableComponent';
 
 
