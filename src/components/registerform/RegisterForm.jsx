@@ -32,7 +32,118 @@ const Register = () => {
     retype: "",
   });
 
+  
+  // ------------Get Date value Function----------
+  const onChange = (date, dateString) => {
+    
+      setUserDetail({ ...userDetail, dob: dateString });
+
+  };
+  // --------Validate Functions----------
+
+  // ----------------Validate Fullname------
+  const checkNamelValid = (input) => {
+    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,5}$/;
+    const emptyInput = "";
+    if (!fullNameRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".FullNameWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".FullNameWarning").style.visibility = "hidden";
+
+    }
+  };
+
+  // ------------ Validate Email Function----------
+  const checkEmailValid = (input) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
+    const emptyInput = "";
+    if (!emailRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".EmailWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".EmailWarning").style.visibility = "hidden";
+
+      setUserDetail({ ...userDetail, email: input });
+    }
+  };
+
+  //-------- Validate Phone Function----------
+  const checkPhoneValid = (input) => {
+    const emailRegex = /^[0-9]{8,10}$/;
+    const emptyInput = "";
+    if (!emailRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".PhoneWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".PhoneWarning").style.visibility = "hidden";
+    }
+  };
+
+
+  // -------- Validate Password Function----------
+  const checkPasswordValid = (input) => {
+    const emptyInput = "";
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".PasswordWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".PasswordWarning").style.visibility = "hidden";
+    }
+  };
+  // -------- Validate Re-Type Password Function----------
+
+  const checkPasswordRetypeValid = () => {
+    if (userDetail.retype === userDetail.password) {
+      document.querySelector(".RetypePasswordWarning").style.visibility =
+        "hidden";
+    } else {
+      document.querySelector(".RetypePasswordWarning").style.visibility =
+        "visible";
+    }
+  };
+
+  
+
+  // -------- Validate DOB Function----------
+
+  // -------- Validate Username Function----------
+  const checkUsernamelValid = (input) => {
+    const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?:[A-Z][a-zA-Z]*)$/;
+    const emptyInput = "";
+    if (!UsernameRegex.test(input) && !emptyInput.match(input)) {
+      document.querySelector(".UsernameWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".UsernameWarning").style.visibility = "hidden";
+    }
+  };
+
+  //----------Validate Gender Function----------
+  const checkGenderlValid = (input) => {
+    const emptyInput = "";
+
+    if (!emptyInput.match(input)) {
+      document.querySelector(".GenderWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".GenderWarning").style.visibility = "hidden";
+
+      setUserDetail({ ...userDetail, gender: input });
+    }
+  };
+
+
   const handleSubmit = (e) => {
+    // -----Left Column Input -----
+    checkNamelValid(userDetail.name)
+    checkEmailValid(userDetail.email)
+    checkPhoneValid(userDetail.phone)
+    checkPasswordValid(userDetail.password)
+
+    // -----Right Column Input -----
+    checkGenderlValid(userDetail.gender)
+    checkUsernamelValid(userDetail.username)
+    checkPasswordRetypeValid()
+    
+
+    //
     e.preventDefault();
     axios({
       method: "post",
@@ -51,103 +162,6 @@ const Register = () => {
       .catch((err) => {
         console.error(err);
       });
-  };
-
-  // ------------Get Date value Function----------
-  const onChange = (date, dateString) => {
-
-    setUserDetail({ ...userDetail, dob: dateString });
-  };
-  // --------Validate Functions----------
-
-  // ----------------Validate Fullname------
-  const checkNamelValid = (input) => {
-    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,5}$/;
-    const emptyInput = "";
-    if (!fullNameRegex.test(input) && !emptyInput.match(input)) {
-      document.querySelector(".FullNameWarning").style.visibility = "visible";
-    } else {
-      document.querySelector(".FullNameWarning").style.visibility = "hidden";
-
-      setUserDetail({ ...userDetail, name: input });
-    }
-  };
-
-  // ------------ Validate Email Function----------
-  const checkEmailValid = (input) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
-    const emptyInput = "";
-    if (!emailRegex.test(input) && !emptyInput.match(input)) {
-      document.querySelector(".EmailWarning").style.visibility = "visible";
-    } else {
-      document.querySelector(".EmailWarning").style.visibility = "hidden";
-
-      setUserDetail({ ...userDetail, email: input });
-    }
-  };
-
-  // -------- Validate Password Function----------
-  const checkPasswordValid = (input) => {
-    const emptyInput = "";
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(input) && !emptyInput.match(input)) {
-      document.querySelector(".PasswordWarning").style.visibility = "visible";
-    } else {
-      document.querySelector(".PasswordWarning").style.visibility = "hidden";
-      setUserDetail({ ...userDetail, password: input });
-    }
-  };
-  // -------- Validate Re-Type Password Function----------
-
-  // const checkPasswordRetypeValid = () => {
-  //   if (userDetail.retype === userDetail.password) {
-  //     document.querySelector(".RetypePasswordWarning").style.visibility =
-  //       "hidden";
-  //   } else {
-  //     document.querySelector(".RetypePasswordWarning").style.visibility =
-  //       "visible";
-  //   }
-  // };
-
-  //-------- Validate Phone Function----------
-  const checkPhoneValid = (input) => {
-    const emailRegex = /^[0-9]{8,10}$/;
-    const emptyInput = "";
-    if (!emailRegex.test(input) && !emptyInput.match(input)) {
-      document.querySelector(".PhoneWarning").style.visibility = "visible";
-    } else {
-      document.querySelector(".PhoneWarning").style.visibility = "hidden";
-
-      setUserDetail({ ...userDetail, phone: input });
-    }
-  };
-
-  // -------- Validate DOB Function----------
-
-  // -------- Validate Username Function----------
-  const checkUsernamelValid = (input) => {
-    const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?: [A-Z][a-zA-Z]*)$/;
-    const emptyInput = "";
-    if (!UsernameRegex.test(input) && !emptyInput.match(input)) {
-      document.querySelector(".UsernameWarning").style.visibility = "visible";
-    } else {
-      document.querySelector(".UsernameWarning").style.visibility = "hidden";
-      setUserDetail({ ...userDetail, username: input });
-    }
-  };
-
-  //----------Validate Gender Function----------
-  const checkGenderlValid = (input) => {
-    const emptyInput = "";
-
-    if (!emptyInput.match(input)) {
-      document.querySelector(".GenderWarning").style.visibility = "visible";
-    } else {
-      document.querySelector(".GenderWarning").style.visibility = "hidden";
-
-      setUserDetail({ ...userDetail, gender: input });
-    }
   };
 
   return (
@@ -195,7 +209,7 @@ const Register = () => {
               <Form.Item
                 className="ItemsContainer"
                 onChange={(e) => {
-                  checkNamelValid(e.target.value);
+                  setUserDetail({...userDetail, name: e.target.value});
                 }}
               >
                 <h3
@@ -235,7 +249,7 @@ const Register = () => {
               {/* Email*/}
               <Form.Item
                 onChange={(e) => {
-                  checkEmailValid(e.target.value);
+                  setUserDetail({ ...userDetail, email: e.target.value });
                 }}
               >
                 <h3
@@ -276,7 +290,7 @@ const Register = () => {
               {/* Phone */}
               <Form.Item
                 onChange={(e) => {
-                  checkPhoneValid(e.target.value);
+                  setUserDetail({ ...userDetail, phone: e.target.value });
                 }}
               >
                 <h3
@@ -317,7 +331,7 @@ const Register = () => {
               {/* Password */}
               <Form.Item
                 onChange={(e) => {
-                  checkPasswordValid(e.target.value);
+                  setUserDetail({ ...userDetail, password: e.target.value });
                 }}
               >
                 <h3
@@ -391,6 +405,7 @@ const Register = () => {
                     textAlign: "left",
                     fontSize: "15px",
                   }}
+                  required
                 >
                   Date of Birth:
                 </h3>
@@ -405,9 +420,10 @@ const Register = () => {
                   onChange={onChange}
                   inputReadOnly={true}
                   allowClear={true}
+                  required
                 />
                 <p
-                  className="PasswordWarning"
+                  className="DateWarning"
                   style={{
                     color: "red",
                     fontSize: "12px",
@@ -464,7 +480,7 @@ const Register = () => {
               {/* Username */}
               <Form.Item
                 onChange={(e) => {
-                  checkUsernamelValid(e.target.value);
+                  setUserDetail({ ...userDetail, username: e.target.value });
                 }}
               >
                 <h3
@@ -504,15 +520,9 @@ const Register = () => {
 
               {/* Re-type Password  */}
               <Form.Item
-              // onChange={(e) => {
-              //   setUserDetail({ ...userDetail, retype: e.target.value });
-              //   if(e.target.value === userDetail.password){
-              //     document.querySelector(".RetypePasswordWarning").style.visibility = "visible";
-              //   }
-              //   else{
-              //     document.querySelector(".RetypePasswordWarning").style.visibility = "hidden";
-              //   }
-              // }}
+                onChange={(e) => {
+                  setUserDetail({ ...userDetail, retype: e.target.value });
+                }}
               >
                 <h3
                   style={{
@@ -560,7 +570,7 @@ const Register = () => {
                     height: "1px",
                   }}
                 >
-                  {/* Error: Password Not Match */}
+                  Error: Password Not Match
                 </p>
               </Form.Item>
             </Col>

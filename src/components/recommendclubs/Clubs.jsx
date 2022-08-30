@@ -37,26 +37,19 @@ const Clubs = () => {
           >
             Together Stronger
           </p>
-
-          <div
-            className="JoinButton"
-            style={{
-              textAlign: "center",
-              marginTop:"1rem"
-            }}
-          >
-            <Button className="JoinButton" shape="round" size="medium">
-              <p
-                style={{
-                  fontWeight: "bold",
-                }}
-              >
-                Join Us
-              </p>
-            </Button>
-          </div>
         </div>
       </div>
+
+      <Button className="JoinButton" shape="round" size="medium">
+        <p
+          style={{
+            fontWeight: "bold",
+          }}
+        >
+          Join Us
+        </p>
+      </Button>
+      
       <hr></hr>
     </React.Fragment>
   );

@@ -36,8 +36,8 @@ const Post = ({ data }) => {
   const handleLike = (postId) => {
     axios({
       headers: { Authorization: `Bearer ${token}` },
-      method: "post",
-      url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/like",
+      method: "get",
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${postId}/like`,
       data: {
         postId,
       },
