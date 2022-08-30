@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./CommentsBox.css";
 import { Avatar, Input, Button, notification, Space } from "antd";
 import CommentList from "../commentlist/CommentList";
@@ -44,11 +44,26 @@ const CommentsBox = ({ data, postId, userimage }) => {
       });
   };
 
+  const [userProfile,setUserProfile]=useState({})
+
+  useEffect(()=> {
+    
+      const token = localStorage.getItem('token')
+      axios.get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile",
+        {
+          headers:{'Authorization': `Bearer ${token}`}
+        }
+      )
+      .then(response => setUserProfile(response.data))
+      .catch(err => console.log(err))
+  
+  },[])
+
   return (
     <React.Fragment>
       <div className="CommentsBoxContainer">
         <div className="CommentBox">
-          <Avatar size={30} src={userimage} />
+          <Avatar size={30} src={userProfile.avatarUrl} />
           <TextArea
             rows={5}
             maxLength={500}
