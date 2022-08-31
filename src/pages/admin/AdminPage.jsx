@@ -76,7 +76,7 @@ function AdminPage() {
               </pre>
             </Paragraph>
         </Col>
-
+        
       </Row>
       <Row className="header-container">
         <Col className="header-body" span={6}>
