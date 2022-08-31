@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import "../ProfilePage.css";
-import Feed from '../../../components/feed/Feeds';
+import "../../pages/profile/ProfilePage.css";
+
 import "antd/dist/antd.css";
 import { Modal } from 'antd';
-import { UserAddOutlined } from '@ant-design/icons';
 
-export default function ProfilePost() {
+
+export default function PostUpload() {
     const [post, setPost] = useState(false);
     const [postImg, setPostImg] = useState();
 
@@ -32,7 +32,7 @@ export default function ProfilePost() {
       setPost(false);
     };
     return (
-        <div className='main-post'>
+        <div className='main-home'>
             <div className='postInput mpost'>
                 <form className="account">
                     <div className="profile_picture">
@@ -75,9 +75,6 @@ export default function ProfilePost() {
                     </div>
                 </form>
             </Modal>
-
-            {/* POSTS */}
-            <Feed />
         </div>
     )
 }

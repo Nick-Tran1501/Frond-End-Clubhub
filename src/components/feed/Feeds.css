@@ -10,7 +10,8 @@
     width: 100%;
     overflow: auto;
     height: 100%;
-    padding: 10px;
+    padding: 7px;
+    margin-left: 0.3rem;
 }
 
 ::-webkit-scrollbar{

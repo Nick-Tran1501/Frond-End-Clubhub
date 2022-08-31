@@ -26,4 +26,10 @@ body{
     width: 85%;
 }
 
-
+@media (max-width: 993px) {
+    .hContainer {
+      width: 95%;
+      margin: auto;
+      overflow: hidden;
+    }
+}

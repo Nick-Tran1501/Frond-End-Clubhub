@@ -135,7 +135,7 @@ const ProfileSide = ({page, changePage}) => {
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
-                        height="6rem"
+                        // height="6rem"
                         src={require("../../../image/Image1.jpg")}
                         className="Images img"
                     />
@@ -143,7 +143,7 @@ const ProfileSide = ({page, changePage}) => {
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
-                        height="6rem"
+                        // height="6rem"
                         src={require("../../../image/Image1.jpg")}
                         className="Images img"
                     />
@@ -151,7 +151,7 @@ const ProfileSide = ({page, changePage}) => {
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
-                        height="6rem"
+                        // height="6rem"
                         src={require("../../../image/Image1.jpg")}
                         className="Images img"
                     />
@@ -159,7 +159,7 @@ const ProfileSide = ({page, changePage}) => {
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
-                        height="6rem"
+                        // height="6rem"
                         src={require("../../../image/Image2.jpg")}
                         className="Images img"
                     />
@@ -167,7 +167,7 @@ const ProfileSide = ({page, changePage}) => {
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
-                        height="6rem"
+                        // height="6rem"
                         src={require("../../../image/Image3.jpg")}
                         className="Images img"
                     />
@@ -175,7 +175,7 @@ const ProfileSide = ({page, changePage}) => {
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
-                        height="6rem"
+                        // height="6rem"
                         src={require("../../../image/Image3.jpg")}
                         className="Images img"
                     />
