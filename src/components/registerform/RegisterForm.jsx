@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Col, Row } from "antd";
 import PrivacyForm from "../termpolicys/PrivacyForm";
+import TermForm from "../termpolicys/TermForm";
 
 const { Option } = Select;
 
@@ -599,14 +600,14 @@ const Register = () => {
               Term Condition
             </span>
             <Modal
-              title="Privacy Policy"
+              title="Term & Condition"
               centered
               visible={modal1Visible}
               onOk={() => setModal1Visible(false)}
               onCancel={() => setModal1Visible(false)}
               width={1000}
             >
-              <PrivacyForm />
+              <TermForm/>
             </Modal>
           </Checkbox>
 
