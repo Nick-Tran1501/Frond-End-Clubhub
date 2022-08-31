@@ -8,6 +8,20 @@ const ProfileBg = ({page, changePage}) => {
 
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
+    const [cover, setCover] = useState();
+    const [avatar, setAvatar] = useState();
+
+    useEffect(() => {
+        return () => {
+            cover && URL.revokeObjectURL(cover)
+        }
+    }, [cover])
+
+    useEffect(() => {
+        return () => {
+            avatar && URL.revokeObjectURL(avatar)
+        }
+    }, [avatar])
 
     const showModal1 = () => {
       setModal1(true);
@@ -28,15 +42,25 @@ const ProfileBg = ({page, changePage}) => {
       setModal2(false);
     };
 
-    const handleFile = (event) => {
+    const handleCover = (event) => {
         const file = event.target.files[0];
+        file.preview = URL.createObjectURL(file)
+        setCover(file)
+        console.log(file)
+    }
+
+    const handleAvatar = (event) => {
+        const file = event.target.files[0];
+        file.preview = URL.createObjectURL(file)
+        setAvatar(file)
         console.log(file)
     }
 
   return (
     <div>
         {/* <!-- profile-cover --> */}
-        <div className="ab bg-image">
+        <div className="ab bg-image" style={cover && {backgroundImage: `url(${cover.preview})`}}>
+            {/* <img src="image/hall.jpg" alt="" /> */}
             <button className="btn btn-sm edit_cover_btn" onClick={showModal1}>Edit cover image</button>
             <Modal title="Change cover image" visible={modal1} onOk={handleOk} onCancel={handleCancel}>
                 <form className="upload_image" id="post_form">
@@ -48,11 +72,16 @@ const ProfileBg = ({page, changePage}) => {
                     </div>
 
                     <div className="file_img">
-                        <label htmlFor="file_image">
-                            <span><i className="fa-regular fa-image"></i></span>
-                            <p>Add an image</p>
-                        </label>
-                        <input type="file" name="file_image" id="file_image" onChange={handleFile}/>
+                        {cover ? 
+                            <label htmlFor="cover">
+                                <img src={cover.preview} alt="post image" className='post_img' />
+                            </label> :
+                            <label htmlFor="cover">
+                                <span><i className="fa-regular fa-image"></i></span>
+                                <p>Add an image</p>
+                            </label>
+                        }
+                        <input type="file" name="cover" id="cover" onChange={handleCover}/>
                     </div>
                 </form>
             </Modal>
@@ -61,7 +90,7 @@ const ProfileBg = ({page, changePage}) => {
         <div className="ab profile-info">
             <div className="pd-left">
                 <div className="pdl-row">
-                    <img className="pfi-img" onClick={showModal2} src="image/avatar.png" alt="profile-image" id="profile_btn" />
+                    <img className="pfi-img" onClick={showModal2} src={avatar ? avatar.preview : "image/avatar.png"} alt="profile-image" id="profile_btn" />
                     <div>
                         <h1>CLUB NAME</h1>
                         <p>Description</p>
@@ -84,11 +113,16 @@ const ProfileBg = ({page, changePage}) => {
                             </div>
 
                             <div className="file_img">
-                                <label htmlFor="file_image">
-                                    <span><i className="fa-regular fa-image"></i></span>
-                                    <p>Add an image</p>
-                                </label>
-                                <input type="file" name="file_image" id="file_image" />
+                                {avatar ? 
+                                    <label htmlFor="avatar">
+                                        <img src={avatar.preview} alt="post image" className='post_img' />
+                                    </label> :
+                                    <label htmlFor="avatar">
+                                        <span><i className="fa-regular fa-image"></i></span>
+                                        <p>Add an image</p>
+                                    </label>
+                                }
+                                <input type="file" name="avatar" id="avatar" onChange={handleAvatar} />
                             </div>
                         </form>
                     </Modal>

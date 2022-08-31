@@ -6,6 +6,7 @@ import Rightbars from "../../components/rightbar/RightBars";
 import "./HomePage.css";
 import "antd/dist/antd.css";
 import { Col, Row} from "antd";
+import PostUpload from "../../components/postUpload/PostUpload";
 
 const Home = () => {
   
@@ -33,6 +34,7 @@ const Home = () => {
           </Col>
 
           <Col xs={24} sm={24} md={18} lg={14} xl={14} style={{marginTop: "2rem"}}>
+            <PostUpload />
             <Feed/>
           </Col>
 

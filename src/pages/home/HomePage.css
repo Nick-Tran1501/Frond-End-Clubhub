@@ -11,12 +11,14 @@
 body{
     font-family: "Noto Sans", cursive;
     font-weight: 600;
+    
 }
 
 .homeContainer {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    background-color: #F9F2ED;
 }
 
 .hContainer {
@@ -24,4 +26,10 @@ body{
     width: 85%;
 }
 
-
+@media (max-width: 993px) {
+    .hContainer {
+      width: 95%;
+      margin: auto;
+      overflow: hidden;
+    }
+}

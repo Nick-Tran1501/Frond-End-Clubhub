@@ -1,16 +1,22 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "antd/dist/antd.min.css";
-
+import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import "./Clubs.css";
 
-const Clubs = () => {
+const Clubs = ({id,name,slogan, logoUrl}) => {
+  const navigate = useNavigate();
+  const getClubId = () =>{
+    localStorage.setItem("clubId",id);
+    navigate("/profile")
+  }
+
   return (
     <React.Fragment>
       <div className="ClubContainer">
         <button className="ButtonImage">
           <img
-            src={require("../../image/Image1.jpg")}
+            src={logoUrl}
             alt="logo"
             width="100%"
             height="55px"
@@ -27,7 +33,7 @@ const Clubs = () => {
               marginBottom:"0"
             }}
           >
-            Football SGS Club
+            {name}
           </p>
           <p
             style={{
@@ -35,12 +41,12 @@ const Clubs = () => {
               opacity: "0.6",
             }}
           >
-            Together Stronger
+            {slogan}
           </p>
         </div>
       </div>
 
-      <Button className="JoinButton" shape="round" size="medium">
+      <Button className="JoinButton" shape="round" size="medium" onClick={()=>{getClubId()}}>
         <p
           style={{
             fontWeight: "bold",
