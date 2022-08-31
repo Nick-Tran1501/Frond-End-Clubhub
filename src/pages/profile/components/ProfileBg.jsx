@@ -13,8 +13,9 @@ const ProfileBg = ({
   slogan,
   backgroundUrl,
 }) => {
-  const [modal1, setModal1] = useState(false);
-  const [modal2, setModal2] = useState(false);
+  
+ const [modal1, setModal1] = useState(false);
+ const [modal2, setModal2] = useState(false);
 
   const showModal1 = () => {
     setModal1(true);
@@ -30,8 +31,7 @@ const ProfileBg = ({
     console.log(event.target.files[0]);
   };
 
-    const [modal1, setModal1] = useState(false);
-    const [modal2, setModal2] = useState(false);
+  
     const [cover, setCover] = useState();
     const [avatar, setAvatar] = useState();
 
@@ -52,8 +52,6 @@ const ProfileBg = ({
     setModal2(false);
   };
 
-  
-  
 
   const [url,setUrl] = useState({});
 
@@ -90,32 +88,6 @@ const ProfileBg = ({
 console.log(url)
   return (
     <div>
-
-      {/* <!-- profile-cover --> */}
-      <div
-        className="ab bg-image"
-        style={{
-          backgroundImage: `url(${backgroundUrl})`,
-        }}
-      >
-        <button className="btn btn-sm edit_cover_btn" onClick={showModal1}>
-          Edit cover image
-        </button>
-        <Modal
-          title="Change cover image"
-          visible={modal1}
-          onOk={uploadImage}
-          onCancel={handleCancel}
-        >
-          <form className="upload_image" id="post_form">
-
-            <div className="file_img">
-              <label htmlFor="file_image">
-                <span>
-                  <i className="fa-regular fa-image"></i>
-                </span>
-                <p>Add an image</p>
-
         {/* <!-- profile-cover --> */}
         <div className="ab bg-image" style={cover && {backgroundImage: `url(${cover.preview})`}}>
             {/* <img src="image/hall.jpg" alt="" /> */}
@@ -144,7 +116,10 @@ console.log(url)
                 </form>
             </Modal>
         </div>
+
+        <div>
         {/* <!-- profile-info --> */}
+        <Modal>
         <div className="ab profile-info">
             <div className="pd-left">
                 <div className="pdl-row">
@@ -162,7 +137,8 @@ console.log(url)
                     </div>
 
 
-              </label>
+              </div>
+              
               <input
                 type="file"
                 name="file_image"
@@ -174,78 +150,19 @@ console.log(url)
               />
               <img src={url.name} alt="background" />
             </div>
-          </form>
-
-        </Modal>
-      </div>
-      {/* <!-- profile-info --> */}
-      <div className="ab profile-info">
-        <div className="pd-left">
-          <div className="pdl-row">
-            <img
-              className="pfi-img"
-              onClick={showModal2}
-              src={logoUrl}
-              alt="profile"
-              id="profile_btn"
-            />
-            <div>
-              <h1>{name}</h1>
-              <p>{description}</p>
-              <p>{slogan}</p>
             </div>
 
-
-            <Modal
-              title="Change profile image"
-              visible={modal2}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <form className="upload_image" id="post_form">
-                <div className="user_infor">
-                  <div className="profile_picture">
-                    <img src="image/default_avata_girl.png" alt="profile" />
-                  </div>
-                  <p>Doraemon</p>
-
-                            <div className="file_img">
-                                {avatar ? 
-                                    <label htmlFor="avatar">
-                                        <img src={avatar.preview} alt="post image" className='post_img' />
-                                    </label> :
-                                    <label htmlFor="avatar">
-                                        <span><i className="fa-regular fa-image"></i></span>
-                                        <p>Add an image</p>
-                                    </label>
-                                }
-                                <input type="file" name="avatar" id="avatar" onChange={handleAvatar} />
-                            </div>
-                        </form>
-                    </Modal>
-
-                </div>
-
-                <div className="file_img">
-                  <label htmlFor="file_image">
-                    <span>
-                      <i className="fa-regular fa-image"></i>
-                    </span>
-                    <p>Add an image</p>
-                  </label>
-                  <input type="file" name="file_image" id="file_image" />
-                </div>
-              </form>
-            </Modal>
-          </div>
-
+        </Modal>
+        </div>
+ 
+        <div>
           <div id="edit_profile_btn" className="pdl-row">
             <button className="btn" onClick={showModal2}>
               Edit Profile
             </button>
           </div>
-        </div>
-
+         </div>
+        
         <div className="pd-right">
           <ul className="link">
             <li>
@@ -291,7 +208,8 @@ console.log(url)
           </ul>
         </div>
       </div>
-    </div>
+    
+    
   );
 };
 

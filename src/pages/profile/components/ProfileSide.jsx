@@ -24,44 +24,43 @@ const ProfileSide = ({ page, changePage, name, slogan, email }) => {
         <div className="ml intro">
             <div className="it it-row1">
                 <h3>Intro</h3>
-                <a onClick={showModal3}>Edit</a>
+                <a>Edit</a>
             </div>
             <div className="it it-row2">
                 <div className="p-row">
                     <i className="fa-solid fa-graduation-cap"></i>
                     <div className="p-note">
-                    <p>Graduate at {info.name}</p>
+                    <p>Graduate at</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-briefcase-fill"></i>
                     <div className="p-note">
-                    <p>Work in {info.location}</p>
+                    <p>Work in </p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-house-fill"></i>
                     <div className="p-note">
-                    <p>Live in {info.president}</p>
+                    <p>Live in </p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-envelope-fill"></i>
                     <div className="p-note">
-                    <p>{info.email}</p>
+                    <p></p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-blockquote-left"></i>
                     <div className="p-note">
                     <p>
-                        "{info.description}"
                     </p>
                     </div>
                 </div>
             </div>
-            <Modal title="Change personal information" visible={modal3} onOk={handleOk} onCancel={handleCancel}>
-                <form onSubmit={handleSubmit} className="upload_image" id="post_info">
+            <Modal title="Change personal information" >
+                <form className="upload_image" id="post_info">
                     <div className="user_infor">
                         <div className="profile_picture">
                             <img src="image/default_avata_girl.png" alt="profile" />
@@ -71,15 +70,15 @@ const ProfileSide = ({ page, changePage, name, slogan, email }) => {
 
                     <div className='inputFields'>
                         <h5>Club Name:</h5>
-                        <input type="text" placeholder='Enter club name' name="name" onChange={handleChange} value={info.name} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
+                        <input type="text" placeholder='Enter club name' name="name"  className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
                         <h5>Location:</h5>
-                        <input type="text" placeholder='Enter location' name="location" onChange={handleChange} value={info.location} className="inputField" />
+                        <input type="text" placeholder='Enter location' name="location"  className="inputField" />
                         <h5>President:</h5>
-                        <input type="text" placeholder='Enter president' name="president" onChange={handleChange} value={info.president} className="inputField" />
+                        <input type="text" placeholder='Enter president' name="president" className="inputField" />
                         <h5>Email:</h5>
-                        <input type="text" placeholder='Email' name="email" onChange={handleChange} value={info.email} className="inputField" />
+                        <input type="text" placeholder='Email' name="email" className="inputField" />
                         <h5>Description:</h5>
-                        <input type="text" placeholder='Enter your description' name="description" onChange={handleChange} value={info.description} className="inputField" />
+                        <input type="text" placeholder='Enter your description' name="description"   className="inputField" />
                     </div>
                     
                 </form>
@@ -268,7 +267,8 @@ const ProfileSide = ({ page, changePage, name, slogan, email }) => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
-export default ProfileSide;
+export default ProfileSide
