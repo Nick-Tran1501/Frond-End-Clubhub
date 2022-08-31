@@ -1,37 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
-import axios from "axios";
-import { Button, Modal, Upload } from "antd";
-import { UploadOutlined} from "@ant-design/icons"
-const ProfileBg = ({
-  page,
-  changePage,
-  name,
-  logoUrl,
-  description,
-  slogan,
-  backgroundUrl,
-}) => {
-  
- const [modal1, setModal1] = useState(false);
- const [modal2, setModal2] = useState(false);
+import { Button, Modal } from 'antd';
 
-  const showModal1 = () => {
-    setModal1(true);
-  };
 
-  const showModal2 = () => {
-    setModal2(true);
-  };
+const ProfileBg = ({page, changePage}) => {
 
-  const handleOk = (event) => {
-    setModal1(false);
-    setModal2(false);
-    console.log(event.target.files[0]);
-  };
-
-  
+    const [modal1, setModal1] = useState(false);
+    const [modal2, setModal2] = useState(false);
     const [cover, setCover] = useState();
     const [avatar, setAvatar] = useState();
 
@@ -47,13 +23,24 @@ const ProfileBg = ({
         }
     }, [avatar])
 
-  const handleCancel = () => {
-    setModal1(false);
-    setModal2(false);
-  };
+    const showModal1 = () => {
+      setModal1(true);
+    };
 
-
-  const [url,setUrl] = useState({});
+    const showModal2 = () => {
+        setModal2(true);
+    };
+  
+    const handleOk = (event) => {
+      setModal1(false);
+      setModal2(false);
+      console.log(event.target.files[0])
+    };
+  
+    const handleCancel = () => {
+      setModal1(false);
+      setModal2(false);
+    };
 
     const handleCover = (event) => {
         const file = event.target.files[0];
@@ -69,23 +56,6 @@ const ProfileBg = ({
         console.log(file)
     }
 
-  const token = localStorage.getItem('token');
-  const uploadImage = () => {
-    const formData = new FormData()
-    formData.append("background", url)
-    console.log("dd",formData)
-    axios({
-        headers: { 'Content-Type': "multipart/form-data",
-                "Authorization": `Bearer ${token}`
-    },
-        method: 'post',
-        url: "https://rmit-club-dhyty.ondigitalocean.app/api/clubs/630de4a51d03758bef83bfdb/bg",
-        data: formData
-    })
-    .then((response) => {console.log(response)})
-    .catch((error) => {console.log(error)});
-  }
-console.log(url)
   return (
     <div>
         {/* <!-- profile-cover --> */}
@@ -116,10 +86,7 @@ console.log(url)
                 </form>
             </Modal>
         </div>
-
-        <div>
         {/* <!-- profile-info --> */}
-        <Modal>
         <div className="ab profile-info">
             <div className="pd-left">
                 <div className="pdl-row">
@@ -136,81 +103,48 @@ console.log(url)
                         </div>
                     </div>
 
+                    <Modal title="Change profile image" visible={modal2} onOk={handleOk} onCancel={handleCancel}>
+                        <form className="upload_image" id="post_form">
+                            <div className="user_infor">
+                                <div className="profile_picture">
+                                    <img src="image/default_avata_girl.png" alt="profile" />
+                                </div>
+                                <p>Doraemon</p>
+                            </div>
 
-              </div>
-              
-              <input
-                type="file"
-                name="file_image"
-                id="file_image"
-                onChange={(e) => {
-                    console.log(e.target.files[0]);
-                    setUrl(e.target.files[0]);
-                }}
-              />
-              <img src={url.name} alt="background" />
-            </div>
+                            <div className="file_img">
+                                {avatar ? 
+                                    <label htmlFor="avatar">
+                                        <img src={avatar.preview} alt="post image" className='post_img' />
+                                    </label> :
+                                    <label htmlFor="avatar">
+                                        <span><i className="fa-regular fa-image"></i></span>
+                                        <p>Add an image</p>
+                                    </label>
+                                }
+                                <input type="file" name="avatar" id="avatar" onChange={handleAvatar} />
+                            </div>
+                        </form>
+                    </Modal>
+                </div>
+                
+                <div id="edit_profile_btn" className="pdl-row">
+                    <button className="btn" onClick={showModal2}>Edit Profile</button>
+                </div>
             </div>
 
-        </Modal>
+
+            <div className="pd-right">
+                <ul className="link">
+                    <li><button onClick={() => changePage("post")} className={page === "post" ? 'profileComp active' : "profileComp"}>Post</button></li>
+                    <li><button onClick={() => changePage("intro")} className={page === "intro" ? 'profileComp active' : "profileComp"}>About</button></li>
+                    <li><button onClick={() => changePage("member")} className={page === "member" ? 'profileComp active' : "profileComp"}>Members</button></li>
+                    <li><button onClick={() => changePage("media")} className={page === "media" ? 'profileComp active' : "profileComp"}>Images</button></li>
+                </ul>
+            </div>
         </div>
- 
-        <div>
-          <div id="edit_profile_btn" className="pdl-row">
-            <button className="btn" onClick={showModal2}>
-              Edit Profile
-            </button>
-          </div>
-         </div>
-        
-        <div className="pd-right">
-          <ul className="link">
-            <li>
-              <button
-                onClick={() => changePage("post")}
-                className={
-                  page === "post" ? "profileComp active" : "profileComp"
-                }
-              >
-                Post
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => changePage("intro")}
-                className={
-                  page === "intro" ? "profileComp active" : "profileComp"
-                }
-              >
-                About
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => changePage("member")}
-                className={
-                  page === "member" ? "profileComp active" : "profileComp"
-                }
-              >
-                Members
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => changePage("media")}
-                className={
-                  page === "media" ? "profileComp active" : "profileComp"
-                }
-              >
-                Images
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    
-    
-  );
-};
+    </div>
+  )
+}
 
 export default ProfileBg;
