@@ -9,19 +9,20 @@ import "./Admin.style.css";
 import {
   Col,
   Row,
-  Input,
+  Paragraph,
+  // Input,
   Typography,
-  Table,
+  // Table,
   //   Search,
-  Form,
-  Menu,
+  // Form,
+  // Menu,
   // Dropdown,
   // Space,
-  Popconfirm,
+  // Popconfirm,
   // message,
-  Button,
-  Select,
-  Modal,
+  // Button,
+  // Select,
+  // Modal,
 } from "antd";
 
 // import commponents
@@ -29,24 +30,53 @@ import RequestClub from "./components/requestEdit/RequestEdit";
 import ClubEdit from "./components/ClubEdit/ClubEdit";
 import UserEdit from "./components/userEdit/UserEdit";
 
-
-
-
 function AdminPage() {
   const { TabPane } = Tabs;
 
   const onChange = (key) => {
-    console.log(key);
+    // console.log(key);
   };
-  const { Link } = Typography;
+
+  const { Link, Title, Paragraph } = Typography;
   // const { Search } = Input;
 
   return (
-    <div className="wrapper">
-      <Row className="title-container">
-        <Col className="title-content" span={24}>
-          <h1> Admin Page </h1>
+    <div className="admin-container">
+      <Row className="admin-header">
+        <Col className="admin-header-title" span={24}>
+          <Title
+            style={{
+              color: "white",
+            }}
+          >
+            Admin Page
+          </Title>
         </Col>
+        <Col className="admin-header-subtitle" span={24}>
+            <Title
+              level={3}
+              style={{
+                color: "white",
+              }}
+            >
+              Wellcome Le Anh Tuan
+            </Title>
+
+            <Paragraph>
+              <pre
+                style={{
+                  fontSize: "1rem",
+                  color: "white",
+                }}
+              >
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
+                exercitationem ab adipisci tempore nostrum iusto iure, itaque
+                mollitia beatae neque amet non, reiciendis quia fugit aspernatur
+                eum dolor quo provident !
+              </pre>
+            </Paragraph>
+        </Col>
+
       </Row>
       <Row className="header-container">
         <Col className="header-body" span={6}>
