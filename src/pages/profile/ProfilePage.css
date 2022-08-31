@@ -47,7 +47,7 @@ body {
 .btn {
   border: none;
   padding: 5px;
-  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%);
+  background: var(--color_primary);
   opacity: 0.8;
   color: rgb(237, 224, 224);
   border-radius: 10px;

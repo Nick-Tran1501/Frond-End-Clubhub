@@ -6,7 +6,7 @@
     flex-flow: column nowrap;
     padding: 0 1rem 0 1rem;
     gap: 1rem;
-    margin-top: 0.1rem;
+    margin-top: 10px;
 }
 
 ::-webkit-scrollbar{

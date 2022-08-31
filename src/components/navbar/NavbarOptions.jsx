@@ -10,10 +10,6 @@ const NavbarOption = ({avatar, Icon, title}) => {
        
       {Icon && <Badge count={5}> <Icon className="navIcon" /> </Badge>}
       
-      {avatar && (
-        <Avatar className='navIcon' src={avatar}/>
-      )}
-      
       <h3 className="navOption_title">{title}</h3>
     </div>
   );
