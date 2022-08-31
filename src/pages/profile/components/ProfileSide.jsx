@@ -20,6 +20,129 @@ const ProfileSide = ({ page, changePage, name, slogan, email }) => {
       <div className="ml intro">
         <div className="it it-row1">
           <h3>Introduction</h3>
+
+        <div className="ml intro">
+            <div className="it it-row1">
+                <h3>Intro</h3>
+                <a onClick={showModal3}>Edit</a>
+            </div>
+            <div className="it it-row2">
+                <div className="p-row">
+                    <i className="fa-solid fa-graduation-cap"></i>
+                    <div className="p-note">
+                    <p>Graduate at {info.name}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-briefcase-fill"></i>
+                    <div className="p-note">
+                    <p>Work in {info.location}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-house-fill"></i>
+                    <div className="p-note">
+                    <p>Live in {info.president}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-envelope-fill"></i>
+                    <div className="p-note">
+                    <p>{info.email}</p>
+                    </div>
+                </div>
+                <div className="p-row">
+                    <i className="bi bi-blockquote-left"></i>
+                    <div className="p-note">
+                    <p>
+                        "{info.description}"
+                    </p>
+                    </div>
+                </div>
+            </div>
+            <Modal title="Change personal information" visible={modal3} onOk={handleOk} onCancel={handleCancel}>
+                <form onSubmit={handleSubmit} className="upload_image" id="post_info">
+                    <div className="user_infor">
+                        <div className="profile_picture">
+                            <img src="image/default_avata_girl.png" alt="profile" />
+                        </div>
+                        <p>Doraemon</p>
+                    </div>
+
+                    <div className='inputFields'>
+                        <h5>Club Name:</h5>
+                        <input type="text" placeholder='Enter club name' name="name" onChange={handleChange} value={info.name} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
+                        <h5>Location:</h5>
+                        <input type="text" placeholder='Enter location' name="location" onChange={handleChange} value={info.location} className="inputField" />
+                        <h5>President:</h5>
+                        <input type="text" placeholder='Enter president' name="president" onChange={handleChange} value={info.president} className="inputField" />
+                        <h5>Email:</h5>
+                        <input type="text" placeholder='Email' name="email" onChange={handleChange} value={info.email} className="inputField" />
+                        <h5>Description:</h5>
+                        <input type="text" placeholder='Enter your description' name="description" onChange={handleChange} value={info.description} className="inputField" />
+                    </div>
+                    
+                </form>
+            </Modal>
+        </div>
+
+        <div className="ml media">
+            <div className="md it-row1">
+                <div className='row1-title'>
+                    <h3>Images</h3>
+                    <a onClick={() => changePage("media")}>All images</a>
+                </div>
+            </div>
+            <Row className="memGalery">
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
+                    <Image
+                        width="100%"
+                        // height="6rem"
+                        src={require("../../../image/Image1.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
+                    <Image
+                        width="100%"
+                        // height="6rem"
+                        src={require("../../../image/Image1.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
+                    <Image
+                        width="100%"
+                        // height="6rem"
+                        src={require("../../../image/Image1.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
+                    <Image
+                        width="100%"
+                        // height="6rem"
+                        src={require("../../../image/Image2.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
+                    <Image
+                        width="100%"
+                        // height="6rem"
+                        src={require("../../../image/Image3.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={8} xl={8}>
+                    <Image
+                        width="100%"
+                        // height="6rem"
+                        src={require("../../../image/Image3.jpg")}
+                        className="Images img"
+                    />
+                </Col>
+            </Row>
         </div>
         <div className="it it-row2">
           <div className="p-row">
