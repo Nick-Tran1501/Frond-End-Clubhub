@@ -33,19 +33,78 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 
-import { render } from "@testing-library/react";
-import { Tab } from "react-bootstrap";
+// import { render } from "@testing-library/react";
+// import { Tab } from "react-bootstrap";
 
 // ----------------------------------------------------------------
 
 function AdminPage() {
-  // -------- attributes --------------------------------
+  // -------- Attributes --------------------------------
   const { Link } = Typography;
   const { Search } = Input;
   const { Option } = Select;
-  const onSearch = (value) => console.log(value);
 
-  //   //  ------- Functions --------------------------------
+  // sammple all user dat api (Search student attribute)
+  const [sts, setSTs] = useState([
+    {
+      key: "objectid-1",
+      id: "s123",
+      name: "st1",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    { 
+      key: "objectid-2",
+      id: "s456",
+      name: "st2",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Member",
+    },
+    { 
+      key: "objectid-3",
+      id: "s789",
+      name: "st3",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Content Writer",
+    },
+  ]);
+
+  const [studentData, setStudentData] = useState();
+
+  const columnStudentData = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      width: "10%",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      width: "30%",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      width: "5%",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      width: "20%",
+    },
+  ];
+
+  // test
+    const [disableSubmit, setDisableSubmit] = useState(true);
+
+
+  //  ------- Functions --------------------------------
   const onChange = (pagination, filters, sorter, extra) => {
     console.log(
       "params --- ",
@@ -61,9 +120,9 @@ function AdminPage() {
   };
 
   // Table data
-
+  // sample student in club
   const sampleData = [];
-  for (let i = 0; i < 46; i++) {
+  for (let i = 0; i < 15; i++) {
     const randomNumber = parseInt(Math.random() * 1000);
     sampleData.push({
       key: i,
@@ -74,12 +133,9 @@ function AdminPage() {
       email: "student@gmail.com",
       role: "Content Writer",
     });
-  }
-  const [dataSource, setDataSource] = useState(sampleData);
-  // new code
+  };
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingStudent, setEditingStudent] = useState(null);
+  const [dataSource, setDataSource] = useState(sampleData);
 
   const columns = [
     {
@@ -90,38 +146,31 @@ function AdminPage() {
     {
       title: "Name",
       dataIndex: "name",
+      width: "20%",
     },
-
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      width: "5%",
+    },
     {
       title: "Join Date",
       dataIndex: "joinDate",
+      width: "20%",
     },
     {
       title: "Email",
       dataIndex: "email",
+      width: "20%",
     },
     {
       title: "Role",
       dataIndex: "role",
       width: "20%",
-      // render: (_, record) => (
-      //   // Test new select
-      //   <Select
-      //     defaultValue={dataSource[record.key].role}
-      //     style={{
-      //       width: "100%",
-      //     }}
-      //     onChange={handleChange}
-      //   >
-      //     <Option value="President">President</Option>
-      //     <Option value="Vice President"> Vice President</Option>
-      //     <Option value="Content Writer"> Content Writer</Option>
-      //     <Option value="Member"> Member</Option>
-      //   </Select>
-      // ),
     },
     {
       title: "Actions",
+      width: "10%",
       render: (record) => {
         return (
           <>
@@ -142,18 +191,40 @@ function AdminPage() {
     },
   ];
 
+  // Function for table ( action edit)
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
+
   // -------- CRUD Functions ---------------
-  const onAddStudent = () => {
+
+  const onSearch = (value) => {
+    if (value !== "") {
+      const result = sts.filter((student) => student.id === value);
+      if (!result[0]) {
+        console.log("Student not found");
+      } else {
+        console.log(result[0]);
+        setStudentData(result);
+        setDisableSubmit(false)
+      }
+    } else {
+      console.log("Please Input");
+    }
+  };
+
+  const onAddStudent = (studentData) => {
     const randomNumber = parseInt(Math.random() * 1000);
+    
     const newStudent = {
       key: randomNumber,
-      id: randomNumber,
-      name: `Em tuấn thứ ${randomNumber}`,
-      gender: "Male",
+      id: studentData[0].id,
+      name: studentData[0].name,
+      gender: studentData[0].gender,
       joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
+      email: studentData[0].email,
+      role: studentData[0].role,
     };
+
     setDataSource((pre) => {
       return [...pre, newStudent];
     });
@@ -204,10 +275,19 @@ function AdminPage() {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log(values);
+    // console.log(values);
+    if (studentData[0] !== ""){
+      studentData[0].role = values.Role;
+      onAddStudent(studentData);
+      console.log("Add new student to club");
+    }
+    else {
+      console.log("Student not found");
+    }
   };
 
   const onReset = () => {
+    setStudentData();
     form.resetFields();
   };
 
@@ -225,28 +305,92 @@ function AdminPage() {
       <Row className="header-container">
         <Col className="header-body" span={6}>
           <Link href="" target="_blank">
-            Back To Home Page (logo)
+            Back To Home Page
           </Link>
         </Col>
-        <Col className="header-body" span={18}>
+        {/* list search bar search club name */}
+        <Col className="" span={18}>
           <Search
             className="search-bar"
             placeholder="Input Club Name"
             size="large"
             onSearch={onSearch}
             enterButton
+            required
           />
         </Col>
       </Row>
 
-      {/* body */}
-      <Row className="club-container">
+      {/* ----------  body --------------- */}
+      <Row className="club-container"
+      >
+        {/* clubmembers table */}
         <Col className="member-table" span={24}>
+
           <h2> Club members table </h2>
           <p> Club Name: Sample Club </p>
-          <p>Total members : Number</p>
+          <p> Total members : Number </p>
 
-          <Button onClick={onAddStudent}> Add a new Student </Button>
+          <div className="search-areas">
+            {/* search bar ( search student by id) */}
+            <Search
+              className="search-bar"
+              placeholder="Input student ID"
+              size="medium"
+              onSearch={onSearch}
+              enterButton
+              required
+            />
+            {/* single student table */}
+            <Table
+              bordered
+              columns={columnStudentData}
+              dataSource={studentData}
+              size="small"
+              pagination={false}
+            />
+            {/* select role and add student */}
+            <Form
+              // {...layout}
+              form={form}
+              name="control-hooks"
+              onFinish={onFinish}
+              disabled={disableSubmit}
+            >
+              <Form.Item
+                name="Role"
+                label="Role"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Select a specific role for new student"
+                  allowClear
+                >
+                  <Option value="President">President</Option>
+                  <Option value="Vice President"> Vice President</Option>
+                  <Option value="Content Writer"> Content Writer</Option>
+                  <Option value="Member"> Member</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+              // {...tailLayout}
+              >
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+
+                <Button htmlType="button" onClick={onReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+
           <Table
             bordered
             columns={columns}
@@ -319,66 +463,13 @@ function AdminPage() {
               <Option value="Vice President"> Vice President</Option>
               <Option value="Content Writer"> Content Writer</Option>
               <Option value="Member"> Member</Option>
-
             </Select>
-
           </Modal>
         </Col>
+
+        {/* add new student */}
         <Col className="request-title" span={24}>
           <h2> Create new club page request</h2>
-          <div className="add-new-student">
-          <Form
-            {...layout}
-            form={form}
-            name="control-hooks"
-            onFinish={onFinish}
-          >
-            <Form.Item
-              name="StudentID"
-              label="Student ID"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              name="Role"
-              label="Role"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Select
-                placeholder="Select a specific role for new studetn"
-                // onChange={onGenderChange}
-                allowClear
-              >
-                <Option value="President">President</Option>
-                <Option value="Vice President"> Vice President</Option>
-                <Option value="Content Writer"> Content Writer</Option>
-                <Option value="Member"> Member</Option>
-              </Select>
-            </Form.Item>
-
-            <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-              <Button htmlType="button" onClick={onReset}>
-                Reset
-              </Button>
-            </Form.Item>
-          </Form>
-
-          </div>
-
-
         </Col>
         <Col className="request-table" span={24}>
           <h2> Request list </h2>
