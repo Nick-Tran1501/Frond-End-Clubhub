@@ -588,7 +588,7 @@ const Register = () => {
               visible={modal2Visible}
               onOk={() => setModal2Visible(false)}
               onCancel={() => setModal2Visible(false)}
-              style={{}}
+              width={1000}
             >
               <PrivacyForm />
             </Modal>
@@ -604,7 +604,7 @@ const Register = () => {
               visible={modal1Visible}
               onOk={() => setModal1Visible(false)}
               onCancel={() => setModal1Visible(false)}
-              style={{}}
+              width={1000}
             >
               <PrivacyForm />
             </Modal>
