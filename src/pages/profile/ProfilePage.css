@@ -66,7 +66,7 @@ body {
 /* Cover-image */
 .bg-image {
   height: 30vh;
-  background-image: url("../../image/hall.jpg");
+  
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
