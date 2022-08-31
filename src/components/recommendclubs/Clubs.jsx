@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "antd/dist/antd.min.css";
-
+import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import "./Clubs.css";
 
-const Clubs = ({name,slogan, logoUrl}) => {
-
+const Clubs = ({id,name,slogan, logoUrl}) => {
+  const navigate = useNavigate();
+  const getClubId = () =>{
+    localStorage.setItem("clubId",id);
+    navigate("/profile")
+  }
 
   return (
     <React.Fragment>
@@ -42,7 +46,7 @@ const Clubs = ({name,slogan, logoUrl}) => {
         </div>
       </div>
 
-      <Button className="JoinButton" shape="round" size="medium">
+      <Button className="JoinButton" shape="round" size="medium" onClick={()=>{getClubId()}}>
         <p
           style={{
             fontWeight: "bold",
