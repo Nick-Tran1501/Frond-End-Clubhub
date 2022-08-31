@@ -16,7 +16,7 @@ function PrivacyForm() {
 
   return (
     <div className='privacyContainer'>
-            {text}
+        <pre> {text} </pre>   
     </div>
   )
 }

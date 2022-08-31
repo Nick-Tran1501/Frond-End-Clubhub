@@ -4,13 +4,15 @@ import "antd/dist/antd.min.css";
 import { Button } from "antd";
 import "./Clubs.css";
 
-const Clubs = () => {
+const Clubs = ({name,slogan, logoUrl}) => {
+
+
   return (
     <React.Fragment>
       <div className="ClubContainer">
         <button className="ButtonImage">
           <img
-            src={require("../../image/Image1.jpg")}
+            src={logoUrl}
             alt="logo"
             width="100%"
             height="55px"
@@ -27,7 +29,7 @@ const Clubs = () => {
               marginBottom:"0"
             }}
           >
-            Football SGS Club
+            {name}
           </p>
           <p
             style={{
@@ -35,7 +37,7 @@ const Clubs = () => {
               opacity: "0.6",
             }}
           >
-            Together Stronger
+            {slogan}
           </p>
         </div>
       </div>
