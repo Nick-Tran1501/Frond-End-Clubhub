@@ -1,0 +1,50 @@
+
+.header-container{
+    background-color:blanchedalmond;
+    height: 10vh;
+}
+
+.title-container {
+    background-color: black;
+    text-align: center;
+}
+
+.title-content h1 {
+    color: white;
+}
+
+.header-body { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .search-bar {
+    padding: 0px 10px;
+    width: 70%;
+    height: 50%;
+} */
+
+/* css body */
+.club-container {
+    height: 90vh;
+}
+
+.member-table{
+    background-color: greenyellow;
+}
+
+.member-title {
+    background-color: red;
+    height: 5vh;
+}
+
+.members-table {
+    background-color: aqua;
+}
+
+.request-title {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+}
