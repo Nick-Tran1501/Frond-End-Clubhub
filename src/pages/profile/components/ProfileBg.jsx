@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
 import { Button, Modal, Image } from "antd";
 import axios from "axios";
 import { PictureOutlined } from "@ant-design/icons";
-import collapseMotion from "antd/lib/_util/motion";
-const ProfileBg = ({
+const ProfileBg =({
+    clubId,
   page,
   changePage,
-  name,
-  logoUrl,
-  description,
-  slogan,
-  backgroundUrl,
+//   name,
+//   logoUrl,
+//   description,
+//   slogan,
+//   backgroundUrl,
 }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [avatar, setAvatar] = useState();
   const [background, setBackground] = useState();
-  const [reRender, setReRender] = useState(0);
-    console.log("ff",backgroundUrl);
-  //API
+  // Post API
   const token = localStorage.getItem("token");
   const uploadBackground = () => {
     const formData = new FormData();
@@ -32,18 +29,52 @@ const ProfileBg = ({
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
-      method: "post",
+      method: "put",
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/630de4a51d03758bef83bfdb/bg`,
       data: formData,
     })
       .then((response) => {
-        setBackground(response.data.backgroundUrl)
+        setClub({...club, backgroundUrl: response.data.backgroundUrl});   
+        setBackground(response.data.backgroundUrl);
         console.log(response.data.backgroundUrl);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+
+  //Get Api
+  const [club, setClub] = useState({
+    name: "",
+    logoUrl: "",
+    description: "",
+    slogan: "",
+    email: "",
+    backgroundUrl: "",
+  });
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
+    })
+      .then((res) => {
+        console.log(res.data);
+        setClub({
+          ...club,
+          name: res.data.name,
+          logoUrl: res.data.logoUrl,
+          description: res.data.description,
+          slogan: res.data.slogan,
+          email: res.data.email,
+          backgroundUrl: res.data.backgroundUrl
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },[]);
+
 
   useEffect(() => {
     return () => {
@@ -64,7 +95,6 @@ const ProfileBg = ({
     setModal1(false);
     setModal2(false);
     uploadBackground();
-    setReRender(reRender+1) 
   };
 
   const handleCancel = () => {
@@ -85,7 +115,7 @@ const ProfileBg = ({
     setAvatar(file);
     console.log(file);
   };
-  console.log("gigi", reRender);
+
 
   return (
     <div>
@@ -94,7 +124,8 @@ const ProfileBg = ({
         <Image
         className="backgroundImage"
           width="100%"
-          src={backgroundUrl}
+        
+          src={`${club.backgroundUrl}?${new Date().getTime()}`}
           style={{
             width: "100%",
             zIndex: "0",
@@ -102,7 +133,6 @@ const ProfileBg = ({
             height: "29vh",
           }}
         />
-
         <Button
           className="btn btn-sm edit_cover_btn"
           shape="circle"
@@ -126,9 +156,9 @@ const ProfileBg = ({
           <form className="upload_image" id="post_form">
             <div className="user_infor">
               <div className="profile_picture">
-                <img src={logoUrl} alt="profile" />
+                <img src={club.logoUrl} alt="profile" />
               </div>
-              <p>{name}</p>
+              <p>{club.name}</p>
             </div>
 
             <div className="file_img">
@@ -165,14 +195,14 @@ const ProfileBg = ({
             <img
               className="pfi-img"
               onClick={showModal2}
-              src={logoUrl}
+              src={club.logoUrl}
               alt="profile"
               id="profile_btn"
             />
             <div>
-              <h1>{name}</h1>
-              <p>{description}</p>
-              <p>{slogan}</p>
+              <h1>{club.name}</h1>
+              <p>{club.description}</p>
+              <p>{club.slogan}</p>
             </div>
 
             <Modal

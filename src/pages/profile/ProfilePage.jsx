@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./ProfilePage.css";
 import Navbar from "../../components/navbar/NavBars";
-import Footer from "../../components/footer/Footers";
-import Sidebar from "../../components/sidebar/Sidebars";
 import "antd/dist/antd.css";
 import ProfileBg from "./components/ProfileBg";
-import { Col, Row, Layout } from "antd";
+import { Col, Row} from "antd";
 import ProfileIntro from "./components/ProfileIntro";
 import ProfileMember from "./components/ProfileMember";
 import ProfileMedia from "./components/ProfileMedia";
@@ -65,13 +63,14 @@ const Profile = () => {
         <Row>
           <Col span={24}>
             <ProfileBg
-              page={page}
-              changePage={changePage}
-              name={club.name}
-              logoUrl={club.logoUrl}
-              description={club.description}
-              slogan={club.slogan}
-              backgroundUrl={club.backgroundUrl}
+              clubId={clubId}
+              // page={page}
+              // changePage={changePage}
+              // name={club.name}
+              // logoUrl={club.logoUrl}
+              // description={club.description}
+              // slogan={club.slogan}
+              // backgroundUrl={club.backgroundUrl}
             />
           </Col>
         </Row>
@@ -81,6 +80,7 @@ const Profile = () => {
           <Row className="main-content">
             <Col xs={24} sm={24} md={7} lg={7} xl={7}>
               <ProfileSide 
+
                 page={page} 
                 changePage={changePage}
                 name={club.name}
