@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
-import { Button, Modal } from "antd";
+import { Button, Modal, Image } from "antd";
 import axios from "axios";
-
+import { PictureOutlined } from "@ant-design/icons";
+import collapseMotion from "antd/lib/_util/motion";
 const ProfileBg = ({
   page,
   changePage,
@@ -15,26 +17,34 @@ const ProfileBg = ({
 }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
-  const [cover, setCover] = useState();
+  const [cover, setCover] = useState("");
   const [avatar, setAvatar] = useState();
+  const [background, setBackground] = useState("");
+  const [reRender, setReRender] = useState(0);
 
   //API
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   const uploadBackground = () => {
     const formData = new FormData();
-    formData.append("background", cover);
-    console.log(formData);
-    const token = localStorage.getItem("token");
+    formData.append("background", background);
+
     axios({
       headers: {
         "Content-Type": "multipart/form-data",
-        Athourization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       method: "post",
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/630de4a51d03758bef83bfdb/bg`,
       data: formData,
     })
       .then((response) => {
-        console.log(response);
+        console.log(response.data.backgroundUrl);
+        setCover(background);
+        if (response.status === 200) {
+            setReRender(reRender+1)
+          document.querySelector(".backgroundImage").src = `${response.data.backgroundUrl}`;
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +56,7 @@ const ProfileBg = ({
       cover && URL.revokeObjectURL(cover);
     };
   }, [cover]);
-  console.log(cover);
+
   useEffect(() => {
     return () => {
       avatar && URL.revokeObjectURL(avatar);
@@ -75,7 +85,7 @@ const ProfileBg = ({
   const handleCover = (event) => {
     const file = event.target.files[0];
     file.preview = URL.createObjectURL(file);
-    setCover(file);
+    setBackground(file);
     console.log(file);
   };
 
@@ -85,18 +95,38 @@ const ProfileBg = ({
     setAvatar(file);
     console.log(file);
   };
+  console.log("gigi", reRender);
 
   return (
     <div>
       {/* <!-- profile-cover --> */}
-      <div
-        className="ab bg-image"
-        style={cover && { backgroundImage: `url(${cover.preview})` }}
-      >
-        {/* <img src="image/hall.jpg" alt="" /> */}
-        <button className="btn btn-sm edit_cover_btn" onClick={showModal1}>
-          Edit cover image
-        </button>
+      <div className="ab bg-image">
+        <Image
+        className="backgroundImage"
+          width={1000}
+          src={backgroundUrl}
+          style={{
+            width: "100%",
+            zIndex: "0",
+            objectFit: "cover",
+            height: "29vh",
+          }}
+        />
+
+        <Button
+          className="btn btn-sm edit_cover_btn"
+          shape="circle"
+          icon={
+            <PictureOutlined
+              style={{
+                fontSize: "25px",
+              }}
+            />
+          }
+          size="medium"
+          onClick={showModal1}
+        />
+
         <Modal
           title="Change cover image"
           visible={modal1}
@@ -112,11 +142,11 @@ const ProfileBg = ({
             </div>
 
             <div className="file_img">
-              {cover ? (
+              {background ? (
                 <label htmlFor="cover">
                   <img
-                    src={cover.preview}
-                    alt="post image"
+                    src={background.preview}
+                    alt="post"
                     className="post_img"
                   />
                 </label>

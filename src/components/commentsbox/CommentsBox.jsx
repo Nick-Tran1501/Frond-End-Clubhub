@@ -65,7 +65,7 @@ const CommentsBox = ({ data, postId, userimage }) => {
         <div className="CommentBox">
           <Avatar size={30} src={userProfile.avatarUrl} />
           <TextArea
-            rows={5}
+            rows={2}
             maxLength={500}
             onChange={(e) => {
               setContents(e.target.value);

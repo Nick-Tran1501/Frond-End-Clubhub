@@ -4,21 +4,16 @@
   display: flex;
   flex-flow: column nowrap;
   height: auto;
-  padding: 0.5rem;
-  gap: 1rem;
+  padding: 0.2rem;  
 }
 .Comment{
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  gap: 1rem;
+  gap:1rem;
 }
 
-.CommentOwner{
-  font-size: 15px;
-  font-family: 'Lato', sans-serif;
 
-}
 
 .UserComment{
   border-radius: 10px ;
@@ -29,11 +24,21 @@
   text-align: justify;
   display: flex;
   flex-flow: column nowrap;
+  height: auto;
 }
 
-.CommentTime{
+
+.CommentOwner{
+  font-family: 'Lato', sans-serif;
+  height: 1.5rem;
   display: flex;
-  justify-content: flex-end;
-  opacity: 0.6;
-  font-size: 11px;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  flex-basis: 50%;
+  gap: 1rem;
+}
+
+.CommentContent{
+  display: flex;
+  flex-basis: 50%;
 }
