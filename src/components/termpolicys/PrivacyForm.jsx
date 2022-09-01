@@ -4,7 +4,7 @@ import PrivacyText from "./PrivacyPolicy.txt";
 
 
 
-function PrivacyForm() {
+const PrivacyForm = () => {
 
     const [text, setText] = useState();
 

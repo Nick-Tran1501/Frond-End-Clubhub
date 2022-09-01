@@ -12,6 +12,7 @@ const RecommendClub = () => {
 
   const [clubInfo,setClubInfo] = useState([
     {
+      id:"",
       name:"",
       slogan:"",
       logoUrl:""
@@ -40,7 +41,7 @@ const RecommendClub = () => {
         {clubInfo.map((club) => {
           return(
 
-            <Clubs name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
+            <Clubs id={club._id} name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
           )
         })}
 
@@ -54,7 +55,6 @@ const RecommendClub = () => {
           <ArrowRightOutlined 
             size="small"
             className="ViewMoreIcon"
-          
           />
         </Button>
       </div>
