@@ -11,7 +11,7 @@ function RequestClub() {
       <Result
         style={{
           backgroundColor: 'white',
-          height: '70vh',
+          height: "100%"
         }}
         icon={<SmileOutlined />}
         title="Great, you have done all the request!"

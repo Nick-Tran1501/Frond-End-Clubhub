@@ -28,6 +28,8 @@ function App() {
           
       {/* Tuan's area ---- command if you want do not delete it*/}
             <AdminPage />
+            {/* <LoginPage /> */}
+            {/* <HomePage /> */}
       {/* -------------------------------------------------------- */}
 
     </div>
