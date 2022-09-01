@@ -17,14 +17,12 @@ const ProfileBg = ({
 }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
-  const [cover, setCover] = useState("");
   const [avatar, setAvatar] = useState();
-  const [background, setBackground] = useState("");
+  const [background, setBackground] = useState();
   const [reRender, setReRender] = useState(0);
-
+    console.log("ff",backgroundUrl);
   //API
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
   const uploadBackground = () => {
     const formData = new FormData();
     formData.append("background", background);
@@ -39,23 +37,13 @@ const ProfileBg = ({
       data: formData,
     })
       .then((response) => {
+        setBackground(response.data.backgroundUrl)
         console.log(response.data.backgroundUrl);
-        setCover(background);
-        if (response.status === 200) {
-            setReRender(reRender+1)
-          document.querySelector(".backgroundImage").src = `${response.data.backgroundUrl}`;
-        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    return () => {
-      cover && URL.revokeObjectURL(cover);
-    };
-  }, [cover]);
 
   useEffect(() => {
     return () => {
@@ -71,10 +59,12 @@ const ProfileBg = ({
     setModal2(true);
   };
 
-  const handleOk = (event) => {
+  const handleOk = (e) => {
+    e.preventDefault();
     setModal1(false);
     setModal2(false);
     uploadBackground();
+    setReRender(reRender+1) 
   };
 
   const handleCancel = () => {
@@ -103,7 +93,7 @@ const ProfileBg = ({
       <div className="ab bg-image">
         <Image
         className="backgroundImage"
-          width={1000}
+          width="100%"
           src={backgroundUrl}
           style={{
             width: "100%",
@@ -130,7 +120,7 @@ const ProfileBg = ({
         <Modal
           title="Change cover image"
           visible={modal1}
-          onOk={handleOk}
+          onOk={(e)=>{handleOk(e)}}
           onCancel={handleCancel}
         >
           <form className="upload_image" id="post_form">
