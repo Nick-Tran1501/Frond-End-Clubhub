@@ -12,7 +12,7 @@ import {
   PageHeader,
   Statistic,
   Tag,
-  // Typography,
+  Typography,
   Table,
   //   Search,
   Form,
@@ -33,12 +33,14 @@ import {
   TeamOutlined,
   UnlockOutlined,
 } from "@ant-design/icons";
+import Title from "antd/lib/skeleton/Title";
 
 // ----------------------------------------------------------------
 function ClubEdit() {
   // -------- Attributes --------------------------------
   const { Search } = Input;
   const { Option } = Select;
+  const { Title } = Typography;
 
   // sammple all user dat api (Search student attribute)
   const [sts, setSTs] = useState([
@@ -250,22 +252,22 @@ function ClubEdit() {
   };
 
   // Add new student input
+  // css label
+  // const layout = {
+  //   labelCol: {
+  //     span: 3,
+  //   },
+  //   wrapperCol: {
+  //     span: 16,
+  //   },
+  // };
 
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
-
-  const tailLayout = {
-    wrapperCol: {
-      offset: 8,
-      span: 16,
-    },
-  };
+  // const tailLayout = {
+  //   wrapperCol: {
+  //     offset: 8,
+  //     span: 16,
+  //   },
+  // };
 
   const [form] = Form.useForm();
   const [form_search] = Form.useForm();
@@ -295,7 +297,7 @@ function ClubEdit() {
     created: "Created date",
     email: "club email",
     president: "Tran Chan Nam",
-    members: "number"
+    members: "number",
   });
 
   const sampleClubs = [];
@@ -309,7 +311,7 @@ function ClubEdit() {
       created: "12/11/2021",
       email: "student@gmail.com",
       president: "Tran Chan Nam",
-      members: "6868"
+      members: "6868",
     });
   }
 
@@ -317,8 +319,8 @@ function ClubEdit() {
     console.log(values);
     const newClub = sampleClubs.filter((club) => club.name === values.clubName);
     console.log(newClub[0]);
-    setClub(newClub[0])
-  }
+    setClub(newClub[0]);
+  };
 
   const searchReset = () => {
     form_search.resetFields();
@@ -329,8 +331,16 @@ function ClubEdit() {
       <Row className="club-edit-container">
         {/* area 1 */}
         <Col className="club-edit-search" span={24}>
-          <Form form={form_search} name="search-club" onFinish={searchClub}>
+          <Form
+            // {...layout}
+            form={form_search}
+            name="search-club"
+            onFinish={searchClub}
+            size="small"
+            style={{}}
+          >
             <Form.Item
+              // {...tailLayout}
               name="clubName"
               label="Club Name"
               rules={[
@@ -339,14 +349,14 @@ function ClubEdit() {
                 },
               ]}
             >
-              <Select
-                placeholder="Selec Club name"
-                allowClear
-              >
+              <Select placeholder="Selec Club name" allowClear style={{}}>
                 {sampleClubs.map((club) => {
-                  return(<Option key={club.id} value={club.name}> {club.name} </Option>)
+                  return (
+                    <Option key={club.id} value={club.name}>
+                      {club.name}
+                    </Option>
+                  );
                 })}
-                
               </Select>
             </Form.Item>
             <Form.Item>
@@ -354,21 +364,22 @@ function ClubEdit() {
                 Search
               </Button>
               <Button htmlType="button" onClick={searchReset}>
-                  Reset
+                Reset
               </Button>
             </Form.Item>
           </Form>
         </Col>
+
         {/* area 2 */}
-        {/* clubmembers details */}
-        <Col className="club-edit-title" span={24}>
+        <Col span={24}>
+          {/* club members details */}
           <PageHeader
             // size= "small"
-            title= {club.name}
+            title={club.name}
             tags={<Tag color="blue">{club.type}</Tag>}
           >
             <Row>
-              <Statistic title= "President" value={club.president} />
+              <Statistic title="President" value={club.president} />
               <Statistic
                 title="Members"
                 value={club.members}
@@ -379,67 +390,98 @@ function ClubEdit() {
               <Statistic title="Generated" value={club.created} />
             </Row>
           </PageHeader>
+        </Col>
 
-          <div className="search-areas">
-            {/* search bar ( search student by id) */}
-            <Search
-              className="search-bar"
-              placeholder="Input student ID"
-              size="medium"
-              onSearch={onSearch}
-              enterButton
-              required
-            />
-            {/* single student table */}
-            <Table
-              bordered
-              columns={columnStudentData}
-              dataSource={studentData}
-              size="small"
-              pagination={false}
-            />
-            {/* select role and add student */}
-            <Form
-              // {...layout}
-              form={form}
-              name="control-hooks"
-              onFinish={onFinish}
-              disabled={disableSubmit}
+        {/* area 3 */}
+        {/* Add new studen  */}
+        <Col className="add-container" span={24}>
+          {/* search bar ( search student by id) */}
+          <Title level={4} style={{ margin: "0 20px" }}>
+            Add new student to club
+          </Title>
+
+
+          <Search
+            style={{
+              margin: "10px 20px",
+            }}
+            className="search-bar"
+            placeholder="Input student ID"
+            size="medium"
+            onSearch={onSearch}
+            enterButton
+            required
+          />
+
+          <Title
+            level={4}
+            style={{
+              margin: "10px",
+              textAlign: "center",
+            }}
+          >
+            Student Information
+          </Title>
+          
+          <Table
+            bordered
+            columns={columnStudentData}
+            dataSource={studentData}
+            size="small"
+            pagination={false}
+          />
+
+          {/* select role and add student */}
+          <Form
+            // {...layout}
+            form={form}
+            name="control-hooks"
+            onFinish={onFinish}
+            disabled={disableSubmit}
+          >
+            <Form.Item
+              name="Role"
+              label="Role"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
-              <Form.Item
-                name="Role"
-                label="Role"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+              <Select
+                placeholder="Select a specific role for new student"
+                allowClear
               >
-                <Select
-                  placeholder="Select a specific role for new student"
-                  allowClear
-                >
-                  <Option value="President">President</Option>
-                  <Option value="Vice President"> Vice President</Option>
-                  <Option value="Content Writer"> Content Writer</Option>
-                  <Option value="Member"> Member</Option>
-                </Select>
-              </Form.Item>
+                <Option value="President">President</Option>
+                <Option value="Vice President"> Vice President</Option>
+                <Option value="Content Writer"> Content Writer</Option>
+                <Option value="Member"> Member</Option>
+              </Select>
+            </Form.Item>
 
-              <Form.Item
-              // {...tailLayout}
-              >
-                <Button type="primary" htmlType="submit">
-                  Add student
-                </Button>
+            <Form.Item
+            // {...tailLayout}
+            >
+              <Button type="primary" htmlType="submit">
+                Add student
+              </Button>
 
-                <Button htmlType="button" onClick={onReset}>
-                  Reset
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+              <Button htmlType="button" onClick={onReset}>
+                Reset
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
 
+        {/* area 4 */}
+        <Col className="table-content" span={24}>
+          {/* single student table */}
+          <Title level={4} 
+            style={{ 
+              textAlign: 'center',
+              margin: "10px",
+          }}
+          > Club Members </Title>
           <Table
             bordered
             columns={columns}

@@ -4,25 +4,32 @@
     padding: 0;
 }
 
-
 .club-edit-container {
-    background-color: aquamarine;
+    background-color: white;
     height: 80%;
 }
-
 /* area 1 */
+.club-edit-search {
+    background-color: wheat;
+    margin: 5px 0px;
+    border: 2px solid black;
+}
 
-
+/* search bar container */
+.ant-form-item{
+    margin:15px 0px 15px 20px;
+}
+/* select bar */
+.ant-select.ant-select-in-form-item {
+    width: 50%;
+}
 
 
 /* area 2 */
-.club-edit-title {
-    height: 15%;
-}
-
+/* club members detail */
 .ant-page-header {
     box-sizing: border-box;
-    margin: 0;
+    margin: 5px 0px;
     color: rgba(0,0,0,.85);
     font-size: 1rem;
     font-variant: tabular-nums;
@@ -32,6 +39,7 @@
     position: relative;
     padding: 0px 20px;
     background-color: wheat;
+    border: 2px solid black;
 }
 
 .ant-page-header-heading-title {
@@ -62,49 +70,33 @@
     margin-bottom: 2px;
 }
 
-
-
-
-/* .header-container{
-    background-color:blanchedalmond;
-    height: 10vh;
+/* area 3 */
+.add-container{
+    margin: 5px 0px;
+    border: 2px solid black;
+    background-color: wheat;
 }
 
-.title-container {
-    background-color: black;
-    text-align: center;
+.ant-input-group {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum";
+    position: relative;
+    display: table;
+    width: 50%;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-.title-content h1 {
-    color: white;
+/* area 4 */
+.table-content{
+    margin: 5px 0px;
+    background-color: wheat;
+    border: 2px solid black;
 }
-
-.header-body { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* css body */
-/*.club-container {
-    height: 90vh;
-}
-
-.member-table{
-    background-color: greenyellow;
-}
-
-.member-title {
-    background-color: red;
-    height: 5vh;
-}
-
-.members-table {
-    background-color: aqua;
-}
-
-.request-title {
-    background-color: bisque;
-    display: flex;
-    flex-direction: column;
-} */
