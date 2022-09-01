@@ -55,7 +55,6 @@ const RecommendClub = () => {
           <ArrowRightOutlined 
             size="small"
             className="ViewMoreIcon"
-          
           />
         </Button>
       </div>

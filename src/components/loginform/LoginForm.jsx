@@ -27,7 +27,7 @@ const LoginForm = () => {
     forgetemail: "",
   });
   const onReset = () => {
-    form.resetFields();
+     form.resetFields();
   };
   const handleSubmit = (e) => {
     checkEmailValid(user.email)
@@ -47,8 +47,9 @@ const LoginForm = () => {
         navigate("/home");
       })
       .catch((err) => {
+        
         onReset()
-        alert("Wrong Email or Password");
+        // alert("Wrong Email or Password");
         console.error(err);
       });
   };
@@ -162,6 +163,7 @@ const LoginForm = () => {
         >
           <Form.Item
             name="email"
+            
           >
             <Input
               size="large"
@@ -186,7 +188,7 @@ const LoginForm = () => {
               }}
               id="EmailInput"
               className="LoginItems"
-              required
+              // required
             />
             <p
               className="EmailWarning"
@@ -204,6 +206,7 @@ const LoginForm = () => {
 
           <Form.Item
             name="password"
+            
           >
             <Input.Password
               size="large"
@@ -230,7 +233,7 @@ const LoginForm = () => {
               prefix={<LockOutlined />}
               className="LoginItems"
               allowClear="true"
-              required
+              // required
               style={{
                 color: "white",
               }}

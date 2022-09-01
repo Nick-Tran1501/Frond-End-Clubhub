@@ -51,6 +51,7 @@ const Profile = () => {
         console.log(err);
       });
   },[]);
+  
   return (
     <div className="profile--container">
       <Row>
