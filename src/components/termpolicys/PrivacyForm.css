@@ -1,7 +1,14 @@
+
 .privacyContainer{
     background-color: whitesmoke;
     height: 400px;
     padding: 20px;
     overflow: auto;
-    text-align: justify;
+}
+
+.privacyContainer pre{
+    font-family: "Noto Sans", cursive;
+    font-size: 15px;
+    font-weight: 600;
+    word-wrap: break-word;
 }
