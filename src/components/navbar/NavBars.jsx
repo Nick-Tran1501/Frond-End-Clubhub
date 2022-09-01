@@ -14,8 +14,6 @@ import {
   Row,
   AutoComplete,
   Input,
-  Avatar,
-  Popover,
   Dropdown,
   Menu,
 } from "antd";
@@ -23,6 +21,7 @@ import Option from "./NavbarOptions";
 import { useEffect } from "react";
 import axios from "axios";
 import { click } from "@testing-library/user-event/dist/click";
+import NotiCard from "./NotiCard";
 
 // Test function of autocomplete
 
@@ -90,6 +89,7 @@ const NavBar = () => {
   };
 
   // Handle the nofication from "Club" navigation option
+  // Each item is a "NotiCard" represents as a new nofication
   const clubMenu = (
     // List of nofication
     <Menu
@@ -97,9 +97,9 @@ const NavBar = () => {
         {
           key: "1",
           label: (
-            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
-              First news
-            </a>
+
+              <NotiCard/>
+
           ),
         },
 
@@ -110,9 +110,9 @@ const NavBar = () => {
         {
           key: "2",
           label: (
-            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
-              Second news
-            </a>
+
+              <NotiCard/>
+
           ),
         },
 
@@ -123,9 +123,7 @@ const NavBar = () => {
         {
           key: "3",
           label: (
-            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
-              Third news
-            </a>
+              <NotiCard/>
           ),
         },
       ]}
@@ -133,6 +131,7 @@ const NavBar = () => {
   );
 
   // Handle the nofication from "Nofication" navigation option
+  // Each item is a "NotiCard" represents as a new nofication
   const nofiMenu = (
     // List of nofication
     <Menu
@@ -140,9 +139,7 @@ const NavBar = () => {
         {
           key: "1",
           label: (
-            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
-              First news
-            </a>
+              <NotiCard/>
           ),
         },
 
@@ -153,9 +150,7 @@ const NavBar = () => {
         {
           key: "2",
           label: (
-            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
-              Second news
-            </a>
+              <NotiCard/>
           ),
         },
 
@@ -166,9 +161,7 @@ const NavBar = () => {
         {
           key: "3",
           label: (
-            <a target="_blank" rel="noreferrer" href="https://www.antgroup.com">
-              Third news
-            </a>
+              <NotiCard/>
           ),
         },
       ]}
@@ -210,14 +203,14 @@ const NavBar = () => {
                 <Option Icon={HomeFilled} title="Home" />
 
                 {/* My Club Dropdown */}
-                <Dropdown overlay={clubMenu} placement="bottom" trigger={['click']}>
+                <Dropdown overlay={clubMenu} placement="bottom" arrow trigger={['click']}>
                   <div>
                     <Option Icon={FlagFilled} title="Club" />
                   </div>
                 </Dropdown>
 
                 {/* Nofication Dropdown */}
-                <Dropdown overlay={nofiMenu} placement='bottom' trigger={['click']}>
+                <Dropdown overlay={nofiMenu} placement='bottomRight' arrow trigger={['click']}>
                   <div>
                     <Option Icon={BellFilled} title="Nofication" />
                   </div>
@@ -225,9 +218,7 @@ const NavBar = () => {
               </div>
             </Col>
           </Row>
-          <div className="navAvatar">
-            <Avatar className="userImg" size="large" icon={<UserOutlined />} />
-          </div>
+
         </div>
       </div>
     </div>
