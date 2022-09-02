@@ -8,6 +8,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import Profile from './pages/profile/ProfilePage';
 import { Route, Routes } from "react-router-dom"
 import AdminPage from './pages/admin/AdminPage';
+import PresidentPage from './pages/president/PresidentPage';
 
 
 
@@ -27,7 +28,8 @@ function App() {
 
 
       {/* Tuan's area ---- command if you want do not delete it*/}
-
+      {/* <LoginPage /> */}
+      <PresidentPage />
       <AdminPage />
 
       {/* <HomePage/>
