@@ -34,7 +34,7 @@ function App() {
             <HomePage/>
             <ProfilePage/>
       {/* -------------------------------------------------------- */}
-    {/* <ClubRegisterForm/> */}
+    <ClubRegisterForm/>
     </div>
   );
 }
