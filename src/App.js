@@ -31,8 +31,8 @@ function App() {
 
             <AdminPage />
          
-            <HomePage/>
-            <ProfilePage/>
+            {/* <HomePage/>
+            <ProfilePage/> */}
       {/* -------------------------------------------------------- */}
     <ClubRegisterForm/>
     </div>

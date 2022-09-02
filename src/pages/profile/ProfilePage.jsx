@@ -34,15 +34,15 @@ const Profile = () => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.clubData);
         setClub({
           ...club,
-          name: res.data.name,
-          logoUrl: res.data.logoUrl,
-          description: res.data.description,
-          slogan: res.data.slogan,
-          email: res.data.email,
-          backgroundUrl: res.data.backgroundUrl
+          name: res.data.clubData.name,
+          logoUrl: res.data.clubData.logoUrl,
+          description: res.data.clubData.description,
+          slogan: res.data.clubData.slogan,
+          email: res.data.clubData.email,
+          backgroundUrl: res.data.clubData.backgroundUrl
         });
       })
       .catch((err) => {
@@ -66,11 +66,6 @@ const Profile = () => {
               clubId={clubId}
               page={page}
               changePage={changePage}
-              // name={club.name}
-              // logoUrl={club.logoUrl}
-              // description={club.description}
-              // slogan={club.slogan}
-              // backgroundUrl={club.backgroundUrl}
             />
           </Col>
         </Row>
