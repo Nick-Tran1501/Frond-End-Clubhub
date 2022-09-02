@@ -168,9 +168,9 @@ const Register = () => {
     <React.Fragment>
       <div className="RegisterCotainer">
         <div className="button-box">
-          <div id="toggle" style={{ left: "100px", width: "90px" }}></div>
+          {/* <div id="toggle" style={{ left: "100px", width: "90px" }}></div> */}
 
-          <div id="toggle" style={{ left: "100px", width: "92px" }}></div>
+          <div id="toggle" style={{ left: "100px", width: "50%" }}></div>
           <Link to="/">
             <button type="button" className="btn-toggle fw-bold">
               Log in
@@ -459,6 +459,7 @@ const Register = () => {
                     background: "black",
                     backgroundColor: "black",
                     color: "black",
+                    width: "100%",
                   }}
                   placeholder="Select your gender"
                 >
@@ -584,6 +585,7 @@ const Register = () => {
               fontSize: "15px",
               width: "100%",
             }}
+            required
           >
             I agree to all the &nbsp;
             <span className="Agreement" onClick={() => setModal2Visible(true)}>

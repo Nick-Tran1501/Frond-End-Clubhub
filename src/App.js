@@ -8,6 +8,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import Profile from './pages/profile/ProfilePage';
 import { Route, Routes } from "react-router-dom"
 import AdminPage from './pages/admin/AdminPage';
+import ClubRegisterForm from './components/cludRegister/ClubRegisterForm';
 
 
 
@@ -28,12 +29,12 @@ function App() {
           
       {/* Tuan's area ---- command if you want do not delete it*/}
 
-            <AdminPage />
+            {/* <AdminPage /> */}
          
-            {/* <HomePage/>
-            <ProfilePage/> */}
+            <HomePage/>
+            <ProfilePage/>
       {/* -------------------------------------------------------- */}
-
+    {/* <ClubRegisterForm/> */}
     </div>
   );
 }

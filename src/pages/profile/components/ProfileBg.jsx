@@ -199,10 +199,10 @@ const ProfileBg =({
               alt="profile"
               id="profile_btn"
             />
-            <div>
-              <h1>{club.name}</h1>
-              <p>{club.description}</p>
-              <p>{club.slogan}</p>
+            <div className="pfi-des">
+              <h1>{club.name}fdfd</h1>
+              <p>{club.description}dfd</p>
+              <p>{club.slogan}dfd</p>
             </div>
 
             <Modal

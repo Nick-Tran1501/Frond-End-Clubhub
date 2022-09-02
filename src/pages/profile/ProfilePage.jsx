@@ -64,8 +64,8 @@ const Profile = () => {
           <Col span={24}>
             <ProfileBg
               clubId={clubId}
-              // page={page}
-              // changePage={changePage}
+              page={page}
+              changePage={changePage}
               // name={club.name}
               // logoUrl={club.logoUrl}
               // description={club.description}
