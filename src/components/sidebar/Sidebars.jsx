@@ -9,7 +9,9 @@ import {
   AppstoreOutlined,
   SettingOutlined,
   EditFilled,
+  ExportOutlined,
 } from "@ant-design/icons";
+import SignOut from "./SignOut";
 
 import axios from "axios"
 
@@ -35,8 +37,7 @@ const items = [
     getItem("Option 5", "6"),
   ]),
   getItem("Setting", "sub3", <SettingOutlined />, [
-    getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
+    getItem(<SignOut/>, "9", <ExportOutlined />),
   ]),
 ];
 
@@ -98,7 +99,7 @@ const sidebar = () => {
         className="sideStats"
         onClick={onClick}
         style={{boxShadow: "1px 2px 5px #888888"}}
-        defaultSelectedKeys={["1"]}
+        defaultSelectedKeys={[""]}
         defaultOpenKeys={[""]}
         mode="inline"
         items={items}
