@@ -16,21 +16,21 @@ function App() {
   return (
     <div className="App">
       {/* Nick's area  */}
-        <Routes>
+      {/* <Routes>
             <Route path='/*' element={<LoginPage/>}/>
 
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/welcome' element={<WelcomePage/>}/>
             <Route path='/profile' element={<ProfilePage/>}/>
-          </Routes>
-    {/* ---------------------------------------------------------------- */}
-      
-          
+          </Routes> */}
+      {/* ---------------------------------------------------------------- */}
+
+
       {/* Tuan's area ---- command if you want do not delete it*/}
 
-            <AdminPage />
-         
-            {/* <HomePage/>
+      <AdminPage />
+
+      {/* <HomePage/>
             <ProfilePage/> */}
       {/* -------------------------------------------------------- */}
 
