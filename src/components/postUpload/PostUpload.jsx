@@ -55,7 +55,7 @@ export default function PostUpload() {
                     </div>
 
                     <div className="caption">
-                        <input type="text" name="text" placeholder="What's on your mind?" className='inputField' style={{width: "100%"}} />
+                        <textarea name="text" placeholder="What's on your mind?" className='inputField' style={{width: "100%"}}></textarea>
                     </div>
 
                     <div className="file_img" id="post_upload">
