@@ -8,9 +8,12 @@ const Feed = () => {
   
   // ---------Data Collection----------
   const [postData,setPostData] =useState([])
+  const token = localStorage.getItem("token");
 
   useEffect(()=>{
     axios({
+      headers: { Authorization: `Bearer ${token}` },
+
       method:"get",
       url:"https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
