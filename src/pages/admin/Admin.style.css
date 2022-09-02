@@ -1,8 +1,14 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 *{
     margin: 0;
     padding: 0;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+
 }
 
 /* main lay out */
@@ -10,21 +16,46 @@
     height: 100vh;
     width: 80%;
     margin: 0 auto;
+    background-color :whitesmoke;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* header  */
+/* ----- area 1 ------ */
 
 .admin-header {
-    /* background-color:black; */
-    display: flex;
+    height: 20%;
 }
 
-/* header title */
 .admin-header-title {
     background-color: #000000;
     font-size: 3rem;
+    text-align: center;
+    height: 40%;
 }
 
 .admin-header-subtitle {
-    background-color: #434343;
+    margin-top: 5px;
+    /* background-color: white; */
+    height: 60%;
+}
+
+
+/* ------- area 2 ---------  */
+
+.admin-tab {
+    height: 80%;
+    margin: 10px 0px;
+    /* border: 2px solid red; */
+}
+
+
+/* .admin-tab-content {
+    height: 10%;
+} */
+
+
+.ant-tabs-top>.ant-tabs-nav {
+    margin: 0px;
 }

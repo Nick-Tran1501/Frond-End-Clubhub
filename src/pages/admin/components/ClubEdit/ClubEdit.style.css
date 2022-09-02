@@ -1,0 +1,102 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.club-edit-container {
+    background-color: white;
+    height: 80%;
+}
+/* area 1 */
+.club-edit-search {
+    background-color: wheat;
+    margin: 5px 0px;
+    border: 2px solid black;
+}
+
+/* search bar container */
+.ant-form-item{
+    margin:15px 0px 15px 20px;
+}
+/* select bar */
+.ant-select.ant-select-in-form-item {
+    width: 50%;
+}
+
+
+/* area 2 */
+/* club members detail */
+.ant-page-header {
+    box-sizing: border-box;
+    margin: 5px 0px;
+    color: rgba(0,0,0,.85);
+    font-size: 1rem;
+    font-variant: tabular-nums;
+    line-height: 5px;
+    list-style: none;
+    font-feature-settings: "tnum";
+    position: relative;
+    padding: 0px 20px;
+    background-color: wheat;
+    border: 2px solid black;
+}
+
+.ant-page-header-heading-title {
+    margin-right: 12px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0,.85);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ant-page-header-content {
+    padding-top: 0px;
+}
+
+.ant-statistic-title {
+    margin-bottom: 0px;
+    color: rgba(0,0,0,.45);
+    font-size: 0.8rem;
+}
+
+.ant-statistic-content {
+    color: rgba(0,0,0,.85);
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+/* area 3 */
+.add-container{
+    margin: 5px 0px;
+    border: 2px solid black;
+    background-color: wheat;
+}
+
+.ant-input-group {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum";
+    position: relative;
+    display: table;
+    width: 50%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* area 4 */
+.table-content{
+    margin: 5px 0px;
+    background-color: wheat;
+    border: 2px solid black;
+}

@@ -10,6 +10,7 @@ import {
   Col,
   Row,
   Paragraph,
+  Descriptions,
   // Input,
   Typography,
   // Table,
@@ -37,60 +38,59 @@ function AdminPage() {
     // console.log(key);
   };
 
-  const { Link, Title, Paragraph } = Typography;
+  const { Text, Title, Paragraph } = Typography;
   // const { Search } = Input;
 
   return (
     <div className="admin-container">
+      {/* area 1 */}
       <Row className="admin-header">
+        {/* title  */}
         <Col className="admin-header-title" span={24}>
           <Title
             style={{
               color: "white",
+              marginTop: "1rem",
             }}
           >
             Admin Page
           </Title>
         </Col>
+
         <Col className="admin-header-subtitle" span={24}>
-            <Title
-              level={3}
+          {/* Heading */}
+          <Title
+            level={4}
+            style={
+              {
+                paddingLeft: "1rem",  
+                // color: "white",
+              }
+            }
+          >
+            WELLCOME : ADMIN NAME
+          </Title>
+            {/*  */}
+          <Paragraph>
+            <pre
               style={{
-                color: "white",
+                fontSize: "1rem",
+                // color: "white",
               }}
             >
-              Wellcome Le Anh Tuan
-            </Title>
+              Admin Pages display in the administration area. Appropriate menus
+              and other styling appear around your content. Use this pages in
+              order to provide extra administration functionality.
+            </pre>
+          </Paragraph>
 
-            <Paragraph>
-              <pre
-                style={{
-                  fontSize: "1rem",
-                  color: "white",
-                }}
-              >
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                exercitationem ab adipisci tempore nostrum iusto iure, itaque
-                mollitia beatae neque amet non, reiciendis quia fugit aspernatur
-                eum dolor quo provident !
-              </pre>
-            </Paragraph>
-        </Col>
-
-      </Row>
-      <Row className="header-container">
-        <Col className="header-body" span={6}>
-          <Link href="" target="_blank">
-            Back To Home Page
-          </Link>
-        </Col>
-        <Col className="" span={18}>
-          <p> Filter area </p>
+          {/* <Text> What whould you like to do ?</Text> */}
         </Col>
       </Row>
-      <Row className="content-row">
-        <Col className="content-col" span={24}>
-          <Tabs onChange={onChange} type="card">
+      {/* area 2  */}
+      <Row className="admin-tab">
+        <Col className="admin-tab-content" span={24}>
+          <Tabs onChange={onChange} type="card" size="large">
             <TabPane tab="Request" key="1">
               <RequestClub />
             </TabPane>

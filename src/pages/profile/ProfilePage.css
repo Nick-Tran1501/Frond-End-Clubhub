@@ -44,16 +44,16 @@ body {
 }
 
 .btn {
-  border: none;
+  /* border: none; */
   padding: 5px;
-  background: var(--color_primary);
+  background: #40a9ff;
   opacity: 0.8;
-  color: rgb(237, 224, 224);
-  border-radius: 10px;
+  /* color: rgb(237, 224, 224); */
+  /* border-radius: 10px; */
 }
 
 /* //Main part */
-.container .ab,
+/* .container .ab, */
 .main-left .ml,
 .main-content .mpost {
   margin-bottom: 15px;
@@ -74,18 +74,21 @@ body {
 /* Cover-image */
 .bg-image {
   height: 30vh;
-  
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
   border-radius: 10px;
+  width: 100%;
   display: flex;
-  justify-content: end;
-  margin-top: 1rem;
+  /* flex-flow: row nowrap;
+  justify-content: end; */
+  margin-top: 0.5rem;
 }
 
 .edit_cover_btn {
-  height: 12%;
+  margin: 0.5rem;
+  /* height: 5%; */
+  text-align: center;
+  width: 10%;
+  position: absolute;
+  right: 0;
 }
 
 .pd-right ul {
@@ -133,6 +136,7 @@ body {
     rgba(160, 55, 255, 1) 30%,
     rgba(0, 212, 255, 1) 100%
   );
+  /* background:white; */
   border-radius: 50%;
   background-origin: border-box;
 }

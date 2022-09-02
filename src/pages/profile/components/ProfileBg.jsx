@@ -1,52 +1,81 @@
 import React, { useState, useEffect } from "react";
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
-import { Button, Modal } from "antd";
+import { Button, Modal, Image } from "antd";
 import axios from "axios";
-
-const ProfileBg = ({
+import { PictureOutlined } from "@ant-design/icons";
+const ProfileBg =({
+    clubId,
   page,
   changePage,
-  name,
-  logoUrl,
-  description,
-  slogan,
-  backgroundUrl,
+//   name,
+//   logoUrl,
+//   description,
+//   slogan,
+//   backgroundUrl,
 }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
-  const [cover, setCover] = useState();
   const [avatar, setAvatar] = useState();
-
-  //API
+  const [background, setBackground] = useState();
+  // Post API
+  const token = localStorage.getItem("token");
   const uploadBackground = () => {
     const formData = new FormData();
-    formData.append("background", cover);
-    console.log(formData);
-    const token = localStorage.getItem("token");
+    formData.append("background", background);
+
     axios({
       headers: {
         "Content-Type": "multipart/form-data",
-        Athourization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
-      method: "post",
+      method: "put",
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/630de4a51d03758bef83bfdb/bg`,
       data: formData,
     })
       .then((response) => {
-        console.log(response);
+        setClub({...club, backgroundUrl: response.data.backgroundUrl});   
+        setBackground(response.data.backgroundUrl);
+        console.log(response.data.backgroundUrl);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+
+  //Get Api
+  const [club, setClub] = useState({
+    name: "",
+    logoUrl: "",
+    description: "",
+    slogan: "",
+    email: "",
+    backgroundUrl: "",
+  });
   useEffect(() => {
-    return () => {
-      cover && URL.revokeObjectURL(cover);
-    };
-  }, [cover]);
-  console.log(cover);
+    axios({
+      method: "get",
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
+    })
+      .then((res) => {
+        console.log(res.data);
+        setClub({
+          ...club,
+          name: res.data.name,
+          logoUrl: res.data.logoUrl,
+          description: res.data.description,
+          slogan: res.data.slogan,
+          email: res.data.email,
+          backgroundUrl: res.data.backgroundUrl
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },[]);
+
+
   useEffect(() => {
     return () => {
       avatar && URL.revokeObjectURL(avatar);
@@ -61,7 +90,8 @@ const ProfileBg = ({
     setModal2(true);
   };
 
-  const handleOk = (event) => {
+  const handleOk = (e) => {
+    e.preventDefault();
     setModal1(false);
     setModal2(false);
     uploadBackground();
@@ -75,7 +105,7 @@ const ProfileBg = ({
   const handleCover = (event) => {
     const file = event.target.files[0];
     file.preview = URL.createObjectURL(file);
-    setCover(file);
+    setBackground(file);
     console.log(file);
   };
 
@@ -86,37 +116,57 @@ const ProfileBg = ({
     console.log(file);
   };
 
+
   return (
     <div>
       {/* <!-- profile-cover --> */}
-      <div
-        className="ab bg-image"
-        style={cover && { backgroundImage: `url(${cover.preview})` }}
-      >
-        {/* <img src="image/hall.jpg" alt="" /> */}
-        <button className="btn btn-sm edit_cover_btn" onClick={showModal1}>
-          Edit cover image
-        </button>
+      <div className="ab bg-image">
+        <Image
+        className="backgroundImage"
+          width="100%"
+        
+          src={`${club.backgroundUrl}?${new Date().getTime()}`}
+          style={{
+            width: "100%",
+            zIndex: "0",
+            objectFit: "cover",
+            height: "29vh",
+          }}
+        />
+        <Button
+          className="btn btn-sm edit_cover_btn"
+          shape="circle"
+          icon={
+            <PictureOutlined
+              style={{
+                fontSize: "25px",
+              }}
+            />
+          }
+          size="medium"
+          onClick={showModal1}
+        />
+
         <Modal
           title="Change cover image"
           visible={modal1}
-          onOk={handleOk}
+          onOk={(e)=>{handleOk(e)}}
           onCancel={handleCancel}
         >
           <form className="upload_image" id="post_form">
             <div className="user_infor">
               <div className="profile_picture">
-                <img src={logoUrl} alt="profile" />
+                <img src={club.logoUrl} alt="profile" />
               </div>
-              <p>{name}</p>
+              <p>{club.name}</p>
             </div>
 
             <div className="file_img">
-              {cover ? (
+              {background ? (
                 <label htmlFor="cover">
                   <img
-                    src={cover.preview}
-                    alt="post image"
+                    src={background.preview}
+                    alt="post"
                     className="post_img"
                   />
                 </label>
@@ -145,14 +195,14 @@ const ProfileBg = ({
             <img
               className="pfi-img"
               onClick={showModal2}
-              src={logoUrl}
+              src={club.logoUrl}
               alt="profile"
               id="profile_btn"
             />
-            <div className="pfi-des">
-              <h1>{name}</h1>
-              <p>{description}</p>
-              <p>{slogan}</p>
+            <div>
+              <h1>{club.name}</h1>
+              <p>{club.description}</p>
+              <p>{club.slogan}</p>
             </div>
 
             <Modal

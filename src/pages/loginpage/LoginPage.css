@@ -216,7 +216,7 @@
   left: 0;
   background: rgb(2,0,36);
   background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 90%, rgba(2,0,36,1) 100%);
-  width: 120px;
+  width: 100px;
   height: 100%;
   position: absolute;
   border-radius: 30px;

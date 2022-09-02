@@ -2,15 +2,17 @@ import React from "react";
 import { useState, useEffect, useMemo } from "react";
 import "antd/dist/antd.css";
 // import NavBar from "../../components/navbar/NavBars";
-import "./Member.style.css";
-
+import "./ClubEdit.style.css";
 
 // -------------- ant design import ---------------------
 import {
   Col,
   Row,
   Input,
-  // Typography,
+  PageHeader,
+  Statistic,
+  Tag,
+  Typography,
   Table,
   //   Search,
   Form,
@@ -28,14 +30,17 @@ import {
 import {
   EditOutlined,
   DeleteOutlined,
+  TeamOutlined,
+  UnlockOutlined,
 } from "@ant-design/icons";
-
+import Title from "antd/lib/skeleton/Title";
 
 // ----------------------------------------------------------------
 function ClubEdit() {
   // -------- Attributes --------------------------------
   const { Search } = Input;
   const { Option } = Select;
+  const { Title } = Typography;
 
   // sammple all user dat api (Search student attribute)
   const [sts, setSTs] = useState([
@@ -48,7 +53,7 @@ function ClubEdit() {
       email: "student@gmail.com",
       role: "President",
     },
-    { 
+    {
       key: "objectid-2",
       id: "s456",
       name: "st2",
@@ -57,7 +62,7 @@ function ClubEdit() {
       email: "student@gmail.com",
       role: "Member",
     },
-    { 
+    {
       key: "objectid-3",
       id: "s789",
       name: "st3",
@@ -125,7 +130,7 @@ function ClubEdit() {
       email: "student@gmail.com",
       role: "Content Writer",
     });
-  };
+  }
 
   const [dataSource, setDataSource] = useState(sampleData);
 
@@ -197,7 +202,7 @@ function ClubEdit() {
       } else {
         console.log(result[0]);
         setStudentData(result);
-        setDisableSubmit(false)
+        setDisableSubmit(false);
       }
     } else {
       console.log("Please Input");
@@ -247,33 +252,33 @@ function ClubEdit() {
   };
 
   // Add new student input
+  // css label
+  // const layout = {
+  //   labelCol: {
+  //     span: 3,
+  //   },
+  //   wrapperCol: {
+  //     span: 16,
+  //   },
+  // };
 
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
-
-  const tailLayout = {
-    wrapperCol: {
-      offset: 8,
-      span: 16,
-    },
-  };
+  // const tailLayout = {
+  //   wrapperCol: {
+  //     offset: 8,
+  //     span: 16,
+  //   },
+  // };
 
   const [form] = Form.useForm();
+  const [form_search] = Form.useForm();
 
   const onFinish = (values) => {
     // console.log(values);
-    if (studentData[0] !== ""){
+    if (studentData[0] !== "") {
       studentData[0].role = values.Role;
       onAddStudent(studentData);
       console.log("Add new student to club");
-    }
-    else {
+    } else {
       console.log("Student not found");
     }
   };
@@ -283,78 +288,200 @@ function ClubEdit() {
     form.resetFields();
   };
 
+  // search club
+  const [club, setClub] = useState({
+    key: "default",
+    id: "sample",
+    name: "Club name",
+    type: "Club type",
+    created: "Created date",
+    email: "club email",
+    president: "Tran Chan Nam",
+    members: "number",
+  });
+
+  const sampleClubs = [];
+  for (let i = 0; i < 10; i++) {
+    const randomNumber = parseInt(Math.random() * 1000);
+    sampleClubs.push({
+      key: i,
+      id: randomNumber,
+      name: `Club name ${i}`,
+      type: "Sport",
+      created: "12/11/2021",
+      email: "student@gmail.com",
+      president: "Tran Chan Nam",
+      members: "6868",
+    });
+  }
+
+  const searchClub = (values) => {
+    console.log(values);
+    const newClub = sampleClubs.filter((club) => club.name === values.clubName);
+    console.log(newClub[0]);
+    setClub(newClub[0]);
+  };
+
+  const searchReset = () => {
+    form_search.resetFields();
+  };
+
   return (
     <div className="">
-      <Row className="club-container"
-      >
-        {/* clubmembers table */}
-        <Col className="member-table" span={24}>
-
-          <h2> Club members table </h2>
-          <p> Club Name: Sample Club </p>
-          <p> Total members : Number </p>
-
-          <div className="search-areas">
-            {/* search bar ( search student by id) */}
-            <Search
-              className="search-bar"
-              placeholder="Input student ID"
-              size="medium"
-              onSearch={onSearch}
-              enterButton
-              required
-            />
-            {/* single student table */}
-            <Table
-              bordered
-              columns={columnStudentData}
-              dataSource={studentData}
-              size="small"
-              pagination={false}
-
-            />
-            {/* select role and add student */}
-            <Form
-              // {...layout}
-              form={form}
-              name="control-hooks"
-              onFinish={onFinish}
-              disabled={disableSubmit}
-            >
-              <Form.Item
-                name="Role"
-                label="Role"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select
-                  placeholder="Select a specific role for new student"
-                  allowClear
-                >
-                  <Option value="President">President</Option>
-                  <Option value="Vice President"> Vice President</Option>
-                  <Option value="Content Writer"> Content Writer</Option>
-                  <Option value="Member"> Member</Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item
+      <Row className="club-edit-container">
+        {/* area 1 */}
+        <Col className="club-edit-search" span={24}>
+          <Form
+            // {...layout}
+            form={form_search}
+            name="search-club"
+            onFinish={searchClub}
+            size="small"
+            style={{}}
+          >
+            <Form.Item
               // {...tailLayout}
+              name="clubName"
+              label="Club Name"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select placeholder="Selec Club name" allowClear style={{}}>
+                {sampleClubs.map((club) => {
+                  return (
+                    <Option key={club.id} value={club.name}>
+                      {club.name}
+                    </Option>
+                  );
+                })}
+              </Select>
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Search
+              </Button>
+              <Button htmlType="button" onClick={searchReset}>
+                Reset
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+
+        {/* area 2 */}
+        <Col span={24}>
+          {/* club members details */}
+          <PageHeader
+            // size= "small"
+            title={club.name}
+            tags={<Tag color="blue">{club.type}</Tag>}
+          >
+            <Row>
+              <Statistic title="President" value={club.president} />
+              <Statistic
+                title="Members"
+                value={club.members}
+                style={{
+                  margin: "0 50px",
+                }}
+              />
+              <Statistic title="Generated" value={club.created} />
+            </Row>
+          </PageHeader>
+        </Col>
+
+        {/* area 3 */}
+        {/* Add new studen  */}
+        <Col className="add-container" span={24}>
+          {/* search bar ( search student by id) */}
+          <Title level={4} style={{ margin: "0 20px" }}>
+            Add new student to club
+          </Title>
+
+
+          <Search
+            style={{
+              margin: "10px 20px",
+            }}
+            className="search-bar"
+            placeholder="Input student ID"
+            size="medium"
+            onSearch={onSearch}
+            enterButton
+            required
+          />
+
+          <Title
+            level={4}
+            style={{
+              margin: "10px",
+              textAlign: "center",
+            }}
+          >
+            Student Information
+          </Title>
+          
+          <Table
+            bordered
+            columns={columnStudentData}
+            dataSource={studentData}
+            size="small"
+            pagination={false}
+          />
+
+          {/* select role and add student */}
+          <Form
+            // {...layout}
+            form={form}
+            name="control-hooks"
+            onFinish={onFinish}
+            disabled={disableSubmit}
+          >
+            <Form.Item
+              name="Role"
+              label="Role"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select
+                placeholder="Select a specific role for new student"
+                allowClear
               >
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
+                <Option value="President">President</Option>
+                <Option value="Vice President"> Vice President</Option>
+                <Option value="Content Writer"> Content Writer</Option>
+                <Option value="Member"> Member</Option>
+              </Select>
+            </Form.Item>
 
-                <Button htmlType="button" onClick={onReset}>
-                  Reset
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+            <Form.Item
+            // {...tailLayout}
+            >
+              <Button type="primary" htmlType="submit">
+                Add student
+              </Button>
 
+              <Button htmlType="button" onClick={onReset}>
+                Reset
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+
+        {/* area 4 */}
+        <Col className="table-content" span={24}>
+          {/* single student table */}
+          <Title level={4} 
+            style={{ 
+              textAlign: 'center',
+              margin: "10px",
+          }}
+          > Club Members </Title>
           <Table
             bordered
             columns={columns}
@@ -422,15 +549,14 @@ function ClubEdit() {
                 });
               }}
             >
-              <Option value="President">President</Option>
-              <Option value="Vice President"> Vice President</Option>
-              <Option value="Content Writer"> Content Writer</Option>
-              <Option value="Member"> Member</Option>
+              <Option value="President">President </Option>
+              <Option value="Vice President"> Vice President </Option>
+              <Option value="Content Writer"> Content Writer </Option>
+              <Option value="Member"> Member </Option>
             </Select>
           </Modal>
         </Col>
       </Row>
-      
     </div>
   );
 }

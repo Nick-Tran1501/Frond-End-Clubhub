@@ -65,9 +65,9 @@ const LoginPage = () => {
                 md={0}
                 xs={0}
               >
-                <video loop autoPlay muted id="video">
+                {/* <video loop autoPlay muted id="video">
                   <source src={backgroundVid} type="video/mp4" />
-                </video>
+                </video> */}
 
                 <div className="ButtonContainer">
                 
