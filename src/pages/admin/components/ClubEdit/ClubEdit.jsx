@@ -119,7 +119,7 @@ function ClubEdit() {
   // Table data
   // sample student in club
   const sampleData = [];
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 100; i++) {
     const randomNumber = parseInt(Math.random() * 1000);
     sampleData.push({
       key: i,
@@ -332,15 +332,13 @@ function ClubEdit() {
         {/* area 1 */}
         <Col className="club-edit-search" span={24}>
           <Form
-            // {...layout}
             form={form_search}
             name="search-club"
             onFinish={searchClub}
-            size="small"
+            size="medium"
             style={{}}
           >
             <Form.Item
-              // {...tailLayout}
               name="clubName"
               label="Club Name"
               rules={[
@@ -349,7 +347,7 @@ function ClubEdit() {
                 },
               ]}
             >
-              <Select placeholder="Selec Club name" allowClear style={{}}>
+              <Select placeholder="Select Club name" allowClear style={{}}>
                 {sampleClubs.map((club) => {
                   return (
                     <Option key={club.id} value={club.name}>
@@ -360,7 +358,9 @@ function ClubEdit() {
               </Select>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button 
+                style={{marginRight: "10px"}}
+                type="primary" htmlType="submit">
                 Search
               </Button>
               <Button htmlType="button" onClick={searchReset}>
@@ -562,3 +562,4 @@ function ClubEdit() {
 }
 
 export default ClubEdit;
+

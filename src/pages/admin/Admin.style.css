@@ -16,33 +16,48 @@ body{
     height: 100vh;
     width: 80%;
     margin: 0 auto;
-    background-color :whitesmoke;
+    background-color :wheat;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ----- area 1 ------ */
+/* ----- Area 1 ------ */
 
 .admin-header {
-    height: 20%;
+    height: 30%;
+    /* background-color: white; */
+    /* border: 2px solid black; */
 }
 
 .admin-header-title {
     background-color: #000000;
     font-size: 3rem;
     text-align: center;
-    height: 40%;
+    height: 30%;
 }
 
+/* area 1 - title  */
 .admin-header-subtitle {
+    height: 70%;
+    margin-top: 10px;
+}
+
+.header-description{
+    height: 80%;
+    padding-left: 20px;
+    /* border: 2px solid red; */
     margin-top: 5px;
-    /* background-color: white; */
-    height: 60%;
+}
+
+.header-description>.ant-descriptions-header {
+    margin-bottom: 20px;
 }
 
 
-/* ------- area 2 ---------  */
+
+
+/* ------- Area 2 ---------  */
 
 .admin-tab {
     height: 80%;
