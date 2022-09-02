@@ -164,9 +164,9 @@ const Register = () => {
     <React.Fragment>
       <div className="RegisterCotainer">
         <div className="button-box">
-          <div id="toggle" style={{ left: "100px", width: "90px" }}></div>
+          {/* <div id="toggle" style={{ left: "100px", width: "90px" }}></div> */}
 
-          <div id="toggle" style={{ left: "100px", width: "92px" }}></div>
+          <div id="toggle" style={{ left: "95px", width: "100px" }}></div>
           <Link to="/">
             <button type="button" className="btn-toggle fw-bold">
               Log in

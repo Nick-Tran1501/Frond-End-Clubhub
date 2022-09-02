@@ -30,7 +30,7 @@
 }
 
 body {
-  font-family: "Noto Sans", cursive;
+  font-family: 'Roboto Slab', serif;
   font-size: 0.8rem;
   font-weight: 600;
   margin: 0 auto;
@@ -135,6 +135,13 @@ body {
   );
   border-radius: 50%;
   background-origin: border-box;
+}
+
+.pfi-des {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .ab.profile-info {
   padding: -7px;

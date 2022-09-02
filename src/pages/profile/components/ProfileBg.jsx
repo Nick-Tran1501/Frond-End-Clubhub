@@ -149,7 +149,7 @@ const ProfileBg = ({
               alt="profile"
               id="profile_btn"
             />
-            <div>
+            <div className="pfi-des">
               <h1>{name}</h1>
               <p>{description}</p>
               <p>{slogan}</p>
