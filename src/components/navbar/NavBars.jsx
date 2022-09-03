@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ClubLogo from "../../image/ClubHub_Trans.png";
-import { Col, Row, AutoComplete, Input, Dropdown, Menu } from "antd";
+import { Col, Row, AutoComplete, Input, Dropdown, Menu, Badge } from "antd";
 import Option from "./NavbarOptions";
 import { useEffect } from "react";
 import axios from "axios";
@@ -177,7 +177,7 @@ const NavBar = () => {
             <Col xs={0} md={0} lg={24}>
               <div className="navOptions d-flex">
                 {/* Navigate HomePage */}
-                <Option Icon={HomeFilled} title="Home" />
+               <Option Icon={HomeFilled} title="Home" />
 
                 {/* My Club Dropdown */}
                 <Dropdown
@@ -187,7 +187,7 @@ const NavBar = () => {
                   trigger={["click"]}
                 >
                   <div>
-                    <Option Icon={FlagFilled} title="Club" />
+                 <Option Icon={FlagFilled} title="Club" />
                   </div>
                 </Dropdown>
 

@@ -4,12 +4,12 @@ import "./NavbarOptions.css";
 import {Avatar} from "antd";
 
 
-const NavbarOption = ({avatar, Icon, title}) => {
+const NavbarOption = ({Icon, title}) => {
   return (
     <div className="navOption">
-       
-      {Icon && <Badge count={5}> <Icon className="navIcon" /> </Badge>}
-      
+      <Badge count={1}>
+      {Icon && <Icon className="navIcon" />}
+      </Badge>
       <h3 className="navOption_title">{title}</h3>
     </div>
   );
