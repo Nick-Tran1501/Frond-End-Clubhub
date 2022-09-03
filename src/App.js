@@ -33,8 +33,13 @@ function App() {
          
             {/* <HomePage/>
             <ProfilePage/> */}
+
+            <AdminPage />
+            {/* <ClubRegisterForm/> */}
+            {/* {/* <HomePage/> */}
+            {/* <ProfilePage/>  */}
       {/* -------------------------------------------------------- */}
-    <ClubRegisterForm/>
+
     </div>
   );
 }
