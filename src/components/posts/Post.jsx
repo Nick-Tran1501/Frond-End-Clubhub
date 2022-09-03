@@ -13,8 +13,10 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import CommentsBox from "../commentsbox/CommentsBox";
-
+import CommentList from "../../components/commentlist/CommentList"
 import axios from "axios";
+import Comment from "../commentlist/Comment";
+
 
 const Post = () => {
   const [postData, setPostData] = useState([]);
@@ -57,7 +59,11 @@ const Post = () => {
             data: {
               postId,
             },
-          });
+          })
+          .then((response) => {
+            loadPost()
+            console.log(response)})
+          .catch((error) => {console.log(error)})
         };
 
         // ------------Read More--------------
@@ -331,11 +337,22 @@ const Post = () => {
             </div>
 
             {show && (
+              <React.Fragment>
               <CommentsBox
                 data={post.comments}
                 postId={post._id}
                 userimage={post.author.avatarUrl}
+                loadPost={loadPost}
               />
+              <div className="CommentListContainer">
+                {post.comments.map((comment) => {
+                  return (
+                    <Comment  data={comment} key={comment._id}  loadPost={loadPost}/>
+                  )
+                })}
+              </div>
+              </React.Fragment>
+
             )}
           </div>
         );
