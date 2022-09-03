@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import "antd/dist/antd.css";
 // import NavBar from "../../components/navbar/NavBars";
 import "./ClubEdit.style.css";
+import "./ClubAPI.js";
 
 // -------------- ant design import ---------------------
 import {
@@ -35,6 +36,7 @@ import {
   UnlockOutlined,
 } from "@ant-design/icons";
 import Title from "antd/lib/skeleton/Title";
+import { getActiveClubData } from "./ClubAPI.js";
 
 // ----------------------------------------------------------------
 function ClubEdit() {
@@ -43,65 +45,67 @@ function ClubEdit() {
   const { Option } = Select;
   const { Title } = Typography;
 
-  // sammple all user dat api (Search student attribute)
-  const [sts, setSTs] = useState([
-    {
-      key: "objectid-1",
-      id: "s123",
-      name: "st1",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "President",
-    },
-    {
-      key: "objectid-2",
-      id: "s456",
-      name: "st2",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Member",
-    },
-    {
-      key: "objectid-3",
-      id: "s789",
-      name: "st3",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
-    },
-  ]);
+  // ---- search club ------
 
-  const [studentData, setStudentData] = useState();
+  // get every club data
+  useEffect(() => {
+    getActiveClubData().then((data) => setClubs(data));
+  }, []);
 
-  const columnStudentData = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      width: "10%",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      width: "30%",
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      width: "5%",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      width: "20%",
-    },
-  ];
+  const [clubs, setClubs] = useState([]);
 
-  // disable submit button
-  const [disableSubmit, setDisableSubmit] = useState(true);
+  // console.log(clubs);
 
+  const searchClub = (values) => {
+    // console.log(values);
+    const newClub = clubs.filter((club) => club.name === values.clubName);
+    // console.log(newClub[0]);
+    // setClub(newClub[0]);
+    setClubDisplay(
+      <PageHeader
+        title={newClub[0].name}
+        tags={<Tag color="blue">{newClub[0].clubCategory}</Tag>}
+      >
+        <Row>
+          <Statistic title="President" value={newClub[0].president.username} />
+          <Statistic
+            title="Members"
+            value={newClub[0].members.length}
+            style={{
+              margin: "0 50px",
+            }}
+          />
+          <Statistic title="Generated" value={newClub[0].created} />
+        </Row>
+      </PageHeader>
+    );
+    const studentsData = newClub[0].members;
+    const clubSelected = [];
+      for (let i = 0; i < studentsData.length; i++) {
+        clubSelected.push({
+          key: studentsData[i]._id,
+          id: studentsData[i]._id,
+          name: studentsData[i].name,
+          gender: studentsData[i].gender,
+          joinDate: "12/11/2021",
+          email: studentsData[i].email,
+          role: "Content Writer",
+        });
+    setDataSource(clubSelected);
+  }
+  }
+
+  const searchReset = () => {
+    form_search.resetFields();
+    setClubDisplay(<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />);
+  };
+
+  const [clubDisplay, setClubDisplay] = useState(
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+  );
+  //  ----------------------------------------------------------------
+
+  // ------------------ TABLE MEMBERS ----------------------------------
   //  ------- Functions --------------------------------
   const onChange = (pagination, filters, sorter, extra) => {
     console.log(
@@ -118,23 +122,38 @@ function ClubEdit() {
   };
 
   // Table data
-  // sample student in club
-  const sampleData = [];
-  for (let i = 0; i < 100; i++) {
-    const randomNumber = parseInt(Math.random() * 1000);
-    sampleData.push({
-      key: i,
-      id: randomNumber,
-      name: `Em tuấn thứ ${i}`,
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
-    });
-  }
+  // console.log(clubDisplay);
 
-  const [dataSource, setDataSource] = useState(sampleData);
+  // const [clubSelected, setClubSelected] = useState([]);
 
+  // const studentsInClub = () => {
+  //   const sampleData = [];
+  //   if (clubSelected.length > 0) {
+  //     for (let i = 0; i < clubSelected.length; i++) {
+  //       sampleData.push({
+  //         key: clubSelected[i]._id,
+  //         id: clubSelected[i]._id,
+  //         name: clubSelected[i].name,
+  //         gender: clubSelected[i].gender,
+  //         joinDate: "12/11/2021",
+  //         email: clubSelected[i].email,
+  //         role: "Content Writer",
+  //       });
+  //     }
+  //     console.log("True");
+  //   }
+  //   else {
+  //     console.log(clubSelected.length);
+  //     console.log("False");
+  //   }
+  //   return sampleData;
+  // }
+
+  // const [studentsInClub, setStudentsInClub] = useState(getStudentInClub())
+
+  // console.log(sampleData)
+
+  const [dataSource, setDataSource] = useState([]);
   const columns = [
     {
       title: "ID",
@@ -194,7 +213,7 @@ function ClubEdit() {
   const [editingStudent, setEditingStudent] = useState(null);
 
   // -------- CRUD Functions ---------------
-
+  // search student by id
   const onSearch = (value) => {
     if (value !== "") {
       const result = sts.filter((student) => student.id === value);
@@ -227,6 +246,7 @@ function ClubEdit() {
     });
   };
 
+  // delete student in club members
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -252,6 +272,63 @@ function ClubEdit() {
   };
 
   // ---- Add new student input ----
+  const [sts, setSTs] = useState([
+    {
+      key: "objectid-1",
+      id: "s123",
+      name: "st1",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "objectid-2",
+      id: "s456",
+      name: "st2",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Member",
+    },
+    {
+      key: "objectid-3",
+      id: "s789",
+      name: "st3",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Content Writer",
+    },
+  ]);
+
+  const [studentData, setStudentData] = useState();
+
+  const columnStudentData = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      width: "10%",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      width: "30%",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      width: "5%",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      width: "20%",
+    },
+  ];
+  // disable submit button
+  const [disableSubmit, setDisableSubmit] = useState(true);
+
   const [form] = Form.useForm();
   const [form_search] = Form.useForm();
 
@@ -270,101 +347,7 @@ function ClubEdit() {
     setStudentData();
     form.resetFields();
   };
-
-  // ---- search club ----
-  // const [club, setClub] = useState();
-  const sampleClubs = [];
-  for (let i = 0; i < 10; i++) {
-    const randomNumber = parseInt(Math.random() * 1000);
-    sampleClubs.push({
-      key: i,
-      id: randomNumber,
-      name: `Club name ${i}`,
-      type: "Sport",
-      created: "12/11/2021",
-      email: "student@gmail.com",
-      president: "Tran Chan Nam",
-      members: "6868",
-    });
-  }
-
-  const searchClub = (values) => {
-    console.log(values);
-    const newClub = sampleClubs.filter((club) => club.name === values.clubName);
-    console.log(newClub[0]);
-    // setClub(newClub[0]);
-
-    // ---- return display ----- 
-    // setClubDisplay(
-    //   <PageHeader title={club.name} tags={<Tag color="blue">{club.type}</Tag>}>
-    //     <Row>
-    //       <Statistic title="President" value={club.president} />
-    //       <Statistic
-    //         title="Members"
-    //         value={club.members}
-    //         style={{
-    //           margin: "0 50px",
-    //         }}
-    //       />
-    //       <Statistic title="Generated" value={club.created} />
-    //     </Row>
-    //   </PageHeader>
-    // );
-
-    setClubDisplay(
-      <PageHeader title={newClub[0].name} tags={<Tag color="blue">{newClub[0].type}</Tag>}>
-        <Row>
-          <Statistic title="President" value={newClub[0].president} />
-          <Statistic
-            title="Members"
-            value={newClub[0].members}
-            style={{
-              margin: "0 50px",
-            }}
-          />
-          <Statistic title="Generated" value={newClub[0].created} />
-        </Row>
-      </PageHeader>
-    );
-
-    // Test promise function
-
-    // return new Promise((resolve, reject) => {
-    //   if (!club) {
-    //     reject("No club found");
-    //   } else {
-    //     resolve(
-    //       setClubDisplay(
-    //         <PageHeader
-    //           title={club.name}
-    //           tags={<Tag color="blue">{club.type}</Tag>}
-    //         >
-    //           <Row>
-    //             <Statistic title="President" value={club.president} />
-    //             <Statistic
-    //               title="Members"
-    //               value={club.members}
-    //               style={{
-    //                 margin: "0 50px",
-    //               }}
-    //             />
-    //             <Statistic title="Generated" value={club.created} />
-    //           </Row>
-    //         </PageHeader>
-    //       )
-    //     );
-    //   }
-    // });
-
-  };
-
-  const searchReset = () => {
-    form_search.resetFields();
-  };
-
-  const [clubDisplay, setClubDisplay] = useState(
-    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-  );
+  //  -------------------------------------------------------------
 
   return (
     <div className="">
@@ -388,9 +371,9 @@ function ClubEdit() {
               ]}
             >
               <Select placeholder="Select Club name" allowClear style={{}}>
-                {sampleClubs.map((club) => {
+                {clubs.map((club) => {
                   return (
-                    <Option key={club.id} value={club.name}>
+                    <Option key={club._id} value={club.name}>
                       {club.name}
                     </Option>
                   );
@@ -413,30 +396,7 @@ function ClubEdit() {
         </Col>
 
         {/* area 2 */}
-        <Col span={24}>
-          {/* club members details */}
-
-          {clubDisplay}
-
-          {/* <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />  */}
-          {/* <PageHeader
-            // size= "small"
-            title={club.name}
-            tags={<Tag color="blue">{club.type}</Tag>}
-          >
-            <Row>
-              <Statistic title="President" value={club.president} />
-              <Statistic
-                title="Members"
-                value={club.members}
-                style={{
-                  margin: "0 50px",
-                }}
-              />
-              <Statistic title="Generated" value={club.created} />
-            </Row>
-          </PageHeader> */}
-        </Col>
+        <Col span={24}>{clubDisplay}</Col>
 
         {/* area 3 */}
         {/* Add new student  */}

@@ -31,9 +31,8 @@ function App() {
           </Routes> */}
 
       {/* Tuan's area ---- command if you want do not delete it*/}
-            {/* <LoginPage /> */}
-            {/* <PresidentPage />
-            <AdminPage /> */}
+
+            <AdminPage />
 
       {/* -------------------------------------------------------- */}
 
