@@ -3,7 +3,7 @@ import "./ProfilePage.css";
 import Navbar from "../../components/navbar/NavBars";
 import "antd/dist/antd.css";
 import ProfileBg from "./components/ProfileBg";
-import { Col, Row} from "antd";
+import { Col, Row } from "antd";
 import ProfileIntro from "./components/ProfileIntro";
 import ProfileMember from "./components/ProfileMember";
 import ProfileMedia from "./components/ProfileMedia";
@@ -34,22 +34,22 @@ const Profile = () => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.clubData);
         setClub({
           ...club,
-          name: res.data.name,
-          logoUrl: res.data.logoUrl,
-          description: res.data.description,
-          slogan: res.data.slogan,
-          email: res.data.email,
-          backgroundUrl: res.data.backgroundUrl
+          name: res.data.clubData.name,
+          logoUrl: res.data.clubData.logoUrl,
+          description: res.data.clubData.description,
+          slogan: res.data.clubData.slogan,
+          email: res.data.clubData.email,
+          backgroundUrl: res.data.clubData.backgroundUrl,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  },[]);
-  
+  }, []);
+
   return (
     <div className="profile--container">
       <Row>
@@ -62,16 +62,7 @@ const Profile = () => {
       <div className="container">
         <Row>
           <Col span={24}>
-            <ProfileBg
-              clubId={clubId}
-              page={page}
-              changePage={changePage}
-              // name={club.name}
-              // logoUrl={club.logoUrl}
-              // description={club.description}
-              // slogan={club.slogan}
-              // backgroundUrl={club.backgroundUrl}
-            />
+            <ProfileBg clubId={clubId} page={page} changePage={changePage} />
           </Col>
         </Row>
 
@@ -79,14 +70,14 @@ const Profile = () => {
         {page === "post" && (
           <Row className="main-content">
             <Col xs={24} sm={24} md={7} lg={7} xl={7}>
-              <ProfileSide 
-
-                page={page} 
+              <ProfileSide
+                clubId={clubId}
+                page={page}
                 changePage={changePage}
                 name={club.name}
                 slogan={club.slogan}
                 email={club.email}
-                />
+              />
             </Col>
 
             <Col xs={24} sm={24} md={17} lg={17} xl={17}>

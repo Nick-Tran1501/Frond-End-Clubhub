@@ -9,14 +9,7 @@ import {
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ClubLogo from "../../image/ClubHub_Trans.png";
-import {
-  Col,
-  Row,
-  AutoComplete,
-  Input,
-  Dropdown,
-  Menu,
-} from "antd";
+import { Col, Row, AutoComplete, Input, Dropdown, Menu } from "antd";
 import Option from "./NavbarOptions";
 import { useEffect } from "react";
 import axios from "axios";
@@ -96,35 +89,25 @@ const NavBar = () => {
       items={[
         {
           key: "1",
-          label: (
-
-              <NotiCard/>
-
-          ),
+          label: <NotiCard />,
         },
 
         {
-          type:'divider'
+          type: "divider",
         },
 
         {
           key: "2",
-          label: (
-
-              <NotiCard/>
-
-          ),
+          label: <NotiCard />,
         },
 
         {
-          type:'divider'
+          type: "divider",
         },
 
         {
           key: "3",
-          label: (
-              <NotiCard/>
-          ),
+          label: <NotiCard />,
         },
       ]}
     />
@@ -138,31 +121,25 @@ const NavBar = () => {
       items={[
         {
           key: "1",
-          label: (
-              <NotiCard/>
-          ),
+          label: <NotiCard />,
         },
 
         {
-          type:'divider'
+          type: "divider",
         },
 
         {
           key: "2",
-          label: (
-              <NotiCard/>
-          ),
+          label: <NotiCard />,
         },
 
         {
-          type:'divider'
+          type: "divider",
         },
 
         {
           key: "3",
-          label: (
-              <NotiCard/>
-          ),
+          label: <NotiCard />,
         },
       ]}
     />
@@ -203,14 +180,24 @@ const NavBar = () => {
                 <Option Icon={HomeFilled} title="Home" />
 
                 {/* My Club Dropdown */}
-                <Dropdown overlay={clubMenu} placement="bottom" arrow trigger={['click']}>
+                <Dropdown
+                  overlay={clubMenu}
+                  placement="bottom"
+                  arrow
+                  trigger={["click"]}
+                >
                   <div>
                     <Option Icon={FlagFilled} title="Club" />
                   </div>
                 </Dropdown>
 
                 {/* Nofication Dropdown */}
-                <Dropdown overlay={nofiMenu} placement='bottomRight' arrow trigger={['click']}>
+                <Dropdown
+                  overlay={nofiMenu}
+                  placement="bottomRight"
+                  arrow
+                  trigger={["click"]}
+                >
                   <div>
                     <Option Icon={BellFilled} title="Nofication" />
                   </div>
@@ -218,7 +205,6 @@ const NavBar = () => {
               </div>
             </Col>
           </Row>
-
         </div>
       </div>
     </div>
