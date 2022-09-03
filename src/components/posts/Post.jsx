@@ -12,7 +12,6 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import CommentsBox from "../commentsbox/CommentsBox";
-import moment from "moment";
 
 import axios from "axios";
 

@@ -3,7 +3,7 @@ import "./ProfilePage.css";
 import Navbar from "../../components/navbar/NavBars";
 import "antd/dist/antd.css";
 import ProfileBg from "./components/ProfileBg";
-import { Col, Row} from "antd";
+import { Col, Row } from "antd";
 import ProfileIntro from "./components/ProfileIntro";
 import ProfileMember from "./components/ProfileMember";
 import ProfileMedia from "./components/ProfileMedia";
@@ -42,14 +42,14 @@ const Profile = () => {
           description: res.data.clubData.description,
           slogan: res.data.clubData.slogan,
           email: res.data.clubData.email,
-          backgroundUrl: res.data.clubData.backgroundUrl
+          backgroundUrl: res.data.clubData.backgroundUrl,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  },[]);
-  
+  }, []);
+
   return (
     <div className="profile--container">
       <Row>
@@ -62,11 +62,7 @@ const Profile = () => {
       <div className="container">
         <Row>
           <Col span={24}>
-            <ProfileBg
-              clubId={clubId}
-              page={page}
-              changePage={changePage}
-            />
+            <ProfileBg clubId={clubId} page={page} changePage={changePage} />
           </Col>
         </Row>
 
@@ -74,14 +70,14 @@ const Profile = () => {
         {page === "post" && (
           <Row className="main-content">
             <Col xs={24} sm={24} md={7} lg={7} xl={7}>
-              <ProfileSide 
-
-                page={page} 
+              <ProfileSide
+                clubId={clubId}
+                page={page}
                 changePage={changePage}
                 name={club.name}
                 slogan={club.slogan}
                 email={club.email}
-                />
+              />
             </Col>
 
             <Col xs={24} sm={24} md={17} lg={17} xl={17}>

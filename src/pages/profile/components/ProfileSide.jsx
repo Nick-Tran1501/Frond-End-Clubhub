@@ -3,7 +3,7 @@ import "../ProfilePage.css";
 import "antd/dist/antd.css";
 import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
 import { Col, Row,Layout } from "antd";
-
+import axios from 'axios';
 function getStoredInfo() {
     const storedInfo = localStorage.getItem("studentID");
     if (!storedInfo) return {
@@ -19,7 +19,7 @@ function getStoredInfo() {
 }
 
 
-const ProfileSide = ({page, changePage}) => {
+const ProfileSide = ({page, changePage, clubId}) => {
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);
 
@@ -57,6 +57,60 @@ const ProfileSide = ({page, changePage}) => {
             [event.target.name]: [event.target.value],
         }))
     }
+
+
+
+    //Api
+    const [club, setClub] = useState({
+        name: "",
+        logoUrl: "",
+        description: "",
+        slogan: "",
+        email: "",
+        backgroundUrl: "",
+        clubCategory: "",
+        status:""
+      });
+    const [clubPres, setClubPres] = useState({
+        name:"",
+        roles:"",
+        avatarUrl: "",
+    })
+    useEffect(() => {
+        axios({
+          method: "get",
+          url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
+        })
+          .then((res) => {
+            console.log(res.data.clubData.logoUrl);
+            setClub({
+              ...club,
+              name: res.data.clubData.name,
+              logoUrl: res.data.clubData.logoUrl,
+              description: res.data.clubData.description,
+              slogan: res.data.clubData.slogan,
+              email: res.data.clubData.email,
+              backgroundUrl: res.data.clubData.backgroundUrl,
+              clubCategory:res.data.clubData.clubCategory,
+              status: res.data.clubData.status
+            });
+            setClubPres({
+                ...clubPres, 
+                name: res.data.clubData.president.name,
+                roles: res.data.clubData.president.roles,
+                avatarUrl: res.data.clubData.president.avatarUrl,
+            })
+
+          }
+          
+          )
+          
+          .catch((err) => {
+            console.log(err);
+          });
+      },[]);
+
+
   return (
     <div className="main-left">
         <div className="ml intro">
@@ -68,32 +122,32 @@ const ProfileSide = ({page, changePage}) => {
                 <div className="p-row">
                     <i className="fa-solid fa-graduation-cap"></i>
                     <div className="p-note">
-                    <p>Graduate at {info.name}</p>
+                    <p>{club.name}</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-briefcase-fill"></i>
                     <div className="p-note">
-                    <p>Work in {info.location}</p>
+                    <p>{club.clubCategory}</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-house-fill"></i>
                     <div className="p-note">
-                    <p>Live in {info.president}</p>
+                    <p>{club.slogan}</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-envelope-fill"></i>
                     <div className="p-note">
-                    <p>{info.email}</p>
+                    <p>{club.email}</p>
                     </div>
                 </div>
                 <div className="p-row">
                     <i className="bi bi-blockquote-left"></i>
                     <div className="p-note">
                     <p>
-                        "{info.description}"
+                        {club.status}
                     </p>
                     </div>
                 </div>
@@ -191,10 +245,10 @@ const ProfileSide = ({page, changePage}) => {
                 </div>
             </div>
             <div className='p-row mem-tag'>
-                <img src='image/Image1.jpg' />
+                <img src={clubPres.avatarUrl} alt='avatar' />
                 <div className='memInfo'>
-                    <h3>Doraemon</h3>
-                    <p>Role: Club President</p>
+                    <h3>{clubPres.name}</h3>
+                    <p>{clubPres.roles}</p>
                 </div>
             </div>
             <div className='p-row mem-tag'>
