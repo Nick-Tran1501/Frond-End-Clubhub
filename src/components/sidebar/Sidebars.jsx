@@ -8,11 +8,9 @@ import {
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined,
-  EditFilled,
   ExportOutlined,
 } from "@ant-design/icons";
 import SignOut from "./SignOut";
-
 import axios from "axios"
 
 // Dropdown Menu
@@ -26,20 +24,7 @@ function getItem(label, key, icon, children, type) {
   };
 }
 
-const items = [
-  getItem("Profile", "sub1", <MailOutlined />, [
-    getItem("Name", "1", <EditFilled />),
-    getItem("Age", "2", <EditFilled />),
-    getItem("User Name", "3", <EditFilled />),
-  ]),
-  getItem("News", "sub2", <AppstoreOutlined />, [
-    getItem("Option 4", "4"),
-    getItem("Option 5", "6"),
-  ]),
-  getItem("Setting", "sub3", <SettingOutlined />, [
-    getItem(<SignOut/>, "9", <ExportOutlined />),
-  ]),
-];
+
 
 
 const sidebar = () => {
@@ -55,6 +40,7 @@ const sidebar = () => {
     console.log("click ", e);
   };
 
+
   const [userProfile,setUserProfile]=useState({})
 
   useEffect(()=> {
@@ -65,12 +51,27 @@ const sidebar = () => {
           headers:{'Authorization': `Bearer ${token}`}
         }
       )
-      .then(response => setUserProfile(response.data))
+      .then(response =>
+        {console.log(response.data)
+        setUserProfile(response.data)})
       .catch(err => console.log(err))
   
   },[])
 
-
+  const items = [
+    getItem("Profile", "sub1", <MailOutlined />, [
+      getItem(`${userProfile.phone}`, "1"),
+      getItem(`${userProfile.dob}`, "2"),
+      getItem(`${userProfile.gender}`, "3"),
+    ]),
+    getItem("News", "sub2", <AppstoreOutlined />, [
+      getItem("Option 4", "4"),
+      getItem("Option 5", "6"),
+    ]),
+    getItem("Setting", "sub3", <SettingOutlined />, [
+      getItem(<SignOut/>, "9", <ExportOutlined />),
+    ]),
+  ];
   return (
     <div className="sideContainer">
 
@@ -115,7 +116,7 @@ const sidebar = () => {
 
       <div className="sideAdvertise">
         <h2> Want to explore more? </h2>
-        <a href="https://www.rmit.edu.vn/vi"> Click Here </a>
+        <a href="https://www.rmit.edu.vn/vi" target="_blank" rel="noreferrer"> Click Here </a>
       </div>
 
       <div className="sideFooter">

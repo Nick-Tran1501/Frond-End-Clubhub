@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "antd";
 import "./SignOut.css";
-
+import {useNavigate} from "react-router-dom"
 const SignOut = () => {
   // Set value of pop up a modal by using useState
   const [visible, setVisible] = useState(false);
@@ -18,7 +18,7 @@ const SignOut = () => {
   const showModal = () => {
     setVisible(true);
   };
-
+  const navigate = useNavigate()
   //Function: Handle the loading after clicking "OK" button => waiting 2s, both appear another text
   const handleOK = () => {
     setModalContent("You are about to be signed out after a few second");
@@ -26,7 +26,12 @@ const SignOut = () => {
     setTimeout(() => {
       setVisible(false);
       setConfirmLoading(false);
+      localStorage.clear()
+      navigate("/")
     }, 2000);
+   
+      
+    
   };
 
   //Function: Handle the "Cancel" button
