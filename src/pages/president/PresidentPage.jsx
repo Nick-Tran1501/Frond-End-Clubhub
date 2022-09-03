@@ -14,7 +14,7 @@ const { TabPane } = Tabs
 
 const PresidentPage = () => {
     const [clubData, setClubData] = useState(null)
-    const [rendered, setRendered] = useState(0)
+
     useEffect(() => {
 
         getClubDetail().then(clubDetail => {
@@ -23,7 +23,7 @@ const PresidentPage = () => {
 
     }, [])
 
-    console.log(rendered)
+
 
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Avatar, Tag, Space, Button } from 'antd'
+import { Table, Avatar, Tag, Space, Button, Modal, Typography } from 'antd'
 import { getClubMembers, kickClubMember } from '../services/service';
+import { MehFilled } from '@ant-design/icons';
 
 
 
@@ -63,7 +64,7 @@ const MemberTable = () => {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <Button type='primary'>Promote</Button>
+                    <Button type='primary' onClick={() => onClickViewInfo(record)}>View Info</Button>
                     <Button type='primary' danger onClick={() => onClickKickMember(record)}>Kick</Button>
                 </Space>
             ),
@@ -85,11 +86,42 @@ const MemberTable = () => {
     })
 
     const onClickKickMember = (record) => {
-        kickClubMember(record).then(function () {
-            getClubMembers().then(data => {
-                setMemberData(data)
-            })
+        Modal.confirm({
+            centered: true,
+            okButtonProps: {
+                type: "primary",
+                danger: true
+            },
+            icon: <MehFilled style={{ fontSize: 32 }} />,
+            title: `Are you sure you want to kick ${record.username} ?`,
+            onOk: () => {
+                kickClubMember(record).then(function () {
+                    getClubMembers().then(data => {
+                        setMemberData(data)
+                    })
+                }).catch(err => {
+                    console.log(err.response.data)
+                })
+            }
         })
+
+    }
+
+    const onClickViewInfo = (record) => {
+        Modal.info({
+            title: "Member Information",
+            content: (
+                <div>
+                    <Avatar src={record.avatarUrl} />
+                    <Typography.Link>{record.username}</Typography.Link>
+                    <Typography>Name: {record.name}</Typography>
+                    <Typography>DoB: {record.dob}</Typography>
+                    <Typography>Phone: {record.phone}</Typography>
+                    <Typography>Gender: {record.gender}</Typography>
+                </div>
+            )
+        })
+
     }
 
     useEffect(() => {
