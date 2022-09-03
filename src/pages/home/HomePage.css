@@ -26,6 +26,19 @@ body{
     width: 85%;
 }
 
+.PostListContainer{
+    height: 95vh;
+    width: 100%;
+    overflow: auto;
+    border-radius: 10px;
+    padding: 7px;
+    margin-left: 0.3rem;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
 @media (max-width: 993px) {
     .hContainer {
       width: 95%;

@@ -3,15 +3,16 @@ import "../../pages/profile/ProfilePage.css";
 
 import "antd/dist/antd.css";
 import { Modal } from 'antd';
+import {CloseCircleOutlined} from '@ant-design/icons';
 
 
 export default function PostUpload() {
     const [post, setPost] = useState(false);
-    const [postImg, setPostImg] = useState();
+    const [postImg, setPostImg] = useState([]);
 
     useEffect(() => {
         return () => {
-            postImg && URL.revokeObjectURL(postImg.preview)
+            postImg && postImg.map(prev => URL.revokeObjectURL(prev));
         }
     }, [postImg]);
     const showPost = () => {
@@ -19,9 +20,17 @@ export default function PostUpload() {
     };
 
     const handleFile = (e) => {
-        const file = e.target.files[0];
-        file.preview = URL.createObjectURL(file)
-        setPostImg(file)
+        const files = e.target.files;
+        console.log(files)
+        // mapping all the images and set the temporary URL for previewing
+        const fileList = Promise.all([...e.target.files].map((file) => {
+            file.preview = URL.createObjectURL(file)
+            console.log(file.preview)
+            setPostImg((prev) => [...prev, file.preview])
+        }))
+        // file.preview = URL.createObjectURL(file)
+        // setPostImg(file)
+        fileList();
     }
   
     const handleOk = () => {
@@ -59,19 +68,20 @@ export default function PostUpload() {
                     </div>
 
                     <div className="file_img" id="post_upload">
-                        {postImg ? 
-                            <label htmlFor="post_img">
-                                <img src={postImg.preview} alt="post image" className='post_img' />
-                            </label> :
+                        {postImg.length > 0 ? postImg.map((prev, index) => 
+                            <div className='post_img'>
+                                <img src={prev} alt="post image" />
+                                <CloseCircleOutlined className='deleteIcon' />
+                            </div>
+                        ) :
                             <label htmlFor="post_img">
                                 <span><i className="fa-regular fa-image"></i></span>
                                 <p>Add an image</p>
                             </label>
                         }
-                        {/* <input type="file" name="u_image" id="imgInp"/> */}
                         
-                        <input type="file" name="post_img" id="post_img" onChange={handleFile}/>
-                        {/* <input type="hidden" id="inputImageUrl" name="imageUrl"/> */}
+                        <input type="file" name="post_img" id="post_img" onChange={handleFile} multiple />
+                        
                     </div>
                 </form>
             </Modal>
