@@ -17,16 +17,6 @@ import CommentsBox from "../commentsbox/CommentsBox";
 import axios from "axios";
 
 const Post = ({ data }) => {
-  const [userProfile, setUserProfile] = useState({});
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => setUserProfile(response.data))
-      .catch((err) => console.log(err));
-  }, []);
 
   // ------Show Comments-----
   const [show, setShow] = useState(false);
