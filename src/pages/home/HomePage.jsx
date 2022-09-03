@@ -11,23 +11,7 @@ import Post from "../../components/posts/Post"
 
 
 const Home = () => {
-  const [postData,setPostData] =useState([])
-  const token = localStorage.getItem("token");
-
-  useEffect(()=>{
-    axios({
-      headers: { Authorization: `Bearer ${token}` },
-
-      method:"get",
-      url:"https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
-    })
-    .then(response => {
-      setPostData(response.data)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  },[])
+  
 
   return (
     <div className="homeContainer">
@@ -54,16 +38,12 @@ const Home = () => {
 
           < Col xs={24} sm={24} md={18} lg={14} xl={13} style={{marginTop: "2rem"}}>
             <PostUpload />
+
+
             <div className="PostListContainer">
-              {postData.map((post) => {
-                return (
-                <Post 
-                  key={post._id}
-                  data={post}
-                />
-                )
-              })}
+              <Post/>
             </div>
+
           </Col>
 
           <Col xs={0} sm={0} md={6} lg={6} xl={6} style={{marginTop: "2rem"}}>

@@ -16,295 +16,330 @@ import CommentsBox from "../commentsbox/CommentsBox";
 
 import axios from "axios";
 
-const Post = ({ data }) => {
-
-  // ------Show Comments-----
-  const [show, setShow] = useState(false);
-
-  // -------Like Count--------
+const Post = () => {
+  const [postData, setPostData] = useState([]);
   const token = localStorage.getItem("token");
-  const handleLike = (postId) => {
+
+  const loadPost = () => {
     axios({
       headers: { Authorization: `Bearer ${token}` },
+
       method: "get",
-      url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${postId}/like`,
-      data: {
-        postId,
-      },
-    });
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
+    })
+      .then((response) => {
+        console.log(response.data);
+        setPostData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  useEffect(() => {
+    loadPost();
+  }, []);
 
-  // ------------Read More--------------
-  const ReadMore = ({ children }) => {
-    const text = children;
-    const [isReadMore, setIsReadMore] = useState(true);
-    const toggleReadMore = () => {
-      setIsReadMore(!isReadMore);
-    };
-    return (
-      <p className="text">
-        {isReadMore ? text.slice(0, 150) : text}
-        <span onClick={toggleReadMore} className="readOrHide">
-          {isReadMore ? "...read more" : " show less"}
-        </span>
-      </p>
-    );
-  };
-
-  // edit Box
+  const [show, setShow] = useState(false);
 
   const [visible, setVisible] = useState(false);
 
-  const showModal = () => {
-    setVisible(true);
-  };
-
-  const handleOk = (e) => {
-    console.log(e);
-    setVisible(false);
-  };
-
-  const handleCancel = (e) => {
-    console.log(e);
-    setVisible(false);
-  };
-
-  // ------Dropdown Menu For Post Setting------
-  const menu = (
-    <Menu
-      style={{
-        width: "5rem",
-        textAlign: "center",
-
-      }}
-      items={[
-        {
-          key: "1",
-          label: <Button
-            style={{
-              all: "unset",
-            }}
-          > Edit</Button>,
-          onClick: () => {
-            showModal();
-          },
-          icons: <EditOutlined/>
-        },
-        {
-          key: "2",
-
-          label: (
-            <Button
-            style={{
-              all: "unset",
-            }}
-            onClick= {() => {
-              deletePost(`${data._id}`)
-            }}
-          > Delete</Button>
-          ),
-          danger: true,
-        },
-      ]}
-    />
-  );
-
-
-  // ------ Delete Post --------------------------------
-  const deletePost = (postId) => {
-    axios({
-        method: "DELETE",
-        headers: { "Authorization": `Bearer ${token}` },
-        url:`https://rmit-club-dhyty.ondigitalocean.app/api/posts/${postId}`,
-      })
-      .then((response) => { console.log(response) })
-      .catch((error) => { console.log(error) })
-  }
 
   return (
     <React.Fragment>
-      <div className="PostContainer">
-        {/* -----Post Header----- */}
-        <div className="PostHeader">
-          {/* Profile Image */}
-          <div className="ProfileImage">
-            <Avatar
-              size={60}
-              src={data.author.avatarUrl}
-              className="sideAvatar"
-            />
-          </div>
-          {/* Post Info */}
-          <div className="PostInfo">
-            <div>
-              <p
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                }}
-              >
-                {data.author.username}
-              </p>
-            </div>
+      {postData.map((post) => {
 
-            <div>
-              <p
-                style={{
-                  opacity: "0.6",
-                  fontWeight: "bold",
-                  fontSize: "12px",
-                }}
-              >
-                {data.createAt}
-              </p>
-            </div>
-            <div
-              style={{
-                opacity: "0.6",
-                fontWeight: "bold",
-                fontSize: "12px",
-              }}
-            >
-              <p>{data.location}</p>
-            </div>
-          </div>
-          {/* Post Setting */}
-          <div className="PostSetting">
-            {data.updateAt ? (
-              <p
-                style={{
-                  opacity: "0.6",
-                  paddingTop: "13px",
-                }}
-              >
-                Updated:{data?.updateAt}
-              </p>
-            ) : (
-              ""
-            )}
-            <Dropdown overlay={menu} placement="bottomRight">
-              <button
-                style={{
-                  padding: "0 ",
-                  margin: "0 0 2rem 0",
-                  border: "none",
-                  background: "none",
-                  fontSize: "1.4rem",
-                  height: "64px",
-                }}
-              >
-                <SettingOutlined />
-              </button>
-            </Dropdown>
+        // -------Like Count--------
+        const handleLike = (postId) => {
+          axios({
+            headers: { Authorization: `Bearer ${token}` },
+            method: "get",
+            url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${postId}/like`,
+            data: {
+              postId,
+            },
+          });
+        };
 
-            <Modal
-              title="Basic Modal"
-              visible={visible}
-              onOk={handleOk}
-              onCancel={handleCancel}
-              okButtonProps={{
-                // functin here
-                disabled: true,
-              }}
-              cancelButtonProps={{
-                disabled: false,
-              }}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Modal>
-          </div>
-        </div>
-
-        {/* -----Post Content----- */}
-        <div className="PostContent">
-          <div className="Content">
-            <ReadMore>{data.content}</ReadMore>
-          </div>
-
-          <div className="PostImage">
-            <Carousel
-              dots={false}
-              arrows
-              prevArrow={<LeftOutlined />}
-              nextArrow={<RightOutlined />}
-              style={{
-                width: "100%",
-              }}
-            >
-              {data.images.map((image) => {
-                return (
-                  <Image
-                    key={image.key}
-                    width="100%"
-                    height="20rem"
-                    src={image.url}
-                    className="Images"
-                  />
-                );
-              })}
-            </Carousel>
-          </div>
-
-          <div className="PostResult">
-            <div className="ReactResult">
-              <p>{data.likes.length}</p>
-            </div>
-
-            <div className="ResultIcon">
-              <LikeOutlined />
-            </div>
-
-            <div className="CommentsResult">
-              <p style={{ fontSize: "18px", paddingTop: "5px" }}>
-                {data.comments.length}
-              </p>
-              <span className="commentsIcon">
-                <CommentOutlined></CommentOutlined>
+        // ------------Read More--------------
+        const ReadMore = ({ children }) => {
+          const text = children;
+          const [isReadMore, setIsReadMore] = useState(true);
+          const toggleReadMore = () => {
+            setIsReadMore(!isReadMore);
+          };
+          return (
+            <p className="text">
+              {isReadMore ? text.slice(0, 150) : text}
+              <span onClick={toggleReadMore} className="readOrHide">
+                {isReadMore ? "...read more" : " show less"}
               </span>
-            </div>
-          </div>
-          <hr />
-        </div>
+            </p>
+          );
+        };
+        // edit Box
+        const showModal = () => {
+          setVisible(true);
+        };
 
-        {/* -------Post Footer------ */}
-        <div className="PostFooter">
-          <button className="Button" onClick={() => handleLike(data._id)}>
-            <div className="ActionButtons">
-              <p>Like</p>
-              <LikeOutlined className="ButtonIcons" />
-            </div>
-          </button>
+        const handleOk = (e) => {
+          console.log(e);
+          setVisible(false);
+        };
 
-          <button className="Button">
-            <div
-              className="ActionButtons"
-              onClick={() => {
-                setShow(!show);
-              }}
-            >
-              <p>Comment</p>
-              <CommentOutlined className="ButtonIcons" />
-            </div>
-          </button>
+        const handleCancel = (e) => {
+          console.log(e);
+          setVisible(false);
+        };
 
-          <button className="Button">
-            <div className="ActionButtons">
-              <p>Share</p>
-              <ShareAltOutlined className="ButtonIcons" />
-            </div>
-          </button>
-        </div>
+        // ------Dropdown Menu For Post Setting------
+        const menu = (
+          <Menu
+            style={{
+              width: "5rem",
+              textAlign: "center",
+            }}
+            items={[
+              {
+                key: "1",
+                label: (
+                  <Button
+                    style={{
+                      all: "unset",
+                    }}
+                  >
+                    {" "}
+                    Edit
+                  </Button>
+                ),
+                onClick: () => {
+                  showModal();
+                },
+                icons: <EditOutlined />,
+              },
+              {
+                key: "2",
 
-        {show && (
-          <CommentsBox
-            data={data.comments}
-            postId={data._id}
-            userimage={data.author.avatarUrl}
+                label: (
+                  <Button
+                    style={{
+                      all: "unset",
+                    }}
+                    onClick={() => {
+                      deletePost();
+                    }}
+                  >
+                    {" "}
+                    Delete
+                  </Button>
+                ),
+                danger: true,
+              },
+            ]}
           />
-        )}
-      </div>
+        );
+
+        // ------ Delete Post ------------
+        const deletePost = () => {
+          axios({
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
+            url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${post._id}`,
+          })
+            .then((response) => {
+              postData.slice(0, post._id)
+              loadPost()
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        };
+
+        return (
+          <div className="PostContainer" key={`${post._id}?${new Date().getTime()}`}>
+            {/* -----Post Header----- */}
+            <div className="PostHeader">
+              {/* Profile Image */}
+              <div className="ProfileImage">
+                <Avatar
+                  size={60}
+                  src={post.author.avatarUrl}
+                  className="sideAvatar"
+                />
+              </div>
+              {/* Post Info */}
+              <div className="PostInfo">
+                <div>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "18px",
+                    }}
+                  >
+                    {post.author.username}
+                  </p>
+                </div>
+
+                <div>
+                  <p
+                    style={{
+                      opacity: "0.6",
+                      fontWeight: "bold",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {post.createAt}
+                  </p>
+                </div>
+                <div
+                  style={{
+                    opacity: "0.6",
+                    fontWeight: "bold",
+                    fontSize: "12px",
+                  }}
+                >
+                  <p>{post.location}</p>
+                </div>
+              </div>
+              {/* Post Setting */}
+              <div className="PostSetting">
+                {post.updateAt ? (
+                  <p
+                    style={{
+                      opacity: "0.6",
+                      paddingTop: "13px",
+                    }}
+                  >
+                    Updated:{post?.updateAt}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <Dropdown overlay={menu} placement="bottomRight">
+                  <button
+                    style={{
+                      padding: "0 ",
+                      margin: "0 0 2rem 0",
+                      border: "none",
+                      background: "none",
+                      fontSize: "1.4rem",
+                      height: "64px",
+                    }}
+                  >
+                    <SettingOutlined />
+                  </button>
+                </Dropdown>
+
+                <Modal
+                  title="Basic Modal"
+                  visible={visible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                  okButtonProps={{
+                    // functin here
+                    disabled: true,
+                  }}
+                  cancelButtonProps={{
+                    disabled: false,
+                  }}
+                >
+                  <p>Some contents...</p>
+                  <p>Some contents...</p>
+                  <p>Some contents...</p>
+                </Modal>
+              </div>
+            </div>
+
+            {/* -----Post Content----- */}
+            <div className="PostContent">
+              <div className="Content">
+                <ReadMore>{post.content}</ReadMore>
+              </div>
+
+              <div className="PostImage">
+                <Carousel
+                  dots={false}
+                  arrows
+                  prevArrow={<LeftOutlined />}
+                  nextArrow={<RightOutlined />}
+                  style={{
+                    width: "100%",
+                  }}
+                >
+                  {post.images.map((image) => {
+                    return (
+                      <Image
+                        key={image.key}
+                        width="100%"
+                        height="20rem"
+                        src={image.url}
+                        className="Images"
+                      />
+                    );
+                  })}
+                </Carousel>
+              </div>
+
+              <div className="PostResult">
+                <div className="ReactResult">
+                  <p>{post.likes.length}</p>
+                </div>
+
+                <div className="ResultIcon">
+                  <LikeOutlined />
+                </div>
+
+                <div className="CommentsResult">
+                  <p style={{ fontSize: "18px", paddingTop: "5px" }}>
+                    {post.comments.length}
+                  </p>
+                  <span className="commentsIcon">
+                    <CommentOutlined></CommentOutlined>
+                  </span>
+                </div>
+              </div>
+              <hr />
+            </div>
+
+            {/* -------Post Footer------ */}
+            <div className="PostFooter">
+              <button className="Button" onClick={() => handleLike(post._id)}>
+                <div className="ActionButtons">
+                  <p>Like</p>
+                  <LikeOutlined className="ButtonIcons" />
+                </div>
+              </button>
+
+              <button className="Button">
+                <div
+                  className="ActionButtons"
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                >
+                  <p>Comment</p>
+                  <CommentOutlined className="ButtonIcons" />
+                </div>
+              </button>
+
+              <button className="Button">
+                <div className="ActionButtons">
+                  <p>Share</p>
+                  <ShareAltOutlined className="ButtonIcons" />
+                </div>
+              </button>
+            </div>
+
+            {show && (
+              <CommentsBox
+                data={post.comments}
+                postId={post._id}
+                userimage={post.author.avatarUrl}
+              />
+            )}
+          </div>
+        );
+      })}
     </React.Fragment>
   );
 };
