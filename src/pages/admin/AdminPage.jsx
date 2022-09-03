@@ -57,36 +57,33 @@ function AdminPage() {
           </Title>
         </Col>
 
+        {/* title description */} 
         <Col className="admin-header-subtitle" span={24}>
           {/* Heading */}
           <Title
             level={4}
-            style={
-              {
-                paddingLeft: "1rem",  
-                // color: "white",
-              }
-            }
+            style={{
+              paddingLeft: "20px",
+              margin: "0",
+              height: "20%"
+            }}
           >
-            WELLCOME : ADMIN NAME
+            Welcome to WorldPress !
           </Title>
-            {/*  */}
-          <Paragraph>
-            <pre
-              style={{
-                fontSize: "1rem",
-                // color: "white",
-              }}
-            >
-              Admin Pages display in the administration area. Appropriate menus
-              and other styling appear around your content. Use this pages in
-              order to provide extra administration functionality.
-            </pre>
-          </Paragraph>
+            {/* admin page functionality */}
+          <Descriptions className="header-description" title="Admin Page Descriptions">
+            <Descriptions.Item label="System Editor"> Admin name</Descriptions.Item>
+            <Descriptions.Item label="System Name"> RMIT Club Hub </Descriptions.Item>
+            <Descriptions.Item label="System Users"> 999+  </Descriptions.Item>
+            <Descriptions.Item label="Location"> SGS </Descriptions.Item>
+            <Descriptions.Item label="Edit">
+              Clubs Controller , Users Controller , Club Creation requests
+            </Descriptions.Item>
+          </Descriptions>
 
-          {/* <Text> What whould you like to do ?</Text> */}
         </Col>
       </Row>
+
       {/* area 2  */}
       <Row className="admin-tab">
         <Col className="admin-tab-content" span={24}>

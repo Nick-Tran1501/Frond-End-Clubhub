@@ -4,6 +4,7 @@ import Feed from '../../../components/feed/Feeds';
 import "antd/dist/antd.css";
 import { Modal } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
+import PostUpload from '../../../components/postUpload/PostUpload';
 
 export default function ProfilePost() {
     const [post, setPost] = useState(false);
@@ -33,49 +34,8 @@ export default function ProfilePost() {
     };
     return (
         <div className='main-post'>
-            <div className='postInput mpost'>
-                <form className="account">
-                    <div className="profile_picture">
-                        <img src="image/avatar.png" alt="profile" /> 
-                    </div>
-                    <input type="text" placeholder="What's on your mind?" id="caption" onClick={showPost} />
-                    <label className="btn btn_primary" id="post_btn" onClick={showPost}>Post</label>
-                </form>
-            </div>
-            
-
-            <Modal title="Post" visible={post} onOk={handleOk} onCancel={handleCancel}>
-                <form  onSubmit={handleOk} className="upload_image" id="post_form">
-                    <div className="user_infor">
-                        <div className="profile_picture">
-                            <img src="image/default_avata_girl.png" alt="profile"/>
-                        </div>
-                        <p>Doraemon</p>
-
-                    </div>
-
-                    <div className="caption">
-                        <input type="text" name="text" placeholder="What's on your mind?" className='inputField' style={{width: "100%"}} />
-                    </div>
-
-                    <div className="file_img" id="post_upload">
-                        {postImg ? 
-                            <label htmlFor="post_img">
-                                <img src={postImg.preview} alt="post image" className='post_img' />
-                            </label> :
-                            <label htmlFor="post_img">
-                                <span><i className="fa-regular fa-image"></i></span>
-                                <p>Add an image</p>
-                            </label>
-                        }
-                        {/* <input type="file" name="u_image" id="imgInp"/> */}
-                        
-                        <input type="file" name="post_img" id="post_img" onChange={handleFile}/>
-                        {/* <input type="hidden" id="inputImageUrl" name="imageUrl"/> */}
-                    </div>
-                </form>
-            </Modal>
-
+            {/* Post Upload */}
+            <PostUpload />
             {/* POSTS */}
             <Feed />
         </div>

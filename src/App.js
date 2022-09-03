@@ -8,7 +8,11 @@ import ProfilePage from './pages/profile/ProfilePage'
 import Profile from './pages/profile/ProfilePage';
 import { Route, Routes } from "react-router-dom"
 import AdminPage from './pages/admin/AdminPage';
+
 import PresidentPage from './pages/president/PresidentPage';
+
+import ClubRegisterForm from './components/cludRegister/ClubRegisterForm';
+
 
 
 
@@ -32,8 +36,18 @@ function App() {
       <PresidentPage />
       <AdminPage />
 
+
       {/* <HomePage/>
+
+            {/* <AdminPage /> */}
+         
+            {/* <HomePage/>
             <ProfilePage/> */}
+
+            <AdminPage />
+            {/* <ClubRegisterForm/> */}
+            {/* {/* <HomePage/> */}
+            {/* <ProfilePage/>  */}
       {/* -------------------------------------------------------- */}
 
     </div>

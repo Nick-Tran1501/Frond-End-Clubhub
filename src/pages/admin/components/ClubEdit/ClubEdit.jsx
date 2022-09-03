@@ -14,6 +14,7 @@ import {
   Tag,
   Typography,
   Table,
+  Empty,
   //   Search,
   Form,
   // Menu,
@@ -119,7 +120,7 @@ function ClubEdit() {
   // Table data
   // sample student in club
   const sampleData = [];
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 100; i++) {
     const randomNumber = parseInt(Math.random() * 1000);
     sampleData.push({
       key: i,
@@ -211,7 +212,6 @@ function ClubEdit() {
 
   const onAddStudent = (studentData) => {
     const randomNumber = parseInt(Math.random() * 1000);
-
     const newStudent = {
       key: randomNumber,
       id: studentData[0].id,
@@ -251,24 +251,7 @@ function ClubEdit() {
     setEditingStudent(null);
   };
 
-  // Add new student input
-  // css label
-  // const layout = {
-  //   labelCol: {
-  //     span: 3,
-  //   },
-  //   wrapperCol: {
-  //     span: 16,
-  //   },
-  // };
-
-  // const tailLayout = {
-  //   wrapperCol: {
-  //     offset: 8,
-  //     span: 16,
-  //   },
-  // };
-
+  // ---- Add new student input ----
   const [form] = Form.useForm();
   const [form_search] = Form.useForm();
 
@@ -288,18 +271,8 @@ function ClubEdit() {
     form.resetFields();
   };
 
-  // search club
-  const [club, setClub] = useState({
-    key: "default",
-    id: "sample",
-    name: "Club name",
-    type: "Club type",
-    created: "Created date",
-    email: "club email",
-    president: "Tran Chan Nam",
-    members: "number",
-  });
-
+  // ---- search club ----
+  // const [club, setClub] = useState();
   const sampleClubs = [];
   for (let i = 0; i < 10; i++) {
     const randomNumber = parseInt(Math.random() * 1000);
@@ -319,12 +292,79 @@ function ClubEdit() {
     console.log(values);
     const newClub = sampleClubs.filter((club) => club.name === values.clubName);
     console.log(newClub[0]);
-    setClub(newClub[0]);
+    // setClub(newClub[0]);
+
+    // ---- return display ----- 
+    // setClubDisplay(
+    //   <PageHeader title={club.name} tags={<Tag color="blue">{club.type}</Tag>}>
+    //     <Row>
+    //       <Statistic title="President" value={club.president} />
+    //       <Statistic
+    //         title="Members"
+    //         value={club.members}
+    //         style={{
+    //           margin: "0 50px",
+    //         }}
+    //       />
+    //       <Statistic title="Generated" value={club.created} />
+    //     </Row>
+    //   </PageHeader>
+    // );
+
+    setClubDisplay(
+      <PageHeader title={newClub[0].name} tags={<Tag color="blue">{newClub[0].type}</Tag>}>
+        <Row>
+          <Statistic title="President" value={newClub[0].president} />
+          <Statistic
+            title="Members"
+            value={newClub[0].members}
+            style={{
+              margin: "0 50px",
+            }}
+          />
+          <Statistic title="Generated" value={newClub[0].created} />
+        </Row>
+      </PageHeader>
+    );
+
+    // Test promise function
+
+    // return new Promise((resolve, reject) => {
+    //   if (!club) {
+    //     reject("No club found");
+    //   } else {
+    //     resolve(
+    //       setClubDisplay(
+    //         <PageHeader
+    //           title={club.name}
+    //           tags={<Tag color="blue">{club.type}</Tag>}
+    //         >
+    //           <Row>
+    //             <Statistic title="President" value={club.president} />
+    //             <Statistic
+    //               title="Members"
+    //               value={club.members}
+    //               style={{
+    //                 margin: "0 50px",
+    //               }}
+    //             />
+    //             <Statistic title="Generated" value={club.created} />
+    //           </Row>
+    //         </PageHeader>
+    //       )
+    //     );
+    //   }
+    // });
+
   };
 
   const searchReset = () => {
     form_search.resetFields();
   };
+
+  const [clubDisplay, setClubDisplay] = useState(
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+  );
 
   return (
     <div className="">
@@ -332,15 +372,13 @@ function ClubEdit() {
         {/* area 1 */}
         <Col className="club-edit-search" span={24}>
           <Form
-            // {...layout}
             form={form_search}
             name="search-club"
             onFinish={searchClub}
-            size="small"
-            style={{}}
+            size="medium"
+            // style={{}}
           >
             <Form.Item
-              // {...tailLayout}
               name="clubName"
               label="Club Name"
               rules={[
@@ -349,7 +387,7 @@ function ClubEdit() {
                 },
               ]}
             >
-              <Select placeholder="Selec Club name" allowClear style={{}}>
+              <Select placeholder="Select Club name" allowClear style={{}}>
                 {sampleClubs.map((club) => {
                   return (
                     <Option key={club.id} value={club.name}>
@@ -360,7 +398,11 @@ function ClubEdit() {
               </Select>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button
+                style={{ marginRight: "10px" }}
+                type="primary"
+                htmlType="submit"
+              >
                 Search
               </Button>
               <Button htmlType="button" onClick={searchReset}>
@@ -373,7 +415,11 @@ function ClubEdit() {
         {/* area 2 */}
         <Col span={24}>
           {/* club members details */}
-          <PageHeader
+
+          {clubDisplay}
+
+          {/* <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />  */}
+          {/* <PageHeader
             // size= "small"
             title={club.name}
             tags={<Tag color="blue">{club.type}</Tag>}
@@ -389,17 +435,16 @@ function ClubEdit() {
               />
               <Statistic title="Generated" value={club.created} />
             </Row>
-          </PageHeader>
+          </PageHeader> */}
         </Col>
 
         {/* area 3 */}
-        {/* Add new studen  */}
+        {/* Add new student  */}
         <Col className="add-container" span={24}>
           {/* search bar ( search student by id) */}
-          <Title level={4} style={{ margin: "0 20px" }}>
+          <Title level={2} style={{ margin: "0 20px" }}>
             Add new student to club
           </Title>
-
 
           <Search
             style={{
@@ -414,15 +459,18 @@ function ClubEdit() {
           />
 
           <Title
-            level={4}
+            level={3}
             style={{
-              margin: "10px",
+              margin: "0px",
               textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
             }}
           >
             Student Information
           </Title>
-          
+
+          {/* student information*/}
           <Table
             bordered
             columns={columnStudentData}
@@ -462,7 +510,11 @@ function ClubEdit() {
             <Form.Item
             // {...tailLayout}
             >
-              <Button type="primary" htmlType="submit">
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ marginRight: "10px" }}
+              >
                 Add student
               </Button>
 
@@ -476,19 +528,25 @@ function ClubEdit() {
         {/* area 4 */}
         <Col className="table-content" span={24}>
           {/* single student table */}
-          <Title level={4} 
-            style={{ 
-              textAlign: 'center',
-              margin: "10px",
-          }}
-          > Club Members </Title>
+
+          <Title
+            level={3}
+            style={{
+              textAlign: "center",
+              margin: "0px",
+              backgroundColor: "black",
+              color: "white",
+            }}
+          >
+            Club Members
+          </Title>
           <Table
             bordered
             columns={columns}
             dataSource={dataSource}
             onChange={onChange}
             pagination={{
-              position: ["bottomCenter"],
+              position: ["bottomRight"],
             }}
           />
           <Modal

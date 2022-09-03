@@ -8,16 +8,13 @@ const ProfileBg =({
     clubId,
   page,
   changePage,
-//   name,
-//   logoUrl,
-//   description,
-//   slogan,
-//   backgroundUrl,
+
 }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [avatar, setAvatar] = useState();
   const [background, setBackground] = useState();
+  
   // Post API
   const token = localStorage.getItem("token");
   const uploadBackground = () => {
@@ -43,6 +40,27 @@ const ProfileBg =({
       });
   };
 
+  const uploadAvatar = () => {
+    const formData = new FormData();
+    formData.append("logo", avatar);
+
+    axios({
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${token}`},
+        url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}/logo`,
+
+      method: "put",
+      data: formData,
+  })
+  .then((response) => {
+    console.log(response.data)
+    setClub({...club, logoUrl: response.data.logoUrl});   
+
+  })
+  .catch((error) => {console.log(error)})
+  }
+  
 
   //Get Api
   const [club, setClub] = useState({
@@ -59,15 +77,15 @@ const ProfileBg =({
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.clubData.logoUrl);
         setClub({
           ...club,
-          name: res.data.name,
-          logoUrl: res.data.logoUrl,
-          description: res.data.description,
-          slogan: res.data.slogan,
-          email: res.data.email,
-          backgroundUrl: res.data.backgroundUrl
+          name: res.data.clubData.name,
+          logoUrl: res.data.clubData.logoUrl,
+          description: res.data.clubData.description,
+          slogan: res.data.clubData.slogan,
+          email: res.data.clubData.email,
+          backgroundUrl: res.data.clubData.backgroundUrl
         });
       })
       .catch((err) => {
@@ -90,11 +108,16 @@ const ProfileBg =({
     setModal2(true);
   };
 
-  const handleOk = (e) => {
+  const handleOkModalBackground = (e) => {
     e.preventDefault();
     setModal1(false);
-    setModal2(false);
     uploadBackground();
+  };
+
+  const handleOkModalAvatar = (e) => {
+    e.preventDefault();
+    setModal2(false);
+    uploadAvatar();
   };
 
   const handleCancel = () => {
@@ -150,7 +173,7 @@ const ProfileBg =({
         <Modal
           title="Change cover image"
           visible={modal1}
-          onOk={(e)=>{handleOk(e)}}
+          onOk={(e)=>{handleOkModalBackground(e)}}
           onCancel={handleCancel}
         >
           <form className="upload_image" id="post_form">
@@ -188,18 +211,19 @@ const ProfileBg =({
           </form>
         </Modal>
       </div>
+
       {/* <!-- profile-info --> */}
       <div className="ab profile-info">
         <div className="pd-left">
           <div className="pdl-row">
-            <img
+            <Image
               className="pfi-img"
               onClick={showModal2}
-              src={club.logoUrl}
+              src={`${club.logoUrl}?${new Date().getTime()}`}
               alt="profile"
               id="profile_btn"
             />
-            <div>
+            <div className="pfi-des">
               <h1>{club.name}</h1>
               <p>{club.description}</p>
               <p>{club.slogan}</p>
@@ -208,7 +232,7 @@ const ProfileBg =({
             <Modal
               title="Change profile image"
               visible={modal2}
-              onOk={handleOk}
+              onOk={(e) => {handleOkModalAvatar(e)}}
               onCancel={handleCancel}
             >
               <form className="upload_image" id="post_form">

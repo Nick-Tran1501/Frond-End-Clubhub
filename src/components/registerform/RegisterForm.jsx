@@ -35,6 +35,8 @@ const Register = () => {
   });
 
   // ------------Get Date value Function----------
+ 
+
   const onChange = (date, dateString) => {
     setUserDetail({ ...userDetail, dob: dateString });
   };
@@ -44,7 +46,7 @@ const Register = () => {
   const checkNamelValid = (input) => {
     const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,5}$/;
     const emptyInput = "";
-    if (!fullNameRegex.test(input) || !emptyInput.match(input)) {
+    if (!fullNameRegex.test(input) && emptyInput.match(input)) {
       document.querySelector(".FullNameWarning").style.visibility = "visible";
     } else {
       document.querySelector(".FullNameWarning").style.visibility = "hidden";
@@ -55,7 +57,7 @@ const Register = () => {
   const checkEmailValid = (input) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
     const emptyInput = "";
-    if (!emailRegex.test(input) || !emptyInput.match(input)) {
+    if (!emailRegex.test(input) && emptyInput.match(input)) {
       document.querySelector(".EmailWarning").style.visibility = "visible";
     } else {
       document.querySelector(".EmailWarning").style.visibility = "hidden";
@@ -68,7 +70,7 @@ const Register = () => {
   const checkPhoneValid = (input) => {
     const emailRegex = /^[0-9]{8,10}$/;
     const emptyInput = "";
-    if (!emailRegex.test(input) || !emptyInput.match(input)) {
+    if (!emailRegex.test(input) && emptyInput.match(input)) {
       document.querySelector(".PhoneWarning").style.visibility = "visible";
     } else {
       document.querySelector(".PhoneWarning").style.visibility = "hidden";
@@ -80,7 +82,7 @@ const Register = () => {
     const emptyInput = "";
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(input) || !emptyInput.match(input)) {
+    if (!passwordRegex.test(input) && emptyInput.match(input)) {
       document.querySelector(".PasswordWarning").style.visibility = "visible";
     } else {
       document.querySelector(".PasswordWarning").style.visibility = "hidden";
@@ -91,7 +93,7 @@ const Register = () => {
   const checkPasswordRetypeValid = () => {
     const emptyInput = "";
     if (
-      userDetail.retype === userDetail.password ||
+      userDetail.retype === userDetail.password &&
       !emptyInput.match(userDetail.retype)
     ) {
       document.querySelector(".RetypePasswordWarning").style.visibility =
@@ -102,19 +104,30 @@ const Register = () => {
     }
   };
 
-  // -------- Validate DOB Function----------
 
   // -------- Validate Username Function----------
   const checkUsernamelValid = (input) => {
     const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?:[A-Z][a-zA-Z]*)$/;
     const emptyInput = "";
-    if (!UsernameRegex.test(input) || !emptyInput.match(input)) {
+    if (!UsernameRegex.test(input) && emptyInput.match(input)) {
       document.querySelector(".UsernameWarning").style.visibility = "visible";
     } else {
       document.querySelector(".UsernameWarning").style.visibility = "hidden";
     }
   };
 
+   // -------- Validate DOB Function----------
+   const checkDobValid = () => {
+    const emptyInput = "";
+    if (
+     
+      emptyInput.match(userDetail.dob)){
+        document.querySelector(".DateWarning").style.visibility = "visible"
+      }else{
+
+        document.querySelector(".DateWarning").style.visibility = "hidden";
+      }
+    }
   //----------Validate Gender Function----------
   const checkGenderlValid = (input) => {
     const emptyInput = "";
@@ -134,12 +147,11 @@ const Register = () => {
     checkEmailValid(userDetail.email);
     checkPhoneValid(userDetail.phone);
     checkPasswordValid(userDetail.password);
-
+    checkPasswordRetypeValid()
     // -----Right Column Input -----
     checkGenderlValid(userDetail.gender);
     checkUsernamelValid(userDetail.username);
-    checkPasswordRetypeValid();
-
+    checkDobValid()
     //
     e.preventDefault();
     axios({
