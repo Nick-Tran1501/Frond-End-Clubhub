@@ -65,7 +65,7 @@ function AdminPage() {
             style={{
               paddingLeft: "20px",
               margin: "0",
-              height: "20%"
+              // height: "20%"
             }}
           >
             Welcome to WorldPress !
@@ -80,7 +80,6 @@ function AdminPage() {
               Clubs Controller , Users Controller , Club Creation requests
             </Descriptions.Item>
           </Descriptions>
-
         </Col>
       </Row>
 
