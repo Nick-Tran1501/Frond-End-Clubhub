@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import Navbars from "../../components/navbar/NavBars";
 import Sidebars from "../../components/sidebar/Sidebars";
 import Feed from "../../components/feed/Feeds";
@@ -7,9 +8,28 @@ import "./HomePage.css";
 import "antd/dist/antd.css";
 import { Col, Row} from "antd";
 import PostUpload from "../../components/postUpload/PostUpload";
+import Post from "../../components/posts/Post"
+
 
 const Home = () => {
-  
+  const [postData,setPostData] =useState([])
+  const token = localStorage.getItem("token");
+
+  useEffect(()=>{
+    axios({
+      headers: { Authorization: `Bearer ${token}` },
+
+      method:"get",
+      url:"https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
+    })
+    .then(response => {
+      
+      setPostData(response.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  },[])
   return (
     <div className="homeContainer">
 
@@ -33,9 +53,18 @@ const Home = () => {
             <Sidebars />
           </Col>
 
-          <Col xs={24} sm={24} md={18} lg={14} xl={13} style={{marginTop: "2rem"}}>
+          < Col xs={24} sm={24} md={18} lg={14} xl={13} style={{marginTop: "2rem"}}>
             <PostUpload />
-            <Feed/>
+            <div className="PostListContainer">
+              {postData.map((post) => {
+                return (
+                <Post 
+                  key={post._id}
+                  data={post}
+                />
+                )
+              })}
+            </div>
           </Col>
 
           <Col xs={0} sm={0} md={6} lg={6} xl={6} style={{marginTop: "2rem"}}>
