@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Carousel, Modal, Avatar } from "antd";
+import { Image, Carousel, Modal, Avatar, Menu, Dropdown, Button } from "antd";
 import {
   EditOutlined,
   LikeOutlined,
@@ -10,6 +10,7 @@ import {
   CommentOutlined,
   LeftOutlined,
   RightOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import CommentsBox from "../commentsbox/CommentsBox";
 
@@ -78,6 +79,58 @@ const Post = ({ data }) => {
     setVisible(false);
   };
 
+  // ------Dropdown Menu For Post Setting------
+  const menu = (
+    <Menu
+      style={{
+        width: "5rem",
+        textAlign: "center",
+
+      }}
+      items={[
+        {
+          key: "1",
+          label: <Button
+            style={{
+              all: "unset",
+            }}
+          > Edit</Button>,
+          onClick: () => {
+            showModal();
+          },
+          icons: <EditOutlined/>
+        },
+        {
+          key: "2",
+
+          label: (
+            <Button
+            style={{
+              all: "unset",
+            }}
+            onClick= {() => {
+              deletePost(`${data._id}`)
+            }}
+          > Delete</Button>
+          ),
+          danger: true,
+        },
+      ]}
+    />
+  );
+
+
+  // ------ Delete Post --------------------------------
+  const deletePost = (postId) => {
+    axios({
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` },
+        url:`https://rmit-club-dhyty.ondigitalocean.app/api/posts/${postId}`,
+      })
+      .then((response) => { console.log(response) })
+      .catch((error) => { console.log(error) })
+  }
+
   return (
     <React.Fragment>
       <div className="PostContainer">
@@ -127,30 +180,33 @@ const Post = ({ data }) => {
           </div>
           {/* Post Setting */}
           <div className="PostSetting">
-            {data.updateAt ?
-            <p
-              style={{
-                opacity: "0.6",
-                paddingTop: "13px",
-              }}
-            >
-              Updated:{data?.updateAt}
-            </p>
-            : ""
-            }
-            <button
-              style={{
-                padding: "0 ",
-                margin: "0 0 2rem 0",
-                border: "none",
-                background: "none",
-                fontSize: "1.4rem",
-                height: "64px",
-              }}
-              onClick={showModal}
-            >
-              <EditOutlined />
-            </button>
+            {data.updateAt ? (
+              <p
+                style={{
+                  opacity: "0.6",
+                  paddingTop: "13px",
+                }}
+              >
+                Updated:{data?.updateAt}
+              </p>
+            ) : (
+              ""
+            )}
+            <Dropdown overlay={menu} placement="bottomRight">
+              <button
+                style={{
+                  padding: "0 ",
+                  margin: "0 0 2rem 0",
+                  border: "none",
+                  background: "none",
+                  fontSize: "1.4rem",
+                  height: "64px",
+                }}
+              >
+                <SettingOutlined />
+              </button>
+            </Dropdown>
+
             <Modal
               title="Basic Modal"
               visible={visible}
