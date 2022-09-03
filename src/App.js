@@ -8,7 +8,11 @@ import ProfilePage from './pages/profile/ProfilePage'
 import Profile from './pages/profile/ProfilePage';
 import { Route, Routes } from "react-router-dom"
 import AdminPage from './pages/admin/AdminPage';
+
+import PresidentPage from './pages/president/PresidentPage';
+
 import ClubRegisterForm from './components/cludRegister/ClubRegisterForm';
+
 
 
 
@@ -18,26 +22,19 @@ function App() {
     <div className="App">
       {/* Nick's area  */}
         {/* <Routes>
+
             <Route path='/*' element={<LoginPage/>}/>
 
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/welcome' element={<WelcomePage/>}/>
             <Route path='/profile' element={<ProfilePage/>}/>
           </Routes> */}
-    {/* ---------------------------------------------------------------- */}
-      
-          
+
       {/* Tuan's area ---- command if you want do not delete it*/}
+            {/* <LoginPage /> */}
+            {/* <PresidentPage />
+            <AdminPage /> */}
 
-            {/* <AdminPage /> */}
-         
-            {/* <HomePage/>
-            <ProfilePage/> */}
-
-            <AdminPage />
-            {/* <ClubRegisterForm/> */}
-            {/* {/* <HomePage/> */}
-            {/* <ProfilePage/>  */}
       {/* -------------------------------------------------------- */}
 
     </div>
