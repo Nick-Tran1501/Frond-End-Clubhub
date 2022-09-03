@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Navbars from "../../components/navbar/NavBars";
 import Sidebars from "../../components/sidebar/Sidebars";
-import Feed from "../../components/feed/Feeds";
 import Rightbars from "../../components/rightbar/RightBars";
 import "./HomePage.css";
 import "antd/dist/antd.css";
@@ -23,13 +22,13 @@ const Home = () => {
       url:"https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
     .then(response => {
-      
       setPostData(response.data)
     })
     .catch(error => {
       console.log(error)
     })
   },[])
+
   return (
     <div className="homeContainer">
 

@@ -30,7 +30,6 @@ const RecommendClub = () => {
     .catch((err) => {console.log(err)})
   },[])
   
-  console.log("hihi",clubInfo)
   return(
     <React.Fragment>
 
