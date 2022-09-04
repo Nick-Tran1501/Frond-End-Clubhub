@@ -24,11 +24,10 @@ export const getClubDetail = async () => {
 
     if (res.status === 200) {
         return res.data
+    } else {
+        console.log(res)
     }
 
-    if (res.status === 404) {
-        return undefined
-    }
 }
 
 export const getJoinClubReques = async () => {
