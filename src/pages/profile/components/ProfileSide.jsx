@@ -185,7 +185,15 @@ const ProfileSide = ({page, changePage, clubId}) => {
                     <a onClick={() => changePage("media")}>All images</a>
                 </div>
             </div>
-            <Row className="memGalery">
+            <Row 
+                gutter={{
+                    xs: 0,
+                    sm: 5,
+                    md: 5,
+                    lg: 5,
+                  }}
+                className="memGalery"
+            >
                 <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                     <Image
                         width="100%"
