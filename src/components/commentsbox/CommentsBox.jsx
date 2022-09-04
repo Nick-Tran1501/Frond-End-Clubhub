@@ -1,9 +1,7 @@
 import React, { useState, useEffect} from "react";
 import "./CommentsBox.css";
 import { Avatar, Input, Button, notification, Space } from "antd";
-import CommentList from "../commentlist/CommentList";
 import axios from "axios";
-import Comment from "../commentlist/Comment"
 const CommentsBox = ({ data, postId, userimage, loadPost }) => {
   const { TextArea } = Input;
 
