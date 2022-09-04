@@ -32,11 +32,11 @@ const Home = () => {
           }}
           className="hContainer"
         >
-          <Col xs={0} sm={0} md={0} lg={7} xl={5}>
+          <Col xs={0} sm={0} md={0} lg={5} xl={5}>
             <Sidebars />
           </Col>
 
-          < Col xs={24} sm={24} md={18} lg={14} xl={13} style={{marginTop: "2rem"}}>
+          < Col xs={24} sm={24} md={18} lg={13} xl={13} style={{marginTop: "2rem"}}>
             <PostUpload />
 
 

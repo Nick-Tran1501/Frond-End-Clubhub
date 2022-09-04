@@ -49,3 +49,18 @@
         font-size: 35px;
     }
 }
+
+@media screen and (max-width: 470px) {
+    .hero {
+        padding: 0 0px;
+    }
+
+    .heroContent .text-2 {
+        font-size: 45px;
+    }
+
+    .heroContent .text-3 {
+        font-size: 35px;
+    }
+}
+
