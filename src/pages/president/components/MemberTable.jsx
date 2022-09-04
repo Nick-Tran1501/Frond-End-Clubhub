@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Avatar, Tag, Space, Button, Modal, Typography } from 'antd'
-import { getClubMembers, kickClubMember } from '../services/service';
+import { getClubMembers, kickClubMember, setMemberRoleInClub } from '../services/service';
 import { MehFilled } from '@ant-design/icons';
 
 
@@ -8,7 +8,17 @@ import { MehFilled } from '@ant-design/icons';
 // Map members to rows
 const MemberTable = () => {
     const [memberData, setMemberData] = useState([])
+    const [clubId, setClubId] = useState(null)
 
+    useEffect(() => {
+        getClubMembers().then(data => {
+            setMemberData(data.members)
+            setClubId(data.clubId)
+
+        })
+
+
+    }, [])
     const columns = [
         {
             title: 'Profile',
@@ -42,17 +52,19 @@ const MemberTable = () => {
             render: (snumber) => <a>{snumber ? snumber : "Empty "}</a>
         },
         {
-            title: 'Roles',
-            key: 'roles',
-            dataIndex: 'roles',
-            render: (_, { roles }) => {
-                let color = 'blue'
-                if (roles === 'user') {
+            title: 'Role',
+            key: 'clubRole',
+            dataIndex: 'clubRole',
+            render: (clubRole) => {
+                let color = 'brown'
+                if (clubRole === 'user') {
                     color = 'green'
+                } else if (clubRole === 'writer') {
+                    color = 'blue'
                 }
                 return (
-                    <Tag color={color} key={roles}>
-                        {roles.toUpperCase()}
+                    <Tag color={color} key={clubRole}>
+                        {clubRole}
                     </Tag>
                 )
 
@@ -62,28 +74,53 @@ const MemberTable = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button type='primary' onClick={() => onClickViewInfo(record)}>View Info</Button>
-                    <Button type='primary' danger onClick={() => onClickKickMember(record)}>Kick</Button>
-                </Space>
-            ),
+            render: (_, record) => {
+                let isPresident = false
+                let isContenWriter = false
+                if (record.clubRole === 'president') {
+                    isPresident = true
+                } else if (record.clubRole === 'writer') {
+                    isContenWriter = true
+                }
+
+                return (
+                    <Space size="middle" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Button type='primary' onClick={() => onClickViewInfo(record)}>View Info</Button>
+                        {(!isContenWriter && !isPresident) && <Button type="primary" onClick={() => onClickSetRole(record, "writer")}>Allow posting</Button>}
+                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "user")}>Disable posting</Button>}
+                        {!isPresident &&
+                            <Button type='primary' danger onClick={() => onClickKickMember(record)}>Kick</Button>
+                        }
+                    </Space>
+                )
+            },
         },
     ];
 
-    let memberInfo = memberData.map(member => {
-        return {
-            key: member._id,
-            name: member.name,
-            username: member.username,
-            avatarUrl: member.avatarUrl,
-            roles: member.roles,
-            dob: member.dob,
-            gender: member.gender,
-            snumber: member?.snumber,
-            phone: member.phone
-        }
-    })
+    let memberInfo = []
+    if (memberData.length > 0) {
+        memberInfo = memberData.map(member => {
+            let clubRole = member.clubs.find(club => club.club === clubId)
+
+
+            return {
+                key: member._id,
+                name: member.name,
+                username: member.username,
+                avatarUrl: member.avatarUrl,
+                roles: member.roles,
+                dob: member.dob,
+                gender: member.gender,
+                snumber: member?.snumber,
+                phone: member.phone,
+                clubRole: clubRole.role
+            }
+        })
+    }
+
+
+
+
 
     const onClickKickMember = (record) => {
         Modal.confirm({
@@ -97,7 +134,7 @@ const MemberTable = () => {
             onOk: () => {
                 kickClubMember(record).then(function () {
                     getClubMembers().then(data => {
-                        setMemberData(data)
+                        setMemberData(data.members)
                     })
                 }).catch(err => {
                     console.log(err.response.data)
@@ -123,14 +160,19 @@ const MemberTable = () => {
         })
 
     }
-
-    useEffect(() => {
-        getClubMembers().then(data => {
-            setMemberData(data)
+    const onClickSetRole = (record, updatedRole) => {
+        setMemberRoleInClub(record, updatedRole).then(() => {
+            getClubMembers().then(data => {
+                setMemberData(data.members)
+            })
         })
+    }
 
-        console.log('Member table api call')
-    }, [])
+
+
+
+    console.log(memberData)
+
 
 
 
