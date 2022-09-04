@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
-
-import "./Request.style.css";
+// import styles from "./Request.less"
+import "./Request.scss";
 
 import { SmileOutlined } from "@ant-design/icons";
 import {
@@ -21,7 +21,10 @@ import { MoreOutlined } from "@ant-design/icons";
 function RequestClub() {
   // test request list
 
-  const { Paragraph, Text } = Typography;
+  // const { Paragraph, Text } = Typography;
+
+
+
 
   return (
     <div>
@@ -38,41 +41,38 @@ function RequestClub() {
 
       {/* test  */}
       <Row>
+
         <Col className="request-list" span={24}>
-          {/* sample request */}
-          <PageHeader
-            title="Cau Lac Bo Chim Chich Choe"
-            subTitle= " Ca mua hat "
-            tags={<Tag color="blue">Pending</Tag>}
-            extra={[
-              <Button key="2">Cancel</Button>,
-              <Button key="1" type="primary">
-                Accept
-              </Button>,
-            ]}
-
-            style ={{
-              backgroundColor: "white",
-              paddingBottom: "10px",
-            }}
-          >
-            <Descriptions size="small" column={2}>
-              <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
-              <Descriptions.Item label="Association">
-                <a>421421</a>
-              </Descriptions.Item>
-              <Descriptions.Item label="Creation Time">
-                2017-01-10
-              </Descriptions.Item>
-              <Descriptions.Item label="Effective Time">
-                2017-10-10
-              </Descriptions.Item>
-              <Descriptions.Item label="Remarks">
-                Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-              </Descriptions.Item>
-            </Descriptions>
-          </PageHeader>
-
+          <div className="request-element">
+            <PageHeader
+              className="customSelect"
+              title="Cau Lac Bo Chim Chich Choe"
+              subTitle=" Ca mua hat "
+              tags={<Tag color="blue">Pending</Tag>}
+              extra={[
+                <Button key="2">Cancel</Button>,
+                <Button key="1" type="primary">
+                  Accept
+                </Button>,
+              ]}
+            >
+              <Descriptions size="small" column={2}>
+                <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
+                <Descriptions.Item label="Association">
+                  <a> 421421</a>
+                </Descriptions.Item>
+                <Descriptions.Item label="Creation Time">
+                  2017-01-10
+                </Descriptions.Item>
+                <Descriptions.Item label="Effective Time">
+                  2017-10-10
+                </Descriptions.Item>
+                <Descriptions.Item label="Remarks">
+                  Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
+                </Descriptions.Item>
+              </Descriptions>
+            </PageHeader>
+          </div>
         </Col>
       </Row>
     </div>

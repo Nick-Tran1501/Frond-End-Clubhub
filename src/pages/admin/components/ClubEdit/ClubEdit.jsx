@@ -98,6 +98,7 @@ function ClubEdit() {
   const searchReset = () => {
     form_search.resetFields();
     setClubDisplay(<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />);
+    setDataSource();
   };
 
   const [clubDisplay, setClubDisplay] = useState(
