@@ -7,7 +7,7 @@ const token = localStorage.getItem("token")
 export const getClubMembers = async () => {
     const res = await axios({
         method: 'get',
-        url: "http://localhost:8080/api/president/myclub/members",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/members",
         headers: { 'Authorization': `Bearer ${token}` }
     })
     if (res.status === 200) {
@@ -18,7 +18,7 @@ export const getClubMembers = async () => {
 export const getClubDetail = async () => {
     const res = await axios({
         method: 'get',
-        url: "http://localhost:8080/api/president/myclub",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub",
         headers: { 'Authorization': `Bearer ${token}` }
     })
 
@@ -34,7 +34,7 @@ export const getClubDetail = async () => {
 export const getJoinClubReques = async () => {
     const res = await axios({
         method: 'get',
-        url: "http://localhost:8080/api/president/myclub/request",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/request",
         headers: { 'Authorization': `Bearer ${token}` }
     })
 
@@ -46,7 +46,7 @@ export const getJoinClubReques = async () => {
 export const processJoinRequest = async (record, action) => {
     const res = await axios({
         method: 'post',
-        url: "http://localhost:8080/api/president/myclub/request",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/request",
         headers: { 'Authorization': `Bearer ${token}` },
         data: {
             requestId: record.key,
@@ -63,7 +63,7 @@ export const processJoinRequest = async (record, action) => {
 export const setMemberRoleInClub = async (record, updatedRole) => {
     const res = await axios({
         method: 'put',
-        url: "http://localhost:8080/api/president/myclub/members",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/members",
         headers: { 'Authorization': `Bearer ${token}` },
         data: {
             userId: record.key,
@@ -79,7 +79,7 @@ export const setMemberRoleInClub = async (record, updatedRole) => {
 export const kickClubMember = async (record) => {
     const res = await axios({
         method: 'delete',
-        url: `http://localhost:8080/api/president/myclub/members/${record.key}`,
+        url: `https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/members/${record.key}`,
         headers: { 'Authorization': `Bearer ${token}` },
     })
 
