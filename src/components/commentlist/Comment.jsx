@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Comment.css";
 import { Avatar, Dropdown, Menu, Button } from "antd";
 import { SettingOutlined, EditOutlined } from "@ant-design/icons";
