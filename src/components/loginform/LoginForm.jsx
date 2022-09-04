@@ -274,9 +274,9 @@ const LoginForm = () => {
             htmlType="submit"
             className="btn-gradient"
             style={{
-              width: "15rem",
+              width: "100%",
               height: "3rem",
-              marginTop: "1rem",
+              marginTop: "1rem"
             }}
           >
             Login

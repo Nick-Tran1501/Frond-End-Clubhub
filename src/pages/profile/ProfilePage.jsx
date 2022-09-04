@@ -58,8 +58,9 @@ const Profile = () => {
         </Col>
       </Row>
 
-      {/* <Sidebar/> */}
-      <div className="container">
+      
+      <div className="pContainer">
+        {/* <Sidebar/> */}
         <Row>
           <Col span={24}>
             <ProfileBg clubId={clubId} page={page} changePage={changePage} />

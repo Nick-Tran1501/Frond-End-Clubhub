@@ -158,7 +158,7 @@
 
 .LoginItems{
   height: 3rem;
-
+  width: 100%;
   border: none;
   border-style: none none solid none;
   background: #384656;
