@@ -13,10 +13,9 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import CommentsBox from "../commentsbox/CommentsBox";
-import CommentList from "../../components/commentlist/CommentList"
+import CommentList from "../../components/commentlist/CommentList";
 import axios from "axios";
 import Comment from "../commentlist/Comment";
-
 
 const Post = () => {
   const [postData, setPostData] = useState([]);
@@ -45,11 +44,9 @@ const Post = () => {
 
   const [visible, setVisible] = useState(false);
 
-
   return (
     <React.Fragment>
       {postData.map((post) => {
-
         // -------Like Count--------
         const handleLike = (postId) => {
           axios({
@@ -60,10 +57,13 @@ const Post = () => {
               postId,
             },
           })
-          .then((response) => {
-            loadPost()
-            console.log(response)})
-          .catch((error) => {console.log(error)})
+            .then((response) => {
+              loadPost();
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         };
 
         // ------------Read More--------------
@@ -73,14 +73,31 @@ const Post = () => {
           const toggleReadMore = () => {
             setIsReadMore(!isReadMore);
           };
-          return (
-            <p className="text">
-              {isReadMore ? text.slice(0, 150) : text}
-              <span onClick={toggleReadMore} className="readOrHide">
-                {isReadMore ? "...read more" : " show less"}
-              </span>
-            </p>
-          );
+          console.log(text.length)
+          if (text.length <= 99){
+            return(
+              <div>
+                <p className="text">{text}</p>
+              </div>
+            )
+          }
+          else{
+            return (
+              <div>
+                <p className="text">
+  
+                  {
+                  isReadMore ? text.slice(0, 100) : text}
+  
+                  <span onClick={toggleReadMore} className="readOrHide">
+                    {
+                    isReadMore ? "...read more" : " show less"}
+                  </span>
+                </p>
+              </div>
+            );
+          }
+          
         };
         // edit Box
         const showModal = () => {
@@ -152,8 +169,8 @@ const Post = () => {
             url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${post._id}`,
           })
             .then((response) => {
-              postData.slice(0, post._id)
-              loadPost()
+              postData.slice(0, post._id);
+              loadPost();
               console.log(response);
             })
             .catch((error) => {
@@ -162,7 +179,10 @@ const Post = () => {
         };
 
         return (
-          <div className="PostContainer" key={`${post._id}?${new Date().getTime()}`}>
+          <div
+            className="PostContainer"
+            key={`${post._id}?${new Date().getTime()}`}
+          >
             {/* -----Post Header----- */}
             <div className="PostHeader">
               {/* Profile Image */}
@@ -338,21 +358,24 @@ const Post = () => {
 
             {show && (
               <React.Fragment>
-              <CommentsBox
-                data={post.comments}
-                postId={post._id}
-                userimage={post.author.avatarUrl}
-                loadPost={loadPost}
-              />
-              <div className="CommentListContainer">
-                {post.comments.map((comment) => {
-                  return (
-                    <Comment  data={comment} key={comment._id}  loadPost={loadPost}/>
-                  )
-                })}
-              </div>
+                <CommentsBox
+                  data={post.comments}
+                  postId={post._id}
+                  userimage={post.author.avatarUrl}
+                  loadPost={loadPost}
+                />
+                <div className="CommentListContainer">
+                  {post.comments.map((comment) => {
+                    return (
+                      <Comment
+                        data={comment}
+                        key={comment._id}
+                        loadPost={loadPost}
+                      />
+                    );
+                  })}
+                </div>
               </React.Fragment>
-
             )}
           </div>
         );

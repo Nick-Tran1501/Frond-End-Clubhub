@@ -13,7 +13,15 @@ const ProfileMedia = () => {
                     <h3>Images</h3>
                 </div>
             </Col>
-            <Row className="memGalery">
+            <Row 
+                gutter={{
+                    xs: 0,
+                    sm: 15,
+                    md: 15,
+                    lg: 15,
+                  }}
+                className="memGalery"
+            >
                 <Col xs={24} sm={24} md={17} lg={17} xl={6}>
                     <Image
                         width="100%"

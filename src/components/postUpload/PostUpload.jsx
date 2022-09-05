@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import "../../pages/profile/ProfilePage.css";
-
+import axios from "axios"
 import "antd/dist/antd.css";
 import { Modal, Row, Col } from 'antd';
 import {CloseCircleOutlined} from '@ant-design/icons';
@@ -9,7 +9,24 @@ import {CloseCircleOutlined} from '@ant-design/icons';
 export default function PostUpload() {
     const [post, setPost] = useState(false);
     const [postImg, setPostImg] = useState([]);
+    const [user,setUser] = useState({})
 
+    //Get User
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        axios
+          .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((response) => {
+            console.log(response.data);
+            setUser(response.data);
+          })
+          .catch((err) => console.log(err));
+      }, []);
+
+
+      
     useEffect(() => {
         return () => {
             postImg && postImg.map(prev => URL.revokeObjectURL(prev));
@@ -40,12 +57,14 @@ export default function PostUpload() {
     const handleCancel = () => {
       setPost(false);
     };
+
+
     return (
         <div className='main-home'>
             <div className='postInput mpost'>
                 <form className="account">
                     <div className="profile_picture">
-                        <img src="image/avatar.png" alt="profile" /> 
+                        <img src={user.avatarUrl} alt="profile" /> 
                     </div>
                     <input type="text" placeholder="What's on your mind?" id="caption" onClick={showPost} />
                     <label className="btn btn_primary" id="post_btn" onClick={showPost}>Post</label>
@@ -57,9 +76,9 @@ export default function PostUpload() {
                 <form  onSubmit={handleOk} className="upload_image" id="post_form">
                     <div className="user_infor">
                         <div className="profile_picture">
-                            <img src="image/default_avata_girl.png" alt="profile"/>
+                            <img src={user.avatarUrl} alt="profile"/>
                         </div>
-                        <p>Doraemon</p>
+                        <p>{user.name}</p>
 
                     </div>
 

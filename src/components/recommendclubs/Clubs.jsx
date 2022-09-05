@@ -19,7 +19,7 @@ const Clubs = ({id,name,slogan, logoUrl}) => {
             src={logoUrl}
             alt="logo"
             width="100%"
-            height="55px"
+            height="100%"
             style={{
               borderRadius: "50%",
             }}
