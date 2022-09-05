@@ -1,7 +1,10 @@
-import React from "react";
+import {useState, React } from "react";
 import "antd/dist/antd.css";
-// import styles from "./Request.less"
 import "./Request.scss";
+
+
+// import styles from "./Request.less"
+// import "./test.css";
 
 import { SmileOutlined } from "@ant-design/icons";
 import {
@@ -18,16 +21,44 @@ import {
 
 import { MoreOutlined } from "@ant-design/icons";
 
+
 function RequestClub() {
   // test request list
 
   // const { Paragraph, Text } = Typography;
+  {/* request API */}
 
+  
 
+  // sample request data
+  const defaultData = [];
+  for (let i = 0; i < 10; i++) {
+    defaultData.push({
+      key: i,
+      id : `s ${i}`,
+      name: `Câu lạc bộ học giỏi ${i}`,
+      clubCategory: "Sport",
+      president: "William Bình Định",
+      creation: "12/12/1212",
+      clubEmail: "WilliamDaQuo@email.bualuaxua",
+    })
+  }
+
+  // console.log(defaultData);
+  const [requests, setRequests] = useState(defaultData);
+
+  // ----- function ------
+
+  const onAccept = (key) => {
+    console.log("click accept on " + key);
+    const newList = requests.filter(request => request.key !== key);
+    setRequests(newList);
+  };
 
 
   return (
-    <div>
+    <div className="request-list">
+
       {/* <Empty /> */}
       {/* <Result
         style={{
@@ -39,30 +70,33 @@ function RequestClub() {
         extra={<Button type="primary">Next</Button>}
       /> */}
 
-      {/* test  */}
       <Row>
-
-        <Col className="request-list" span={24}>
+        <Col span={24}> 
+           {/* test display */}
           <div className="request-element">
+            {requests.map((request) => 
+            
             <PageHeader
-              className="customSelect"
-              title="Cau Lac Bo Chim Chich Choe"
-              subTitle=" Ca mua hat "
-              tags={<Tag color="blue">Pending</Tag>}
+              key = {request.id}
+              title= {request.name}
+              subTitle= "sub title"
+              tags={[
+                <Tag color="blue">{request.clubCategory}</Tag>,
+                <Tag color="purple">Pending</Tag>
+              ]}
               extra={[
                 <Button key="2">Cancel</Button>,
-                <Button key="1" type="primary">
-                  Accept
-                </Button>,
+                <Button key="1" type="primary" onClick={()=> onAccept(request.key)}> Accept </Button>,
+                
               ]}
             >
               <Descriptions size="small" column={2}>
-                <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
+                <Descriptions.Item label="Created"> {request.president} </Descriptions.Item>
                 <Descriptions.Item label="Association">
                   <a> 421421</a>
                 </Descriptions.Item>
                 <Descriptions.Item label="Creation Time">
-                  2017-01-10
+                  {request.creation}
                 </Descriptions.Item>
                 <Descriptions.Item label="Effective Time">
                   2017-10-10
@@ -71,10 +105,13 @@ function RequestClub() {
                   Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
                 </Descriptions.Item>
               </Descriptions>
-            </PageHeader>
+            </PageHeader> 
+            )}
           </div>
+
         </Col>
       </Row>
+
     </div>
   );
 }

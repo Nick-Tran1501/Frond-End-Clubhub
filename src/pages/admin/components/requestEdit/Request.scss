@@ -7,15 +7,17 @@
 
 
 .request-list {
-    height: 70vh;
-    border: 2px solid red;
+    height: 100vh;
+    background-color:#F9F2ED;
+
+    // border: 2px solid red;
 }
 
 
 .request-element {
     .ant-page-header {
         box-sizing: border-box;
-        margin: 5px 0px;
+        margin: 10px 0px;
         color: rgba(0,0,0,.85);
         font-size: 1rem;
         font-variant: tabular-nums;
@@ -23,8 +25,9 @@
         list-style: none;
         font-feature-settings: "tnum";
         position: relative;
-        padding: 20px 20px;
+        padding: 40px 20px;
         background-color: white;
+        border: 1px solid black;
     }
 }
 
