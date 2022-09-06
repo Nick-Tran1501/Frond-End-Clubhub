@@ -1,213 +1,244 @@
 import React, { useState } from "react";
-import "./NavBars.css";
+import "./NavBar.scss";
 import "antd/dist/antd.css";
 import {
-  HomeFilled,
-  UserOutlined,
-  FlagFilled,
-  BellFilled,
+  MenuOutlined,
+  DownOutlined,
+  BellOutlined,
+  NotificationOutlined,
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ClubLogo from "../../image/ClubHub_Trans.png";
-import { Col, Row, AutoComplete, Input, Dropdown, Menu } from "antd";
-import Option from "./NavbarOptions";
-import { useEffect } from "react";
+import Rightbars from "../rightbar/RightBars";
+import {
+  Col,
+  Row,
+  AutoComplete,
+  Input,
+  Dropdown,
+  Menu,
+  Button,
+  Drawer,
+  Search,
+} from "antd";
+import Sidebar from "../sidebar/Sidebars";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { click } from "@testing-library/user-event/dist/click";
 import NotiCard from "./NotiCard";
 
 // Test function of autocomplete
 
-const getRandomInt = (max, min = 0) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const searchResult = (query) =>
-  new Array(getRandomInt(5))
-    .join(".")
-    .split(".")
-    .map((_, idx) => {
-      const category = `${query}${idx}`;
-      return {
-        value: category,
-        label: (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <span>
-              Found {query} on{" "}
-              <a
-                href={`https://s.taobao.com/search?q=${query}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {category}
-              </a>
-            </span>
-            <span>{getRandomInt(200, 100)} results</span>
-          </div>
-        ),
-      };
-    });
-
 // Render the Navigation Bar
 const NavBar = () => {
-  // Manange the Handling Search,
-  const [userProfile, setUserProfile] = useState({});
+  const [visible, setVisible] = useState(false);
 
-  // useEffect(()=> {
-
-  //     const token = localStorage.getItem('token')
-  //     axios.get("https://rmit-club.herokuapp.com/api/user",
-  //       {
-  //         headers:{'Authorization': `Bearer ${token}`}
-  //       }
-  //     )
-  //     .then(response => setUserProfile(response.data))
-  //     .catch(err => console.log(err))
-
-  // },[])
-
-  const [options, setOptions] = useState([]);
-
-  //handle Searching function
-  const handleSearch = (value) => {
-    setOptions(value ? searchResult(value) : []);
+  const showSideBar = () => {
+    setVisible(true);
   };
 
-  const onSelect = (value) => {
-    console.log("onSelect", value);
+  const onClose = () => {
+    setVisible(false);
   };
 
-  // Handle the nofication from "Club" navigation option
-  // Each item is a "NotiCard" represents as a new nofication
-  const clubMenu = (
-    // List of nofication
-    <Menu
-      items={[
-        {
-          key: "1",
-          label: <NotiCard />,
-        },
 
-        {
-          type: "divider",
-        },
+  const [showRight, setShowRight] = useState(false)
 
-        {
-          key: "2",
-          label: <NotiCard />,
-        },
 
-        {
-          type: "divider",
-        },
+  const showRightBar = () => {
+    setShowRight(true)
+  }
 
-        {
-          key: "3",
-          label: <NotiCard />,
-        },
-      ]}
-    />
-  );
-
-  // Handle the nofication from "Nofication" navigation option
-  // Each item is a "NotiCard" represents as a new nofication
-  const nofiMenu = (
-    // List of nofication
-    <Menu
-      items={[
-        {
-          key: "1",
-          label: <NotiCard />,
-        },
-
-        {
-          type: "divider",
-        },
-
-        {
-          key: "2",
-          label: <NotiCard />,
-        },
-
-        {
-          type: "divider",
-        },
-
-        {
-          key: "3",
-          label: <NotiCard />,
-        },
-      ]}
-    />
-  );
+  const closeRightBar = () => {
+    setShowRight(false)
+  }
+  const { Search } = Input;
 
   // Render the View
   return (
-    <div className="navbar--container">
-      <div className="nContainer">
-        <Row>
-          <Col lg={24} className="navLeft">
-            <img src={ClubLogo} alt="" />
+    <Row
+      className="navbar--container"
+      gutter={{
+        xs: "1",
+        sm: "1",
+        md: "1",
+        lg: "0",
+        xl: "0",
+      }}
+    >
+      <Col xs={5} sm={5} md={5} lg={5} xl={5} className="NavBarLogoContainer">
+        <Row className="NavBarLogo">
+          <Col xs={10} sm={10} md={10} lg={0} xl={0}>
+            <Button onClick={showSideBar}>
+              <MenuOutlined
+                style={{
+                  color: "black",
+                  fontSize: "1.4rem",
+                }}
+              />
+            </Button>
           </Col>
-        </Row>
 
-        {/* Nav Search Bar */}
-        <Row className="searchBar">
-          <Col span={24} className="navSearch">
-            <AutoComplete
-              dropdownMatchSelectWidth={252}
-              style={{}}
-              options={options}
-              onSelect={onSelect}
-              onSearch={handleSearch}
-              className="searchInput"
+          <Col xs={14} sm={14} md={14} lg={24} xl={24}>
+            <Button
+              style={{
+                all: "unset",
+                width: "100%",
+                height: "100%",
+                textAlign: "center",
+              }}
             >
-              <Input.Search size="large" placeholder="Search" />
-            </AutoComplete>
+              <img
+                src={require("../../image/ClubHub_Trans.png")}
+                alt="Logo"
+                width="100px"
+                height="100%"
+                style={{
+                  objectFit: "cover",
+                }}
+              ></img>
+            </Button>
           </Col>
         </Row>
+      </Col>
 
-        {/* Nav Right Icon */}
-        <div className="navRight d-flex ">
-          <Row>
-            <Col xs={0} md={0} lg={24}>
-              <div className="navOptions d-flex">
-                {/* Navigate HomePage */}
-                <Option Icon={HomeFilled} title="Home" />
+      <Col
+        xs={10}
+        sm={10}
+        md={10}
+        lg={10}
+        xl={10}
+        className="NavBarSearchContainer"
+      >
+        <Search
+          placeholder="Search For Your Club"
+          // onSearch={onSearch}
+          size="medium"
+        />
+      </Col>
 
-                {/* My Club Dropdown */}
-                <Dropdown
-                  overlay={clubMenu}
-                  placement="bottom"
-                  arrow
-                  trigger={["click"]}
-                >
-                  <div>
-                    <Option Icon={FlagFilled} title="Club" />
-                  </div>
-                </Dropdown>
+      <Col
+        xs={5}
+        sm={5}
+        md={5}
+        lg={5}
+        xl={5}
+        className="NavBarSettingContainer"
+      >
+        <Row
+          className="SettingMenu"
+          gutter={{
+            xs: "5",
+            sm: "5",
+            md: "5",
+            lg: "5",
+            xl: "5",
+          }}
+        >
+          <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
+            <Button
+              style={{
+                all: "unset",
+                textAlign: "center",
+              }}
+            >
+              <DownOutlined
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0",
+                }}
+                className="SettingText"
+              >
+                My Clubs
+              </p>
+            </Button>
+          </Col>
 
-                {/* Nofication Dropdown */}
-                <Dropdown
-                  overlay={nofiMenu}
-                  placement="bottomRight"
-                  arrow
-                  trigger={["click"]}
-                >
-                  <div>
-                    <Option Icon={BellFilled} title="Nofication" />
-                  </div>
-                </Dropdown>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </div>
-    </div>
+          <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
+            <Button
+              style={{
+                all: "unset",
+                textAlign: "center",
+              }}
+            >
+              <BellOutlined
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0",
+                }}
+                className="SettingText"
+              >
+                Notification
+              </p>
+            </Button>
+          </Col>
+
+          <Col xs={8} sm={8} md={8} lg={0} xl={0} className="EventMenu">
+            <Button
+              style={{
+                all: "unset",
+                textAlign: "center",
+              }}
+              onClick= {
+                () => {showRightBar()}
+              }
+            >
+              <NotificationOutlined
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0",
+                }}
+                className="SettingText"
+              >
+                Event
+              </p>
+            </Button>
+          </Col>
+        </Row>
+      </Col>
+
+
+      {/* Side Bar */}
+      <Drawer
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        visible={visible}
+        key="left"
+      >
+        <Sidebar />
+      </Drawer>
+
+
+      {/* Right Bar */}
+      <Drawer
+        placement="right"
+        closable={false}
+        onClose={closeRightBar}
+        visible={showRight}
+        key="right"
+        drawerStyle={{
+          paddingTop:"1.5rem",
+          backgroundColor:" #F9F2ED"
+        }}
+      >
+        <Rightbars/>
+      </Drawer>
+    </Row>
   );
 };
 

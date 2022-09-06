@@ -36,7 +36,7 @@ const Home = () => {
             <Sidebars />
           </Col>
 
-          < Col xs={24} sm={24} md={18} lg={13} xl={13} style={{marginTop: "2rem"}}>
+          < Col xs={24} sm={24} md={24} lg={13} xl={13} style={{marginTop: "2rem"}}>
             <PostUpload />
 
 
@@ -46,7 +46,7 @@ const Home = () => {
 
           </Col>
 
-          <Col xs={0} sm={0} md={6} lg={6} xl={6} style={{marginTop: "2rem"}}>
+          <Col xs={0} sm={0} md={0} lg={6} xl={6} style={{marginTop: "2rem"}}>
             <Rightbars/>
           </Col>
           

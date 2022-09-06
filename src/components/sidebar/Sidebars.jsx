@@ -93,7 +93,6 @@ const sidebar = () => {
 
       <Row>
         <Col xs={24} lg={24} className="sideTop">
-          <img src={userProfile.avatarUrl} alt="backgorundImage" />
           <Avatar
             size={60}
             src={userProfile.avatarUrl}

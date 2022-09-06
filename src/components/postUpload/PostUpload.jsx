@@ -10,10 +10,13 @@ export default function PostUpload() {
     const [post, setPost] = useState(false);
     const [postImg, setPostImg] = useState([]);
     const [user,setUser] = useState({})
+    const [clubId,setClubId] = useState("")
+    const token = localStorage.getItem("token");
+    const [postData, setPostData] = useState([]);
+
 
     //Get User
     useEffect(() => {
-        const token = localStorage.getItem("token");
         axios
           .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
             headers: { Authorization: `Bearer ${token}` },
@@ -21,12 +24,13 @@ export default function PostUpload() {
           .then((response) => {
             console.log(response.data);
             setUser(response.data);
+            setClubId(response.data.clubs[0].club)
+            
           })
           .catch((err) => console.log(err));
       }, []);
 
-
-      
+    
     useEffect(() => {
         return () => {
             postImg && postImg.map(prev => URL.revokeObjectURL(prev));
@@ -56,9 +60,39 @@ export default function PostUpload() {
   
     const handleCancel = () => {
       setPost(false);
+      setPostImg([])
     };
 
+    console.log(clubId)
+      
+      
+    // --------- Create Post ---------
+    const [createPostContent, setCreatePostContent] = useState("")
+    const createPost = () => {
+        const formData = new FormData();
+        formData.append("content", createPostContent)
+        formData.append("location", "RMIT University")
+        postImg.forEach(img => {
 
+            formData.append("images", img)
+        })
+        
+        formData.append("viewMode", "internal")
+        console.log("gig",`${token}`)
+        axios({
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${token}`,
+            },
+            url:`https://rmit-club-dhyty.ondigitalocean.app/api/posts/clubs/${clubId}`,
+            method:"POST",
+            data: formData
+        })
+        .then((response) => {
+            setPost(false)
+            console.log(response)})
+        .catch((err) => {console.log(err)})
+    }
     return (
         <div className='main-home'>
             <div className='postInput mpost'>
@@ -72,7 +106,11 @@ export default function PostUpload() {
             </div>
             
 
-            <Modal title="Post" visible={post} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Post" visible={post} onOk={() => {
+                
+                createPost()
+
+                }} onCancel={handleCancel}>
                 <form  onSubmit={handleOk} className="upload_image" id="post_form">
                     <div className="user_infor">
                         <div className="profile_picture">
@@ -83,7 +121,16 @@ export default function PostUpload() {
                     </div>
 
                     <div className="caption">
-                        <textarea name="text" placeholder="What's on your mind?" className='inputField' style={{width: "100%"}}></textarea>
+                        <textarea 
+                            name="text" 
+                            placeholder="What's on your mind?" 
+                            className='inputField' 
+                            style={{width: "100%"}}
+                            onChange ={(e) => {
+                                console.log(e.target.value)
+                                setCreatePostContent(e.target.value)
+                            }}
+                        ></textarea>
                     </div>
 
                     <div className="file_img" id="post_upload">
@@ -101,7 +148,7 @@ export default function PostUpload() {
                             className='multi_img'>
                                 {postImg.map((prev, index) => 
                                 <Col span={8}>
-                                    <img src={prev} alt="post image" />
+                                    <img src={prev} alt="postImg" />
                                     <CloseCircleOutlined
                                         className='deleteIcon' 
                                         // onClick={() => {postImg.slice(index, 1);setPostImg(postImg)}} 
@@ -113,7 +160,7 @@ export default function PostUpload() {
                             // If 1 image, full width
                             postImg.map((prev, index) => 
                                 <div className='post_img'>
-                                    <img src={prev} alt="post image" />
+                                    <img src={prev} alt="postImg" />
                                     <CloseCircleOutlined className='deleteIcon' />
                                 </div>
                         ) 
