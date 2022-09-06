@@ -19,6 +19,7 @@
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
+
 }
 
 .NavBarLogo{
@@ -49,12 +50,19 @@
 
 .ant-input-group {
   width: 80% !important;
-
+  color: black;
 }
 
 .ant-input-wrapper{
+  
   .ant-btn{
     background-color: #B4B4B4;
+  }
+}
+
+.NavBarSearchContainer{
+  input.ant-input{
+    color:black
   }
 }
 
