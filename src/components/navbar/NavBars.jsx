@@ -52,7 +52,50 @@ const NavBar = () => {
     setShowRight(false)
   }
   const { Search } = Input;
+  const token = localStorage.getItem("token")
 
+  const [searchValue,setSearchValue] = useState("")
+  const [searchDisplay, setSearchDisplay] = useState({
+    clubs:[],
+    posts:[],
+    profiles: [],
+  })
+
+  axios({
+    method:"post",
+    url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
+    headers:{
+      "Authorization": `Bearer ${token}` },
+      data:{
+        value: searchValue
+      }
+  })
+  .then((response)=> {
+    console.log(response)
+    setSearchDisplay(
+      {...searchDisplay,
+      clubs: response.data.clubs,
+      posts: response.data.posts,
+      profile: response.data.profile
+    }
+
+    )
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  const value = [
+    {
+      value: 'Burns Bay Road',
+    },
+    {
+      value: 'Downing Street',
+    },
+    {
+      value: 'Wall Street',
+    },
+  ];
+  
   // Render the View
   return (
     <Row
@@ -109,11 +152,30 @@ const NavBar = () => {
         xl={10}
         className="NavBarSearchContainer"
       >
-        <Search
-          placeholder="Search For Your Club"
-          // onSearch={onSearch}
-          size="medium"
-        />
+        <AutoComplete
+          options={value}
+
+          style={{
+            width:"100%",
+          }}
+          filterOption={(inputValue, option) =>
+            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+          }
+        >
+
+          <Search
+            placeholder="Search For Your Club"
+            // onSearch={onSearch}
+            style={{
+              color:"black"
+            }}
+            size="medium"
+            onChange={(e) => {
+              setSearchValue(e.target.value)
+            }}
+            allowClear
+          />
+        </AutoComplete>
       </Col>
 
       <Col
