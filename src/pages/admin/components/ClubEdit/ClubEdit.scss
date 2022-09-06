@@ -1,0 +1,129 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.club-edit-container {
+    background-color: whitesmoke;
+    height: 80%;
+}
+
+
+
+/* ---- Area 1----- */
+.club-edit-search {
+    background-color: white;
+    margin: 5px 0px;
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px #888888;
+    width: 100%;
+
+    .ant-form{
+        // background-color: red;
+        padding: 10px 20px 2px;
+    }
+    .ant-select.ant-select-in-form-item {
+        width: 60%;
+    }
+    .ant-form-item{
+        margin: 10px;
+    }
+}
+
+
+/*  ----- Area 2 ----- */
+.club-description {
+    margin-top: 10px;
+    width: 100%;
+    .ant-page-header {
+        box-sizing: border-box;
+        margin: 5px 0px;
+        color: rgba(0,0,0,.85);
+        line-height: 5px;
+        list-style: none;
+        position: relative;
+        padding: 0px 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px #888888;
+    }
+
+    .ant-page-header-heading-title {
+        margin-right: 12px;
+        margin-bottom: 0px;
+        color: rgba(0,0,0,.85);
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .ant-page-header-content {
+        padding-top: 0px;
+    }
+
+    .ant-statistic-title {
+        margin-bottom: 0px;
+        color: rgba(0,0,0,.45);
+        font-size: 0.8rem;
+    }
+
+    .ant-statistic-content {
+        color: rgba(0,0,0,.85);
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+    }
+
+}
+
+
+/* ---- Area 3 ---- */
+.add-container{
+
+    margin: 20px 0px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px #888888;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+
+    .ant-typography{
+        margin: 5px 0px;
+    }
+
+    .ant-input-group-wrapper {
+        display: inline-block;
+        width: 60%;
+        text-align: start;
+        vertical-align: top;
+        padding: 10px 0px;
+    }
+
+    .ant-form {
+        box-sizing: border-box;
+        margin: 10px 0px;
+        color: rgba(0,0,0,.85);
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        font-feature-settings: "tnum";
+    }
+
+}
+
+
+/* ---- Area 4 ---- */
+.members-table{
+    margin: 5px 0px;
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px #888888;
+    
+}

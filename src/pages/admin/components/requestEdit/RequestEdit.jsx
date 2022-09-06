@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import "./Request.scss";
 
 // import styles from "./Request.less"
-// import "./test.css";
+
 
 import { SmileOutlined } from "@ant-design/icons";
 import {
@@ -37,6 +37,7 @@ function RequestClub() {
       president: "William Bình Định",
       creation: "12/12/1212",
       clubEmail: "WilliamDaQuo@email.bualuaxua",
+      reason: "Reason create to home page ...... Gonghu Road, Xihu District, Hangzhou, Zhejiang, China "
     });
   }
 
@@ -49,7 +50,6 @@ function RequestClub() {
     console.log("click accept on " + key);
     const newList = requests.filter((request) => request.key !== key);
     setRequests(newList);
-
   };
 
   const onCancel = (key) => {
@@ -92,10 +92,6 @@ function RequestClub() {
     // }
 
   };
-
-
-
-
 
   return (
     <div className="request-list">
@@ -149,13 +145,13 @@ function RequestClub() {
                     2017-10-10
                   </Descriptions.Item>
                   <Descriptions.Item label="Reason">
-                    Reason create to home page ......
-                    Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
+                    {request.reason}
                   </Descriptions.Item>
                 </Descriptions>
               </PageHeader>
             </div>
           ))}
+
           
         </Col>
       </Row>

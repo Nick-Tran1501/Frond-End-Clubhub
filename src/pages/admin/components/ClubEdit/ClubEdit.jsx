@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect, useMemo } from "react";
 import "antd/dist/antd.css";
-// import NavBar from "../../components/navbar/NavBars";
-import "./ClubEdit.style.css";
+import "./ClubEdit.scss";
 import "./ClubAPI.js";
 
 // -------------- ant design import ---------------------
@@ -81,19 +80,19 @@ function ClubEdit() {
     );
     const studentsData = newClub[0].members;
     const clubSelected = [];
-      for (let i = 0; i < studentsData.length; i++) {
-        clubSelected.push({
-          key: studentsData[i]._id,
-          id: studentsData[i]._id,
-          name: studentsData[i].name,
-          gender: studentsData[i].gender,
-          joinDate: "12/11/2021",
-          email: studentsData[i].email,
-          role: "Content Writer",
-        });
-    setDataSource(clubSelected);
-  }
-  }
+    for (let i = 0; i < studentsData.length; i++) {
+      clubSelected.push({
+        key: studentsData[i]._id,
+        id: studentsData[i]._id,
+        name: studentsData[i].name,
+        gender: studentsData[i].gender,
+        joinDate: "12/11/2021",
+        email: studentsData[i].email,
+        role: "Content Writer",
+      });
+      setDataSource(clubSelected);
+    }
+  };
 
   const searchReset = () => {
     form_search.resetFields();
@@ -350,145 +349,150 @@ function ClubEdit() {
   };
   //  -------------------------------------------------------------
 
+  //  -------------------------- DISPLAY ----------------------------------
   return (
-    <div className="">
-      <Row className="club-edit-container">
-        {/* area 1 */}
-        <Col className="club-edit-search" span={24}>
-          <Form
-            form={form_search}
-            name="search-club"
-            onFinish={searchClub}
-            size="medium"
-            // style={{}}
-          >
-            <Form.Item
-              name="clubName"
-              label="Club Name"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+    <div className="club-edit-container">
+      <Row className="">
+        {/* Area 1 */}
+        <Col span={24}>
+          <div className="club-edit-search">
+            <Form
+              form={form_search}
+              name="search-club"
+              onFinish={searchClub}
+              size="medium"
+              // style={{}}
             >
-              <Select placeholder="Select Club name" allowClear style={{}}>
-                {clubs.map((club) => {
-                  return (
-                    <Option key={club._id} value={club.name}>
-                      {club.name}
-                    </Option>
-                  );
-                })}
-              </Select>
-            </Form.Item>
-            <Form.Item>
-              <Button
-                style={{ marginRight: "10px" }}
-                type="primary"
-                htmlType="submit"
+              <Form.Item
+                name="clubName"
+                label="Club Name"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
               >
-                Search
-              </Button>
-              <Button htmlType="button" onClick={searchReset}>
-                Reset
-              </Button>
-            </Form.Item>
-          </Form>
+                <Select placeholder="Select Club name" allowClear style={{}}>
+                  {clubs.map((club) => {
+                    return (
+                      <Option key={club._id} value={club.name}>
+                        {club.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  style={{ marginRight: "10px" }}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Search
+                </Button>
+                <Button htmlType="button" onClick={searchReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </Col>
 
-        {/* area 2 */}
-        <Col span={24}>{clubDisplay}</Col>
+        {/* Area 2 */}
+        <Col span={24}>
+          <div className="club-description">{clubDisplay}</div>
+        </Col>
 
-        {/* area 3 */}
-        {/* Add new student  */}
-        <Col className="add-container" span={24}>
+        {/* Area 3 */}
+        <Col span={24}>
           {/* search bar ( search student by id) */}
-          <Title level={2} style={{ margin: "0 20px" }}>
-            Add new student to club
-          </Title>
+          <div className="add-container">
 
-          <Search
-            style={{
-              margin: "10px 20px",
-            }}
-            className="search-bar"
-            placeholder="Input student ID"
-            size="medium"
-            onSearch={onSearch}
-            enterButton
-            required
-          />
+            <Title level={3}>
+              Add new student to club
+            </Title>
 
-          <Title
-            level={3}
-            style={{
-              margin: "0px",
-              textAlign: "center",
-              backgroundColor: "black",
-              color: "white",
-            }}
-          >
-            Student Information
-          </Title>
+            <Search
+              className="search-bar"
+              placeholder="Input student ID"
+              size="medium"
+              onSearch={onSearch}
+              enterButton
+              required
+            />
 
-          {/* student information*/}
-          <Table
-            bordered
-            columns={columnStudentData}
-            dataSource={studentData}
-            size="small"
-            pagination={false}
-          />
-
-          {/* select role and add student */}
-          <Form
-            // {...layout}
-            form={form}
-            name="control-hooks"
-            onFinish={onFinish}
-            disabled={disableSubmit}
-          >
-            <Form.Item
-              name="Role"
-              label="Role"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+            <Title
+              level={3}
+              style={{
+                margin: "0px",
+                textAlign: "center",
+                backgroundColor: "black",
+                color: "white",
+              }}
             >
-              <Select
-                placeholder="Select a specific role for new student"
-                allowClear
-              >
-                <Option value="President">President</Option>
-                <Option value="Vice President"> Vice President</Option>
-                <Option value="Content Writer"> Content Writer</Option>
-                <Option value="Member"> Member</Option>
-              </Select>
-            </Form.Item>
+              Student Information
+            </Title>
 
-            <Form.Item
-            // {...tailLayout}
+            {/* student information*/}
+            <Table
+              bordered
+              columns={columnStudentData}
+              dataSource={studentData}
+              size="small"
+              pagination={false}
+            />
+
+            {/* select role and add student */}
+            <Form
+              // {...layout}
+              form={form}
+              name="control-hooks"
+              onFinish={onFinish}
+              disabled={disableSubmit}
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ marginRight: "10px" }}
+              <Form.Item
+                name="Role"
+                label="Role"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
               >
-                Add student
-              </Button>
+                <Select
+                  placeholder="Select a specific role for new student"
+                  allowClear
+                >
+                  <Option value="President">President</Option>
+                  <Option value="Vice President"> Vice President</Option>
+                  <Option value="Content Writer"> Content Writer</Option>
+                  <Option value="Member"> Member</Option>
+                </Select>
+              </Form.Item>
 
-              <Button htmlType="button" onClick={onReset}>
-                Reset
-              </Button>
-            </Form.Item>
-          </Form>
+              <Form.Item
+              // {...tailLayout}
+              >
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ marginRight: "10px" }}
+                >
+                  Add student
+                </Button>
+
+                <Button htmlType="button" onClick={onReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </Col>
 
         {/* area 4 */}
-        <Col className="table-content" span={24}>
-          {/* single student table */}
+        <Col span={24}>
+          {/* single student table */} 
+          <div className="members-table">
 
           <Title
             level={3}
@@ -501,6 +505,7 @@ function ClubEdit() {
           >
             Club Members
           </Title>
+          
           <Table
             bordered
             columns={columns}
@@ -574,6 +579,11 @@ function ClubEdit() {
               <Option value="Member"> Member </Option>
             </Select>
           </Modal>
+
+
+          </div>
+
+
         </Col>
       </Row>
     </div>

@@ -50,7 +50,7 @@ function AdminPage() {
           <Title
             style={{
               color: "white",
-              marginTop: "1rem",
+              // marginTop: "1rem",
             }}
           >
             Admin Page
@@ -64,7 +64,7 @@ function AdminPage() {
             level={4}
             style={{
               paddingLeft: "20px",
-              margin: "0",
+              margin: "10px 0px",
               // height: "20%"
             }}
           >
@@ -99,6 +99,7 @@ function AdminPage() {
           </Tabs>
         </Col>
       </Row>
+
     </div>
   );
 }
