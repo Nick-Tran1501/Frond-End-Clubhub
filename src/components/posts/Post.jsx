@@ -20,10 +20,9 @@ import Comment from "../commentlist/Comment";
 const Post = () => {
   const [postData, setPostData] = useState([]);
   const token = localStorage.getItem("token");
-
   const loadPost = () => {
     axios({
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { "Authorization": `Bearer ${token}` },
 
       method: "get",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",

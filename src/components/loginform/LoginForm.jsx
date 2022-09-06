@@ -122,6 +122,7 @@ const LoginForm = () => {
       },
     })
     .then((res) => {
+      setVisible(false)
       console.log(res);
     })
     .catch((err) => {

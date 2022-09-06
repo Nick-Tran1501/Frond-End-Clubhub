@@ -1,0 +1,81 @@
+.navbar--container {
+  width: 100%;  
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #40a9ff;
+  box-shadow: 1px 2px 5px #888888;
+  z-index: 10;  
+  height: 8vh;
+  // gap: 1rem;
+
+}
+
+ .NavBarSearchContainer, .NavBarSettingContainer{
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.NavBarLogo{
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;  
+}
+
+.NavBarLogo{
+  .ant-btn{
+    all: unset;
+    height: 100%;
+    width: 100%; 
+  }
+ 
+}
+
+[ant-click-animating-without-extra-node]::after{
+  display: none;
+}
+
+.ant-drawer-body{
+  background-color: #F9F2ED;
+  padding: 0rem 1rem;
+}
+
+.ant-input-group {
+  width: 80% !important;
+
+}
+
+.ant-input-wrapper{
+  .ant-btn{
+    background-color: #B4B4B4;
+  }
+}
+
+.SettingMenu{
+  width: 100%;
+}
+
+.SettingItems{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.EventMenu{
+  text-align: center;
+}
+
+@media only screen and (max-width:995px) {
+  .SettingText{
+    display: none;
+  }
+}
