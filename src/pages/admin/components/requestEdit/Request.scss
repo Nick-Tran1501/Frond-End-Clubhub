@@ -27,6 +27,7 @@
 .request-list {
     height: 100vh;
     background-color:#F9F2ED;
+    overflow: scroll;
 }
 
 
@@ -44,6 +45,8 @@
         padding: 40px 20px;
         background-color: white;
         border: 0;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px #888888;
     }
 }
 
