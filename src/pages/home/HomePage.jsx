@@ -37,8 +37,6 @@ const Home = () => {
           </Col>
 
           < Col xs={24} sm={24} md={24} lg={13} xl={13} style={{marginTop: "2rem"}}>
-            <PostUpload />
-
 
             <div className="PostListContainer">
               <Post/>

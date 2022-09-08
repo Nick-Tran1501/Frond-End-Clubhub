@@ -13,16 +13,17 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import CommentsBox from "../commentsbox/CommentsBox";
-import CommentList from "../../components/commentlist/CommentList";
 import axios from "axios";
 import Comment from "../commentlist/Comment";
+import PostUpload from "../postUpload/PostUpload";
+
 
 const Post = () => {
   const [postData, setPostData] = useState([]);
   const token = localStorage.getItem("token");
   const loadPost = () => {
     axios({
-      headers: { "Authorization": `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
 
       method: "get",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
@@ -45,6 +46,7 @@ const Post = () => {
 
   return (
     <React.Fragment>
+      <PostUpload reload={loadPost}/>
       {postData.map((post) => {
         // -------Like Count--------
         const handleLike = (postId) => {
@@ -72,31 +74,26 @@ const Post = () => {
           const toggleReadMore = () => {
             setIsReadMore(!isReadMore);
           };
-          console.log(text.length)
-          if (text.length <= 99){
-            return(
+          console.log(text.length);
+          if (text.length <= 99) {
+            return (
               <div>
                 <p className="text">{text}</p>
               </div>
-            )
-          }
-          else{
+            );
+          } else {
             return (
               <div>
                 <p className="text">
-  
-                  {
-                  isReadMore ? text.slice(0, 100) : text}
-  
+                  {isReadMore ? text.slice(0, 100) : text}
+
                   <span onClick={toggleReadMore} className="readOrHide">
-                    {
-                    isReadMore ? "...read more" : " show less"}
+                    {isReadMore ? "...read more" : " show less"}
                   </span>
                 </p>
               </div>
             );
           }
-          
         };
         // edit Box
         const showModal = () => {
