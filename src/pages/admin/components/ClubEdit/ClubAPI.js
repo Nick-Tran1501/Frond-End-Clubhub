@@ -30,10 +30,15 @@ export const getClubID = async (id) => {
 
 
 // get club 
-export const getStudent= async () => {
+export const getStudent= async (sID,clubId) => {
     const response = await axios({
-        method: 'GET',
-        url: "https://rmit-club-dhyty.ondigitalocean.app/api/clubs",
+        method: 'POST',
+        url: `https://rmit-club-dhyty.ondigitalocean.app/api/admin/users/search`,
+        headers:{ 'Authorization': `Bearer ${token}`},
+        data: {
+            clubId,
+            value: sID
+        }
     })
 
     if (response.status === 200) {

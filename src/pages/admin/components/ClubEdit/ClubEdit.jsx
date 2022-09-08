@@ -35,7 +35,7 @@ import {
   UnlockOutlined,
 } from "@ant-design/icons";
 // import Title from "antd/lib/skeleton/Title";
-import { getActiveClubData, getClubID } from "./ClubAPI.js";
+import { getActiveClubData, getClubID, getStudent } from "./ClubAPI.js";
 
 function ClubEdit() {
 
@@ -47,41 +47,20 @@ function ClubEdit() {
 
   const [clubs, setClubs] = useState([]);
   const [clubDisplay, setClubDisplay] = useState();
+
+  // --- club's students data table -----
   const [dataSource, setDataSource] = useState([]);
+
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
-  const [sts, setSTs] = useState([
-    {
-      key: "objectid-1",
-      id: "s123",
-      name: "st1",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "President",
-    },
-    {
-      key: "objectid-2",
-      id: "s456",
-      name: "st2",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Member",
-    },
-    {
-      key: "objectid-3",
-      id: "s789",
-      name: "st3",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
-    },
-  ]);
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [disableSearch, setDisableSearch] = useState(true);
-  const [studentData, setStudentData] = useState();
+
+  // **** single student attribute ****
+  const [studentData, setStudentData] = useState([]);
+  // const [studentDisplay, setStudentDisplay] = useState();
+  // **************************************
+
   const [form] = Form.useForm();
   const [form_search] = Form.useForm();
 
@@ -89,11 +68,9 @@ function ClubEdit() {
 
   // ---- search club ------
 
-  // get every club data
   useEffect(() => {
     getActiveClubData().then((data) => setClubs(data));
   }, []);
-
   
   const searchClub = (value) => {
     getClubID(value.clubID).then((data) => {
@@ -130,22 +107,21 @@ function ClubEdit() {
 
   //  ----------------------------------------------------------------
 
-  // ------------------ TABLE MEMBERS ----------------------------------
+  // const onChange = (pagination, filters, sorter, extra) => {
+  //   console.log(
+  //     "params --- ",
+  //     "pag:",
+  //     pagination,
+  //     "filters: ",
+  //     filters,
+  //     "sorter: ",
+  //     sorter,
+  //     "extra: ",
+  //     extra
+  //   );
+  // };
 
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log(
-      "params --- ",
-      "pag:",
-      pagination,
-      "filters: ",
-      filters,
-      "sorter: ",
-      sorter,
-      "extra: ",
-      extra
-    );
-  };
-
+  // club members table column 
   const columns = [
     {
       title: "ID",
@@ -199,27 +175,41 @@ function ClubEdit() {
       },
     },
   ];
-
-  // Function for table ( action edit)
-
+  // -----------------------------------
   // -------- CRUD Functions ---------------
   // Search student by id
   const onSearch = (value) => {
-    if (value !== "") {
-      const result = sts.filter((student) => student.id === value);
-      if (!result[0]) {
-        console.log("Student not found");
-      } 
-      else {
-        console.log(clubDisplay.clubData._id);
-        console.log(result[0]);
-        setStudentData(result);
-        setDisableSubmit(false);
-      }
-    }
-    else {
-      console.log("Please Input");
-    }
+    const cID = clubDisplay.clubData._id;
+    getStudent(value,cID).then((data) => {
+      const newStudent = {
+        key: data._id,
+        id: data.snumber,
+        name: data.name,
+        gender: data.gender,
+        email: data.email,
+      };
+      console.log(newStudent);
+      setStudentData([newStudent]);
+      setDisableSubmit(false);
+    })
+    
+
+
+    // if (value !== "") {
+    //   const result = sts.filter((student) => student.id === value);
+    //   if (!result[0]) {
+    //     console.log("Student not found");
+    //   } 
+    //   else {
+    //     console.log(clubDisplay.clubData._id);
+    //     console.log(result[0]);
+    //     setStudentData(result);
+    //     setDisableSubmit(false);
+    //   }
+    // }
+    // else {
+    //   console.log("Please Input");
+    // }
   };
 
   const onAddStudent = (studentData) => {
@@ -265,7 +255,6 @@ function ClubEdit() {
 
   // ---- Add new student input ----
 
-
   const columnStudentData = [
     {
       title: "ID",
@@ -288,8 +277,6 @@ function ClubEdit() {
       width: "20%",
     },
   ];
-
-  // disable submit button
   
   const onFinish = (values) => {
     // console.log(values);
@@ -489,7 +476,7 @@ function ClubEdit() {
               bordered
               columns={columns}
               dataSource={dataSource}
-              onChange={onChange}
+              // onChange={onChange}
               pagination={{
                 position: ["bottomRight"],
               }}
