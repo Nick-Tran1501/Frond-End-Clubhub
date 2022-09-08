@@ -34,15 +34,58 @@ import {
   TeamOutlined,
   UnlockOutlined,
 } from "@ant-design/icons";
-import Title from "antd/lib/skeleton/Title";
-import { getActiveClubData } from "./ClubAPI.js";
+// import Title from "antd/lib/skeleton/Title";
+import { getActiveClubData, getClubID } from "./ClubAPI.js";
 
-// ----------------------------------------------------------------
 function ClubEdit() {
-  // -------- Attributes --------------------------------
+
+
+// -------- Attributes --------------------------------
   const { Search } = Input;
   const { Option } = Select;
   const { Title } = Typography;
+
+  const [clubs, setClubs] = useState([]);
+  const [clubDisplay, setClubDisplay] = useState();
+  const [dataSource, setDataSource] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
+  const [sts, setSTs] = useState([
+    {
+      key: "objectid-1",
+      id: "s123",
+      name: "st1",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "President",
+    },
+    {
+      key: "objectid-2",
+      id: "s456",
+      name: "st2",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Member",
+    },
+    {
+      key: "objectid-3",
+      id: "s789",
+      name: "st3",
+      gender: "Male",
+      joinDate: "12/11/2021",
+      email: "student@gmail.com",
+      role: "Content Writer",
+    },
+  ]);
+  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [disableSearch, setDisableSearch] = useState(true);
+  const [studentData, setStudentData] = useState();
+  const [form] = Form.useForm();
+  const [form_search] = Form.useForm();
+
+// ****************************************************************
 
   // ---- search club ------
 
@@ -51,62 +94,44 @@ function ClubEdit() {
     getActiveClubData().then((data) => setClubs(data));
   }, []);
 
-  const [clubs, setClubs] = useState([]);
+  
+  const searchClub = (value) => {
+    getClubID(value.clubID).then((data) => {
+      console.log(data);
+      setClubDisplay(data);
 
-  // console.log(clubs);
+      const studentsData = data.clubData.members;
+      console.log(studentsData[0].clubs);
 
-  const searchClub = (values) => {
-    // console.log(values);
-    const newClub = clubs.filter((club) => club.name === values.clubName);
-    // console.log(newClub[0]);
-    // setClub(newClub[0]);
-    setClubDisplay(
-      <PageHeader
-        title={newClub[0].name}
-        tags={<Tag color="blue">{newClub[0].clubCategory}</Tag>}
-      >
-        <Row>
-          <Statistic title="President" value={newClub[0].president.username} />
-          <Statistic
-            title="Members"
-            value={newClub[0].members.length}
-            style={{
-              margin: "0 50px",
-            }}
-          />
-          <Statistic title="Generated" value={newClub[0].created} />
-        </Row>
-      </PageHeader>
-    );
-    const studentsData = newClub[0].members;
-    const clubSelected = [];
-    for (let i = 0; i < studentsData.length; i++) {
-      clubSelected.push({
-        key: studentsData[i]._id,
-        id: studentsData[i]._id,
-        name: studentsData[i].name,
-        gender: studentsData[i].gender,
-        joinDate: "12/11/2021",
-        email: studentsData[i].email,
-        role: "Content Writer",
-      });
-      setDataSource(clubSelected);
-    }
+      const clubSelected = [];
+      for (let i = 0; i < studentsData.length; i++) {
+        let currentClub = studentsData[i].clubs.find((club) => club.club === data.clubData._id);
+        // console.log(roleData);
+        clubSelected.push({
+          key: studentsData[i]._id,
+          id: studentsData[i].snumber,
+          name: studentsData[i].name,
+          gender: studentsData[i].gender,
+          joinDate: currentClub.joinDate,
+          email: studentsData[i].email,
+          role: currentClub.role,
+        })
+        setDataSource(clubSelected);
+        setDisableSearch(false);
+      }
+    });
   };
 
   const searchReset = () => {
     form_search.resetFields();
-    setClubDisplay(<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />);
     setDataSource();
+    setDisableSearch(true);
   };
 
-  const [clubDisplay, setClubDisplay] = useState(
-    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-  );
   //  ----------------------------------------------------------------
 
   // ------------------ TABLE MEMBERS ----------------------------------
-  //  ------- Functions --------------------------------
+
   const onChange = (pagination, filters, sorter, extra) => {
     console.log(
       "params --- ",
@@ -121,39 +146,6 @@ function ClubEdit() {
     );
   };
 
-  // Table data
-  // console.log(clubDisplay);
-
-  // const [clubSelected, setClubSelected] = useState([]);
-
-  // const studentsInClub = () => {
-  //   const sampleData = [];
-  //   if (clubSelected.length > 0) {
-  //     for (let i = 0; i < clubSelected.length; i++) {
-  //       sampleData.push({
-  //         key: clubSelected[i]._id,
-  //         id: clubSelected[i]._id,
-  //         name: clubSelected[i].name,
-  //         gender: clubSelected[i].gender,
-  //         joinDate: "12/11/2021",
-  //         email: clubSelected[i].email,
-  //         role: "Content Writer",
-  //       });
-  //     }
-  //     console.log("True");
-  //   }
-  //   else {
-  //     console.log(clubSelected.length);
-  //     console.log("False");
-  //   }
-  //   return sampleData;
-  // }
-
-  // const [studentsInClub, setStudentsInClub] = useState(getStudentInClub())
-
-  // console.log(sampleData)
-
-  const [dataSource, setDataSource] = useState([]);
   const columns = [
     {
       title: "ID",
@@ -209,22 +201,23 @@ function ClubEdit() {
   ];
 
   // Function for table ( action edit)
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingStudent, setEditingStudent] = useState(null);
 
   // -------- CRUD Functions ---------------
-  // search student by id
+  // Search student by id
   const onSearch = (value) => {
     if (value !== "") {
       const result = sts.filter((student) => student.id === value);
       if (!result[0]) {
         console.log("Student not found");
-      } else {
+      } 
+      else {
+        console.log(clubDisplay.clubData._id);
         console.log(result[0]);
         setStudentData(result);
         setDisableSubmit(false);
       }
-    } else {
+    }
+    else {
       console.log("Please Input");
     }
   };
@@ -246,7 +239,6 @@ function ClubEdit() {
     });
   };
 
-  // delete student in club members
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -272,37 +264,7 @@ function ClubEdit() {
   };
 
   // ---- Add new student input ----
-  const [sts, setSTs] = useState([
-    {
-      key: "objectid-1",
-      id: "s123",
-      name: "st1",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "President",
-    },
-    {
-      key: "objectid-2",
-      id: "s456",
-      name: "st2",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Member",
-    },
-    {
-      key: "objectid-3",
-      id: "s789",
-      name: "st3",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
-    },
-  ]);
 
-  const [studentData, setStudentData] = useState();
 
   const columnStudentData = [
     {
@@ -326,12 +288,9 @@ function ClubEdit() {
       width: "20%",
     },
   ];
+
   // disable submit button
-  const [disableSubmit, setDisableSubmit] = useState(true);
-
-  const [form] = Form.useForm();
-  const [form_search] = Form.useForm();
-
+  
   const onFinish = (values) => {
     // console.log(values);
     if (studentData[0] !== "") {
@@ -361,10 +320,9 @@ function ClubEdit() {
               name="search-club"
               onFinish={searchClub}
               size="medium"
-              // style={{}}
             >
               <Form.Item
-                name="clubName"
+                name="clubID"
                 label="Club Name"
                 rules={[
                   {
@@ -375,7 +333,7 @@ function ClubEdit() {
                 <Select placeholder="Select Club name" allowClear style={{}}>
                   {clubs.map((club) => {
                     return (
-                      <Option key={club._id} value={club.name}>
+                      <Option key={club._id} value={club._id}>
                         {club.name}
                       </Option>
                     );
@@ -400,17 +358,41 @@ function ClubEdit() {
 
         {/* Area 2 */}
         <Col span={24}>
-          <div className="club-description">{clubDisplay}</div>
+          <div className="club-description">
+            {clubDisplay && (
+              <PageHeader
+                title={clubDisplay.clubData.name}
+                tags={
+                  <Tag color="blue">{clubDisplay.clubData.clubCategory}</Tag>
+                }
+              >
+                <Row>
+                  <Statistic
+                    title="President"
+                    value={clubDisplay?.clubData.president.username}
+                  />
+                  <Statistic
+                    title="Members"
+                    value={clubDisplay.memberCount}
+                    style={{
+                      margin: "0 50px",
+                    }}
+                  />
+                  <Statistic
+                    title="Generated"
+                    value={clubDisplay?.clubData.createDate}
+                  />
+                </Row>
+              </PageHeader>
+            )}
+          </div>
         </Col>
 
         {/* Area 3 */}
         <Col span={24}>
           {/* search bar ( search student by id) */}
           <div className="add-container">
-
-            <Title level={3}>
-              Add new student to club
-            </Title>
+            <Title level={3}>Add new student to club</Title>
 
             <Search
               className="search-bar"
@@ -418,6 +400,7 @@ function ClubEdit() {
               size="medium"
               onSearch={onSearch}
               enterButton
+              disabled={disableSearch}
               required
             />
 
@@ -444,7 +427,6 @@ function ClubEdit() {
 
             {/* select role and add student */}
             <Form
-              // {...layout}
               form={form}
               name="control-hooks"
               onFinish={onFinish}
@@ -468,11 +450,10 @@ function ClubEdit() {
                   <Option value="Content Writer"> Content Writer</Option>
                   <Option value="Member"> Member</Option>
                 </Select>
+
               </Form.Item>
 
-              <Form.Item
-              // {...tailLayout}
-              >
+              <Form.Item>
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -491,99 +472,67 @@ function ClubEdit() {
 
         {/* area 4 */}
         <Col span={24}>
-          {/* single student table */} 
           <div className="members-table">
-
-          <Title
-            level={3}
-            style={{
-              textAlign: "center",
-              margin: "0px",
-              backgroundColor: "black",
-              color: "white",
-            }}
-          >
-            Club Members
-          </Title>
-          
-          <Table
-            bordered
-            columns={columns}
-            dataSource={dataSource}
-            onChange={onChange}
-            pagination={{
-              position: ["bottomRight"],
-            }}
-          />
-          <Modal
-            title="Edit Student"
-            visible={isEditing}
-            okText="Save"
-            onCancel={() => {
-              resetEditing();
-            }}
-            onOk={() => {
-              setDataSource((pre) => {
-                return pre.map((student) => {
-                  if (student.id === editingStudent.id) {
-                    return editingStudent;
-                  } else {
-                    return student;
-                  }
-                });
-              });
-              resetEditing();
-            }}
-          >
-            <Input
-              value={editingStudent?.name}
-              onChange={(e) => {
-                setEditingStudent((pre) => {
-                  return { ...pre, name: e.target.value };
-                });
-              }}
-            />
-            <Input
-              value={editingStudent?.email}
-              onChange={(e) => {
-                setEditingStudent((pre) => {
-                  return { ...pre, email: e.target.value };
-                });
-              }}
-            />
-            <Input
-              value={editingStudent?.role}
-              onChange={(e) => {
-                setEditingStudent((pre) => {
-                  return { ...pre, role: e.target.value };
-                });
-              }}
-            />
-
-            <Select
-              defaultValue={editingStudent?.role}
+            <Title
+              level={3}
               style={{
-                width: "100%",
-              }}
-              // onChange={handleChange}
-              onChange={(e) => {
-                // console.log(e);
-                setEditingStudent((pre) => {
-                  return { ...pre, role: e };
-                });
+                textAlign: "center",
+                margin: "0px",
+                backgroundColor: "black",
+                color: "white",
               }}
             >
-              <Option value="President">President </Option>
-              <Option value="Vice President"> Vice President </Option>
-              <Option value="Content Writer"> Content Writer </Option>
-              <Option value="Member"> Member </Option>
-            </Select>
-          </Modal>
+              Club Members
+            </Title>
 
-
+            <Table
+              bordered
+              columns={columns}
+              dataSource={dataSource}
+              onChange={onChange}
+              pagination={{
+                position: ["bottomRight"],
+              }}
+            />
+            <Modal
+              title="Edit Student"
+              visible={isEditing}
+              okText="Save"
+              onCancel={() => {
+                resetEditing();
+              }}
+              onOk={() => {
+                setDataSource((pre) => {
+                  return pre.map((student) => {
+                    if (student.id === editingStudent.id) {
+                      return editingStudent;
+                    } else {
+                      return student;
+                    }
+                  });
+                });
+                resetEditing();
+              }}
+            >
+    
+              <Select
+                defaultValue={editingStudent?.role}
+                style={{
+                  width: "100%",
+                }}
+                onChange={(e) => {
+                  setEditingStudent((pre) => {
+                    return { ...pre, role: e };
+                  });
+                }}
+              >
+                <Option value="President">President </Option>
+                <Option value="Vice President"> Vice President </Option>
+                <Option value="Content Writer"> Content Writer </Option>
+                <Option value="Member"> Member </Option>
+              </Select>
+            </Modal>
           </div>
-
-
         </Col>
       </Row>
     </div>
