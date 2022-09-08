@@ -5,7 +5,7 @@ import { Button, Modal, Image } from "antd";
 import axios from "axios";
 import { PictureOutlined } from "@ant-design/icons";
 const ProfileBg =({
-    clubId,
+  ClubId,
   page,
   changePage,
 
@@ -17,6 +17,7 @@ const ProfileBg =({
   
   // Post API
   const token = localStorage.getItem("token");
+  const clubId = localStorage.getItem("clubId")
   const uploadBackground = () => {
     const formData = new FormData();
     formData.append("background", background);
@@ -24,10 +25,10 @@ const ProfileBg =({
     axios({
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       method: "put",
-      url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/630de4a51d03758bef83bfdb/bg`,
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}/bg`,
       data: formData,
     })
       .then((response) => {

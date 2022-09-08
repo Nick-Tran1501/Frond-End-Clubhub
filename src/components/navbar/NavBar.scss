@@ -54,14 +54,15 @@
 }
 
 .ant-input-wrapper{
-  
   .ant-btn{
     background-color: #B4B4B4;
   }
+  
+
 }
 
 .NavBarSearchContainer{
-  input.ant-input{
+  .ant-input-affix-wrapper > input.ant-input {
     color:black
   }
 }

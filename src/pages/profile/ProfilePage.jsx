@@ -72,7 +72,7 @@ const Profile = () => {
           <Row className="main-content">
             <Col xs={24} sm={24} md={7} lg={7} xl={7}>
               <ProfileSide
-                clubId={clubId}
+                ClubId={clubId}
                 page={page}
                 changePage={changePage}
                 name={club.name}
