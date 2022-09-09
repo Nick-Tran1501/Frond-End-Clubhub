@@ -298,10 +298,6 @@ body {
   font-size: 3rem;
 }
 
-.upload_image input[type="file"] {
-  /* display: none; */
-}
-
 .upload_image input[type="submit"] {
   width: 100%;
 }
