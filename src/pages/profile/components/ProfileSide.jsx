@@ -4,31 +4,14 @@ import "antd/dist/antd.css";
 import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
 import { Col, Row,Layout } from "antd";
 import axios from 'axios';
-function getStoredInfo() {
-    const storedInfo = localStorage.getItem("studentID");
-    if (!storedInfo) return {
-        name: "",
-        location: "",
-        president: "",
-        email: "",
-        description: "",
-        title: "",
-        date: ""
-    }
-    return JSON.parse(storedInfo);
-}
 
 
-const ProfileSide = ({page, changePage, clubId}) => {
+const ProfileSide = ({page, changePage}) => {
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);
 
-    const [info, setInfo] = useState(getStoredInfo)
 
-    useEffect(() => {
-        localStorage.setItem("studentID", JSON.stringify(info));
-    }, [info])
-
+    const clubId = localStorage.getItem("clubId")
     const showModal3 = () => {
         setModal3(true);
     };
@@ -52,10 +35,7 @@ const ProfileSide = ({page, changePage, clubId}) => {
     }
 
     function handleChange (event) {
-        setInfo((prevInfo) => ({
-            ...prevInfo,
-            [event.target.name]: [event.target.value],
-        }))
+        
     }
 
 
@@ -163,15 +143,15 @@ const ProfileSide = ({page, changePage, clubId}) => {
 
                     <div className='inputFields'>
                         <h5>Club Name:</h5>
-                        <input type="text" placeholder='Enter club name' name="name" onChange={handleChange} value={info.name} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
+                        <input type="text" placeholder='Enter club name' name="name" onChange={handleChange}  className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
                         <h5>Location:</h5>
-                        <input type="text" placeholder='Enter location' name="location" onChange={handleChange} value={info.location} className="inputField" />
+                        <input type="text" placeholder='Enter location' name="location" onChange={handleChange}  className="inputField" />
                         <h5>President:</h5>
-                        <input type="text" placeholder='Enter president' name="president" onChange={handleChange} value={info.president} className="inputField" />
+                        <input type="text" placeholder='Enter president' name="president" onChange={handleChange} className="inputField" />
                         <h5>Email:</h5>
-                        <input type="text" placeholder='Email' name="email" onChange={handleChange} value={info.email} className="inputField" />
+                        <input type="text" placeholder='Email' name="email" onChange={handleChange} className="inputField" />
                         <h5>Description:</h5>
-                        <input type="text" placeholder='Enter your description' name="description" onChange={handleChange} value={info.description} className="inputField" />
+                        <input type="text" placeholder='Enter your description' name="description" onChange={handleChange}  className="inputField" />
                     </div>
                     
                 </form>
@@ -311,8 +291,8 @@ const ProfileSide = ({page, changePage, clubId}) => {
 
             <div className='p-row'>
                 <div className='p-note'>
-                    <h3>{info.title}</h3>
-                    <p>{info.date}</p>
+                    {/* <h3>{info.title}</h3>
+                    <p>{info.date}</p> */}
                 </div>
             </div>
             <Modal title="Change events" visible={modal4} onOk={handleOk} onCancel={handleCancel}>
@@ -327,9 +307,9 @@ const ProfileSide = ({page, changePage, clubId}) => {
                     <div className='inputFields'>
                         {/* <DatePicker onChange={handleChange} /> */}
                         <h5>Event Title:</h5>
-                        <input type="text" placeholder='Enter event title' name="title" onChange={handleChange} value={info.title} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
+                        <input type="text" placeholder='Enter event title' name="title" onChange={handleChange} className="inputField" /> {/* should declare the value = formData.name because sth called contrilled components */}
                         <h5>Event Date:</h5>
-                        <input type="date" placeholder='Enter date event' name="date" onChange={handleChange} value={info.date} className="inputField" />
+                        <input type="date" placeholder='Enter date event' name="date" onChange={handleChange} className="inputField" />
                     </div>
                     
                 </form>

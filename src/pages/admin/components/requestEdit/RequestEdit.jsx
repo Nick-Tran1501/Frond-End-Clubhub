@@ -105,11 +105,13 @@ function RequestClub() {
               </div>
             ))}
 
-          {requests.length === 0 && (
+
+
+          {requests.length === 0 && (            
             <Result
               style={{
                 backgroundColor: "white",
-                height: "100%",
+                height: "100vh",
               }}
               icon={<SmileOutlined />}
               title="Great, you have done all the request!"

@@ -57,9 +57,9 @@ const MemberTable = () => {
             dataIndex: 'clubRole',
             render: (clubRole) => {
                 let color = 'brown'
-                if (clubRole === 'user') {
+                if (clubRole === 'Member') {
                     color = 'green'
-                } else if (clubRole === 'writer') {
+                } else if (clubRole === 'Writer') {
                     color = 'blue'
                 }
                 return (
@@ -77,17 +77,17 @@ const MemberTable = () => {
             render: (_, record) => {
                 let isPresident = false
                 let isContenWriter = false
-                if (record.clubRole === 'president') {
+                if (record.clubRole === 'President') {
                     isPresident = true
-                } else if (record.clubRole === 'writer') {
+                } else if (record.clubRole === 'Writer') {
                     isContenWriter = true
                 }
 
                 return (
                     <Space size="middle" style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button type='primary' onClick={() => onClickViewInfo(record)}>View Info</Button>
-                        {(!isContenWriter && !isPresident) && <Button type="primary" onClick={() => onClickSetRole(record, "writer")}>Allow posting</Button>}
-                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "user")}>Disable posting</Button>}
+                        {(!isContenWriter && !isPresident) && <Button type="primary" onClick={() => onClickSetRole(record, "Writer")}>Allow posting</Button>}
+                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "Member")}>Disable posting</Button>}
                         {!isPresident &&
                             <Button type='primary' danger onClick={() => onClickKickMember(record)}>Kick</Button>
                         }

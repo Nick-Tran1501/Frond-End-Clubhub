@@ -41,7 +41,7 @@ const RecommendClub = () => {
           
           return(
 
-            <Clubs id={club._id} name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
+            <Clubs key={club._id} id={club._id} name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
           )
         })}
 

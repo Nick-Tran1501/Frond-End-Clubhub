@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState,useEffect } from "react";
 import "./NavBar.scss";
 import "antd/dist/antd.css";
 import {
@@ -51,52 +52,57 @@ const NavBar = () => {
   const closeRightBar = () => {
     setShowRight(false)
   }
+
   const { Search } = Input;
   const token = localStorage.getItem("token")
 
-  const [searchValue,setSearchValue] = useState("")
-  const [searchDisplay, setSearchDisplay] = useState({
-    clubs:[],
-    posts:[],
-    profiles: [],
-  })
+ const [searchValue,setSearchValue] = useState("")
+  // const [searchDisplay, setSearchDisplay] = useState({
+  //   clubs:[],
+  //   posts:[],
+  //   profiles: [],
+  // }) 
 
-  axios({
-    method:"post",
-    url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
-    headers:{
-      "Authorization": `Bearer ${token}` },
-      data:{
-        value: searchValue
-      }
-  })
-  .then((response)=> {
-    console.log(response)
-    setSearchDisplay(
-      {...searchDisplay,
-      clubs: response.data.clubs,
-      posts: response.data.posts,
-      profile: response.data.profile
-    }
-
-    )
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  const value = [
-    {
-      value: 'Burns Bay Road',
-    },
-    {
-      value: 'Downing Street',
-    },
-    {
-      value: 'Wall Street',
-    },
-  ];
+  // axios({
+  //   method:"post",
+  //   url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
+  //   headers:{
+  //     "Authorization": `Bearer ${token}` },
+  //     data:{
+  //       value: searchValue
+  //     }
+  // })
+  // .then((response)=> {
+  //   setSearchDisplay(
+  //     {...searchDisplay,
+  //       clubs: response.data.clubs,
+  //       posts: response.data.posts,
+  //       profile: response.data.profile
+  //     }
+  //   )
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // })
   
-  // Render the View
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setUserProfile(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  
+  
+  
+const navigate = useNavigate()
+  
   return (
     <Row
       className="navbar--container"
@@ -128,7 +134,9 @@ const NavBar = () => {
                 width: "100%",
                 height: "100%",
                 textAlign: "center",
+                cursor:"pointer"
               }}
+              onClick={()=>{navigate("/home")}}
             >
               <img
                 src={require("../../image/ClubHub_Trans.png")}
@@ -152,20 +160,8 @@ const NavBar = () => {
         xl={10}
         className="NavBarSearchContainer"
       >
-        <AutoComplete
-          options={value}
-
-          style={{
-            width:"100%",
-          }}
-          filterOption={(inputValue, option) =>
-            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-          }
-        >
-
           <Search
             placeholder="Search For Your Club"
-            // onSearch={onSearch}
             style={{
               color:"black"
             }}
@@ -175,7 +171,7 @@ const NavBar = () => {
             }}
             allowClear
           />
-        </AutoComplete>
+        
       </Col>
 
       <Col
@@ -201,6 +197,7 @@ const NavBar = () => {
               style={{
                 all: "unset",
                 textAlign: "center",
+                cursor:"pointer"
               }}
             >
               <DownOutlined
@@ -225,6 +222,7 @@ const NavBar = () => {
               style={{
                 all: "unset",
                 textAlign: "center",
+                cursor:"pointer"
               }}
             >
               <BellOutlined
@@ -258,6 +256,7 @@ const NavBar = () => {
                 style={{
                   fontSize: "20px",
                   fontWeight: "bold",
+                  cursor:"pointer"
                 }}
               />
               <p

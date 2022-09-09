@@ -2,18 +2,19 @@ import React, {useState, useEffect} from 'react';
 import "../../pages/profile/ProfilePage.css";
 import axios from "axios"
 import "antd/dist/antd.css";
-import { Modal, Row, Col } from 'antd';
+import { Modal, Row, Col, Upload,Button } from 'antd';
 import {CloseCircleOutlined} from '@ant-design/icons';
 
 
-export default function PostUpload() {
+export default function PostUpload({reload}) {
     const [post, setPost] = useState(false);
     const [postImg, setPostImg] = useState([]);
     const [user,setUser] = useState({})
-    const [clubId,setClubId] = useState("")
     const token = localStorage.getItem("token");
+    
     const [postData, setPostData] = useState([]);
 
+    const clubId=localStorage.getItem("clubId")
 
     //Get User
     useEffect(() => {
@@ -23,9 +24,7 @@ export default function PostUpload() {
           })
           .then((response) => {
             console.log(response.data);
-            setUser(response.data);
-            setClubId(response.data.clubs[0].club)
-            
+            setUser(response.data);            
           })
           .catch((err) => console.log(err));
       }, []);
@@ -41,35 +40,29 @@ export default function PostUpload() {
         setPost(true);
     };
 
-    const handleFile = (e) => {
-        const files = e.target.files;
-        console.log(files)
-        // mapping all the images and set the temporary URL for previewing
-        Promise.all([...e.target.files].map((file) => {
-            file.preview = URL.createObjectURL(file)
-            console.log(file.preview)
-            setPostImg((prev) => [...prev, file.preview])
-        }))
-        // file.preview = URL.createObjectURL(file)
-        // setPostImg(file)
-    }
   
     const handleOk = () => {
       setPost(false);
+     
     };
   
     const handleCancel = () => {
       setPost(false);
       setPostImg([])
-    };
+    };      
+    
 
-    console.log(clubId)
+    //Save Image To Stage
+    const saveImages = (file) => {
+        setPostImg(prev => [...prev,file])
       
-      
+    }
+
+    
     // --------- Create Post ---------
     const [createPostContent, setCreatePostContent] = useState("")
     const createPost = () => {
-        const formData = new FormData();
+        let formData = new FormData();
         formData.append("content", createPostContent)
         formData.append("location", "RMIT University")
         postImg.forEach(img => {
@@ -78,7 +71,7 @@ export default function PostUpload() {
         })
         
         formData.append("viewMode", "internal")
-        console.log("gig",`${token}`)
+        console.log("gig",formData)
         axios({
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -89,8 +82,11 @@ export default function PostUpload() {
             data: formData
         })
         .then((response) => {
-            setPost(false)
-            console.log(response)})
+            setPost(false) 
+            console.log(response)
+            setPostImg([])
+            {reload()}
+        })
         .catch((err) => {console.log(err)})
     }
     return (
@@ -133,48 +129,22 @@ export default function PostUpload() {
                         ></textarea>
                     </div>
 
-                    <div className="file_img" id="post_upload">
-                        {/* Check if there is any image */}
-                        {postImg.length > 0 ? 
-                            postImg.length > 1 ? 
-                            //If more than 2, re-scale image
-                            <Row 
-                            gutter={{
-                                xs: 0,
-                                sm: 5,
-                                md: 5,
-                                lg: 5,
-                              }}
-                            className='multi_img'>
-                                {postImg.map((prev, index) => 
-                                <Col span={8}>
-                                    <img src={prev} alt="postImg" />
-                                    <CloseCircleOutlined
-                                        className='deleteIcon' 
-                                        // onClick={() => {postImg.slice(index, 1);setPostImg(postImg)}} 
-                                    />
-                                </Col>
-                                )}
-                            </Row>
-                            : 
-                            // If 1 image, full width
-                            postImg.map((prev, index) => 
-                                <div className='post_img'>
-                                    <img src={prev} alt="postImg" />
-                                    <CloseCircleOutlined className='deleteIcon' />
-                                </div>
-                        ) 
-                        :
-                            // If there is no image yet
-                            <label htmlFor="post_img">
-                                <span><i className="fa-regular fa-image"></i></span>
-                                <p>Add an image</p>
-                            </label>
-                        }
-                        
-                        <input type="file" name="post_img" id="post_img" onChange={handleFile} multiple />
-                        
-                    </div>
+                    <Upload 
+                    action={(file) => saveImages(file)} 
+                    multiple listType="picture" 
+                    accept='.png,.jpeg,.jpg'
+                    beforeUpload={(file) => {
+                        console.log({file})
+                        return file
+                    }}
+                    maxCount ={5}
+                    
+                    >
+                        <Button>
+                            Click Upload
+                        </Button>
+                    </Upload>
+
                 </form>
             </Modal>
         </div>
