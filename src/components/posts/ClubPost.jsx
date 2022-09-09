@@ -75,7 +75,6 @@ const ClubPosts = () => {
         const toggleReadMore = () => {
           setIsReadMore(!isReadMore);
         };
-        console.log(text.length);
         if (text.length <= 99) {
           return (
             <div>

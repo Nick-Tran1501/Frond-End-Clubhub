@@ -15,7 +15,6 @@ import {
 import CommentsBox from "../commentsbox/CommentsBox";
 import axios from "axios";
 import Comment from "../commentlist/Comment";
-import PostUpload from "../postUpload/PostUpload";
 
 
 const Post = () => {
@@ -29,7 +28,6 @@ const Post = () => {
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
       .then((response) => {
-        console.log(response.data);
         setPostData(response.data);
       })
       .catch((error) => {
@@ -46,7 +44,6 @@ const Post = () => {
 
   return (
     <React.Fragment>
-      <PostUpload reload={loadPost}/>
       {postData.map((post) => {
         // -------Like Count--------
         const handleLike = (postId) => {
