@@ -4,6 +4,7 @@ import axios from "axios"
 import "antd/dist/antd.css";
 import { Modal, Row, Col, Upload,Button } from 'antd';
 import {CloseCircleOutlined} from '@ant-design/icons';
+import { createUseStyles } from "react-jss"
 
 
 export default function PostUpload({reload}) {

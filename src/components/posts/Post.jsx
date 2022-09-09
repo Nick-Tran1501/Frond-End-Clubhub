@@ -15,11 +15,33 @@ import {
 import CommentsBox from "../commentsbox/CommentsBox";
 import axios from "axios";
 import Comment from "../commentlist/Comment";
+import { createUseStyles } from "react-jss";
 
+const useStyles = createUseStyles({
+  like: {
+    flexBasis: "30%",
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "1rem",
+    color: "#2078F4",
+  },
+  unlike: {
+    flexBasis: "30%",
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "1rem",
+    color: "#000",
+  },
+});
 
 const Post = () => {
   const [postData, setPostData] = useState([]);
   const token = localStorage.getItem("token");
+  const classes = useStyles();
   const loadPost = () => {
     axios({
       headers: { Authorization: `Bearer ${token}` },
@@ -28,6 +50,7 @@ const Post = () => {
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
       .then((response) => {
+        console.log("Post", response.data);
         setPostData(response.data);
       })
       .catch((error) => {
@@ -36,6 +59,22 @@ const Post = () => {
   };
   useEffect(() => {
     loadPost();
+  }, []);
+
+  //-----------Get User---------
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log("User", response.data);
+        setUserProfile(response.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const [show, setShow] = useState(false);
@@ -63,7 +102,6 @@ const Post = () => {
               console.log(error);
             });
         };
-
         // ------------Read More--------------
         const ReadMore = ({ children }) => {
           const text = children;
@@ -71,7 +109,6 @@ const Post = () => {
           const toggleReadMore = () => {
             setIsReadMore(!isReadMore);
           };
-          console.log(text.length);
           if (text.length <= 99) {
             return (
               <div>
@@ -85,7 +122,7 @@ const Post = () => {
                   {isReadMore ? text.slice(0, 100) : text}
 
                   <span onClick={toggleReadMore} className="readOrHide">
-                    {isReadMore ? "...read more" : " show less"}
+                    {isReadMore ? "...Read more" : " Show less"}
                   </span>
                 </p>
               </div>
@@ -323,7 +360,13 @@ const Post = () => {
             {/* -------Post Footer------ */}
             <div className="PostFooter">
               <button className="Button" onClick={() => handleLike(post._id)}>
-                <div className="ActionButtons">
+                <div
+                  className={
+                    post.likes.includes(`${userProfile._id}`)
+                      ? classes.like
+                      : classes.unlike
+                  }
+                >
                   <p>Like</p>
                   <LikeOutlined className="ButtonIcons" />
                 </div>

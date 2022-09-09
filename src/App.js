@@ -33,7 +33,7 @@ function App() {
       {/* <ProfilePage/> */}
       {/* ---------------------------------------------------------------- */}
 
-      <PresidentPage />
+      {/* <PresidentPage /> */}
     </div>
   );
 }
