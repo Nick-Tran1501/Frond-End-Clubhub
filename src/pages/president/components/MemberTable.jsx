@@ -57,7 +57,7 @@ const MemberTable = () => {
             dataIndex: 'clubRole',
             render: (clubRole) => {
                 let color = 'brown'
-                if (clubRole === 'user') {
+                if (clubRole === 'member') {
                     color = 'green'
                 } else if (clubRole === 'writer') {
                     color = 'blue'
