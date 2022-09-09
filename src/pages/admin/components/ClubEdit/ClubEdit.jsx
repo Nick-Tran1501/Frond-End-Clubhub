@@ -15,16 +15,11 @@ import {
   Typography,
   Table,
   Empty,
-  //   Search,
   Form,
-  // Menu,
-  // Dropdown,
-  // Space,
-  // Popconfirm,
-  // message,
   Button,
   Select,
   Modal,
+  notification,
 } from "antd";
 
 // import icon
@@ -35,7 +30,9 @@ import {
   UnlockOutlined,
 } from "@ant-design/icons";
 // import Title from "antd/lib/skeleton/Title";
+
 import { getActiveClubData, getClubID, getStudent } from "./ClubAPI.js";
+
 
 function ClubEdit() {
 
@@ -64,6 +61,14 @@ function ClubEdit() {
   const [form] = Form.useForm();
   const [form_search] = Form.useForm();
 
+  //  ******** Notification / type: {success, info, warning, error} *******
+  const openNotificationWithIcon = (type,content) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: content,
+    });
+  };
+  
 // ****************************************************************
 
   // ---- search club ------
@@ -178,23 +183,32 @@ function ClubEdit() {
   // -----------------------------------
   // -------- CRUD Functions ---------------
   // Search student by id
+
   const onSearch = (value) => {
-    const cID = clubDisplay.clubData._id;
-    getStudent(value,cID).then((data) => {
-      const newStudent = {
-        key: data._id,
-        id: data.snumber,
-        name: data.name,
-        gender: data.gender,
-        email: data.email,
-      };
-      console.log(newStudent);
-      setStudentData([newStudent]);
-      setDisableSubmit(false);
-    })
+    if (value !== ""){
+      const cID = clubDisplay.clubData._id;
+      getStudent(value,cID).then((data) => {
+        if (!data){
+          return openNotificationWithIcon("error", `Can not found student with ID: ${value}`) ;
+        }
+        const newStudent = {
+          key: data._id,
+          id: data.snumber,
+          name: data.name,
+          gender: data.gender,
+          email: data.email,
+        };
+        console.log(newStudent);
+        setStudentData([newStudent]);
+        setDisableSubmit(false);
+      })
+
+    }
+    else {
+      console.log("Please Input");
+    }
+
     
-
-
     // if (value !== "") {
     //   const result = sts.filter((student) => student.id === value);
     //   if (!result[0]) {
@@ -207,9 +221,7 @@ function ClubEdit() {
     //     setDisableSubmit(false);
     //   }
     // }
-    // else {
-    //   console.log("Please Input");
-    // }
+
   };
 
   const onAddStudent = (studentData) => {
@@ -223,10 +235,8 @@ function ClubEdit() {
       email: studentData[0].email,
       role: studentData[0].role,
     };
-
-    setDataSource((pre) => {
-      return [...pre, newStudent];
-    });
+    setDataSource((pre) =>  [...pre, newStudent]);
+    return openNotificationWithIcon("success", `Add student id ${newStudent.id} to club !`);
   };
 
   const onDeleteStudent = (record) => {

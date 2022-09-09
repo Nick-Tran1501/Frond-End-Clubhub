@@ -28,7 +28,6 @@ export const getClubID = async (id) => {
     }
 };
 
-
 // get club 
 export const getStudent= async (sID,clubId) => {
     const response = await axios({
