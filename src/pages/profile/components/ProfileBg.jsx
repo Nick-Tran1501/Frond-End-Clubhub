@@ -197,7 +197,7 @@ const ProfileBg =({
 
 //-------Button Display---------
   const memberId = []
-  club.members.map(member => { 
+  club.members.forEach(member => { 
     memberId.push(member._id)
   })
   
