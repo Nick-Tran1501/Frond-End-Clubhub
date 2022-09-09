@@ -4,50 +4,55 @@ import club_1 from "../../image/clubs-cheer.jpg"
 import club_2 from "../../image/club-cheer_2.png"
 import avatar from "../../image/avatar.png"
 import { useEffect } from 'react';
-import teammate from './team_data'
+import teammate from './team_data';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Gallery = () => {
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   autoplay: true,
-  //   autoplaySpeed: 3000,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //         dots: true
-  //       }
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //         initialSlide: 0
-  //       }
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1
-  //       }
-  //     }
-  //   ]
-  // };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 0
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
 
-  // useEffect(() => {
-  //   Aos.init({duration: 2000});
-  // }, []);
+  useEffect(() => {
+    Aos.init({duration: 2000});
+  }, []);
 
   return (
     <div className='galleryContainer'>
@@ -55,7 +60,7 @@ const Gallery = () => {
 
         {/* Skewed card */}
         <section className='galleryContent_1'>
-          <div className="splitview skewed">
+          <div data-aos="zoom-in-up" className="splitview skewed">
             <div className="panel bottom">
                 <div className="content">
                     <div className="description">
@@ -84,7 +89,7 @@ const Gallery = () => {
 
         {/* Left card */}
         <section className='galleryContent_2'>
-          <div className="splitview skewed">
+          <div data-aos="fade-up" className="splitview skewed">
             <div className="panel left">
                 <div className="content">
                     <div className="description">
@@ -104,7 +109,7 @@ const Gallery = () => {
         
         {/* Right card */}
         <section className='galleryContent_3'>
-          <div className="splitview skewed">
+          <div data-aos="fade-up" className="splitview skewed">
             <div  className="panel right">
                 <div className="content">
                     <div className="description">
@@ -124,7 +129,7 @@ const Gallery = () => {
 
         {/* Left card */}
         <section className='galleryContent_4'>
-          <div className="splitview skewed">
+          <div data-aos="fade-up" className="splitview skewed">
             <div className="panel left">
                 <div className="content">
                     <div className="description">
@@ -146,8 +151,10 @@ const Gallery = () => {
         <section className='team' id='team'>
           <div className='max-width'>
             <h2 className='tag'>Our Team</h2>
-              <div className="imgslider">
-                {/* <Slider {...settings}> */}
+              
+          </div>
+          <div className="imgslider">
+                <Slider {...settings}>
                   {teammate.map((mate) => (
                     <div className='card_team'>
                       <img src={avatar}  alt={mate.name} />
@@ -155,9 +162,8 @@ const Gallery = () => {
                       <p>{mate.role}</p>
                     </div>
                  ))}
-                {/* </Slider> */}
+                </Slider>
               </div>
-          </div>
         </section>
       </div>
     </div>

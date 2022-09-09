@@ -193,7 +193,7 @@
     width: 80%;
     margin: 10px auto;
     padding: 50px;
-    display: flex;
+    /* display: flex; */
 }
 
 .slick-arrow {
@@ -209,9 +209,9 @@
 
 .card_team {
     border-radius: 6px;
-    padding: 25px 35px;
+    padding: 5px 5px;
     background-color: #222;
-    overflow: hidden;
+    /* overflow: hidden; */
     cursor: pointer;
 }
 
@@ -220,7 +220,7 @@
 }
 
 .card_team img {
-    width: 100%;
+    width: 60%;
     height: 70%;
     margin: 10px auto;
     object-fit: cover;

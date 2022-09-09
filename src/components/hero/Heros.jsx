@@ -1,6 +1,6 @@
 import React from 'react';
 import './Heros.css';
-// import Typical from 'react-typical';
+import Typical from 'react-typical';
 
 const Hero = () => {
   return (
@@ -10,8 +10,8 @@ const Hero = () => {
           <div className='text-1'>Welcome to</div>
           <div className='text-2'>CLUBHUB RMIT VIETNAM</div>
           <div className='text-3'>And we are
-            <span> The way finders
-              {/* <Typical 
+            <span>
+              <Typical 
               loop={Infinity}
               wrapper="b"
               steps={[
@@ -19,7 +19,7 @@ const Hero = () => {
                 1000,
                 ' Website Developers', 
                 1000
-              ]} /> */}
+              ]} />
             </span>
           </div>
         </div>
