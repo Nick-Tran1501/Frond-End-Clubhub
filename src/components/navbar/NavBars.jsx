@@ -56,12 +56,12 @@ const NavBar = () => {
   const { Search } = Input;
   const token = localStorage.getItem("token")
 
-  const [searchValue,setSearchValue] = useState("")
-  const [searchDisplay, setSearchDisplay] = useState({
-    clubs:[],
-    posts:[],
-    profiles: [],
-  })
+ const [searchValue,setSearchValue] = useState("")
+  // const [searchDisplay, setSearchDisplay] = useState({
+  //   clubs:[],
+  //   posts:[],
+  //   profiles: [],
+  // }) 
 
   // axios({
   //   method:"post",
@@ -94,7 +94,6 @@ const NavBar = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
         setUserProfile(response.data);
       })
       .catch((err) => console.log(err));

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
-import PostUpload from "../../../components/postUpload/PostUpload";
-import ClubPosts from "../../../components/posts/ClubPost";
+import ClubPosts from "../../../components/posts/ClubPost"
 
 export default function ProfilePost() {
   const [post, setPost] = useState(false);

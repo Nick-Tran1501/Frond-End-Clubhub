@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "../ProfilePage.css";
 import "antd/dist/antd.css";
-import { Button, Modal, Image } from "antd";
+import { Button, Modal, Image, notification } from "antd";
 import axios from "axios";
 import { PictureOutlined } from "@ant-design/icons";
+import { createUseStyles } from "react-jss"
+
+
+const useStyles= createUseStyles({
+  disable:{
+    backgroundColor:"grey",
+    color:"white"
+  },
+
+  able: {
+    backgroundColor: "#68B8FF"
+    
+  }
+})
+
 const ProfileBg =({
   ClubId,
   page,
@@ -34,7 +49,6 @@ const ProfileBg =({
       .then((response) => {
         setClub({...club, backgroundUrl: response.data.backgroundUrl});   
         setBackground(response.data.backgroundUrl);
-        console.log(response.data.backgroundUrl);
       })
       .catch((error) => {
         console.log(error);
@@ -55,7 +69,6 @@ const ProfileBg =({
       data: formData,
   })
   .then((response) => {
-    console.log(response.data)
     setClub({...club, logoUrl: response.data.logoUrl});   
 
   })
@@ -63,7 +76,7 @@ const ProfileBg =({
   }
   
 
-  //Get Api
+  //Get Club Api
   const [club, setClub] = useState({
     name: "",
     logoUrl: "",
@@ -71,6 +84,7 @@ const ProfileBg =({
     slogan: "",
     email: "",
     backgroundUrl: "",
+    members:[],
   });
   useEffect(() => {
     axios({
@@ -78,7 +92,7 @@ const ProfileBg =({
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log(res.data.clubData.logoUrl);
+        console.log(res.data.clubData);
         setClub({
           ...club,
           name: res.data.clubData.name,
@@ -86,14 +100,29 @@ const ProfileBg =({
           description: res.data.clubData.description,
           slogan: res.data.clubData.slogan,
           email: res.data.clubData.email,
-          backgroundUrl: res.data.clubData.backgroundUrl
+          backgroundUrl: res.data.clubData.backgroundUrl,
+          members:res.data.clubData.members
         });
       })
       .catch((err) => {
+        
+        
         console.log(err);
       });
   },[]);
-
+  
+  // Current User Api
+  const [userProfile, setUserProfile] = useState("");
+  useEffect(() => {
+    axios
+      .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setUserProfile(response.data._id);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -141,6 +170,47 @@ const ProfileBg =({
   };
 
 
+ 
+  // ---------Join---------
+  const joinClub = () =>{
+    axios({
+      headers:{
+        "Authorization": `Bearer ${token}`
+      },
+      method: "POST",
+      url:`https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}/join`,
+      data:{message: "Can I Joined Your Club?"}
+    })
+    .then((response)=>{
+      
+        console.log(response)
+      })
+    .catch((err)=> {
+      
+      console.log(err.response.status);
+      if( err.response.status===402){
+        openNotificationWithIcon("error")
+      }
+    })
+      
+  }
+
+//-------Button Display---------
+  const memberId = []
+  club.members.map(member => { 
+    memberId.push(member._id)
+  })
+  
+  const openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: 'Pending',
+      description:
+        'Your request have been send. Please wait for the confirmation',
+    });
+  };
+  
+  
+  const classes = useStyles();
   return (
     <div>
       {/* <!-- profile-cover --> */}
@@ -272,10 +342,19 @@ const ProfileBg =({
             </Modal>
           </div>
 
-          <div id="edit_profile_btn" className="pdl-row">
-            <button className="btn" onClick={showModal2}>
+          <div id="edit_profile_btn" className="pdl-row ProfileButtonContainer">
+            <Button className="btn" onClick={showModal2}>
               Edit Profile
-            </button>
+            </Button>
+            <Button 
+              className={ memberId.includes(userProfile) ? classes.disable : classes.able}
+              onClick={() => {joinClub()}}
+              disabled={memberId.includes(userProfile) ? true : false}
+            >
+              Join
+            </Button>
+
+            
           </div>
         </div>
 
