@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.user-edit-container{
+    background-color: whitesmoke;
+    height: auto;
+    padding: 0 5px;
+}
+
+//  --- Area 1 ---
+.title-user-edit {
+    background-color: white;
+    // border-radius: 5px;
+    // box-shadow: 2px 2px 5px #888888;
+    // border: 2px solid red;
+
+    h3.ant-typography {
+        text-align: center;
+        // color: black;
+        margin: auto;
+    }
+}
+
+.user-edit-table{
+    background-color: white;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    padding: 10px;
+    h3.ant-typography{
+        text-align: center;
+    }
+    
+    
+}
