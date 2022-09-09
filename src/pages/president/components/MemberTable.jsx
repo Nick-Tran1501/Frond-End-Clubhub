@@ -57,7 +57,7 @@ const MemberTable = () => {
             dataIndex: 'clubRole',
             render: (clubRole) => {
                 let color = 'brown'
-                if (clubRole === 'user') {
+                if (clubRole === 'member') {
                     color = 'green'
                 } else if (clubRole === 'writer') {
                     color = 'blue'
@@ -87,7 +87,7 @@ const MemberTable = () => {
                     <Space size="middle" style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button type='primary' onClick={() => onClickViewInfo(record)}>View Info</Button>
                         {(!isContenWriter && !isPresident) && <Button type="primary" onClick={() => onClickSetRole(record, "writer")}>Allow posting</Button>}
-                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "user")}>Disable posting</Button>}
+                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "member")}>Disable posting</Button>}
                         {!isPresident &&
                             <Button type='primary' danger onClick={() => onClickKickMember(record)}>Kick</Button>
                         }
