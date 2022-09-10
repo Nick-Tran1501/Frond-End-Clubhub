@@ -127,7 +127,7 @@ const NavBar = () => {
             
           </div>,
           
-          icon: <Avatar size="large" src={noti.club.logoUrl}/> ,
+          icon: <Avatar size="large" src={noti?.club?.logoUrl}/> ,
           key: noti._id,
         })
       })}
