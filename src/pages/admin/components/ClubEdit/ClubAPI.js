@@ -1,4 +1,5 @@
 import axios from 'axios'
+import UserEdit from '../userEdit/UserEdit';
 
 
 const token = localStorage.getItem('token');
@@ -46,6 +47,64 @@ export const getStudent= async (sID,clubId) => {
 };
 
 
+// add new student to club
+export const addStudentToClub = async (clubId,userId,role) => {
+    const response = await axios({
+        method: 'PUT',
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/admin/members/add",
+        headers:{ 'Authorization': `Bearer ${token}`},
+        data : {
+            clubId,
+            userId,
+            role
+        }
+    })
+
+    if (response.status === 200){
+        return response.data.message;
+    }
+}
+
+export const removeUserFromClub = async (userId, clubId) => {
+    const response = await axios({
+        method: 'DELETE',
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/admin/clubs/members/remove",
+        headers:{ 'Authorization': `Bearer ${token}`},
+        data: {
+            userId,
+            clubId
+        }
+    })
+
+    if (response.status === 200){
+        return response.data.message;
+    }
+}
+
+export const updateRole = async (clubId, userId, role) => {
+
+    const response = await axios({
+        method: 'PUT',
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/admin/clubs/members/role",
+        headers:{ 'Authorization': `Bearer ${token}`},
+        data: {
+            clubId,
+            userId,
+            role
+        }    
+    })
+    // return response.status;
+    .then((response) => {
+        console.log(response.status);
+        return response.status;
+    })
+    .catch((err)=>{
+        console.log(err);
+        return err.response.status;
+    })
+    
+    return response;
+} 
 
 
 
