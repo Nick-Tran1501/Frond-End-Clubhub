@@ -71,7 +71,7 @@ export default function PostUpload({reload}) {
             formData.append("images", img)
         })
         
-        formData.append("viewMode", "internal")
+        formData.append("viewMode", "public")
         console.log("gig",formData)
         axios({
             headers: {

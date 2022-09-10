@@ -1,11 +1,11 @@
 .sideContainer{
     height: 95vh;
-    margin: 40px 0 0 10px;
-    border-radius: 1px;
+    margin: 40px 0 0 0;
     text-align: center;
     height: fit-content;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .sideAvatar{
@@ -24,7 +24,7 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     box-shadow: 1px 0px 3px #888888;
-    
+    width: 100%;
 }
 
 .sideTop h2{
