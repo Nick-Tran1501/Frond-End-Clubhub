@@ -271,7 +271,7 @@ const Post = () => {
                 ) : (
                   ""
                 )}
-                <Dropdown overlay={menu} placement="bottomRight">
+                <Dropdown overlay={menu} placement="bottomRight" arrow>
                   <button
                     style={{
                       padding: "0 ",

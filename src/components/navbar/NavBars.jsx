@@ -20,6 +20,7 @@ import {
   Button,
   Drawer,
   Search,
+  
 } from "antd";
 import Sidebar from "../sidebar/Sidebars";
 import { useNavigate } from "react-router-dom";
@@ -103,6 +104,29 @@ const NavBar = () => {
   
 const navigate = useNavigate()
   
+
+
+// -----------Notification--------------
+const menu = (
+  <Menu
+    // onClick={handleMenuClick}
+    items={[
+      {
+        label: '1st menu item',
+        key: '1',
+      },
+      {
+        label: '2nd menu item',
+        key: '2',
+      },
+      {
+        label: '3rd menu item',
+        key: '3',
+      },
+    ]}
+  />
+);
+
   return (
     <Row
       className="navbar--container"
@@ -218,6 +242,7 @@ const navigate = useNavigate()
           </Col>
 
           <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
+
             <Button
               style={{
                 all: "unset",
