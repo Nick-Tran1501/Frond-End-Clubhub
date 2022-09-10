@@ -120,7 +120,7 @@ const NavBar = () => {
         return ({
           label: 
           <div className="NotiContainer" style={{
-            borderBottom:"1px dashed"
+            borderBottom:"1px solid"
           }}>{noti.message}
             <br></br>
             <span style={{opacity:"0.5", fontSize:"10px"}}>{noti.createAt}</span>
