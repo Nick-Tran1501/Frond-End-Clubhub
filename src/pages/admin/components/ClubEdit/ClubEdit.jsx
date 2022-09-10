@@ -517,13 +517,13 @@ function ClubEdit() {
                       })
                     })
                   }
-                  if (status === 400) {
+                  else if (status === 400) {
                     openNotificationWithIcon(
                       "error",
                       `This club already have a president, please try again`
                     )
                   }
-                  if (status === 401) {
+                  else if (status === 401) {
                     openNotificationWithIcon(
                       "error",
                       `This student has already been president of another club`

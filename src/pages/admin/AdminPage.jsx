@@ -1,10 +1,8 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import "antd/dist/antd.css";
 import { Tabs } from "antd";
 
 // css
-
-
 import "./Admin.style.scss";
 
 // import antd
@@ -13,25 +11,15 @@ import {
   Row,
   Paragraph,
   Descriptions,
-  // Input,
   Typography,
-  // Table,
-  //   Search,
-  // Form,
-  // Menu,
-  // Dropdown,
-  // Space,
-  // Popconfirm,
-  // message,
-  // Button,
-  // Select,
-  // Modal,
 } from "antd";
 
 // import commponents
 import RequestClub from "./components/requestEdit/RequestEdit";
 import ClubEdit from "./components/ClubEdit/ClubEdit";
 import UserEdit from "./components/userEdit/UserEdit";
+import { getAdminData } from "./AdminAPI";
+import {getUsers} from "./components/userEdit/UserAPI";
 
 function AdminPage() {
   const { TabPane } = Tabs;
@@ -41,12 +29,31 @@ function AdminPage() {
   };
 
   const { Text, Title, Paragraph } = Typography;
-  // const { Search } = Input;
+  const [admin, setAdmin] = useState();
+  const [users, setUsers] = useState();
+
+  useEffect(()=>{
+    getAdminData().then((data)=>{
+      console.log(data);
+      setAdmin(data);
+    })
+  },[])
+
+  useEffect(()=>{
+    getUsers().then((data)=>{
+      console.log(data);
+      setUsers(data);
+    })
+  },[])
+
+
+
+
+
 
   return (
     <div className="admin-container">
       <div className="admin-header">
-        
         <Row>
           {/* Area 1 */}
           <Col className="admin-header-title" span={24}> 
@@ -58,7 +65,7 @@ function AdminPage() {
             <Title
               level={4}
             >
-              Welcome to Admin Page!
+              Welcome to Admin Page !
             </Title>
             
             {/* admin page functionality */}
@@ -66,12 +73,12 @@ function AdminPage() {
               title="Admin Page Descriptions"
             >
               <Descriptions.Item label="System Editor">
-                Admin name
+                {admin?.name}
               </Descriptions.Item>
               <Descriptions.Item label="System Name">
                 RMIT Club Hub
               </Descriptions.Item>
-              <Descriptions.Item label="System Users"> 999+ </Descriptions.Item>
+              <Descriptions.Item label="System Users"> {users?.length} </Descriptions.Item>
               <Descriptions.Item label="Location"> SGS </Descriptions.Item>
               <Descriptions.Item label="Edit">
                 Clubs Controller , Users Controller , Club Creation requests
