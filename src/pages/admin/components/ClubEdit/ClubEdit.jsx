@@ -31,20 +31,23 @@ import {
 } from "@ant-design/icons";
 // import Title from "antd/lib/skeleton/Title";
 
-import { getActiveClubData, getClubID, getStudent } from "./ClubAPI.js";
-
+import {
+  addStudentToClub,
+  getActiveClubData,
+  getClubID,
+  getStudent,
+  removeUserFromClub,
+  updateRole,
+} from "./ClubAPI.js";
 
 function ClubEdit() {
-
-
-// -------- Attributes --------------------------------
+  // -------- Attributes --------------------------------
   const { Search } = Input;
   const { Option } = Select;
   const { Title } = Typography;
 
   const [clubs, setClubs] = useState([]);
   const [clubDisplay, setClubDisplay] = useState();
-  
 
   // --- club's students data table -----
   const [dataSource, setDataSource] = useState([]);
@@ -63,42 +66,39 @@ function ClubEdit() {
   const [form_search] = Form.useForm();
 
   //  ******** Notification / type: {success, info, warning, error} *******
-  const openNotificationWithIcon = (type,content) => {
+  const openNotificationWithIcon = (type, content) => {
     notification[type]({
-      message: 'Notification Title',
+      message: "Notification Title",
       description: content,
     });
   };
-  
-// ****************************************************************
+
+  // ****************************************************************
 
   // ---- search club ------
 
   useEffect(() => {
     getActiveClubData().then((data) => setClubs(data));
   }, []);
-  
+
   const searchClub = (value) => {
     getClubID(value.clubID).then((data) => {
-      console.log(data);
       setClubDisplay(data);
-
       const studentsData = data.clubData.members;
-      console.log(studentsData[0].clubs);
-
       const clubSelected = [];
       for (let i = 0; i < studentsData.length; i++) {
-        let currentClub = studentsData[i].clubs.find((club) => club.club === data.clubData._id);
-        // console.log(roleData);
+        let currentClub = studentsData[i].clubs.find(
+          (club) => club.club === data.clubData._id
+        );
         clubSelected.push({
           key: studentsData[i]._id,
           id: studentsData[i].snumber,
           name: studentsData[i].name,
           gender: studentsData[i].gender,
-          joinDate: currentClub.joinDate,
+          joinDate: currentClub.joinDate.slice(0, 10),
           email: studentsData[i].email,
           role: currentClub.role,
-        })
+        });
         setDataSource(clubSelected);
         setDisableSearch(false);
       }
@@ -113,21 +113,7 @@ function ClubEdit() {
 
   //  ----------------------------------------------------------------
 
-  // const onChange = (pagination, filters, sorter, extra) => {
-  //   console.log(
-  //     "params --- ",
-  //     "pag:",
-  //     pagination,
-  //     "filters: ",
-  //     filters,
-  //     "sorter: ",
-  //     sorter,
-  //     "extra: ",
-  //     extra
-  //   );
-  // };
-
-  // club members table column 
+  // club members table column
   const columns = [
     {
       title: "ID",
@@ -186,11 +172,25 @@ function ClubEdit() {
   // Search student by id
 
   const onSearch = (value) => {
-    if (value !== ""){
+    if (value !== "") {
       const cID = clubDisplay.clubData._id;
-      getStudent(value,cID).then((data) => {
-        if (!data){
-          return openNotificationWithIcon("error", `Can not found student with ID: ${value}`) ;
+      const checkAppearance = dataSource.filter(
+        (student) => student.id === value
+      );
+      console.log(checkAppearance);
+      if (checkAppearance.length > 0) {
+        return openNotificationWithIcon(
+          "error",
+          `Student with ID: ${value} already in club`
+        );
+      }
+
+      getStudent(value, cID).then((data) => {
+        if (!data) {
+          return openNotificationWithIcon(
+            "error",
+            `Cannot found student with ID: ${value}`
+          );
         }
         const newStudent = {
           key: data._id,
@@ -199,45 +199,38 @@ function ClubEdit() {
           gender: data.gender,
           email: data.email,
         };
-        console.log(newStudent);
         setStudentData([newStudent]);
         setDisableSubmit(false);
-      })
-
+      });
+    } else {
+      return openNotificationWithIcon(
+        "warning",
+        `Please input student ID start with S`
+      );
     }
-    else {
-      console.log("Please Input");
-    }
-
-    
-    // if (value !== "") {
-    //   const result = sts.filter((student) => student.id === value);
-    //   if (!result[0]) {
-    //     console.log("Student not found");
-    //   } 
-    //   else {
-    //     console.log(clubDisplay.clubData._id);
-    //     console.log(result[0]);
-    //     setStudentData(result);
-    //     setDisableSubmit(false);
-    //   }
-    // }
-
   };
 
   const onAddStudent = (studentData) => {
-    const randomNumber = parseInt(Math.random() * 1000);
-    const newStudent = {
-      key: randomNumber,
-      id: studentData[0].id,
-      name: studentData[0].name,
-      gender: studentData[0].gender,
-      joinDate: "12/11/2021",
-      email: studentData[0].email,
-      role: studentData[0].role,
-    };
-    setDataSource((pre) =>  [...pre, newStudent]);
-    return openNotificationWithIcon("success", `Add student id ${newStudent.id} to club !`);
+    const student = studentData[0];
+    const clubId = clubDisplay.clubData._id;
+    const studentId = student.key;
+    const role = student.role;
+    // console.log(dataSource);
+    const checkAppearance = dataSource.filter(
+      (student) => student.key === studentId
+    );
+    if (checkAppearance.length > 0) {
+      return openNotificationWithIcon(
+        "error",
+        `Student with ID: ${student.id} is already in club`
+      );
+    }
+    addStudentToClub(clubId, studentId, role);
+    setDataSource((pre) => [...pre, student]);
+    return openNotificationWithIcon(
+      "success",
+      `Add student id ${student.id} to club !`
+    );
   };
 
   const onDeleteStudent = (record) => {
@@ -246,10 +239,16 @@ function ClubEdit() {
       okText: "Yes",
       okType: "danger",
       onOk: () => {
+        const userId = record.key;
+        const clubId = clubDisplay.clubData._id;
+        removeUserFromClub(userId, clubId);
         setDataSource((pre) => {
-          // console.log(record.id);
           return pre.filter((student) => student.id !== record.id);
         });
+        openNotificationWithIcon(
+          "success",
+          `Remove student id ${record.id} from club !`
+        );
       },
     });
   };
@@ -264,7 +263,7 @@ function ClubEdit() {
     setEditingStudent(null);
   };
 
-  // ---- Add new student input ----
+  // ---- Add new student input ----å
 
   const columnStudentData = [
     {
@@ -288,13 +287,14 @@ function ClubEdit() {
       width: "20%",
     },
   ];
-  
+
   const onFinish = (values) => {
-    // console.log(values);
     if (studentData[0] !== "") {
       studentData[0].role = values.Role;
+      studentData[0].joinDate = new Date(Date.now())
+        .toLocaleString("en-GB", { timeZone: "Asia/Ho_Chi_Minh" })
+        .slice(0, 10);
       onAddStudent(studentData);
-      console.log("Add new student to club");
     } else {
       console.log("Student not found");
     }
@@ -378,7 +378,7 @@ function ClubEdit() {
                   />
                   <Statistic
                     title="Generated"
-                    value={clubDisplay?.clubData.createDate}
+                    value={clubDisplay?.clubData.createDate.slice(0, 10)}
                   />
                 </Row>
               </PageHeader>
@@ -443,12 +443,9 @@ function ClubEdit() {
                   placeholder="Select a specific role for new student"
                   allowClear
                 >
-                  <Option value="President">President</Option>
-                  <Option value="Vice President"> Vice President</Option>
                   <Option value="Content Writer"> Content Writer</Option>
                   <Option value="Member"> Member</Option>
                 </Select>
-
               </Form.Item>
 
               <Form.Item>
@@ -487,32 +484,55 @@ function ClubEdit() {
               bordered
               columns={columns}
               dataSource={dataSource}
-              // onChange={onChange}
               pagination={{
                 position: ["bottomRight"],
               }}
             />
             <Modal
-              title="Edit Student"
+              title="Edit Student Role"
               visible={isEditing}
               okText="Save"
               onCancel={() => {
                 resetEditing();
               }}
               onOk={() => {
-                setDataSource((pre) => {
-                  return pre.map((student) => {
-                    if (student.id === editingStudent.id) {
-                      return editingStudent;
-                    } else {
-                      return student;
-                    }
-                  });
-                });
+                const clubId = clubDisplay.clubData._id;
+                const userId = editingStudent.key;
+                const role = editingStudent.role;
+                updateRole(clubId, userId, role)
+                .then((status) => {
+                  console.log(status)
+                  if (status === 200) {
+                    openNotificationWithIcon(
+                      "success",
+                      `Student ID: ${editingStudent.id}'s role was updated to ${role}`
+                    )
+                    setDataSource((pre) => {
+                      return pre.map((student) => {
+                        if (student.id === editingStudent.id) {
+                          return editingStudent;
+                        } else {
+                          return student;
+                        }
+                      })
+                    })
+                  }
+                  if (status === 400) {
+                    openNotificationWithIcon(
+                      "error",
+                      `This club already have a president, please try again`
+                    )
+                  }
+                  if (status === 401) {
+                    openNotificationWithIcon(
+                      "error",
+                      `This student has already been president of another club`
+                    )
+                  }
+                })
                 resetEditing();
               }}
             >
-    
               <Select
                 defaultValue={editingStudent?.role}
                 style={{
@@ -525,7 +545,6 @@ function ClubEdit() {
                 }}
               >
                 <Option value="President">President </Option>
-                <Option value="Vice President"> Vice President </Option>
                 <Option value="Content Writer"> Content Writer </Option>
                 <Option value="Member"> Member </Option>
               </Select>

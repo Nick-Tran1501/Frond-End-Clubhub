@@ -45,22 +45,20 @@ function AdminPage() {
 
   return (
     <div className="admin-container">
-      
       <div className="admin-header">
         
         <Row>
           {/* Area 1 */}
-          
-            <Col className="admin-header-title" span={24}> 
-              <Title> Admin Page </Title>
-            </Col>
+          <Col className="admin-header-title" span={24}> 
+            <Title> Admin Page </Title>
+          </Col>
           
           {/* Area 2 */}
           <Col className="admin-header-subtitle" span={24}>
             <Title
               level={4}
             >
-              Welcome to WorldPress !
+              Welcome to Admin Page!
             </Title>
             
             {/* admin page functionality */}
