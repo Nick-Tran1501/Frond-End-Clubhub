@@ -295,9 +295,9 @@ const ProfileBg =({
               id="profile_btn"
             />
             <div className="pfi-des">
-              <h1>{club.name}sds</h1>
-              <p>{club.description}sds</p>
-              <p>{club.slogan}sds</p>
+              <h1>{club.name}</h1>
+              <p>{club.description}</p>
+              <p>{club.slogan}</p>
             </div>
 
             <Modal
