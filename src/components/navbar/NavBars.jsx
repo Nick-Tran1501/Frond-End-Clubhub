@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./NavBar.scss";
 import "antd/dist/antd.css";
 import {
@@ -13,20 +13,17 @@ import Rightbars from "../rightbar/RightBars";
 import {
   Col,
   Row,
-  AutoComplete,
   Input,
   Dropdown,
   Menu,
   Button,
   Drawer,
-  Search,
+  Avatar,
 } from "antd";
 import Sidebar from "../sidebar/Sidebars";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { click } from "@testing-library/user-event/dist/click";
 import NotiCard from "./NotiCard";
-
 // Test function of autocomplete
 
 // Render the Navigation Bar
@@ -41,27 +38,25 @@ const NavBar = () => {
     setVisible(false);
   };
 
-
-  const [showRight, setShowRight] = useState(false)
-
+  const [showRight, setShowRight] = useState(false);
 
   const showRightBar = () => {
-    setShowRight(true)
-  }
+    setShowRight(true);
+  };
 
   const closeRightBar = () => {
-    setShowRight(false)
-  }
+    setShowRight(false);
+  };
 
   const { Search } = Input;
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
- const [searchValue,setSearchValue] = useState("")
+  const [searchValue, setSearchValue] = useState("");
   // const [searchDisplay, setSearchDisplay] = useState({
   //   clubs:[],
   //   posts:[],
   //   profiles: [],
-  // }) 
+  // })
 
   // axios({
   //   method:"post",
@@ -84,7 +79,7 @@ const NavBar = () => {
   // .catch((err) => {
   //   console.log(err);
   // })
-  
+
   const [userProfile, setUserProfile] = useState({});
 
   useEffect(() => {
@@ -98,11 +93,47 @@ const NavBar = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  
-  
-  
-const navigate = useNavigate()
-  
+
+  const navigate = useNavigate();
+
+  // -----------Notification--------------
+  const [notification,setNotification] = useState([])
+  useEffect(()=>{
+
+    axios({
+      method:"get",
+      headers:{
+        "Authorization": `Bearer ${token}` 
+      },
+      url:"https://rmit-club-dhyty.ondigitalocean.app/api/notify"
+    })
+    .then((response) => {
+      console.log(response.data);
+      setNotification(response.data)
+    })
+    .catch((err) => {console.log(err)})
+  },[])
+  const menu = (
+    <Menu
+      selectable
+      items={ notification.map((noti) => {
+        return ({
+          label: 
+          <div className="NotiContainer" style={{
+            borderBottom:"1px dashed"
+          }}>{noti.message}
+            <br></br>
+            <span style={{opacity:"0.5", fontSize:"10px"}}>{noti.createAt}</span>
+            
+          </div>,
+          
+          icon: <Avatar size="large" src={noti.club.logoUrl}/> ,
+          key: noti._id,
+        })
+      })}
+    />
+  );
+
   return (
     <Row
       className="navbar--container"
@@ -134,9 +165,11 @@ const navigate = useNavigate()
                 width: "100%",
                 height: "100%",
                 textAlign: "center",
-                cursor:"pointer"
+                cursor: "pointer",
               }}
-              onClick={()=>{navigate("/home")}}
+              onClick={() => {
+                navigate("/home");
+              }}
             >
               <img
                 src={require("../../image/ClubHub_Trans.png")}
@@ -160,18 +193,17 @@ const navigate = useNavigate()
         xl={10}
         className="NavBarSearchContainer"
       >
-          <Search
-            placeholder="Search For Your Club"
-            style={{
-              color:"black"
-            }}
-            size="medium"
-            onChange={(e) => {
-              setSearchValue(e.target.value)
-            }}
-            allowClear
-          />
-        
+        <Search
+          placeholder="Search For Your Club"
+          style={{
+            color: "black",
+          }}
+          size="medium"
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+          allowClear
+        />
       </Col>
 
       <Col
@@ -197,7 +229,7 @@ const navigate = useNavigate()
               style={{
                 all: "unset",
                 textAlign: "center",
-                cursor:"pointer"
+                cursor: "pointer",
               }}
             >
               <DownOutlined
@@ -218,28 +250,35 @@ const navigate = useNavigate()
           </Col>
 
           <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
-            <Button
-              style={{
-                all: "unset",
-                textAlign: "center",
-                cursor:"pointer"
-              }}
+            <Dropdown 
+              overlay={menu} 
+              trigger="click"
+              placement="bottomRight"
+              arrow
             >
-              <BellOutlined
+              <Button
                 style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
+                  all: "unset",
+                  textAlign: "center",
+                  cursor: "pointer",
                 }}
-              />
-              <p
-                style={{
-                  margin: "0",
-                }}
-                className="SettingText"
               >
-                Notification
-              </p>
-            </Button>
+                <BellOutlined
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                />
+                <p
+                  style={{
+                    margin: "0",
+                  }}
+                  className="SettingText"
+                >
+                  Notification
+                </p>
+              </Button>
+            </Dropdown>
           </Col>
 
           <Col xs={8} sm={8} md={8} lg={0} xl={0} className="EventMenu">
@@ -248,15 +287,15 @@ const navigate = useNavigate()
                 all: "unset",
                 textAlign: "center",
               }}
-              onClick= {
-                () => {showRightBar()}
-              }
+              onClick={() => {
+                showRightBar();
+              }}
             >
               <NotificationOutlined
                 style={{
                   fontSize: "20px",
                   fontWeight: "bold",
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
               />
               <p
@@ -272,7 +311,6 @@ const navigate = useNavigate()
         </Row>
       </Col>
 
-
       {/* Side Bar */}
       <Drawer
         placement="left"
@@ -284,7 +322,6 @@ const navigate = useNavigate()
         <Sidebar />
       </Drawer>
 
-
       {/* Right Bar */}
       <Drawer
         placement="right"
@@ -293,11 +330,11 @@ const navigate = useNavigate()
         visible={showRight}
         key="right"
         drawerStyle={{
-          paddingTop:"1.5rem",
-          backgroundColor:" #F9F2ED"
+          paddingTop: "1.5rem",
+          backgroundColor: " #F9F2ED",
         }}
       >
-        <Rightbars/>
+        <Rightbars />
       </Drawer>
     </Row>
   );

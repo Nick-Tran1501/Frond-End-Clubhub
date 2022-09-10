@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import { Routes, Route} from "react-router-dom";
 import { useNavigate} from "react-router-dom";
 
@@ -25,7 +25,17 @@ const { Content } = Layout;
 const LoginPage = () => {
   
     const navigate = useNavigate()
-
+    const token = localStorage.getItem("token")
+    
+  useEffect(() => {
+    if(!token){
+      navigate("/")
+     }
+     else{
+       navigate("/home")
+     }
+  },[])
+   
     
   return (
     <React.Fragment>

@@ -39,13 +39,14 @@ const useStyles = createUseStyles({
 });
 
 const Post = () => {
+
   const [postData, setPostData] = useState([]);
   const token = localStorage.getItem("token");
   const classes = useStyles();
+
   const loadPost = () => {
     axios({
-      headers: { Authorization: `Bearer ${token}` },
-
+      headers: { "Authorization": `Bearer ${token}` },
       method: "get",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
@@ -271,7 +272,7 @@ const Post = () => {
                 ) : (
                   ""
                 )}
-                <Dropdown overlay={menu} placement="bottomRight">
+                <Dropdown overlay={menu} placement="bottomRight" arrow>
                   <button
                     style={{
                       padding: "0 ",
