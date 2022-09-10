@@ -2,7 +2,18 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Carousel, Modal, Avatar, Menu, Dropdown, Button } from "antd";
+import "./Post.scss";
+import {
+  Image,
+  Carousel,
+  Modal,
+  Avatar,
+  Menu,
+  Dropdown,
+  Button,
+  Input,
+  Upload,
+} from "antd";
 import {
   EditOutlined,
   LikeOutlined,
@@ -16,6 +27,7 @@ import CommentsBox from "../commentsbox/CommentsBox";
 import axios from "axios";
 import Comment from "../commentlist/Comment";
 import { createUseStyles } from "react-jss";
+import { upload } from "@testing-library/user-event/dist/upload";
 
 const useStyles = createUseStyles({
   like: {
@@ -37,16 +49,15 @@ const useStyles = createUseStyles({
     color: "#000",
   },
 });
-
+const { TextArea } = Input;
 const Post = () => {
-
   const [postData, setPostData] = useState([]);
   const token = localStorage.getItem("token");
   const classes = useStyles();
 
   const loadPost = () => {
     axios({
-      headers: { "Authorization": `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
       method: "get",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
@@ -81,6 +92,49 @@ const Post = () => {
   const [show, setShow] = useState(false);
 
   const [visible, setVisible] = useState(false);
+  const [postUpdateImg, setPostUpdateImg] = useState([]);
+
+  //Update Post
+
+  useEffect(() => {
+    return () => {
+      postUpdateImg && postUpdateImg.map((prev) => URL.revokeObjectURL(prev));
+    };
+  }, [postUpdateImg]);
+
+  const saveImages = (file) => {
+    setPostUpdateImg((prev) => [...prev, file]);
+  };
+
+  
+  const [updatePostContent, setUpdatePostContent] = useState("")
+    const updatePost = (id) => {
+        let formData = new FormData();
+        formData.append("content", updatePostContent)
+        formData.append("location", "RMIT University")
+        postUpdateImg.forEach(img => {
+
+            formData.append("images", img)
+        })
+        
+        formData.append("viewMode", "public")
+        axios({
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${token}`,
+            },
+            url:`https://rmit-club-dhyty.ondigitalocean.app/api/posts/clubs/${id}`,
+            method:"POST",
+            data: formData
+        })
+        .then((response) => {
+            setVisible(false) 
+            console.log(response)
+            setPostUpdateImg([])
+            loadPost()
+        })
+        .catch((err) => {console.log(err)})
+    }
 
   return (
     <React.Fragment>
@@ -288,21 +342,50 @@ const Post = () => {
                 </Dropdown>
 
                 <Modal
-                  title="Basic Modal"
+                  title="Update Post"
                   visible={visible}
-                  onOk={handleOk}
+                  onOk={()=> {updatePost(post._id)}}
                   onCancel={handleCancel}
-                  okButtonProps={{
-                    // functin here
-                    disabled: true,
-                  }}
-                  cancelButtonProps={{
-                    disabled: false,
-                  }}
                 >
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
+                  
+
+                  <div className="editContainer">
+                    <div className="userInfo">
+                      <div className="profile_picture">
+                        <Avatar
+                          size="large"
+                          src={post.author.avatarUrl}
+                          alt="profile"
+                        />
+                      </div>
+                      <p
+                        style={{
+                          paddingTop: "1rem",
+                        }}
+                      >
+                        {post.author.name}
+                      </p>
+                    </div>
+                    <Input.TextArea 
+                      rows={2} 
+                      // onChange={(e)=>{setUpdatePostContent(e.target.value)}}
+                     
+                    />
+                    <Upload
+                      action={(file) => saveImages(file)}
+                      multiple
+                      listType="picture"
+                      accept=".png,.jpeg,.jpg"
+                      beforeUpload={(file) => {
+                        console.log({ file });
+                        return file;
+                      }}
+                      maxCount={5}
+                    >
+                      <Button>Click Upload</Button>
+                    </Upload>
+                  </div>
+                 
                 </Modal>
               </div>
             </div>
