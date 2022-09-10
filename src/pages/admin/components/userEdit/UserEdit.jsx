@@ -4,21 +4,35 @@ import "./UserEdit.scss";
 import "./UserAPI.js";
 
 //  antd import
-import { Empty, Button, Result, Row, Col, Typography, Table ,Modal } from "antd";
+import {
+  Empty,
+  Button,
+  Result,
+  Row,
+  Col,
+  Typography,
+  Table,
+  Modal,
+  notification,
+} from "antd";
 
 import { SmileOutlined, DeleteOutlined } from "@ant-design/icons";
-import { getUsers } from "./UserAPI.js";
+import { getUsers, deleteStudent } from "./UserAPI.js";
 
 function UserEdit() {
   // attribute
   const { Title, Text } = Typography;
+  //  ******** Notification / type: {success, info, warning, error} *******
+  const openNotificationWithIcon = (type, content) => {
+    notification[type]({
+      message: "Notification Title",
+      description: content,
+    });
+  };
 
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
     getUsers().then((data) => {
-      console.log(data);
-      // setUsers(users);
-      // const sampleData = [];
       const users = [];
       for (let i = 0; i < data.length; i++) {
         users.push({
@@ -32,10 +46,8 @@ function UserEdit() {
         });
       }
       setTableData(users);
-    })
-  },[]);
-
-
+    });
+  }, []);
 
   //  --- table structure ---
   const columns = [
@@ -99,8 +111,17 @@ function UserEdit() {
       okText: "Yes",
       okType: "danger",
       onOk: () => {
+        console.log(record.key);
+        deleteStudent(record.key).then((status) => {
+          console.log(status);
+          if ( status=== 200){
+            openNotificationWithIcon(
+              "success",
+              `Student ID: ${record.id} is delete of system`
+            )
+          }
+        });
         setTableData((pre) => {
-          // console.log(record.id);
           return pre.filter((student) => student.id !== record.id);
         });
       },
@@ -113,13 +134,10 @@ function UserEdit() {
       <Row>
         {/* Area 1 */}
         <Col span={24}>
-
           <div className="title-user-edit">
             <Title level={3}> Total Users </Title>
           </div>
           <div className="user-edit-table">
-            {/* <Title level={3}>Table </Title> */}
-
             {tableData.length > 0 && (
               <Table
                 bordered
@@ -145,7 +163,6 @@ function UserEdit() {
         </Col>
       </Row>
     </div>
-
   );
 }
 
