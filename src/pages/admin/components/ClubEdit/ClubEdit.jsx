@@ -529,7 +529,7 @@ function ClubEdit() {
                       `This student has already been president of another club`
                     )
                   }
-                });
+                })
                 resetEditing();
               }}
             >
