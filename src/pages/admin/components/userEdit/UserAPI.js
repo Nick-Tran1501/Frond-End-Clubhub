@@ -17,3 +17,19 @@ export const getUsers = async() => {
     }
 }
 
+
+export const deleteStudent = async(userId) => {
+    const response = await axios({
+        method: 'DELETE',
+        url: `https://rmit-club-dhyty.ondigitalocean.app/api/admin/users/delete/${userId}`,
+        headers:{ 'Authorization': `Bearer ${token}`},
+    })
+    .then((response) =>{
+        console.log(response.status);
+        return response.status;
+    })
+    .catch((err) =>{
+        console.log(err);
+    });
+    return response;
+}

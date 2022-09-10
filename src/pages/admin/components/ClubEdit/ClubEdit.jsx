@@ -359,19 +359,19 @@ function ClubEdit() {
           <div className="club-description">
             {clubDisplay && (
               <PageHeader
-                title={clubDisplay.clubData.name}
+                title={clubDisplay?.clubData.name}
                 tags={
-                  <Tag color="blue">{clubDisplay.clubData.clubCategory}</Tag>
+                  <Tag color="blue">{clubDisplay?.clubData.clubCategory}</Tag>
                 }
               >
                 <Row>
                   <Statistic
                     title="President"
-                    value={clubDisplay?.clubData.president.username}
+                    value={clubDisplay?.clubData?.president?.username}
                   />
                   <Statistic
                     title="Members"
-                    value={clubDisplay.memberCount}
+                    value={clubDisplay?.memberCount}
                     style={{
                       margin: "0 50px",
                     }}
@@ -517,19 +517,19 @@ function ClubEdit() {
                       })
                     })
                   }
-                  if (status === 400) {
+                  else if (status === 400) {
                     openNotificationWithIcon(
                       "error",
                       `This club already have a president, please try again`
                     )
                   }
-                  if (status === 401) {
+                  else if (status === 401) {
                     openNotificationWithIcon(
                       "error",
                       `This student has already been president of another club`
                     )
                   }
-                })
+                });
                 resetEditing();
               }}
             >
