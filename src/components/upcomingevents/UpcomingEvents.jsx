@@ -22,7 +22,6 @@ function UpcomingEvent() {
       });
   }, []);
 
-  // return events.map((event) => {
   return (
     <div className="upComingContainer">
       {events.length > 0 &&
@@ -46,65 +45,7 @@ function UpcomingEvent() {
       {events.length === 0 && <Title level={4}>Events List</Title>}
     </div>
 
-    // <div className="upComingContainer" key={event._id}>
-    // <div className="EventImage">
-    // <Carousel
-    // >
-
-    /* {event.imageUrl.map((pic) => {
-              return (
-                <Image
-                  key={pic.index}
-                  width="100%"
-                  src={pic}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                  alt="event"
-                />
-              );
-            })} */
-
-    //   </Carousel>
-    // </div>
-
-    /* <div className="EventInfo">
-          <Title
-            level={4}
-            // style={{
-            //   fontSize:"15px",
-            //   fontWeight:"bold",
-            //   opacity:"0.6"
-            // }}
-          >
-            Event
-          </Title>
-
-          <Title
-            Title
-            level={4}
-            // style={{
-            //   fontSize:"20px",
-            //   fontWeight:"bold"
-
-            // }}
-          >
-            {event.name}
-          </Title>
-
-          <p
-            style={{
-              fontSize: "15px",
-              fontWeight: "bold",
-              opacity: "0.6",
-            }}
-          >
-            {event._id}
-          </p>
-        </div> */
-    // </div>
   );
-  // });
 }
 
 export default UpcomingEvent;

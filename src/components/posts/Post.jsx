@@ -15,7 +15,6 @@ import {
   Upload,
 } from "antd";
 import {
-  EditOutlined,
   LikeOutlined,
   ShareAltOutlined,
   CommentOutlined,
@@ -50,8 +49,7 @@ const useStyles = createUseStyles({
 });
 const Post = () => {
   const [postData, setPostData] = useState([]);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [updatePostContent, setUpdatePostContent] = useState("");
+
   const clubId = localStorage.getItem("clubId")
   const token = localStorage.getItem("token");
   const classes = useStyles();
@@ -95,27 +93,23 @@ const Post = () => {
 
   const [visible, setVisible] = useState(false);
 
-  const [postUpdateImg, setPostUpdateImg] = useState();
+  const [postUpdateImg, setPostUpdateImg] = useState([]);
 
   //Update Post
-
-  useEffect(() => {
-    return () => {
-      postUpdateImg && postUpdateImg.map((prev) => URL.revokeObjectURL(prev));
-    };
-  }, [postUpdateImg]);
 
   const saveUpdateImages = (file) => {
     setPostUpdateImg((prev) => [...prev, file]);
   };
 
   const updatePost = (id) => {
+    console.log("upDatePost",id)
+
     let formData = new FormData();
-    formData.append("content", editing);
+    formData.append("content", editing.content);
     formData.append("location", "RMIT University");
-    // postUpdateImg.forEach((img) => {
-    //   formData.append("images", img);
-    // });
+    postUpdateImg.forEach((img) => {
+      formData.append("images", img);
+    });
 
     formData.append("viewMode", "public");
     axios({
@@ -130,7 +124,7 @@ const Post = () => {
       .then((response) => {
         setVisible(false);
         console.log(response);
-        // setPostUpdateImg([]);
+        setPostUpdateImg([]);
         loadPost();
       })
       .catch((err) => {
@@ -214,7 +208,7 @@ const Post = () => {
                       all: "unset",
                     }}
                     onClick={() => {
-                      // onEdit(post);
+                      onEdit(post);
                       // console.log(post.images);
                       setVisible(true);
                     }}
@@ -341,19 +335,20 @@ const Post = () => {
                   visible={visible}
                   onCancel={() => {
                     setVisible(false);
+                    console.log(post._id)
                   }}
                   onOk={() => {
                     setPostData((pre) => {
                       return pre.map((post) => {
-                        if (post._id === editing.id) {
+                        if (post._id === editing._id) {
                           return editing;
                         } else {
                           return post;
                         }
                       });
                     });
+                    updatePost(editing._id);
                     resetEditing();
-                    updatePost(post._id);
                   }}
                 >
                   <div className="editContainer">
