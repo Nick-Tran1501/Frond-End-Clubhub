@@ -14,7 +14,7 @@ import {
 import SignOut from "./SignOut";
 import axios from "axios";
 
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { editUser } from "./SidebarAPI";
 
@@ -87,11 +87,11 @@ const sidebar = () => {
       getItem(`${userProfile?.gender}`, "4"),
     ]),
     getItem("Manage", "sub2", <AppstoreOutlined />, [getItem(
-      <Button 
+      <Button
         style={{
           all: "unset",
         }}
-        onClick={()=>{navigate("/president")}}
+        onClick={() => { navigate("/president") }}
       >My Club</Button>
       , "5")]),
     getItem("Setting", "sub3", <SettingOutlined />, [
@@ -148,7 +148,7 @@ const sidebar = () => {
         items={items}
       />
       {/* fix part */}
-      
+
       <Modal
         title="Edit Personal Information"
         visible={isEditing}
@@ -166,9 +166,9 @@ const sidebar = () => {
 
           // console.log(username, name, dob, phone, gender);
           editUser(username, name, dob, phone, gender)
-          .then((status) => {
-            console.log(status);
-          })
+            .then((status) => {
+              console.log(status);
+            })
           setUserProfile(editingStudent);
           resetEditing();
         }}
@@ -188,15 +188,6 @@ const sidebar = () => {
           onChange={(e) => {
             setEditingStudent((pre) => {
               return { ...pre, name: e.target.value };
-            });
-          }}
-        />
-        <Input
-          value={editingStudent?.email}
-          addonBefore="Edit Email"
-          onChange={(e) => {
-            setEditingStudent((pre) => {
-              return { ...pre, email: e.target.value };
             });
           }}
         />

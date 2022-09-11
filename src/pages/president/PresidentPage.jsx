@@ -14,23 +14,34 @@ const { TabPane } = Tabs
 
 const PresidentPage = () => {
     const [clubData, setClubData] = useState()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         getClubDetail().then(clubDetail => {
+
             setClubData(clubDetail)
         }).catch((error) => {
             console.log(error)
         })
-
+        setLoading(false)
 
     }, [])
 
     console.log(clubData)
 
+    if (loading) {
+        return (
+            <div className='container'>
+                <Typography.Title>Loading club data</Typography.Title>
+            </div>
+        )
+    }
+
     if (!clubData) {
         return (
             <div className='container'>
                 <Typography.Title>You have not create a club</Typography.Title>
+                <Button type='primary'>Establish a club</Button>
             </div>
         )
     }
