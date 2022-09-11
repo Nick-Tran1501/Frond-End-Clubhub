@@ -12,6 +12,8 @@ import PresidentPage from "./pages/president/PresidentPage";
 
 import ClubRegisterForm from "./components/cludRegister/ClubRegisterForm";
 import UpcomingEvent from "./components/upcomingevents/UpcomingEvents";
+import CreateClub from "./components/CreateNewClub/CreateClub";
+
 
 function App() {
   return (
@@ -33,9 +35,7 @@ function App() {
       {/* <HomePage /> */}
       {/* <ProfilePage/> */}
       {/* ---------------------------------------------------------------- */}
-
-
-
+      <CreateClub />
       {/* <UpcomingEvent/> */}
 
     </div>
