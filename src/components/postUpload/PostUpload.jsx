@@ -28,11 +28,6 @@ export default function PostUpload({ reload }) {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    return () => {
-      postImg && postImg.map((prev) => URL.revokeObjectURL(prev));
-    };
-  }, [postImg]);
 
   const showPost = () => {
     setPost(true);
