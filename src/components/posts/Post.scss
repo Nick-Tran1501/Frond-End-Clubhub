@@ -1,0 +1,22 @@
+.editContainer{
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: white;
+  padding: 1rem;
+  gap: 1rem;
+  height: auto;
+}
+.userInfo{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.editContainer{
+  textarea.ant-input{
+    background: #F0EEF6;
+  }
+
+}

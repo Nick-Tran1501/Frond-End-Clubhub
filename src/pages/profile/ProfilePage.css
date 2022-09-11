@@ -204,13 +204,11 @@ body {
 
 #post_form {
   width: 100%;
-  border-radius: var(--card_border_radius);
   background: var(--color_white);
   align-items: center;
-  /* padding: var(--card_padding); */
+  padding: 1rem;
   position: relative;
   transition: all 0.5s ease-in-out;
-  /* background-color: black; */
 }
 
 .upload_image .form_title {
