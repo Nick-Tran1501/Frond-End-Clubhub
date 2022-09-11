@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "../../pages/loginpage/LoginPage.css";
-import { Button, Form, Input, DatePicker, Select, Checkbox, Modal } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  DatePicker,
+  Select,
+  Checkbox,
+  Modal,
+  notification,
+} from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -35,7 +44,6 @@ const Register = () => {
   });
 
   // ------------Get Date value Function----------
- 
 
   const onChange = (date, dateString) => {
     setUserDetail({ ...userDetail, dob: dateString });
@@ -61,7 +69,6 @@ const Register = () => {
       document.querySelector(".EmailWarning").style.visibility = "visible";
     } else {
       document.querySelector(".EmailWarning").style.visibility = "hidden";
-
     }
   };
 
@@ -103,7 +110,6 @@ const Register = () => {
     }
   };
 
-
   // -------- Validate Username Function----------
   const checkUsernamelValid = (input) => {
     const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?:[A-Z][a-zA-Z]*)$/;
@@ -116,18 +122,15 @@ const Register = () => {
     }
   };
 
-   // -------- Validate DOB Function----------
-   const checkDobValid = () => {
+  // -------- Validate DOB Function----------
+  const checkDobValid = () => {
     const emptyInput = "";
-    if (
-     
-      emptyInput.match(userDetail.dob)){
-        document.querySelector(".DateWarning").style.visibility = "visible"
-      }else{
-
-        document.querySelector(".DateWarning").style.visibility = "hidden";
-      }
+    if (emptyInput.match(userDetail.dob)) {
+      document.querySelector(".DateWarning").style.visibility = "visible";
+    } else {
+      document.querySelector(".DateWarning").style.visibility = "hidden";
     }
+  };
   //----------Validate Gender Function----------
   const checkGenderlValid = (input) => {
     const emptyInput = "";
@@ -140,7 +143,12 @@ const Register = () => {
       setUserDetail({ ...userDetail, gender: input });
     }
   };
-
+  const openNotificationWithIcon = (type,errorMessage) => {
+    notification[type]({
+      message: "Error",
+      description: errorMessage,
+    }); 
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     // -----Left Column Input -----
@@ -148,15 +156,15 @@ const Register = () => {
     checkEmailValid(userDetail.email);
     checkPhoneValid(userDetail.phone);
     checkPasswordValid(userDetail.password);
-    checkPasswordRetypeValid()
+    checkPasswordRetypeValid();
     // -----Right Column Input -----
     checkGenderlValid(userDetail.gender);
     checkUsernamelValid(userDetail.username);
     checkDobValid();
     //
-    
+
     axios({
-      method: "post",
+      method: "POST",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signup",
       data: {
         name: userDetail.name,
@@ -170,10 +178,12 @@ const Register = () => {
     })
       .then((response) => console.log(response))
       .catch((err) => {
+       openNotificationWithIcon('error',err.response.data.message)
         console.error(err);
+        
       });
   };
-
+ 
   //Handle to pop up the Modal
   const [modal2Visible, setModal2Visible] = useState(false);
   const [modal1Visible, setModal1Visible] = useState(false);
@@ -625,7 +635,8 @@ const Register = () => {
               onOk={() => setModal1Visible(false)}
               onCancel={() => setModal1Visible(false)}
               width={1000}
-            >e\
+            >
+              e\
               <TermForm />
             </Modal>
           </Checkbox>
@@ -641,7 +652,9 @@ const Register = () => {
               height: "3rem",
               marginTop: "0.3rem",
             }}
-            onClick={(e)=> {handleSubmit(e)}}
+            onClick={(e) => {
+              handleSubmit(e);
+            }}
           >
             Register
           </Button>

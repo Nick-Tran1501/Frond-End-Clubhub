@@ -65,7 +65,7 @@ const Gallery = () => {
                 <div className="content">
                     <div className="description">
                         <h1>Events</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia mollitia saepe et, voluptatum labore tempora nulla veritatis officiis, explicabo nemo error beatae perferendis, odit iusto quo veniam commodi consectetur doloremque?</p>
+                        <p>A great place to help you manage your club and create a variety of trending events. Connect with content creators around the world.</p>
                     </div>
 
                     <img src={club_1} alt="Original" />
@@ -76,7 +76,7 @@ const Gallery = () => {
                 <div className="content">
                     <div className="description">
                         <h1>Announcement</h1>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat veritatis reprehenderit sequi dolore eum inventore sint nisi reiciendis hic, maiores dignissimos minus eaque ut impedit nihil asperiores soluta esse? Voluptatibus!</p>
+                        <p>Discover great and dynamic clubs according to your interests. Stay up to date with the latest news and announcements for your club.</p>
                     </div>
 
                     <img src={club_2} alt="Duotone" />
@@ -94,7 +94,7 @@ const Gallery = () => {
                 <div className="content">
                     <div className="description">
                         <h1>Clubhub</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod exercitationem provident suscipit cum saepe facere consequatur fugit quas, excepturi, ipsum itaque praesentium unde inventore. Dolores optio ducimus quidem sequi ex?</p>
+                        <p>Give people the opportunity to build community and bring the world closer together. Connect with more people, build influence, and create compelling content that's distinctly yours.</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@ const Gallery = () => {
                 <div className="content">
                     <div className="description">
                         <h1>Features</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore repellat, facere impedit odit perspiciatis minus omnis veritatis totam quos voluptas, placeat dolore, deserunt ad! Illum repellendus illo assumenda laborum cum?</p>
+                        <p>Express yourself in new ways with the latest Clubhub features.</p>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@ const Gallery = () => {
                 <div className="content">
                     <div className="description">
                         <h1>Work with us</h1>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium in nobis reprehenderit, fuga praesentium ratione, alias quod impedit nam a provident vero porro eum dolore, voluptas quaerat unde architecto eveniet.</p>
+                        <p>Share and grow your club with our diverse, global community.</p>
                     </div>
                 </div>
             </div>

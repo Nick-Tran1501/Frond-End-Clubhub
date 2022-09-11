@@ -111,7 +111,7 @@ const sidebar = () => {
         "editBtn",
         <EditOutlined />
       ),
-      userProfile.roles === "admin" ?
+      userProfile.isAdmin === true ?
       getItem(
       
       <Button
