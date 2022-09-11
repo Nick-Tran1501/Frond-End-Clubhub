@@ -6,11 +6,11 @@ import "antd/dist/antd.css";
 import "../../pages/loginpage/LoginPage.css";
 import { Link } from "react-router-dom";
 
-import { Button, Form, Input, Checkbox, Tooltip, Modal } from "antd";
+import { Button, Form, Input, Checkbox, Tooltip, Modal, Typography } from "antd";
 import {
   InfoCircleOutlined,
   LockOutlined,
-  MailOutlined 
+  MailOutlined
 } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -27,31 +27,55 @@ const LoginForm = () => {
     forgetemail: "",
   });
   const onReset = () => {
-     form.resetFields();
+    form.resetFields();
   };
   const handleSubmit = (e) => {
+    let allowLogin = true
     checkEmailValid(user.email)
     checkPasswordValid(user.password)
-
-    e.preventDefault();
-    axios({
-      method: "post",
-      url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signin",
-      data: {
-        email: user.email,
-        password: user.password,
-      },
-    })
-      .then((response) => {
-        localStorage.setItem("token", response.data.accessToken);
-        navigate("/home");
+    if (!user.email || !user.password) {
+      allowLogin = false
+      Modal.error({
+        centered: true,
+        title: 'Invalid Login',
+        content: (<Typography.Text>Please fill in all the fields</Typography.Text>),
+        onOk: () => { }
       })
-      .catch((err) => {
-        
-        onReset()
-        // alert("Wrong Email or Password");
-        console.error(err);
-      });
+    }
+
+    if (allowLogin) {
+
+
+
+      console.log(user.email, user.password)
+      e.preventDefault();
+      axios({
+        method: "post",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signin",
+        data: {
+          email: user.email,
+          password: user.password,
+        },
+      })
+        .then((response) => {
+          localStorage.setItem("token", response.data.accessToken);
+          navigate("/home");
+        })
+        .catch((err) => {
+
+          Modal.error({
+            title: 'Login failed',
+            content: (<Typography.Text>{err.response.data.message}</Typography.Text>)
+          })
+
+
+          onReset()
+          setUser({ email: "", password: "", forgetemail: "" })
+          // alert("Wrong Email or Password");
+
+          console.error(err.response);
+        });
+    }
   };
 
   const OnChange = (e) => {
@@ -79,7 +103,7 @@ const LoginForm = () => {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(input) && !emptyInput.match(input)) {
       document.querySelector(".PasswordWarning").style.visibility = "visible";
-      
+
     } else {
       document.querySelector(".PasswordWarning").style.visibility = "hidden";
       setUser({ ...user, password: input });
@@ -121,17 +145,17 @@ const LoginForm = () => {
         email: user.forgetemail,
       },
     })
-    .then((res) => {
-      setVisible(false)
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => {
+        setVisible(false)
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
   }
-  
-  
+
+
 
   return (
     <React.Fragment>
@@ -153,24 +177,24 @@ const LoginForm = () => {
         <h1>Login</h1>
 
         <Form
-        name="LoginForm"
+          name="LoginForm"
           className="InputForm"
           style={{
             color: "white",
           }}
           form={form}
           onSubmitCapture={handleSubmit}
-          
+
         >
           <Form.Item
             name="email"
-            
+
           >
             <Input
               size="large"
               placeholder="Enter Your Email"
               allowClear="true"
-              prefix={<MailOutlined/>}
+              prefix={<MailOutlined />}
               suffix={
                 <Tooltip title="Input Your Email">
                   <InfoCircleOutlined
@@ -189,7 +213,7 @@ const LoginForm = () => {
               }}
               id="EmailInput"
               className="LoginItems"
-              // required
+            // required
             />
             <p
               className="EmailWarning"
@@ -207,7 +231,7 @@ const LoginForm = () => {
 
           <Form.Item
             name="password"
-            
+
           >
             <Input.Password
               size="large"
@@ -304,29 +328,29 @@ const LoginForm = () => {
             </p>
           </Button>
           <Modal
-        title="Forget Password"
-        visible={visible}
-        onOk={forgetPassword}
-        onCancel={handleCancel}
-        
-        centered
-        bodyStyle={{
-          backgroundColor:"#5B778B",
-        }}
-      >
-          <Input size="large" placeholder="Input Your Email" prefix={<MailOutlined 
-            style={{
-              color: "white",
-              marginRight: "10px"
-            }}
-          />}
-            onChange={(e) => setUser({...user, forgetemail: e.target.value})}
-            style={{
+            title="Forget Password"
+            visible={visible}
+            onOk={forgetPassword}
+            onCancel={handleCancel}
 
-              backgroundColor: "#44505F",
+            centered
+            bodyStyle={{
+              backgroundColor: "#5B778B",
             }}
-          />
-           <p
+          >
+            <Input size="large" placeholder="Input Your Email" prefix={<MailOutlined
+              style={{
+                color: "white",
+                marginRight: "10px"
+              }}
+            />}
+              onChange={(e) => setUser({ ...user, forgetemail: e.target.value })}
+              style={{
+
+                backgroundColor: "#44505F",
+              }}
+            />
+            <p
               className="ForgetWarning"
               style={{
                 color: "red",
@@ -338,8 +362,8 @@ const LoginForm = () => {
             >
               Warning: Incorrect Email
             </p>
-        
-      </Modal>
+
+          </Modal>
         </div>
       </div>
     </React.Fragment>
