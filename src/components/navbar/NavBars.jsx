@@ -47,43 +47,16 @@ const NavBar = () => {
   const closeRightBar = () => {
     setShowRight(false);
   };
-
   const { Search } = Input;
   const token = localStorage.getItem("token");
 
-  const [searchValue, setSearchValue] = useState("");
-  // const [searchDisplay, setSearchDisplay] = useState({
-  //   clubs:[],
-  //   posts:[],
-  //   profiles: [],
-  // })
+  const [searchValue, setSearchValue] = useState();
 
-  // axios({
-  //   method:"post",
-  //   url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
-  //   headers:{
-  //     "Authorization": `Bearer ${token}` },
-  //     data:{
-  //       value: searchValue
-  //     }
-  // })
-  // .then((response)=> {
-  //   setSearchDisplay(
-  //     {...searchDisplay,
-  //       clubs: response.data.clubs,
-  //       posts: response.data.posts,
-  //       profile: response.data.profile
-  //     }
-  //   )
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // })
 
   const [userProfile, setUserProfile] = useState({});
 
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     axios
       .get("https://rmit-club-dhyty.ondigitalocean.app/api/user/profile", {
         headers: { Authorization: `Bearer ${token}` },
@@ -98,8 +71,8 @@ const NavBar = () => {
 
   // -----------Notification--------------
   const [notification,setNotification] = useState([])
-  useEffect(()=>{
 
+  useEffect(()=>{
     axios({
       method:"get",
       headers:{
@@ -113,6 +86,7 @@ const NavBar = () => {
     })
     .catch((err) => {console.log(err)})
   },[])
+
   const menu = (
     <Menu
       selectable
@@ -139,6 +113,29 @@ const NavBar = () => {
       })}
     />
   );
+    
+
+  // function search
+
+  const [searchResult, setSearchResult] = useState([])
+
+  const onSearch = () => {
+    // console.log(searchValue);
+      axios({
+        method:"POST",
+        headers: { Authorization: `Bearer ${token}`},
+        url:"https://rmit-club-dhyty.ondigitalocean.app/api/search",
+        data: {
+          value: searchValue
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        setSearchResult(response.data);
+      })
+      .catch((err) => {console.log(err)})
+  }
+    
 
   return (
     <Row
@@ -191,6 +188,7 @@ const NavBar = () => {
         </Row>
       </Col>
 
+{/* **************************** */}
       <Col
         xs={10}
         sm={10}
@@ -208,9 +206,11 @@ const NavBar = () => {
           onChange={(e) => {
             setSearchValue(e.target.value);
           }}
+          onSearch={onSearch}
           allowClear
         />
       </Col>
+{/* **************************** */}
 
       <Col
         xs={5}
