@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbars from "../../components/navbar/NavBars";
 import Sidebars from "../../components/sidebar/Sidebars";
@@ -10,9 +11,20 @@ import PostUpload from "../../components/postUpload/PostUpload";
 import Post from "../../components/posts/Post"
 
 
-const Home = () => {
-  
+const Home = () => { 
+  const navigate = useNavigate()
+  const token = localStorage.getItem("token")
 
+
+  useEffect(() => {
+    if(!token){
+      navigate("/")
+     }
+     else{
+       navigate("/home")
+     }
+  },[])
+  
   return (
     <div className="homeContainer">
 
