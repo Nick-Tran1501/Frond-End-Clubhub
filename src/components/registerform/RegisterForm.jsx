@@ -10,11 +10,12 @@ import {
   Checkbox,
   Modal,
   notification,
+  Typography,
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import { Col, Row } from "antd";
@@ -23,11 +24,17 @@ import TermForm from "../termpolicys/TermForm";
 
 const { Option } = Select;
 
-const Checked = (e) => {
-  console.log(`checked = ${e.target.checked}`);
-};
+
 
 const Register = () => {
+  //---Navigate
+  const navigate = useNavigate()
+  const [disableRegister, setDisableRegister] = useState(false)
+
+  const Checked = (e) => {
+    console.log(e)
+    setDisableRegister(e)
+  };
   //--------Date Format-----
   const dateFormatList = ["DD/MM/YYYY"];
 
@@ -112,9 +119,8 @@ const Register = () => {
 
   // -------- Validate Username Function----------
   const checkUsernamelValid = (input) => {
-    const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?:[A-Z][a-zA-Z]*)$/;
-    const emptyInput = "";
-    if (!UsernameRegex.test(input) || emptyInput.match(input)) {
+    const UsernameRegex = "^[A-Za-z0-9._-]{8,16}$";
+    if (!input.match(UsernameRegex)) {
       document.querySelector(".UsernameWarning").style.visibility = "visible";
     } else {
       document.querySelector(".UsernameWarning").style.visibility = "hidden";
@@ -143,13 +149,16 @@ const Register = () => {
       setUserDetail({ ...userDetail, gender: input });
     }
   };
-  const openNotificationWithIcon = (type,errorMessage) => {
+  const openNotificationWithIcon = (type, errorMessage) => {
     notification[type]({
       message: "Error",
       description: errorMessage,
-    }); 
+    });
   };
+
+
   const handleSubmit = (e) => {
+    let allowSignUp = true
     e.preventDefault();
     // -----Left Column Input -----
     checkNamelValid(userDetail.name);
@@ -162,28 +171,49 @@ const Register = () => {
     checkUsernamelValid(userDetail.username);
     checkDobValid();
     //
+    if (!userDetail.name || !userDetail.email || !userDetail.phone || !userDetail.password || !userDetail.gender
+      || userDetail.username
+    ) {
+      allowSignUp = false
+      Modal.error({
+        centered: true,
+        title: 'Invalid Sign Up',
+        content: (<Typography.Text>Please fill in all the required fields</Typography.Text>)
+      })
+    }
 
-    axios({
-      method: "POST",
-      url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signup",
-      data: {
-        name: userDetail.name,
-        email: userDetail.email,
-        password: userDetail.password,
-        username: userDetail.username,
-        dob: userDetail.dob,
-        gender: userDetail.gender,
-        phone: userDetail.phone,
-      },
-    })
-      .then((response) => console.log(response))
-      .catch((err) => {
-       openNotificationWithIcon('error',err.response.data.message)
-        console.error(err);
-        
-      });
+    if (allowSignUp) {
+
+
+      axios({
+        method: "POST",
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signup",
+        data: {
+          name: userDetail.name,
+          email: userDetail.email,
+          password: userDetail.password,
+          username: userDetail.username,
+          dob: userDetail.dob,
+          gender: userDetail.gender,
+          phone: userDetail.phone,
+        },
+      })
+        .then((response) => {
+          console.log(response)
+          Modal.success({
+            title: 'Sign up success',
+            content: (<Typography.Text>Please check your email to active account</Typography.Text>),
+            onOk: () => navigate("/")
+          })
+        })
+        .catch((err) => {
+          openNotificationWithIcon('error', err.response.data.message)
+          console.error(err);
+
+        });
+    }
   };
- 
+
   //Handle to pop up the Modal
   const [modal2Visible, setModal2Visible] = useState(false);
   const [modal1Visible, setModal1Visible] = useState(false);
@@ -603,7 +633,7 @@ const Register = () => {
           </Row>
 
           <Checkbox
-            onChange={Checked}
+            onChange={(e) => Checked(e.target.checked)}
             style={{
               fontSize: "15px",
               width: "100%",
@@ -647,6 +677,7 @@ const Register = () => {
             size="large"
             htmlType="submit"
             className="btn-gradient"
+            disabled={!disableRegister}
             style={{
               width: "35rem",
               height: "3rem",
