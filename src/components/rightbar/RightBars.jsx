@@ -10,7 +10,6 @@ const Rightbars = () => {
     <div className='rightContainer'>
       <RecommendClubs/>
       <UpcomingEvent/>
-      <UpcomingEvent/>
     </div>
   )
 }
