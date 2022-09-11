@@ -25,6 +25,5 @@ export const editUser = async (username,name, dob, phone, gender) => {
         console.log(err);
         return err.response.status;
     })
-    
     return response;
 }
