@@ -1,288 +1,81 @@
-
-import React, { useState } from 'react';
-import 'antd/dist/antd.css';
+import React, { useState, useEffect } from 'react'
+import { Form, Button, Checkbox, Input, Select, Typography, } from 'antd'
 import './ClubRegisterForm.css'
-import {
-  AutoComplete,
-  Button,
-  Cascader,
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Upload,
-  Modal
-} from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import TextArea from 'antd/lib/input/TextArea'
+import { sendCreateClubRequest } from './createClub'
 
-const { Option } = Select;
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
-
-const getBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = () => resolve(reader.result);
-
-    reader.onerror = (error) => reject(error);
-  });
+const { Option } = Select
 
 const ClubRegisterForm = () => {
-  const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
-
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [previewTitle, setPreviewTitle] = useState('');
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-2',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-xxx',
-      percent: 50,
-      name: 'image.png',
-      status: 'uploading',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error',
-    },
-  ]);
-
-  const handleCancel = () => setPreviewVisible(false);
-
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
-    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-  };
-
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </div>
-  );
+  const [acceptPolicy, setAcceptPolicy] = useState(false)
+  const [newClub, setNewClub] = useState({
+    name: "",
+    email: "",
+    slogan: "",
+    description: "",
+    category: ""
+  })
 
 
   return (
-    <div className='createClubContainer'>
-      <Form
-        {...formItemLayout}
-        form={form}
-        name="register"
-        onFinish={onFinish}
-        scrollToFirstError
-        className='createClubForm'
-      >
-        <Form.Item
-          name="president"
-          label="President Name"
-          rules={[
-            {
-              required: true,
-              message: 'Please input club president name!',
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input
-            allowClear="true"
-            className='inputClubForm'
-          />
-        </Form.Item>
+    <div className='Container'>
+      <header className='Form'>
+        <Typography.Title>Request to create a new club</Typography.Title>
 
-        <Form.Item
-          name="presidentId"
-          label="President's ID"
-          rules={[
-            {
-              required: true,
-              message: 'Please input president ID!',
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input
-            allowClear="true"
-            className='inputClubForm'
-          />
-        </Form.Item>
+        <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
+          <Form.Item name={"clubname"} label={"Club name"} rules={[{ required: true, message: "Please enter your club name" }]}>
+            <Input placeholder='Enter your new club name' maxLength={30} />
+          </Form.Item>
 
-        <Form.Item
-          name="clubname"
-          label="Club Name"
-          tooltip="What do you want others to call your club?"
-          rules={[
-            {
-              required: true,
-              message: 'Please input club name!',
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input
-            allowClear="true"
-            className='inputClubForm'
-          />
-        </Form.Item>
+          <Form.Item name={"email"} rules={[{ required: true, message: "Enter an email as your club contact method" }]} label="Club Email">
+            <Input type='email' maxLength={30} placeholder="Email for other user to contact your club" />
+          </Form.Item>
 
-        <Form.Item
-          name="slogan"
-          label="Slogan"
-          rules={[
-            {
-              required: false,
-              message: 'Please enter Club Slogan',
-            },
-          ]}
-        >
-          <Input.TextArea showCount maxLength={100} allowClear="true" className='inputClubForm' id="slogan" />
-        </Form.Item>
+          <Form.Item name={"slogan"} label="Slogan">
+            <TextArea maxLength={50} placeholder="Your club slogan" />
+          </Form.Item>
 
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input
-            allowClear="true"
-            className='inputClubForm'
-          />
-        </Form.Item>
 
-        <Form.Item
-          name="ctype"
-          label="Club Type"
-          rules={[
-            {
-              required: true,
-              message: 'Please select club type!',
-            },
-          ]}
-        >
-          <Select placeholder="Select club type" className='inputClubForm'>
-            <Option value="sports">Sport</Option>
-            <Option value="academic">Academic</Option>
-            <Option value="other">Other</Option>
-          </Select>
-        </Form.Item>
+          <Form.Item name={"description"} label="Description">
+            <TextArea maxLength={100} showCount placeholder='A short description about your club' />
+          </Form.Item>
+          <Form.Item name={"category"}
+            label="Category"
+            rules={[{ required: true, message: "Please select one category" }]}
 
-        <Form.Item
-          name="images"
-          label="Images"
-        >
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            // fileList={fileList}
-            onPreview={handlePreview}
-            onChange={handleChange}
           >
-            {fileList.length >= 8 ? null : uploadButton}
-          </Upload>
-          <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
-            <img
-              alt="example"
-              style={{
-                width: '100%',
-              }}
-              src={previewImage}
-            />
-          </Modal>
-        </Form.Item>
+            <Select
+              placeholder="Your club category"
+              defaultValue={"Tech"}
+              onChange={(e) => { console.log(e) }}
+            >
+              <Option value="Tech">Tech</Option>
+              <Option value="Academic">Academic</Option>
+              <Option value="Sport">Sport</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item wrapperCol={{ span: 24 }}>
+            <Checkbox onChange={(e) => setAcceptPolicy(e.target.checked)}>By submiting this form, I agree to ClubHub's user policy</Checkbox>
+          </Form.Item>
 
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+
+
+          <Form.Item wrapperCol={{ span: 24 }}>
+            <Button type="primary" block disabled={!acceptPolicy}>
+              Submit to admin
+            </Button>
+          </Form.Item>
+          <Form.Item wrapperCol={{ span: 24 }}>
+            <Button type="danger" block>
+              Cancel
+            </Button>
+          </Form.Item>
+
+        </Form>
+      </header>
     </div>
+  )
+}
 
-  );
-};
-
-export default ClubRegisterForm;
+export default ClubRegisterForm

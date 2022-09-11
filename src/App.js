@@ -32,7 +32,7 @@ function App() {
       {/* <HomePage /> */}
       {/* <ProfilePage/> */}
       {/* ---------------------------------------------------------------- */}
-
+      <ClubRegisterForm />
       {/* <PresidentPage /> */}
     </div>
   );
