@@ -13,11 +13,11 @@
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-around;
-  padding: 10rem 7rem 10rem 5rem; 
+  justify-content: center;
+  padding: 10rem ; 
   gap: 2rem;
   border-style: hidden;
- 
+ width: 100%;
 }
 
 
@@ -104,8 +104,9 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  
   background-color: #526F85;
-  height: 65vh;
+  height: auto;
   width: 100%;
   
 }
@@ -127,7 +128,7 @@
   height: 65vh;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 2rem 4rem 2rem;
   background-color: #526F85;
 }
 
@@ -254,6 +255,7 @@
   color: white;
   font-size: 18px;
   font-weight: bolder;
+  padding-bottom: 1rem;
 }
 
 .ant-modal-title{
