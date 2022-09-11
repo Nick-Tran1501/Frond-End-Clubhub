@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import SignOut from "./SignOut";
 import axios from "axios";
-
+import {useNavigate} from "react-router-dom"
 // Dropdown Menu
 function getItem(label, key, icon, children, type) {
   return {
@@ -26,6 +26,9 @@ function getItem(label, key, icon, children, type) {
 }
 
 const sidebar = () => {
+
+  const navigate = useNavigate()
+
   //  ------- fix ---------
   const { Option } = Select;
 
@@ -78,7 +81,14 @@ const sidebar = () => {
       getItem(`${userProfile?.dob}`, "3"),
       getItem(`${userProfile?.gender}`, "4"),
     ]),
-    getItem("Clubs", "sub2", <AppstoreOutlined />, [getItem("Option 4", "5")]),
+    getItem("Manage", "sub2", <AppstoreOutlined />, [getItem(
+      <Button 
+        style={{
+          all: "unset",
+        }}
+        onClick={()=>{navigate("/president")}}
+      >My Club</Button>
+      , "5")]),
     getItem("Setting", "sub3", <SettingOutlined />, [
       getItem(
         <Button
@@ -86,7 +96,7 @@ const sidebar = () => {
             all: "unset",
           }}
           onClick={() => {
-            console.log(userProfile);
+            // console.log(userProfile);
             onEditStudent(userProfile);
           }}
         >
