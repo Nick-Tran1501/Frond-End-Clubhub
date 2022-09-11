@@ -67,10 +67,9 @@ const LoginPage = () => {
             <Row className="MainContainer">
               {/* Background Side */}
               <Col
-                span={16}
                 className="BackgroundSide"
-                xxl={16}
-                xl={12}
+                xxl={14}
+                xl={0}
                 lg={0}
                 md={0}
                 xs={0}
@@ -122,10 +121,9 @@ const LoginPage = () => {
 
               {/* Content Size */}
               <Col
-                span={8}
                 className="ContentSide"
-                xxl={8}
-                xl={12}
+                xxl={10}
+                xl={24}
                 lg={24}
                 md={24}
                 xs={24}

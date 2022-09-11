@@ -34,7 +34,6 @@
     }
     .event-content{
       flex: 1;
-      background-color: aquamarine;
       // text-align: center;
       padding: 0.5rem;
       .ant-typography{
@@ -45,5 +44,12 @@
         padding: 0px;
       }
     }
+}
 
+.event-content{
+  border-top: 1px solid;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+  
 }

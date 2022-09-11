@@ -142,6 +142,7 @@ const Register = () => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     // -----Left Column Input -----
     checkNamelValid(userDetail.name);
     checkEmailValid(userDetail.email);
@@ -151,9 +152,9 @@ const Register = () => {
     // -----Right Column Input -----
     checkGenderlValid(userDetail.gender);
     checkUsernamelValid(userDetail.username);
-    checkDobValid()
+    checkDobValid();
     //
-    e.preventDefault();
+    
     axios({
       method: "post",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/auth/signup",
