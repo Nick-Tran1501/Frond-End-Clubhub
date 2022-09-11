@@ -44,7 +44,7 @@ const Register = () => {
 
   // ----------------Validate Fullname------
   const checkNamelValid = (input) => {
-    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?: [A-Z][a-zA-Z]*){0,5}$/;
+    const fullNameRegex = /^[A-Z][a-zA-Z]{1,}(?:[A-Z][a-zA-Z]*){0,5}$/;
     const emptyInput = "";
     if (!fullNameRegex.test(input) && emptyInput.match(input)) {
       document.querySelector(".FullNameWarning").style.visibility = "visible";
@@ -57,20 +57,19 @@ const Register = () => {
   const checkEmailValid = (input) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@rmit.edu.vn$/;
     const emptyInput = "";
-    if (!emailRegex.test(input) && emptyInput.match(input)) {
+    if (!emailRegex.test(input) || emptyInput.match(input)) {
       document.querySelector(".EmailWarning").style.visibility = "visible";
     } else {
       document.querySelector(".EmailWarning").style.visibility = "hidden";
 
-      setUserDetail({ ...userDetail, email: input });
     }
   };
 
   //-------- Validate Phone Function----------
   const checkPhoneValid = (input) => {
-    const emailRegex = /^[0-9]{8,10}$/;
+    const emailRegex = /^[0-9]{9,10}$/;
     const emptyInput = "";
-    if (!emailRegex.test(input) && emptyInput.match(input)) {
+    if (!emailRegex.test(input) || emptyInput.match(input)) {
       document.querySelector(".PhoneWarning").style.visibility = "visible";
     } else {
       document.querySelector(".PhoneWarning").style.visibility = "hidden";
@@ -82,7 +81,7 @@ const Register = () => {
     const emptyInput = "";
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(input) && emptyInput.match(input)) {
+    if (!passwordRegex.test(input) || emptyInput.match(input)) {
       document.querySelector(".PasswordWarning").style.visibility = "visible";
     } else {
       document.querySelector(".PasswordWarning").style.visibility = "hidden";
@@ -109,10 +108,11 @@ const Register = () => {
   const checkUsernamelValid = (input) => {
     const UsernameRegex = /^[a-zA-Z0-9._%+-]{1,}(?:[A-Z][a-zA-Z]*)$/;
     const emptyInput = "";
-    if (!UsernameRegex.test(input) && emptyInput.match(input)) {
+    if (!UsernameRegex.test(input) || emptyInput.match(input)) {
       document.querySelector(".UsernameWarning").style.visibility = "visible";
     } else {
       document.querySelector(".UsernameWarning").style.visibility = "hidden";
+      setUserDetail({ ...userDetail, username: input });
     }
   };
 
@@ -625,7 +625,7 @@ const Register = () => {
               onOk={() => setModal1Visible(false)}
               onCancel={() => setModal1Visible(false)}
               width={1000}
-            >
+            >e\
               <TermForm />
             </Modal>
           </Checkbox>
@@ -641,7 +641,7 @@ const Register = () => {
               height: "3rem",
               marginTop: "0.3rem",
             }}
-            onClick={handleSubmit}
+            onClick={(e)=> {handleSubmit(e)}}
           >
             Register
           </Button>
