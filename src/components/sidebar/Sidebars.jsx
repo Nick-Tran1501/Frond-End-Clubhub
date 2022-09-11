@@ -13,7 +13,12 @@ import {
 } from "@ant-design/icons";
 import SignOut from "./SignOut";
 import axios from "axios";
+
 import {useNavigate} from "react-router-dom"
+
+import { editUser } from "./SidebarAPI";
+
+
 // Dropdown Menu
 function getItem(label, key, icon, children, type) {
   return {
@@ -143,6 +148,7 @@ const sidebar = () => {
         items={items}
       />
       {/* fix part */}
+      
       <Modal
         title="Edit Personal Information"
         visible={isEditing}
@@ -151,12 +157,34 @@ const sidebar = () => {
           resetEditing();
         }}
         onOk={() => {
+          // console.log(editingStudent);
+          const username = editingStudent.username;
+          const name = editingStudent.name;
+          const dob = editingStudent.dob;
+          const phone = editingStudent.phone;
+          const gender = editingStudent.gender;
+
+          // console.log(username, name, dob, phone, gender);
+          editUser(username, name, dob, phone, gender)
+          .then((status) => {
+            console.log(status);
+          })
           setUserProfile(editingStudent);
           resetEditing();
         }}
       >
         <Input
+          value={editingStudent?.username}
+          addonBefore="Edit User name"
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, username: e.target.value };
+            });
+          }}
+        />
+        <Input
           value={editingStudent?.name}
+          addonBefore="Edit Name"
           onChange={(e) => {
             setEditingStudent((pre) => {
               return { ...pre, name: e.target.value };
@@ -165,6 +193,7 @@ const sidebar = () => {
         />
         <Input
           value={editingStudent?.email}
+          addonBefore="Edit Email"
           onChange={(e) => {
             setEditingStudent((pre) => {
               return { ...pre, email: e.target.value };
@@ -173,17 +202,19 @@ const sidebar = () => {
         />
         <Input
           value={editingStudent?.dob}
+          addonBefore="Edit Birthday"
           onChange={(e) => {
             setEditingStudent((pre) => {
-              return { ...pre, address: e.target.value };
+              return { ...pre, dob: e.target.value };
             });
           }}
         />
         <Input
           value={editingStudent?.gender}
+          addonBefore="Edit Gender"
           onChange={(e) => {
             setEditingStudent((pre) => {
-              return { ...pre, address: e.target.value };
+              return { ...pre, gender: e.target.value };
             });
           }}
         />
