@@ -134,6 +134,7 @@ const sidebar = () => {
         items={items}
       />
       {/* fix part */}
+      
       <Modal
         title="Edit Personal Information"
         visible={isEditing}
