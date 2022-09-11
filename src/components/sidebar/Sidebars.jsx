@@ -10,6 +10,7 @@ import {
   SettingOutlined,
   ExportOutlined,
   EditOutlined,
+  ClusterOutlined 
 } from "@ant-design/icons";
 import SignOut from "./SignOut";
 import axios from "axios";
@@ -110,6 +111,20 @@ const sidebar = () => {
         "editBtn",
         <EditOutlined />
       ),
+      userProfile.roles === "admin" ?
+      getItem(
+      
+      <Button
+        style={{
+          all: "unset",
+        }}
+        onClick={() => {
+          // console.log(userProfile);
+          navigate("/admin")
+        }}
+      >
+        Admin Table
+      </Button>,"AdminBtn",<ClusterOutlined />):"",
       getItem(<SignOut />, "7", <ExportOutlined />),
     ]),
   ];
