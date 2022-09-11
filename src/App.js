@@ -36,6 +36,14 @@ function App() {
       <PresidentPage />
       <AdminPage />
 
+<<<<<<< Updated upstream
+=======
+      <ClubRegisterForm />
+      {/* <AdminPage /> */}
+      {/* <HomePage /> */}
+      {/* <ProfilePage/> */}
+      {/* ---------------------------------------------------------------- */}
+>>>>>>> Stashed changes
 
       {/* <HomePage/>
 
