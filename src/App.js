@@ -10,8 +10,10 @@ import AdminPage from "./pages/admin/AdminPage";
 
 import PresidentPage from "./pages/president/PresidentPage";
 
-import ClubRegisterForm from "./components/cludRegister/ClubRegisterForm";
+
 import UpcomingEvent from "./components/upcomingevents/UpcomingEvents";
+import CreateClub from "./components/CreateNewClub/CreateClub";
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/president" element={<PresidentPage />} />
+        <Route path="/createClub" element={<CreateClub />} />
       </Routes>
 
       {/* Tuan's area ---- command if you want do not delete it*/}
@@ -33,9 +36,7 @@ function App() {
       {/* <HomePage /> */}
       {/* <ProfilePage/> */}
       {/* ---------------------------------------------------------------- */}
-
-
-
+      {/* <CreateClub /> */}
       {/* <UpcomingEvent/> */}
 
     </div>

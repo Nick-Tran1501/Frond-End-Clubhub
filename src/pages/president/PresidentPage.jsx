@@ -1,6 +1,7 @@
 import { Space, Tag, Button, Col, Row, Statistic, Avatar, Tabs, Typography, Divider, Badge } from 'antd';
 import { MessageTwoTone, SmileTwoTone, setTwoToneColor } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom"
 import { getClubMembers, getClubDetail, getJoinClubReques } from './services/service';
 import MemberTable from './components/MemberTable';
 import RequestTable from './components/RequestTable';
@@ -14,23 +15,41 @@ const { TabPane } = Tabs
 
 const PresidentPage = () => {
     const [clubData, setClubData] = useState()
+    const [loading, setLoading] = useState(true)
+    const navigate = useNavigate()
+
+    const onClickCreateClub = () => {
+        navigate("/createClub")
+    }
+
 
     useEffect(() => {
         getClubDetail().then(clubDetail => {
+
             setClubData(clubDetail)
+            setLoading(false)
         }).catch((error) => {
             console.log(error)
+            setLoading(false)
         })
 
 
     }, [])
 
-    console.log(clubData)
+
+    if (loading) {
+        return (
+            <div className='container'>
+                <Typography.Title>Loading club data</Typography.Title>
+            </div>
+        )
+    }
 
     if (!clubData) {
         return (
             <div className='container'>
                 <Typography.Title>You have not create a club</Typography.Title>
+                <Button type='primary' onClick={() => onClickCreateClub()}>Establish a club</Button>
             </div>
         )
     }
