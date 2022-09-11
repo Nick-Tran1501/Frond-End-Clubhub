@@ -2,11 +2,11 @@ import { Space, Tag, Button, Col, Row, Statistic, Avatar, Tabs, Typography, Divi
 import { MessageTwoTone, SmileTwoTone, setTwoToneColor } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom"
-import { getClubMembers, getClubDetail, getJoinClubReques } from './services/service';
+import { getClubDetail } from './services/service';
 import MemberTable from './components/MemberTable';
 import RequestTable from './components/RequestTable';
-import axios from 'axios';
-import './President.css'
+
+import './President.scss'
 
 const { TabPane } = Tabs
 
@@ -20,6 +20,10 @@ const PresidentPage = () => {
 
     const onClickCreateClub = () => {
         navigate("/createClub")
+    }
+
+    const onClickBack = () => {
+        navigate("/home")
     }
 
 
@@ -40,16 +44,21 @@ const PresidentPage = () => {
     if (loading) {
         return (
             <div className='container'>
-                <Typography.Title>Loading club data</Typography.Title>
+                <Typography.Title style={{ textAlign: 'center', marginTop: "20vh" }}>Loading club data...</Typography.Title>
             </div>
         )
     }
 
     if (!clubData) {
         return (
-            <div className='container'>
-                <Typography.Title>You have not create a club</Typography.Title>
-                <Button type='primary' onClick={() => onClickCreateClub()}>Establish a club</Button>
+            <div className='container' >
+                <Typography.Title style={{ textAlign: 'center', marginTop: "20vh" }}>You have not create a club</Typography.Title>
+                <Button type='primary' onClick={() => onClickCreateClub()} block style={{ maxWidth: "40%", alignSelf: 'center', borderRadius: '10px', minHeight: "5vh", fontSize: '2rem', minWidth: "fit-content" }}>Establish a club</Button>
+                <Button type='primary' danger onClick={() => onClickBack()} block style={{
+                    maxWidth: "40%", alignSelf: 'center', borderRadius: '10px', minHeight: "5vh", fontSize: '2rem', marginTop: '1rem',
+                    minWidth: "fit-content"
+                }}>Back to Home</Button>
+
             </div>
         )
     }
