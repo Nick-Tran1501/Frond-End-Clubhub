@@ -27,7 +27,6 @@ import CommentsBox from "../commentsbox/CommentsBox";
 import axios from "axios";
 import Comment from "../commentlist/Comment";
 import { createUseStyles } from "react-jss";
-import { upload } from "@testing-library/user-event/dist/upload";
 
 const useStyles = createUseStyles({
   like: {
@@ -49,9 +48,11 @@ const useStyles = createUseStyles({
     color: "#000",
   },
 });
-const { TextArea } = Input;
 const Post = () => {
   const [postData, setPostData] = useState([]);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [updatePostContent, setUpdatePostContent] = useState("");
+  const clubId = localStorage.getItem("clubId")
   const token = localStorage.getItem("token");
   const classes = useStyles();
 
@@ -69,6 +70,7 @@ const Post = () => {
         console.log(error);
       });
   };
+
   useEffect(() => {
     loadPost();
   }, []);
@@ -92,7 +94,8 @@ const Post = () => {
   const [show, setShow] = useState(false);
 
   const [visible, setVisible] = useState(false);
-  const [postUpdateImg, setPostUpdateImg] = useState([]);
+
+  const [postUpdateImg, setPostUpdateImg] = useState();
 
   //Update Post
 
@@ -102,39 +105,50 @@ const Post = () => {
     };
   }, [postUpdateImg]);
 
-  const saveImages = (file) => {
+  const saveUpdateImages = (file) => {
     setPostUpdateImg((prev) => [...prev, file]);
   };
 
-  
-  const [updatePostContent, setUpdatePostContent] = useState("")
-    const updatePost = (id) => {
-        let formData = new FormData();
-        formData.append("content", updatePostContent)
-        formData.append("location", "RMIT University")
-        postUpdateImg.forEach(img => {
+  const updatePost = (id) => {
+    let formData = new FormData();
+    formData.append("content", editing);
+    formData.append("location", "RMIT University");
+    // postUpdateImg.forEach((img) => {
+    //   formData.append("images", img);
+    // });
 
-            formData.append("images", img)
-        })
-        
-        formData.append("viewMode", "public")
-        axios({
-            headers: {
-                "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer ${token}`,
-            },
-            url:`https://rmit-club-dhyty.ondigitalocean.app/api/posts/clubs/${id}`,
-            method:"POST",
-            data: formData
-        })
-        .then((response) => {
-            setVisible(false) 
-            console.log(response)
-            setPostUpdateImg([])
-            loadPost()
-        })
-        .catch((err) => {console.log(err)})
-    }
+    formData.append("viewMode", "public");
+    axios({
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${clubId}/${id}`,
+      method: "PUT",
+      data: formData,
+    })
+      .then((response) => {
+        setVisible(false);
+        console.log(response);
+        // setPostUpdateImg([]);
+        loadPost();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [editing, setEditing] = useState(null);
+
+  const onEdit = (record) => {
+    setVisible(true);
+    setEditing({ ...record });
+  };
+
+  const resetEditing = () => {
+    setVisible(false);
+    setEditing(null);
+  };
 
   return (
     <React.Fragment>
@@ -184,21 +198,6 @@ const Post = () => {
             );
           }
         };
-        // edit Box
-        const showModal = () => {
-          setVisible(true);
-        };
-
-        const handleOk = (e) => {
-          console.log(e);
-          setVisible(false);
-        };
-
-        const handleCancel = (e) => {
-          console.log(e);
-          setVisible(false);
-        };
-
         // ------Dropdown Menu For Post Setting------
         const menu = (
           <Menu
@@ -214,19 +213,18 @@ const Post = () => {
                     style={{
                       all: "unset",
                     }}
+                    onClick={() => {
+                      // onEdit(post);
+                      // console.log(post.images);
+                      setVisible(true);
+                    }}
                   >
-                    {" "}
                     Edit
                   </Button>
                 ),
-                onClick: () => {
-                  showModal();
-                },
-                icons: <EditOutlined />,
               },
               {
                 key: "2",
-
                 label: (
                   <Button
                     style={{
@@ -236,7 +234,6 @@ const Post = () => {
                       deletePost();
                     }}
                   >
-                    {" "}
                     Delete
                   </Button>
                 ),
@@ -264,17 +261,14 @@ const Post = () => {
         };
 
         return (
-          <div
-            className="PostContainer"
-            key={`${post._id}?${new Date().getTime()}`}
-          >
+          <div className="PostContainer" key={post._id}>
             {/* -----Post Header----- */}
             <div className="PostHeader">
               {/* Profile Image */}
               <div className="ProfileImage">
                 <Avatar
                   size={60}
-                  src={post.author.avatarUrl}
+                  src={post?.author?.avatarUrl}
                   className="sideAvatar"
                 />
               </div>
@@ -287,7 +281,7 @@ const Post = () => {
                       fontSize: "18px",
                     }}
                   >
-                    {post.author.username}
+                    {post?.author?.username}
                   </p>
                 </div>
 
@@ -299,7 +293,7 @@ const Post = () => {
                       fontSize: "12px",
                     }}
                   >
-                    {post.createAt}
+                    {post?.createAt}
                   </p>
                 </div>
                 <div
@@ -309,12 +303,12 @@ const Post = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <p>{post.location}</p>
+                  <p>{post?.location}</p>
                 </div>
               </div>
               {/* Post Setting */}
               <div className="PostSetting">
-                {post.updateAt ? (
+                {post?.updateAt ? (
                   <p
                     style={{
                       opacity: "0.6",
@@ -343,18 +337,31 @@ const Post = () => {
 
                 <Modal
                   title="Update Post"
+                  destroyOnClose={true}
                   visible={visible}
-                  onOk={()=> {updatePost(post._id)}}
-                  onCancel={handleCancel}
+                  onCancel={() => {
+                    setVisible(false);
+                  }}
+                  onOk={() => {
+                    setPostData((pre) => {
+                      return pre.map((post) => {
+                        if (post._id === editing.id) {
+                          return editing;
+                        } else {
+                          return post;
+                        }
+                      });
+                    });
+                    resetEditing();
+                    updatePost(post._id);
+                  }}
                 >
-                  
-
                   <div className="editContainer">
                     <div className="userInfo">
                       <div className="profile_picture">
                         <Avatar
                           size="large"
-                          src={post.author.avatarUrl}
+                          src={post?.author?.avatarUrl}
                           alt="profile"
                         />
                       </div>
@@ -363,16 +370,24 @@ const Post = () => {
                           paddingTop: "1rem",
                         }}
                       >
-                        {post.author.name}
+                        {post?.author?.name}
                       </p>
                     </div>
-                    <Input.TextArea 
-                      rows={2} 
-                      // onChange={(e)=>{setUpdatePostContent(e.target.value)}}
-                     
-                    />
+
+                    <div>
+                      <Input.TextArea
+                        rows={3}
+                        value={editing?.content}
+                        onChange={(e) => {
+                          setEditing((pre) => {
+                            return { ...pre, content: e.target.value };
+                          });
+                        }}
+                      />
+                    </div>
+
                     <Upload
-                      action={(file) => saveImages(file)}
+                      action={(file) => saveUpdateImages(file)}
                       multiple
                       listType="picture"
                       accept=".png,.jpeg,.jpg"
@@ -385,7 +400,6 @@ const Post = () => {
                       <Button>Click Upload</Button>
                     </Upload>
                   </div>
-                 
                 </Modal>
               </div>
             </div>
@@ -393,7 +407,7 @@ const Post = () => {
             {/* -----Post Content----- */}
             <div className="PostContent">
               <div className="Content">
-                <ReadMore>{post.content}</ReadMore>
+                <ReadMore>{post?.content}</ReadMore>
               </div>
 
               <div className="PostImage">
@@ -406,13 +420,13 @@ const Post = () => {
                     width: "100%",
                   }}
                 >
-                  {post.images.map((image) => {
+                  {post?.images.map((image) => {
                     return (
                       <Image
-                        key={image.key}
+                        key={image?.key}
                         width="100%"
                         height="20rem"
-                        src={image.url}
+                        src={image?.url}
                         className="Images"
                       />
                     );
@@ -422,7 +436,7 @@ const Post = () => {
 
               <div className="PostResult">
                 <div className="ReactResult">
-                  <p>{post.likes.length}</p>
+                  <p>{post?.likes.length}</p>
                 </div>
 
                 <div className="ResultIcon">
@@ -431,7 +445,7 @@ const Post = () => {
 
                 <div className="CommentsResult">
                   <p style={{ fontSize: "18px", paddingTop: "5px" }}>
-                    {post.comments.length}
+                    {post?.comments.length}
                   </p>
                   <span className="commentsIcon">
                     <CommentOutlined></CommentOutlined>
@@ -446,7 +460,7 @@ const Post = () => {
               <button className="Button" onClick={() => handleLike(post._id)}>
                 <div
                   className={
-                    post.likes.includes(`${userProfile._id}`)
+                    post.likes.includes(userProfile._id)
                       ? classes.like
                       : classes.unlike
                   }
@@ -468,12 +482,12 @@ const Post = () => {
                 </div>
               </button>
 
-              <button className="Button">
+              <Button className="Button">
                 <div className="ActionButtons">
                   <p>Share</p>
                   <ShareAltOutlined className="ButtonIcons" />
                 </div>
-              </button>
+              </Button>
             </div>
 
             {show && (
@@ -485,11 +499,11 @@ const Post = () => {
                   loadPost={loadPost}
                 />
                 <div className="CommentListContainer">
-                  {post.comments.map((comment) => {
+                  {post?.comments.map((comment) => {
                     return (
                       <Comment
                         data={comment}
-                        key={comment._id}
+                        key={comment?._id}
                         loadPost={loadPost}
                       />
                     );
