@@ -3,12 +3,13 @@ import { Form, Button, Checkbox, Input, Select, Typography, Modal } from 'antd'
 import './CreateClub.css'
 import TextArea from 'antd/lib/input/TextArea'
 import { sendCreateClubRequest } from './CreateClubAPI'
-
+import { useNavigate } from 'react-router-dom'
 
 const { Option } = Select
 
 const CreateClub = () => {
 
+  const navigate = useNavigate()
   const [acceptPolicy, setAcceptPolicy] = useState(false)
   const [newClub, setNewClub] = useState({
     name: "",
@@ -19,7 +20,9 @@ const CreateClub = () => {
   })
 
 
-
+  const onClickCancel = () => {
+    navigate("/home")
+  }
 
   const onClubNameChange = (e) => {
     const data = { ...newClub, name: e }
@@ -51,7 +54,8 @@ const CreateClub = () => {
       if (response.success) {
         Modal.success({
           title: 'Create club successful',
-          content: (<Typography.Text>{response.message}</Typography.Text>)
+          content: (<Typography.Text>{response.message}</Typography.Text>),
+          onOk: () => navigate('/home')
         })
       } else {
         Modal.error({
@@ -86,22 +90,25 @@ const CreateClub = () => {
             />
           </Form.Item>
 
-          <Form.Item name={"slogan"} label="Slogan">
+          <Form.Item name={"slogan"} label="Slogan"
+            rules={[{ required: true, message: "Please enter your club slogan" }]}
+          >
             <TextArea
               maxLength={50}
               placeholder="Your club slogan"
-              required
+
               onChange={(e) => onSloganChange(e.target.value)}
             />
           </Form.Item>
 
 
-          <Form.Item name={"description"} label="Description">
+          <Form.Item name={"description"} label="Description"
+            rules={[{ required: true, message: "Please enter your club description" }]}>
             <TextArea
               maxLength={100}
               showCount
               placeholder='A short description about your club'
-              required
+
               onChange={(e) => onDesChange(e.target.value)}
             />
           </Form.Item>
@@ -112,7 +119,6 @@ const CreateClub = () => {
           >
             <Select
               placeholder="Your club category"
-              defaultValue={"Tech"}
               onChange={(e) => onCategoryChange(e)}
             >
               <Option value="Tech">Tech</Option>
@@ -131,7 +137,7 @@ const CreateClub = () => {
             </Button>
           </Form.Item>
           <Form.Item wrapperCol={{ span: 24 }}>
-            <Button type="danger" block>
+            <Button type="danger" block onClick={() => onClickCancel()}>
               Cancel
             </Button>
           </Form.Item>
