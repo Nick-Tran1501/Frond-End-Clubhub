@@ -30,7 +30,6 @@ const RecommendClub = () => {
     .catch((err) => {console.log(err)})
   },[])
   
-  console.log("hihi",clubInfo)
   return(
     <React.Fragment>
 
@@ -39,9 +38,10 @@ const RecommendClub = () => {
         >Recommend for you</h5>
 
         {clubInfo.map((club) => {
+          
           return(
 
-            <Clubs id={club._id} name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
+            <Clubs key={club._id} id={club._id} name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
           )
         })}
 

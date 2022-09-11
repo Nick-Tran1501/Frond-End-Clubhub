@@ -1,10 +1,8 @@
 import React, { useState, useEffect} from "react";
 import "./CommentsBox.css";
 import { Avatar, Input, Button, notification, Space } from "antd";
-import CommentList from "../commentlist/CommentList";
 import axios from "axios";
-
-const CommentsBox = ({ data, postId, userimage }) => {
+const CommentsBox = ({ data, postId, userimage, loadPost }) => {
   const { TextArea } = Input;
 
   const openNotificationWithIcon = (type) => {
@@ -36,6 +34,7 @@ const CommentsBox = ({ data, postId, userimage }) => {
     })
       .then((response) => {
         console.log(response);
+        loadPost()
         return <Space>{openNotificationWithIcon("success")}</Space>;
       })
       .catch((error) => {
@@ -58,6 +57,7 @@ const CommentsBox = ({ data, postId, userimage }) => {
       .catch(err => console.log(err))
   
   },[])
+
 
   return (
     <React.Fragment>
@@ -86,8 +86,7 @@ const CommentsBox = ({ data, postId, userimage }) => {
           </Button>
         </div>
       </div>
-
-      <CommentList data={data} />
+      
     </React.Fragment>
   );
 };

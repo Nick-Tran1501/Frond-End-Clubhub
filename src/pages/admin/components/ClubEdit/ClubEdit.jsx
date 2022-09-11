@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect, useMemo } from "react";
 import "antd/dist/antd.css";
-// import NavBar from "../../components/navbar/NavBars";
-import "./ClubEdit.style.css";
+import "./ClubEdit.scss";
+import "./ClubAPI.js";
 
 // -------------- ant design import ---------------------
 import {
@@ -15,16 +15,11 @@ import {
   Typography,
   Table,
   Empty,
-  //   Search,
   Form,
-  // Menu,
-  // Dropdown,
-  // Space,
-  // Popconfirm,
-  // message,
   Button,
   Select,
   Modal,
+  notification,
 } from "antd";
 
 // import icon
@@ -34,107 +29,91 @@ import {
   TeamOutlined,
   UnlockOutlined,
 } from "@ant-design/icons";
-import Title from "antd/lib/skeleton/Title";
+// import Title from "antd/lib/skeleton/Title";
 
-// ----------------------------------------------------------------
+import {
+  addStudentToClub,
+  getActiveClubData,
+  getClubID,
+  getStudent,
+  removeUserFromClub,
+  updateRole,
+} from "./ClubAPI.js";
+
 function ClubEdit() {
   // -------- Attributes --------------------------------
   const { Search } = Input;
   const { Option } = Select;
   const { Title } = Typography;
 
-  // sammple all user dat api (Search student attribute)
-  const [sts, setSTs] = useState([
-    {
-      key: "objectid-1",
-      id: "s123",
-      name: "st1",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "President",
-    },
-    {
-      key: "objectid-2",
-      id: "s456",
-      name: "st2",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Member",
-    },
-    {
-      key: "objectid-3",
-      id: "s789",
-      name: "st3",
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
-    },
-  ]);
+  const [clubs, setClubs] = useState([]);
+  const [clubDisplay, setClubDisplay] = useState();
 
-  const [studentData, setStudentData] = useState();
+  // --- club's students data table -----
+  const [dataSource, setDataSource] = useState([]);
 
-  const columnStudentData = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      width: "10%",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      width: "30%",
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      width: "5%",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      width: "20%",
-    },
-  ];
-
-  // disable submit button
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const [disableSearch, setDisableSearch] = useState(true);
 
-  //  ------- Functions --------------------------------
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log(
-      "params --- ",
-      "pag:",
-      pagination,
-      "filters: ",
-      filters,
-      "sorter: ",
-      sorter,
-      "extra: ",
-      extra
-    );
+  // **** single student attribute ****
+  const [studentData, setStudentData] = useState([]);
+  // const [studentDisplay, setStudentDisplay] = useState();
+  // **************************************
+
+  const [form] = Form.useForm();
+  const [form_search] = Form.useForm();
+
+  //  ******** Notification / type: {success, info, warning, error} *******
+  const openNotificationWithIcon = (type, content) => {
+    notification[type]({
+      message: "Notification Title",
+      description: content,
+    });
   };
 
-  // Table data
-  // sample student in club
-  const sampleData = [];
-  for (let i = 0; i < 100; i++) {
-    const randomNumber = parseInt(Math.random() * 1000);
-    sampleData.push({
-      key: i,
-      id: randomNumber,
-      name: `Em tuấn thứ ${i}`,
-      gender: "Male",
-      joinDate: "12/11/2021",
-      email: "student@gmail.com",
-      role: "Content Writer",
+  // ****************************************************************
+
+  // ---- search club ------
+
+  useEffect(() => {
+    getActiveClubData().then((data) => setClubs(data));
+  }, []);
+
+  const searchClub = (value) => {
+    getClubID(value.clubID).then((data) => {
+      setClubDisplay(data);
+      const studentsData = data.clubData.members;
+      const clubSelected = [];
+      for (let i = 0; i < studentsData.length; i++) {
+        let currentClub = studentsData[i].clubs.find(
+          (club) => club.club === data.clubData._id
+        );
+        clubSelected.push({
+          key: studentsData[i]._id,
+          id: studentsData[i].snumber,
+          name: studentsData[i].name,
+          gender: studentsData[i].gender,
+          joinDate: currentClub.joinDate.slice(0, 10),
+          email: studentsData[i].email,
+          role: currentClub.role,
+        });
+        setDataSource(clubSelected);
+        setDisableSearch(false);
+      }
     });
-  }
+  };
 
-  const [dataSource, setDataSource] = useState(sampleData);
+  const searchReset = () => {
+    form_search.resetFields();
+    setDataSource();
+    setDisableSearch(true);
+  };
 
+  //  ----------------------------------------------------------------
+
+  // club members table column
   const columns = [
     {
       title: "ID",
@@ -188,43 +167,70 @@ function ClubEdit() {
       },
     },
   ];
-
-  // Function for table ( action edit)
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingStudent, setEditingStudent] = useState(null);
-
+  // -----------------------------------
   // -------- CRUD Functions ---------------
+  // Search student by id
 
   const onSearch = (value) => {
     if (value !== "") {
-      const result = sts.filter((student) => student.id === value);
-      if (!result[0]) {
-        console.log("Student not found");
-      } else {
-        console.log(result[0]);
-        setStudentData(result);
-        setDisableSubmit(false);
+      const cID = clubDisplay.clubData._id;
+      const checkAppearance = dataSource.filter(
+        (student) => student.id === value
+      );
+      console.log(checkAppearance);
+      if (checkAppearance.length > 0) {
+        return openNotificationWithIcon(
+          "error",
+          `Student with ID: ${value} already in club`
+        );
       }
+
+      getStudent(value, cID).then((data) => {
+        if (!data) {
+          return openNotificationWithIcon(
+            "error",
+            `Cannot found student with ID: ${value}`
+          );
+        }
+        const newStudent = {
+          key: data._id,
+          id: data.snumber,
+          name: data.name,
+          gender: data.gender,
+          email: data.email,
+        };
+        setStudentData([newStudent]);
+        setDisableSubmit(false);
+      });
     } else {
-      console.log("Please Input");
+      return openNotificationWithIcon(
+        "warning",
+        `Please input student ID start with S`
+      );
     }
   };
 
   const onAddStudent = (studentData) => {
-    const randomNumber = parseInt(Math.random() * 1000);
-    const newStudent = {
-      key: randomNumber,
-      id: studentData[0].id,
-      name: studentData[0].name,
-      gender: studentData[0].gender,
-      joinDate: "12/11/2021",
-      email: studentData[0].email,
-      role: studentData[0].role,
-    };
-
-    setDataSource((pre) => {
-      return [...pre, newStudent];
-    });
+    const student = studentData[0];
+    const clubId = clubDisplay.clubData._id;
+    const studentId = student.key;
+    const role = student.role;
+    // console.log(dataSource);
+    const checkAppearance = dataSource.filter(
+      (student) => student.key === studentId
+    );
+    if (checkAppearance.length > 0) {
+      return openNotificationWithIcon(
+        "error",
+        `Student with ID: ${student.id} is already in club`
+      );
+    }
+    addStudentToClub(clubId, studentId, role);
+    setDataSource((pre) => [...pre, student]);
+    return openNotificationWithIcon(
+      "success",
+      `Add student id ${student.id} to club !`
+    );
   };
 
   const onDeleteStudent = (record) => {
@@ -233,10 +239,16 @@ function ClubEdit() {
       okText: "Yes",
       okType: "danger",
       onOk: () => {
+        const userId = record.key;
+        const clubId = clubDisplay.clubData._id;
+        removeUserFromClub(userId, clubId);
         setDataSource((pre) => {
-          // console.log(record.id);
           return pre.filter((student) => student.id !== record.id);
         });
+        openNotificationWithIcon(
+          "success",
+          `Remove student id ${record.id} from club !`
+        );
       },
     });
   };
@@ -251,16 +263,38 @@ function ClubEdit() {
     setEditingStudent(null);
   };
 
-  // ---- Add new student input ----
-  const [form] = Form.useForm();
-  const [form_search] = Form.useForm();
+  // ---- Add new student input ----å
+
+  const columnStudentData = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      width: "10%",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      width: "30%",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      width: "5%",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      width: "20%",
+    },
+  ];
 
   const onFinish = (values) => {
-    // console.log(values);
     if (studentData[0] !== "") {
       studentData[0].role = values.Role;
+      studentData[0].joinDate = new Date(Date.now())
+        .toLocaleString("en-GB", { timeZone: "Asia/Ho_Chi_Minh" })
+        .slice(0, 10);
       onAddStudent(studentData);
-      console.log("Add new student to club");
     } else {
       console.log("Student not found");
     }
@@ -270,349 +304,252 @@ function ClubEdit() {
     setStudentData();
     form.resetFields();
   };
+  //  -------------------------------------------------------------
 
-  // ---- search club ----
-  // const [club, setClub] = useState();
-  const sampleClubs = [];
-  for (let i = 0; i < 10; i++) {
-    const randomNumber = parseInt(Math.random() * 1000);
-    sampleClubs.push({
-      key: i,
-      id: randomNumber,
-      name: `Club name ${i}`,
-      type: "Sport",
-      created: "12/11/2021",
-      email: "student@gmail.com",
-      president: "Tran Chan Nam",
-      members: "6868",
-    });
-  }
-
-  const searchClub = (values) => {
-    console.log(values);
-    const newClub = sampleClubs.filter((club) => club.name === values.clubName);
-    console.log(newClub[0]);
-    // setClub(newClub[0]);
-
-    // ---- return display ----- 
-    // setClubDisplay(
-    //   <PageHeader title={club.name} tags={<Tag color="blue">{club.type}</Tag>}>
-    //     <Row>
-    //       <Statistic title="President" value={club.president} />
-    //       <Statistic
-    //         title="Members"
-    //         value={club.members}
-    //         style={{
-    //           margin: "0 50px",
-    //         }}
-    //       />
-    //       <Statistic title="Generated" value={club.created} />
-    //     </Row>
-    //   </PageHeader>
-    // );
-
-    setClubDisplay(
-      <PageHeader title={newClub[0].name} tags={<Tag color="blue">{newClub[0].type}</Tag>}>
-        <Row>
-          <Statistic title="President" value={newClub[0].president} />
-          <Statistic
-            title="Members"
-            value={newClub[0].members}
-            style={{
-              margin: "0 50px",
-            }}
-          />
-          <Statistic title="Generated" value={newClub[0].created} />
-        </Row>
-      </PageHeader>
-    );
-
-    // Test promise function
-
-    // return new Promise((resolve, reject) => {
-    //   if (!club) {
-    //     reject("No club found");
-    //   } else {
-    //     resolve(
-    //       setClubDisplay(
-    //         <PageHeader
-    //           title={club.name}
-    //           tags={<Tag color="blue">{club.type}</Tag>}
-    //         >
-    //           <Row>
-    //             <Statistic title="President" value={club.president} />
-    //             <Statistic
-    //               title="Members"
-    //               value={club.members}
-    //               style={{
-    //                 margin: "0 50px",
-    //               }}
-    //             />
-    //             <Statistic title="Generated" value={club.created} />
-    //           </Row>
-    //         </PageHeader>
-    //       )
-    //     );
-    //   }
-    // });
-
-  };
-
-  const searchReset = () => {
-    form_search.resetFields();
-  };
-
-  const [clubDisplay, setClubDisplay] = useState(
-    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-  );
-
+  //  -------------------------- DISPLAY ----------------------------------
   return (
-    <div className="">
-      <Row className="club-edit-container">
-        {/* area 1 */}
-        <Col className="club-edit-search" span={24}>
-          <Form
-            form={form_search}
-            name="search-club"
-            onFinish={searchClub}
-            size="medium"
-            // style={{}}
-          >
-            <Form.Item
-              name="clubName"
-              label="Club Name"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Select placeholder="Select Club name" allowClear style={{}}>
-                {sampleClubs.map((club) => {
-                  return (
-                    <Option key={club.id} value={club.name}>
-                      {club.name}
-                    </Option>
-                  );
-                })}
-              </Select>
-            </Form.Item>
-            <Form.Item>
-              <Button
-                style={{ marginRight: "10px" }}
-                type="primary"
-                htmlType="submit"
-              >
-                Search
-              </Button>
-              <Button htmlType="button" onClick={searchReset}>
-                Reset
-              </Button>
-            </Form.Item>
-          </Form>
-        </Col>
-
-        {/* area 2 */}
+    <div className="club-edit-container">
+      <Row className="">
+        {/* Area 1 */}
         <Col span={24}>
-          {/* club members details */}
-
-          {clubDisplay}
-
-          {/* <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />  */}
-          {/* <PageHeader
-            // size= "small"
-            title={club.name}
-            tags={<Tag color="blue">{club.type}</Tag>}
-          >
-            <Row>
-              <Statistic title="President" value={club.president} />
-              <Statistic
-                title="Members"
-                value={club.members}
-                style={{
-                  margin: "0 50px",
-                }}
-              />
-              <Statistic title="Generated" value={club.created} />
-            </Row>
-          </PageHeader> */}
+          <div className="club-edit-search">
+            <Form
+              form={form_search}
+              name="search-club"
+              onFinish={searchClub}
+              size="medium"
+            >
+              <Form.Item
+                name="clubID"
+                label="Club Name"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select placeholder="Select Club name" allowClear style={{}}>
+                  {clubs.map((club) => {
+                    return (
+                      <Option key={club._id} value={club._id}>
+                        {club.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  style={{ marginRight: "10px" }}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Search
+                </Button>
+                <Button htmlType="button" onClick={searchReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </Col>
 
-        {/* area 3 */}
-        {/* Add new student  */}
-        <Col className="add-container" span={24}>
+        {/* Area 2 */}
+        <Col span={24}>
+          <div className="club-description">
+            {clubDisplay && (
+              <PageHeader
+                title={clubDisplay?.clubData.name}
+                tags={
+                  <Tag color="blue">{clubDisplay?.clubData.clubCategory}</Tag>
+                }
+              >
+                <Row>
+                  <Statistic
+                    title="President"
+                    value={clubDisplay?.clubData?.president?.username}
+                  />
+                  <Statistic
+                    title="Members"
+                    value={clubDisplay?.memberCount}
+                    style={{
+                      margin: "0 50px",
+                    }}
+                  />
+                  <Statistic
+                    title="Generated"
+                    value={clubDisplay?.clubData.createDate.slice(0, 10)}
+                  />
+                </Row>
+              </PageHeader>
+            )}
+          </div>
+        </Col>
+
+        {/* Area 3 */}
+        <Col span={24}>
           {/* search bar ( search student by id) */}
-          <Title level={2} style={{ margin: "0 20px" }}>
-            Add new student to club
-          </Title>
+          <div className="add-container">
+            <Title level={3}>Add new student to club</Title>
 
-          <Search
-            style={{
-              margin: "10px 20px",
-            }}
-            className="search-bar"
-            placeholder="Input student ID"
-            size="medium"
-            onSearch={onSearch}
-            enterButton
-            required
-          />
+            <Search
+              className="search-bar"
+              placeholder="Input student ID"
+              size="medium"
+              onSearch={onSearch}
+              enterButton
+              disabled={disableSearch}
+              required
+            />
 
-          <Title
-            level={3}
-            style={{
-              margin: "0px",
-              textAlign: "center",
-              backgroundColor: "black",
-              color: "white",
-            }}
-          >
-            Student Information
-          </Title>
-
-          {/* student information*/}
-          <Table
-            bordered
-            columns={columnStudentData}
-            dataSource={studentData}
-            size="small"
-            pagination={false}
-          />
-
-          {/* select role and add student */}
-          <Form
-            // {...layout}
-            form={form}
-            name="control-hooks"
-            onFinish={onFinish}
-            disabled={disableSubmit}
-          >
-            <Form.Item
-              name="Role"
-              label="Role"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+            <Title
+              level={3}
+              style={{
+                margin: "0px",
+                textAlign: "center",
+                backgroundColor: "black",
+                color: "white",
+              }}
             >
-              <Select
-                placeholder="Select a specific role for new student"
-                allowClear
-              >
-                <Option value="President">President</Option>
-                <Option value="Vice President"> Vice President</Option>
-                <Option value="Content Writer"> Content Writer</Option>
-                <Option value="Member"> Member</Option>
-              </Select>
-            </Form.Item>
+              Student Information
+            </Title>
 
-            <Form.Item
-            // {...tailLayout}
+            {/* student information*/}
+            <Table
+              bordered
+              columns={columnStudentData}
+              dataSource={studentData}
+              size="small"
+              pagination={false}
+            />
+
+            {/* select role and add student */}
+            <Form
+              form={form}
+              name="control-hooks"
+              onFinish={onFinish}
+              disabled={disableSubmit}
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ marginRight: "10px" }}
+              <Form.Item
+                name="Role"
+                label="Role"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
               >
-                Add student
-              </Button>
+                <Select
+                  placeholder="Select a specific role for new student"
+                  allowClear
+                >
+                  <Option value="Content Writer"> Content Writer</Option>
+                  <Option value="Member"> Member</Option>
+                </Select>
+              </Form.Item>
 
-              <Button htmlType="button" onClick={onReset}>
-                Reset
-              </Button>
-            </Form.Item>
-          </Form>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ marginRight: "10px" }}
+                >
+                  Add student
+                </Button>
+
+                <Button htmlType="button" onClick={onReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </Col>
 
         {/* area 4 */}
-        <Col className="table-content" span={24}>
-          {/* single student table */}
-
-          <Title
-            level={3}
-            style={{
-              textAlign: "center",
-              margin: "0px",
-              backgroundColor: "black",
-              color: "white",
-            }}
-          >
-            Club Members
-          </Title>
-          <Table
-            bordered
-            columns={columns}
-            dataSource={dataSource}
-            onChange={onChange}
-            pagination={{
-              position: ["bottomRight"],
-            }}
-          />
-          <Modal
-            title="Edit Student"
-            visible={isEditing}
-            okText="Save"
-            onCancel={() => {
-              resetEditing();
-            }}
-            onOk={() => {
-              setDataSource((pre) => {
-                return pre.map((student) => {
-                  if (student.id === editingStudent.id) {
-                    return editingStudent;
-                  } else {
-                    return student;
-                  }
-                });
-              });
-              resetEditing();
-            }}
-          >
-            <Input
-              value={editingStudent?.name}
-              onChange={(e) => {
-                setEditingStudent((pre) => {
-                  return { ...pre, name: e.target.value };
-                });
-              }}
-            />
-            <Input
-              value={editingStudent?.email}
-              onChange={(e) => {
-                setEditingStudent((pre) => {
-                  return { ...pre, email: e.target.value };
-                });
-              }}
-            />
-            <Input
-              value={editingStudent?.role}
-              onChange={(e) => {
-                setEditingStudent((pre) => {
-                  return { ...pre, role: e.target.value };
-                });
-              }}
-            />
-
-            <Select
-              defaultValue={editingStudent?.role}
+        <Col span={24}>
+          <div className="members-table">
+            <Title
+              level={3}
               style={{
-                width: "100%",
-              }}
-              // onChange={handleChange}
-              onChange={(e) => {
-                // console.log(e);
-                setEditingStudent((pre) => {
-                  return { ...pre, role: e };
-                });
+                textAlign: "center",
+                margin: "0px",
+                backgroundColor: "black",
+                color: "white",
               }}
             >
-              <Option value="President">President </Option>
-              <Option value="Vice President"> Vice President </Option>
-              <Option value="Content Writer"> Content Writer </Option>
-              <Option value="Member"> Member </Option>
-            </Select>
-          </Modal>
+              Club Members
+            </Title>
+
+            <Table
+              bordered
+              columns={columns}
+              dataSource={dataSource}
+              pagination={{
+                position: ["bottomRight"],
+              }}
+            />
+            <Modal
+              title="Edit Student Role"
+              visible={isEditing}
+              okText="Save"
+              onCancel={() => {
+                resetEditing();
+              }}
+              onOk={() => {
+                const clubId = clubDisplay.clubData._id;
+                const userId = editingStudent.key;
+                const role = editingStudent.role;
+                updateRole(clubId, userId, role)
+                .then((status) => {
+                  console.log(status)
+                  if (status === 200) {
+                    openNotificationWithIcon(
+                      "success",
+                      `Student ID: ${editingStudent.id}'s role was updated to ${role}`
+                    )
+                    setDataSource((pre) => {
+                      return pre.map((student) => {
+                        if (student.id === editingStudent.id) {
+                          return editingStudent;
+                        } else {
+                          return student;
+                        }
+                      })
+                    })
+                  }
+                  else if (status === 400) {
+                    openNotificationWithIcon(
+                      "error",
+                      `This club already have a president, please try again`
+                    )
+                  }
+                  else if (status === 401) {
+                    openNotificationWithIcon(
+                      "error",
+                      `This student has already been president of another club`
+                    )
+                  }
+                })
+                resetEditing();
+              }}
+            >
+              <Select
+                defaultValue={editingStudent?.role}
+                style={{
+                  width: "100%",
+                }}
+                onChange={(e) => {
+                  setEditingStudent((pre) => {
+                    return { ...pre, role: e };
+                  });
+                }}
+              >
+                <Option value="President">President </Option>
+                <Option value="Content Writer"> Content Writer </Option>
+                <Option value="Member"> Member </Option>
+              </Select>
+            </Modal>
+          </div>
         </Col>
       </Row>
     </div>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./SideBars.css";
 import "antd/dist/antd.css";
-import { Avatar, Menu, Col, Row, Button } from "antd";
+import { Avatar, Menu, Col, Row, Button, Modal, Select, Input } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   MailOutlined,
@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 import SignOut from "./SignOut";
 import axios from "axios";
+import { editUser } from "./SidebarAPI";
 
 // Dropdown Menu
 function getItem(label, key, icon, children, type) {
@@ -26,6 +27,24 @@ function getItem(label, key, icon, children, type) {
 }
 
 const sidebar = () => {
+  //  ------- fix ---------
+  const { Option } = Select;
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
+
+  const onEditStudent = (record) => {
+    setIsEditing(true);
+    setEditingStudent({ ...record });
+  };
+
+  const resetEditing = () => {
+    setIsEditing(false);
+    setEditingStudent(null);
+  };
+
+  // ---------------------------------------------------------------
+
   // Display all the recent hashtags in posts
   const recentItem = (topic) => (
     <div className="sideRecentItem">
@@ -55,10 +74,10 @@ const sidebar = () => {
 
   const items = [
     getItem("Profile", "sub1", <MailOutlined />, [
-      getItem(`${userProfile.name}`, "1"),
-      getItem(`${userProfile.phone}`, "2"),
-      getItem(`${userProfile.dob}`, "3"),
-      getItem(`${userProfile.gender}`, "4"),
+      getItem(`${userProfile?.name}`, "1"),
+      getItem(`${userProfile?.phone}`, "2"),
+      getItem(`${userProfile?.dob}`, "3"),
+      getItem(`${userProfile?.gender}`, "4"),
     ]),
     getItem("Clubs", "sub2", <AppstoreOutlined />, [getItem("Option 4", "5")]),
     getItem("Setting", "sub3", <SettingOutlined />, [
@@ -67,18 +86,20 @@ const sidebar = () => {
           style={{
             all: "unset",
           }}
+          onClick={() => {
+            // console.log(userProfile);
+            onEditStudent(userProfile);
+          }}
         >
           Edit Profile
         </Button>,
-        "6",
+        "editBtn",
         <EditOutlined />
       ),
       getItem(<SignOut />, "7", <ExportOutlined />),
     ]),
   ];
 
- 
-  
   return (
     <div className="sideContainer">
       {/* <Menu
@@ -93,14 +114,13 @@ const sidebar = () => {
 
       <Row>
         <Col xs={24} lg={24} className="sideTop">
-          <img src={userProfile.avatarUrl} alt="backgorundImage" />
           <Avatar
             size={60}
-            src={userProfile.avatarUrl}
+            src={userProfile?.avatarUrl}
             className="sideAvatar"
           />
-          <h2>{userProfile.username}</h2>
-          <h4>{userProfile.email}</h4>
+          <h2>{userProfile?.username}</h2>
+          <h4>{userProfile?.email}</h4>
         </Col>
       </Row>
 
@@ -113,6 +133,79 @@ const sidebar = () => {
         mode="inline"
         items={items}
       />
+      {/* fix part */}
+      <Modal
+        title="Edit Personal Information"
+        visible={isEditing}
+        okText="Save"
+        onCancel={() => {
+          resetEditing();
+        }}
+        onOk={() => {
+          // console.log(editingStudent);
+          const username = editingStudent.username;
+          const name = editingStudent.name;
+          const dob = editingStudent.dob;
+          const phone = editingStudent.phone;
+          const gender = editingStudent.gender;
+
+          // console.log(username, name, dob, phone, gender);
+          editUser(username, name, dob, phone, gender)
+          .then((status) => {
+            console.log(status);
+          })
+          setUserProfile(editingStudent);
+          resetEditing();
+        }}
+      >
+        <Input
+          value={editingStudent?.username}
+          addonBefore="Edit User name"
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, username: e.target.value };
+            });
+          }}
+        />
+        <Input
+          value={editingStudent?.name}
+          addonBefore="Edit Name"
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, name: e.target.value };
+            });
+          }}
+        />
+        <Input
+          value={editingStudent?.email}
+          addonBefore="Edit Email"
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, email: e.target.value };
+            });
+          }}
+        />
+        <Input
+          value={editingStudent?.dob}
+          addonBefore="Edit Birthday"
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, dob: e.target.value };
+            });
+          }}
+        />
+        <Input
+          value={editingStudent?.gender}
+          addonBefore="Edit Gender"
+          onChange={(e) => {
+            setEditingStudent((pre) => {
+              return { ...pre, gender: e.target.value };
+            });
+          }}
+        />
+      </Modal>
+
+      {/* __________ */}
 
       <div className="sideBottom">
         <p> Recent </p>
@@ -125,8 +218,7 @@ const sidebar = () => {
       <div className="sideAdvertise">
         <h2> Want to explore more? </h2>
         <a href="https://www.rmit.edu.vn/vi" target="_blank" rel="noreferrer">
-          {" "}
-          Click Here{" "}
+          Click Here
         </a>
       </div>
 

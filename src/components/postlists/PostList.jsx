@@ -3,7 +3,6 @@ import React from "react";
 
 
 const PostList = ({data}) => {
-  // console.log(data)
 
  return(
   <React.Fragment>

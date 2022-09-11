@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.title-container {
+    background-color: white;
+    // border: 2px solid red;
+    margin-bottom: 5px;
+    padding: 0px 20px;
+    display: flex;
+
+    // .request-title{
+    //     margin: 0px;
+    // }
+
+    // .number-list {
+    //     margin: 0px;
+    //     margin-top: 0px;
+    // }
+}
+
+.request-list {
+    height: 70vh;
+    background-color:#F9F2ED;
+    overflow: scroll;
+}
+
+
+.request-element {
+    .ant-page-header {
+        box-sizing: border-box;
+        margin: 0px 2px 10px 2px;
+        color: rgba(0,0,0,.85);
+        font-size: 1rem;
+        font-variant: tabular-nums;
+        line-height: 5px;
+        list-style: none;
+        font-feature-settings: "tnum";
+        position: relative;
+        padding: 40px 20px;
+        background-color: white;
+        border: 0;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px #888888;
+    }
+}
+
+
+

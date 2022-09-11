@@ -30,6 +30,7 @@ const MemberTable = () => {
             title: "Full Name",
             dataIndex: "name",
             key: "name",
+            responsive: ['lg'],
             render: (name) => <a>{name}</a>
         },
         {
@@ -42,24 +43,20 @@ const MemberTable = () => {
             title: "Gender",
             dataIndex: "gender",
             key: 'gender',
+            responsive: ['lg'],
             render: (gender) => <a>{gender}</a>
         },
 
         {
-            title: "SNumber",
-            dataIndex: 'snumber',
-            key: 'snumber',
-            render: (snumber) => <a>{snumber ? snumber : "Empty "}</a>
-        },
-        {
             title: 'Role',
             key: 'clubRole',
             dataIndex: 'clubRole',
+            responsive: ['lg'],
             render: (clubRole) => {
                 let color = 'brown'
-                if (clubRole === 'member') {
+                if (clubRole === 'Member') {
                     color = 'green'
-                } else if (clubRole === 'writer') {
+                } else if (clubRole === 'Content Writer') {
                     color = 'blue'
                 }
                 return (
@@ -74,22 +71,23 @@ const MemberTable = () => {
         {
             title: 'Action',
             key: 'action',
+
             render: (_, record) => {
                 let isPresident = false
                 let isContenWriter = false
-                if (record.clubRole === 'president') {
+                if (record.clubRole === 'President') {
                     isPresident = true
-                } else if (record.clubRole === 'writer') {
+                } else if (record.clubRole === 'Content Writer') {
                     isContenWriter = true
                 }
 
                 return (
                     <Space size="middle" style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button type='primary' onClick={() => onClickViewInfo(record)}>View Info</Button>
-                        {(!isContenWriter && !isPresident) && <Button type="primary" onClick={() => onClickSetRole(record, "writer")}>Allow posting</Button>}
-                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "member")}>Disable posting</Button>}
+                        {(!isContenWriter && !isPresident) && <Button type="primary" onClick={() => onClickSetRole(record, "Content Writer")}>Allow posting</Button>}
+                        {(isContenWriter && !isPresident) && <Button type="default" onClick={() => onClickSetRole(record, "Member")}>Disable posting</Button>}
                         {!isPresident &&
-                            <Button type='primary' danger onClick={() => onClickKickMember(record)}>Kick</Button>
+                            <Button type='primary' danger onClick={() => onClickKickMember(record)}>Remove</Button>
                         }
                     </Space>
                 )
@@ -177,6 +175,7 @@ const MemberTable = () => {
 
 
     return (
+
 
         <Table columns={columns} dataSource={memberInfo} />
     )

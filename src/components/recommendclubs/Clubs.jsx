@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "antd/dist/antd.min.css";
 import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Avatar } from "antd";
 import "./Clubs.css";
 
 const Clubs = ({id,name,slogan, logoUrl}) => {
@@ -15,15 +15,8 @@ const Clubs = ({id,name,slogan, logoUrl}) => {
     <React.Fragment>
       <div className="ClubContainer">
         <button className="ButtonImage">
-          <img
-            src={logoUrl}
-            alt="logo"
-            width="100%"
-            height="55px"
-            style={{
-              borderRadius: "50%",
-            }}
-          />
+          
+          <Avatar size={50} src={logoUrl} />
         </button>
 
         <div className="clubInfo">

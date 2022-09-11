@@ -1,9 +1,9 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import "antd/dist/antd.css";
 import { Tabs } from "antd";
 
 // css
-import "./Admin.style.css";
+import "./Admin.style.scss";
 
 // import antd
 import {
@@ -11,25 +11,15 @@ import {
   Row,
   Paragraph,
   Descriptions,
-  // Input,
   Typography,
-  // Table,
-  //   Search,
-  // Form,
-  // Menu,
-  // Dropdown,
-  // Space,
-  // Popconfirm,
-  // message,
-  // Button,
-  // Select,
-  // Modal,
 } from "antd";
 
 // import commponents
 import RequestClub from "./components/requestEdit/RequestEdit";
 import ClubEdit from "./components/ClubEdit/ClubEdit";
 import UserEdit from "./components/userEdit/UserEdit";
+import { getAdminData } from "./AdminAPI";
+import {getUsers} from "./components/userEdit/UserAPI";
 
 function AdminPage() {
   const { TabPane } = Tabs;
@@ -39,67 +29,86 @@ function AdminPage() {
   };
 
   const { Text, Title, Paragraph } = Typography;
-  // const { Search } = Input;
+  const [admin, setAdmin] = useState();
+  const [users, setUsers] = useState();
+
+  useEffect(()=>{
+    getAdminData().then((data)=>{
+      console.log(data);
+      setAdmin(data);
+    })
+  },[])
+
+  useEffect(()=>{
+    getUsers().then((data)=>{
+      console.log(data);
+      setUsers(data);
+    })
+  },[])
+
+
+
+
+
 
   return (
     <div className="admin-container">
-      {/* area 1 */}
-      <Row className="admin-header">
-        {/* title  */}
-        <Col className="admin-header-title" span={24}>
-          <Title
-            style={{
-              color: "white",
-              marginTop: "1rem",
-            }}
-          >
-            Admin Page
-          </Title>
-        </Col>
-
-        {/* title description */} 
-        <Col className="admin-header-subtitle" span={24}>
-          {/* Heading */}
-          <Title
-            level={4}
-            style={{
-              paddingLeft: "20px",
-              margin: "0",
-              height: "20%"
-            }}
-          >
-            Welcome to WorldPress !
-          </Title>
+      <div className="admin-header">
+        <Row>
+          {/* Area 1 */}
+          <Col className="admin-header-title" span={24}> 
+            <Title> Admin Page </Title>
+          </Col>
+          
+          {/* Area 2 */}
+          <Col className="admin-header-subtitle" span={24}>
+            <Title
+              level={4}
+            >
+              Welcome to Admin Page !
+            </Title>
+            
             {/* admin page functionality */}
-          <Descriptions className="header-description" title="Admin Page Descriptions">
-            <Descriptions.Item label="System Editor"> Admin name</Descriptions.Item>
-            <Descriptions.Item label="System Name"> RMIT Club Hub </Descriptions.Item>
-            <Descriptions.Item label="System Users"> 999+  </Descriptions.Item>
-            <Descriptions.Item label="Location"> SGS </Descriptions.Item>
-            <Descriptions.Item label="Edit">
-              Clubs Controller , Users Controller , Club Creation requests
-            </Descriptions.Item>
-          </Descriptions>
+            <Descriptions
+              title="Admin Page Descriptions"
+            >
+              <Descriptions.Item label="System Editor">
+                {admin?.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="System Name">
+                RMIT Club Hub
+              </Descriptions.Item>
+              <Descriptions.Item label="System Users"> {users?.length} </Descriptions.Item>
+              <Descriptions.Item label="Location"> SGS </Descriptions.Item>
+              <Descriptions.Item label="Edit">
+                Clubs Controller , Users Controller , Club Creation requests
+              </Descriptions.Item>
+            </Descriptions>
 
-        </Col>
-      </Row>
+          </Col>
 
-      {/* area 2  */}
-      <Row className="admin-tab">
-        <Col className="admin-tab-content" span={24}>
-          <Tabs onChange={onChange} type="card" size="large">
-            <TabPane tab="Request" key="1">
-              <RequestClub />
-            </TabPane>
-            <TabPane tab="Club Editing" key="2">
-              <ClubEdit />
-            </TabPane>
-            <TabPane tab="Users Editing" key="3">
-              <UserEdit />
-            </TabPane>
-          </Tabs>
-        </Col>
-      </Row>
+        </Row>
+
+      </div>
+
+      {/* Tab container */}
+      <div className="admin-tab">
+        <Row>
+          <Col className="admin-tab-content" span={24}>
+            <Tabs onChange={onChange} type="card" size="large">
+              <TabPane tab="Request" key="1">
+                <RequestClub />
+              </TabPane>
+              <TabPane tab="Club Editing" key="2">
+                <ClubEdit />
+              </TabPane>
+              <TabPane tab="Users Editing" key="3">
+                <UserEdit />
+              </TabPane>
+            </Tabs>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
