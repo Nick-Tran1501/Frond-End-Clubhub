@@ -172,7 +172,7 @@ const Register = () => {
     checkDobValid();
     //
     if (!userDetail.name || !userDetail.email || !userDetail.phone || !userDetail.password || !userDetail.gender
-      || userDetail.username
+      || !userDetail.username
     ) {
       allowSignUp = false
       Modal.error({
