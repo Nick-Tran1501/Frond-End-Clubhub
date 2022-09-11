@@ -33,10 +33,16 @@ function App() {
       {/* <HomePage /> */}
       {/* <ProfilePage/> */}
       {/* ---------------------------------------------------------------- */}
+<<<<<<< HEAD
       <ClubRegisterForm />
       {/* <PresidentPage /> */}
+=======
+
+
+>>>>>>> b70710ba8dac16fab00aaaa498baa2b654951cb3
 
       {/* <UpcomingEvent/> */}
+
     </div>
   );
 }

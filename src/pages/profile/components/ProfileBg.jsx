@@ -153,6 +153,8 @@ const ProfileBg =({
   const handleCancel = () => {
     setModal1(false);
     setModal2(false);
+    setAvatar()
+    setBackground()
   };
 
   const handleCover = (event) => {
@@ -243,6 +245,7 @@ const ProfileBg =({
 
         <Modal
           title="Change cover image"
+          destroyOnClose={true}
           visible={modal1}
           onOk={(e)=>{handleOkModalBackground(e)}}
           onCancel={handleCancel}
@@ -289,7 +292,6 @@ const ProfileBg =({
           <div className="pdl-row">
             <Image
               className="pfi-img"
-              onClick={showModal2}
               src={`${club.logoUrl}?${new Date().getTime()}`}
               alt="profile"
               id="profile_btn"
@@ -302,6 +304,7 @@ const ProfileBg =({
 
             <Modal
               title="Change profile image"
+              destroyOnClose={true}
               visible={modal2}
               onOk={(e) => {handleOkModalAvatar(e)}}
               onCancel={handleCancel}

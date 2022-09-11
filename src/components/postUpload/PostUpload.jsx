@@ -76,9 +76,9 @@ export default function PostUpload({ reload }) {
         setPost(false);
         console.log(response);
         setPostImg([]);
-        {
+        
           reload();
-        }
+        
       })
       .catch((err) => {
         console.log(err);
@@ -105,6 +105,8 @@ export default function PostUpload({ reload }) {
 
       <Modal
         title="Post"
+        destroyOnClose={true}
+
         visible={post}
         onOk={() => {
           createPost();
