@@ -9,9 +9,6 @@ import { Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/admin/AdminPage";
 
 import PresidentPage from "./pages/president/PresidentPage";
-
-
-import UpcomingEvent from "./components/upcomingevents/UpcomingEvents";
 import CreateClub from "./components/CreateNewClub/CreateClub";
 
 
