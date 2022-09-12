@@ -61,7 +61,6 @@ const Post = () => {
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
       .then((response) => {
-        console.log("Post", response.data);
         setPostData(response.data);
       })
       .catch((error) => {
@@ -83,7 +82,6 @@ const Post = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log("User", response.data);
         setUserProfile(response.data);
       })
       .catch((err) => console.log(err));
@@ -334,7 +332,6 @@ const Post = () => {
                   visible={visible}
                   onCancel={() => {
                     setVisible(false);
-                    console.log(post._id)
                   }}
                   onOk={() => {
                     setPostData((pre) => {
@@ -386,7 +383,6 @@ const Post = () => {
                       listType="picture"
                       accept=".png,.jpeg,.jpg"
                       beforeUpload={(file) => {
-                        console.log({ file });
                         return file;
                       }}
                       maxCount={5}
