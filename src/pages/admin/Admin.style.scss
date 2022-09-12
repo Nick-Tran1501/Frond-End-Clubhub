@@ -1,84 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    font-family: 'Poppins', sans-serif;
-
+body {
+  font-family: "Poppins", sans-serif;
 }
 
 /* main lay out */
 .admin-container {
-    height: 100vh;
-    width: 80%;
-    margin: 0 auto;
-    background-color: whitesmoke;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  background-color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
-
 
 .admin-header {
-    height: 30%;
-    margin-bottom: 10px;
+  height: 30%;
+  margin-bottom: 10px;
 
-    .ant-row {
-        height: 100%;
+  .admin_subHeader {
+    display: flex;
+    justify-content: space-between;
 
-        /* ----- Area 1 ------ */
-        .admin-header-title {
-            background-color: #000000;
-            font-size: 3rem;
-            text-align: center;
-            height: 30%;
-            // border-radius: 2px;
-            // box-shadow: 1px 2px 5px #888888; 
-            // border: 3px solid blue;
-            h1.ant-typography {
-                margin: 10px;
-                color: white;
-                font-weight: 600;
-                font-size: 38px;
-                line-height: 1.23;
-            }
-        }
-    
-        /* ----- Area 2 ------ */
-
-        .admin-header-subtitle{
-            height: 70%;
-            display: flex;
-            flex-direction: column;
-            border-radius: 5px;
-            box-shadow: 1px 2px 5px #888888; 
-
-            // --- children --- 
-            h4.ant-typography {
-                margin: 10px;
-                background-color: whitesmoke;
-            }
-            .ant-descriptions {
-                padding: 10px;
-                background-color: whitesmoke;
-            }
-
-        }
+    .admin_homebutton {
+      margin: 10px;
+      border-radius: 5px;
     }
-    
+  }
 
+  .ant-row {
+    height: 100%;
 
+    /* ----- Area 1 ------ */
+    .admin-header-title {
+      background-color: #000000;
+      font-size: 3rem;
+      text-align: center;
+      height: 30%;
+      // border-radius: 2px;
+      // box-shadow: 1px 2px 5px #888888;
+      // border: 3px solid blue;
+      h1.ant-typography {
+        margin: 10px;
+        color: white;
+        font-weight: 600;
+        font-size: 38px;
+        line-height: 1.23;
+      }
+    }
 
+    /* ----- Area 2 ------ */
 
+    .admin-header-subtitle {
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 5px;
+      box-shadow: 1px 2px 5px #888888;
 
+      // --- children ---
+      h4.ant-typography {
+        margin: 10px;
+        background-color: whitesmoke;
+      }
+      .ant-descriptions {
+        padding: 10px;
+        background-color: whitesmoke;
+      }
+    }
+  }
 }
-
-
 
 // /* area 1 - title  */
 // .admin-header-subtitle {
@@ -97,25 +94,21 @@ body{
 //     margin-bottom: 20px;
 // }
 
-
-
 // ---- Tab container ----
 
 .admin-tab {
-    height: 70%;
-    // border: 2px solid red;
-    padding: 5px;
+  height: 70%;
+  // border: 2px solid red;
+  padding: 5px;
 
-    .ant-tabs-nav{
-        margin: 0px;
-    }
+  .ant-tabs-nav {
+    margin: 0px;
+  }
 }
-
 
 // /* .admin-tab-content {
 //     height: 10%;
 // } */
-
 
 // .ant-tabs-top>.ant-tabs-nav {
 //     margin: 0px;

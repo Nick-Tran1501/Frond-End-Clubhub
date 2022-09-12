@@ -11,7 +11,7 @@ export const getAdminData = async () => {
         headers: { 'Authorization': `Bearer ${token}` },
     })
         .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             return response.data;
         })
         .catch((err) => {

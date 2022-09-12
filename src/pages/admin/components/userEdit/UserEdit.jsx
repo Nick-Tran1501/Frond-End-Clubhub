@@ -64,26 +64,30 @@ function UserEdit() {
     {
       title: "Gender",
       dataIndex: "gender",
-      width: "5%",
+      responsive: ['lg'],
+      width: "10%",
     },
     {
       title: "Birthday",
       dataIndex: "birthday",
-      width: "15%",
+      responsive: ['lg'],
+      width: "20%",
     },
     {
       title: "Email",
       dataIndex: "email",
+      responsive: ['md'],
       width: "20%",
     },
     {
       title: "Phone",
       dataIndex: "phone",
+      responsive: ['lg'],
       width: "20%",
     },
     {
       title: "Remove",
-      width: "2%",
+      width: "5%",
       render: (record) => {
         return (
           <>
@@ -111,10 +115,9 @@ function UserEdit() {
       okText: "Yes",
       okType: "danger",
       onOk: () => {
-        console.log(record.key);
         deleteStudent(record.key).then((status) => {
-          console.log(status);
-          if ( status=== 200){
+          // console.log(status);
+          if (status === 200) {
             openNotificationWithIcon(
               "success",
               `Student ID: ${record.id} is delete of system`
@@ -156,7 +159,7 @@ function UserEdit() {
                 }}
                 icon={<SmileOutlined />}
                 title="Users can not be found !!"
-                // extra={<Button type="primary">Next</Button>}
+              // extra={<Button type="primary">Next</Button>}
               />
             )}
           </div>

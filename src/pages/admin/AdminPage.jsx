@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import { Tabs } from "antd";
+import { useNavigate } from "react-router-dom"
 
 // css
 import "./Admin.style.scss";
@@ -12,6 +13,7 @@ import {
   Paragraph,
   Descriptions,
   Typography,
+  Button
 } from "antd";
 
 // import commponents
@@ -21,6 +23,7 @@ import UserEdit from "./components/userEdit/UserEdit";
 import { getAdminData } from "./AdminAPI";
 import { getUsers } from "./components/userEdit/UserAPI";
 
+
 function AdminPage() {
   const { TabPane } = Tabs;
 
@@ -28,23 +31,30 @@ function AdminPage() {
     // console.log(key);
   };
 
+  const navigate = useNavigate()
+  const onClickBack = () => {
+    navigate("/home")
+  }
+
   const { Text, Title, Paragraph } = Typography;
   const [admin, setAdmin] = useState();
   const [users, setUsers] = useState();
 
   useEffect(() => {
     getAdminData().then((data) => {
-      console.log(data);
+      // console.log(data);
       setAdmin(data);
     })
   }, [])
 
   useEffect(() => {
     getUsers().then((data) => {
-      console.log(data);
+      // console.log(data);
       setUsers(data);
     })
   }, [])
+
+
 
 
 
@@ -62,16 +72,20 @@ function AdminPage() {
 
           {/* Area 2 */}
           <Col className="admin-header-subtitle" span={24}>
-            <Title
-              level={4}
-            >
-              Welcome to Admin Page !
-            </Title>
+            <div className="admin_subHeader">
+              <Title
+                level={4}
+              >
+                Welcome to Admin Page !
+              </Title>
+              <Button type="primary" className="admin_homebutton" onClick={() => onClickBack()}>Back to Home</Button>
+            </div>
 
             {/* admin page functionality */}
             <Descriptions
               title="Admin Page Descriptions"
             >
+
               <Descriptions.Item label="System Editor">
                 {admin?.name}
               </Descriptions.Item>

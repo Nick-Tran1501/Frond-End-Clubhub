@@ -24,6 +24,7 @@ const MemberTable = () => {
             title: 'Profile',
             dataIndex: 'avatarUrl',
             key: 'avatarUrl',
+            responsive: ['md'],
             render: (url) => <Avatar src={url} />
         },
         {
@@ -169,7 +170,7 @@ const MemberTable = () => {
 
 
 
-    console.log(memberData)
+    // console.log(memberData)
 
 
 

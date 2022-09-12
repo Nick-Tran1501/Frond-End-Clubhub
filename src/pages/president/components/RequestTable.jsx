@@ -27,6 +27,7 @@ const RequestTable = ({ data }) => {
             title: 'Gender',
             dataIndex: 'gender',
             key: 'gender',
+            responsive: ['md'],
             render: (text) => <a>{text}</a>,
         },
 
@@ -34,6 +35,7 @@ const RequestTable = ({ data }) => {
             title: 'Message',
             dataIndex: 'message',
             key: 'message',
+            responsive: ['lg'],
             render: (text) => <a>{text}</a>,
         },
 
@@ -41,6 +43,7 @@ const RequestTable = ({ data }) => {
             title: 'Time',
             dataIndex: 'createAt',
             key: 'createAt',
+            responsive: ['md'],
             render: (text) => <a>{text}</a>,
         },
 
@@ -92,7 +95,7 @@ const RequestTable = ({ data }) => {
         })
 
 
-        console.log("request table api call")
+
 
     }, [])
 
