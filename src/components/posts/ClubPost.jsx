@@ -4,7 +4,6 @@ import "./Post.css";
 import { Image, Carousel, Modal, Avatar, Menu, Dropdown, Button,Upload,Input } from "antd";
 import PostUpload from "../postUpload/PostUpload";
 import {
-  EditOutlined,
   LikeOutlined,
   ShareAltOutlined,
   CommentOutlined,

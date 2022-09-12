@@ -19,8 +19,10 @@ const RecommendClub = () => {
     }
   ]
   )
+  const token = localStorage.getItem("token")
   useEffect(() => {
     axios({
+      headers: { Authorization: `Bearer ${token}` },
       method: "get",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/clubs/?recruit=true",
     })
@@ -41,7 +43,7 @@ const RecommendClub = () => {
           
           return(
 
-            <Clubs key={club._id} id={club._id} name={club.name} slogan={club.slogan} logoUrl={club.logoUrl}/>
+            <Clubs key={club?._id} id={club?._id} name={club?.name} slogan={club?.slogan} logoUrl={club?.logoUrl}/>
           )
         })}
 
