@@ -110,11 +110,9 @@ const LoginPage = () => {
                       height: "3rem",
                       marginTop: "1rem",
                     }}
-                    onClick={() =>{
-                      navigate("/home")
-                    }}
+                    
                   >
-                    Visit as Guest
+                   <a href="http://rmit.edu.vn/" target="_blank" rel="noreferrer" style={{all:"unset"}}>RMIT Vietnam</a> 
                   </Button>
                 </div>
               </Col>
