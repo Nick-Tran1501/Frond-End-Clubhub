@@ -1,10 +1,11 @@
 import axios from "axios";
 
 
-const token = localStorage.getItem("token")
+
 
 
 export const getClubMembers = async () => {
+    const token = localStorage.getItem("token")
     const res = await axios({
         method: 'get',
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/members",
@@ -16,6 +17,7 @@ export const getClubMembers = async () => {
 }
 
 export const getClubDetail = async () => {
+    const token = localStorage.getItem("token")
     const res = await axios({
         method: 'get',
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub",
@@ -31,6 +33,7 @@ export const getClubDetail = async () => {
 }
 
 export const getJoinClubReques = async () => {
+    const token = localStorage.getItem("token")
     const res = await axios({
         method: 'get',
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/request",
@@ -43,6 +46,7 @@ export const getJoinClubReques = async () => {
 }
 
 export const processJoinRequest = async (record, action) => {
+    const token = localStorage.getItem("token")
     const res = await axios({
         method: 'post',
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/request",
@@ -60,6 +64,7 @@ export const processJoinRequest = async (record, action) => {
 
 
 export const setMemberRoleInClub = async (record, updatedRole) => {
+    const token = localStorage.getItem("token")
     const res = await axios({
         method: 'put',
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/members",
@@ -76,6 +81,7 @@ export const setMemberRoleInClub = async (record, updatedRole) => {
 }
 
 export const kickClubMember = async (record) => {
+    const token = localStorage.getItem("token")
     const res = await axios({
         method: 'delete',
         url: `https://rmit-club-dhyty.ondigitalocean.app/api/president/myclub/members/${record.key}`,

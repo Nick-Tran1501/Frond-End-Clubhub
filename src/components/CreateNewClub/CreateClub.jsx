@@ -66,7 +66,7 @@ const CreateClub = () => {
     })
   }
 
-  console.log(newClub)
+
 
   return (
     <div className='Container'>

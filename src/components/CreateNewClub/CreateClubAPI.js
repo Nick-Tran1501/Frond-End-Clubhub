@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-const token = localStorage.getItem("token")
+
 // Create club api
 export const sendCreateClubRequest = async (clubData) => {
+    const token = localStorage.getItem("token")
     const response = await axios({
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/clubs/",
         method: 'POST',
