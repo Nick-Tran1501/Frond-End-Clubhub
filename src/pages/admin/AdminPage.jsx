@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import { Tabs } from "antd";
 
@@ -19,7 +19,7 @@ import RequestClub from "./components/requestEdit/RequestEdit";
 import ClubEdit from "./components/ClubEdit/ClubEdit";
 import UserEdit from "./components/userEdit/UserEdit";
 import { getAdminData } from "./AdminAPI";
-import {getUsers} from "./components/userEdit/UserAPI";
+import { getUsers } from "./components/userEdit/UserAPI";
 
 function AdminPage() {
   const { TabPane } = Tabs;
@@ -32,19 +32,19 @@ function AdminPage() {
   const [admin, setAdmin] = useState();
   const [users, setUsers] = useState();
 
-  useEffect(()=>{
-    getAdminData().then((data)=>{
+  useEffect(() => {
+    getAdminData().then((data) => {
       console.log(data);
       setAdmin(data);
     })
-  },[])
+  }, [])
 
-  useEffect(()=>{
-    getUsers().then((data)=>{
+  useEffect(() => {
+    getUsers().then((data) => {
       console.log(data);
       setUsers(data);
     })
-  },[])
+  }, [])
 
 
 
@@ -56,10 +56,10 @@ function AdminPage() {
       <div className="admin-header">
         <Row>
           {/* Area 1 */}
-          <Col className="admin-header-title" span={24}> 
+          <Col className="admin-header-title" span={24}>
             <Title> Admin Page </Title>
           </Col>
-          
+
           {/* Area 2 */}
           <Col className="admin-header-subtitle" span={24}>
             <Title
@@ -67,7 +67,7 @@ function AdminPage() {
             >
               Welcome to Admin Page !
             </Title>
-            
+
             {/* admin page functionality */}
             <Descriptions
               title="Admin Page Descriptions"
@@ -95,7 +95,7 @@ function AdminPage() {
       <div className="admin-tab">
         <Row>
           <Col className="admin-tab-content" span={24}>
-            <Tabs onChange={onChange} type="card" size="large">
+            <Tabs onChange={onChange} type="card" size="large" destroyInactiveTabPane>
               <TabPane tab="Request" key="1">
                 <RequestClub />
               </TabPane>
