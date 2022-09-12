@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "./Post.css";
-import { Image, Carousel, Modal, Avatar, Menu, Dropdown, Button } from "antd";
+import { Image, Carousel, Modal, Avatar, Menu, Dropdown, Button,Upload,Input } from "antd";
 import PostUpload from "../postUpload/PostUpload";
 import {
   EditOutlined,
@@ -82,6 +82,53 @@ const ClubPosts = () => {
   const [show, setShow] = useState(false);
 
   const [visible, setVisible] = useState(false);
+  const [postUpdateImg, setPostUpdateImg] = useState([]);
+  const saveUpdateImages = (file) => {
+    setPostUpdateImg((prev) => [...prev, file]);
+  };
+
+  const updateClubPost = (id) => {
+    console.log("upDatePost",id)
+
+    let formData = new FormData();
+    formData.append("content", editing.content);
+    formData.append("location", "RMIT University");
+    postUpdateImg.forEach((img) => {
+      formData.append("images", img);
+    });
+
+    formData.append("viewMode", "public");
+    axios({
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${clubId}/${id}`,
+      method: "PUT",
+      data: formData,
+    })
+      .then((response) => {
+        setVisible(false);
+        console.log(response);
+        setPostUpdateImg([]);
+        loadClubPost();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [editing, setEditing] = useState(null);
+
+  const onEdit = (record) => {
+    setVisible(true);
+    setEditing({ ...record });
+  };
+
+  const resetEditing = () => {
+    setVisible(false);
+    setEditing(null);
+  };
 
 
   return(
@@ -135,20 +182,20 @@ const ClubPosts = () => {
           );
         }
       };
-      // edit Box
-      const showModal = () => {
-        setVisible(true);
-      };
+      // // edit Box
+      // const showModal = () => {
+      //   setVisible(true);
+      // };
 
-      const handleOk = (e) => {
-        console.log(e);
-        setVisible(false);
-      };
+      // const handleOk = (e) => {
+      //   console.log(e);
+      //   setVisible(false);
+      // };
 
-      const handleCancel = (e) => {
-        console.log(e);
-        setVisible(false);
-      };
+      // const handleCancel = (e) => {
+      //   console.log(e);
+      //   setVisible(false);
+      // };
 
       // ------Dropdown Menu For Post Setting------
       const menu = (
@@ -165,15 +212,15 @@ const ClubPosts = () => {
                   style={{
                     all: "unset",
                   }}
+                 onClick={()=> {
+                  onEdit(post)
+                  setVisible(true);
+                }} 
                 >
-                  {" "}
+                 
                   Edit
                 </Button>
               ),
-              onClick: () => {
-                showModal();
-              },
-              icons: <EditOutlined />,
             },
             {
               key: "2",
@@ -217,7 +264,7 @@ const ClubPosts = () => {
       return (
         <div
           className="PostContainer"
-          key={`${post._id}?${new Date().getTime()}`}
+          key={post._id}
         >
           {/* -----Post Header----- */}
           <div className="PostHeader">
@@ -293,22 +340,71 @@ const ClubPosts = () => {
               </Dropdown>
 
               <Modal
-                title="Basic Modal"
-                visible={visible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                okButtonProps={{
-                  // functin here
-                  disabled: true,
-                }}
-                cancelButtonProps={{
-                  disabled: false,
-                }}
-              >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-              </Modal>
+                  title="Update Post"
+                  destroyOnClose={true}
+                  visible={visible}
+                  onCancel={() => {
+                    setVisible(false);
+                  }}
+                  onOk={() => {
+                    setClubPostData((pre) => {
+                      return pre.map((post) => {
+                        if (post._id === editing._id) {
+                          return editing;
+                        } else {
+                          return post;
+                        }
+                      });
+                    });
+                    updateClubPost(editing._id);
+                    resetEditing();
+                  }}
+                >
+                  <div className="editContainer">
+                    <div className="userInfo">
+                      <div className="profile_picture">
+                        <Avatar
+                          size="large"
+                          src={post?.author?.avatarUrl}
+                          alt="profile"
+                        />
+                      </div>
+                      <p
+                        style={{
+                          paddingTop: "1rem",
+                        }}
+                      >
+                        {post?.author?.name}
+                      </p>
+                    </div>
+
+                    <div>
+                      <Input.TextArea
+                        rows={3}
+                        value={editing?.content}
+                        onChange={(e) => {
+                          setEditing((pre) => {
+                            return { ...pre, content: e.target.value };
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <Upload
+                      action={(file) => saveUpdateImages(file)}
+                      multiple
+                      listType="picture"
+                      accept=".png,.jpeg,.jpg"
+                      beforeUpload={(file) => {
+                        console.log({ file });
+                        return file;
+                      }}
+                      maxCount={5}
+                    >
+                      <Button>Click Upload</Button>
+                    </Upload>
+                  </div>
+                </Modal>
             </div>
           </div>
 

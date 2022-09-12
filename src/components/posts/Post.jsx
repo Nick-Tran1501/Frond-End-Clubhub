@@ -93,10 +93,10 @@ const Post = () => {
 
   const [visible, setVisible] = useState(false);
 
-  const [postUpdateImg, setPostUpdateImg] = useState([]);
+ 
 
   //Update Post
-
+  const [postUpdateImg, setPostUpdateImg] = useState([]);
   const saveUpdateImages = (file) => {
     setPostUpdateImg((prev) => [...prev, file]);
   };
@@ -209,7 +209,6 @@ const Post = () => {
                     }}
                     onClick={() => {
                       onEdit(post);
-                      // console.log(post.images);
                       setVisible(true);
                     }}
                   >
