@@ -70,50 +70,50 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   // -----------Notification--------------
-  const [notification,setNotification] = useState([])
+  const [notification, setNotification] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     axios({
-      method:"get",
-      headers:{
-        "Authorization": `Bearer ${token}` 
+      method: "get",
+      headers: {
+        "Authorization": `Bearer ${token}`
       },
-      url:"https://rmit-club-dhyty.ondigitalocean.app/api/notify"
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/notify"
     })
-    .then((response) => {
-      console.log(response.data);
-      setNotification(response.data)
-    })
-    .catch((err) => {console.log(err)})
-  },[])
+      .then((response) => {
+        console.log(response.data);
+        setNotification(response.data)
+      })
+      .catch((err) => { console.log(err) })
+  }, [])
 
   const menu = (
     <Menu
       selectable
-      items={ notification.map((noti) => {
+      items={notification.length === 0 ? [{ label: "Currently have no notifications", key: "no-notify12", disabled: true }] : notification.map((noti) => {
         return ({
-          label: 
-          <div className="NotiContainer" style={{
-            borderBottom:"1px solid"
-          }}>{noti.message}
-            <br></br>
-            <span style={{opacity:"0.5", fontSize:"10px"}}>{noti.createAt}</span>
-            
-          </div>,
-          
+          label:
+            <div className="NotiContainer" style={{
+              borderBottom: "1px solid"
+            }}>{noti.message}
+              <br></br>
+              <span style={{ opacity: "0.5", fontSize: "10px" }}>{noti.createAt}</span>
 
-          icon: 
-          <Avatar 
+            </div>,
+
+
+          icon:
+            <Avatar
               size="large"
               src={noti?.club?.logoUrl}
-            /> ,
+            />,
 
           key: noti._id,
         })
       })}
     />
   );
-    
+
 
   // function search
 
@@ -121,21 +121,21 @@ const NavBar = () => {
 
   const onSearch = () => {
     // console.log(searchValue);
-      axios({
-        method:"POST",
-        headers: { Authorization: `Bearer ${token}`},
-        url:"https://rmit-club-dhyty.ondigitalocean.app/api/search",
-        data: {
-          value: searchValue
-        }
-      })
+    axios({
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
+      data: {
+        value: searchValue
+      }
+    })
       .then((response) => {
         console.log(response.data);
         setSearchResult(response.data);
       })
-      .catch((err) => {console.log(err)})
+      .catch((err) => { console.log(err) })
   }
-    
+
 
   return (
     <Row
@@ -188,7 +188,7 @@ const NavBar = () => {
         </Row>
       </Col>
 
-{/* **************************** */}
+      {/* **************************** */}
       <Col
         xs={10}
         sm={10}
@@ -210,7 +210,7 @@ const NavBar = () => {
           allowClear
         />
       </Col>
-{/* **************************** */}
+      {/* **************************** */}
 
       <Col
         xs={5}
@@ -256,8 +256,8 @@ const NavBar = () => {
           </Col>
 
           <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
-            <Dropdown 
-              overlay={menu} 
+            <Dropdown
+              overlay={menu}
               trigger="click"
               placement="bottomRight"
               arrow

@@ -20,6 +20,30 @@ body {
   flex-direction: column;
 }
 
+.president_header {
+  display: flex;
+  justify-content: space-between;
+
+  .president_header__button {
+    margin-top: 1rem;
+    border-radius: 5px;
+    // width: fit-content;
+  }
+}
+
+.club_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3.ant-typography {
+    margin: 5px 0;
+  }
+}
+
+.club_slogan {
+}
+
 /* .container {
   margin: 32px;
   text-align: center;

@@ -128,16 +128,19 @@ function ClubEdit() {
     {
       title: "Gender",
       dataIndex: "gender",
+      responsive: ['lg'],
       width: "5%",
     },
     {
       title: "Join Date",
       dataIndex: "joinDate",
+      responsive: ['lg'],
       width: "20%",
     },
     {
       title: "Email",
       dataIndex: "email",
+      responsive: ['md'],
       width: "20%",
     },
     {
@@ -177,7 +180,7 @@ function ClubEdit() {
       const checkAppearance = dataSource.filter(
         (student) => student.id === value
       );
-      console.log(checkAppearance);
+      // console.log(checkAppearance);
       if (checkAppearance.length > 0) {
         return openNotificationWithIcon(
           "error",
@@ -500,36 +503,36 @@ function ClubEdit() {
                 const userId = editingStudent.key;
                 const role = editingStudent.role;
                 updateRole(clubId, userId, role)
-                .then((status) => {
-                  console.log(status)
-                  if (status === 200) {
-                    openNotificationWithIcon(
-                      "success",
-                      `Student ID: ${editingStudent.id}'s role was updated to ${role}`
-                    )
-                    setDataSource((pre) => {
-                      return pre.map((student) => {
-                        if (student.id === editingStudent.id) {
-                          return editingStudent;
-                        } else {
-                          return student;
-                        }
+                  .then((status) => {
+                    console.log(status)
+                    if (status === 200) {
+                      openNotificationWithIcon(
+                        "success",
+                        `Student ID: ${editingStudent.id}'s role was updated to ${role}`
+                      )
+                      setDataSource((pre) => {
+                        return pre.map((student) => {
+                          if (student.id === editingStudent.id) {
+                            return editingStudent;
+                          } else {
+                            return student;
+                          }
+                        })
                       })
-                    })
-                  }
-                  else if (status === 400) {
-                    openNotificationWithIcon(
-                      "error",
-                      `This club already have a president, please try again`
-                    )
-                  }
-                  else if (status === 401) {
-                    openNotificationWithIcon(
-                      "error",
-                      `This student has already been president of another club`
-                    )
-                  }
-                })
+                    }
+                    else if (status === 400) {
+                      openNotificationWithIcon(
+                        "error",
+                        `This club already have a president, please try again`
+                      )
+                    }
+                    else if (status === 401) {
+                      openNotificationWithIcon(
+                        "error",
+                        `This student has already been president of another club`
+                      )
+                    }
+                  })
                 resetEditing();
               }}
             >
