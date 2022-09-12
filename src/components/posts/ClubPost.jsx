@@ -4,7 +4,6 @@ import "./Post.css";
 import { Image, Carousel, Modal, Avatar, Menu, Dropdown, Button,Upload,Input } from "antd";
 import PostUpload from "../postUpload/PostUpload";
 import {
-  EditOutlined,
   LikeOutlined,
   ShareAltOutlined,
   CommentOutlined,
@@ -74,7 +73,6 @@ const ClubPosts = () => {
          headers: { Authorization: `Bearer ${token}` },
        })
        .then((response) => {
-         console.log("User", response.data);
          setUserProfile(response.data);
        })
        .catch((err) => console.log(err));
@@ -88,7 +86,6 @@ const ClubPosts = () => {
   };
 
   const updateClubPost = (id) => {
-    console.log("upDatePost",id)
 
     let formData = new FormData();
     formData.append("content", editing.content);
@@ -109,7 +106,6 @@ const ClubPosts = () => {
     })
       .then((response) => {
         setVisible(false);
-        console.log(response);
         setPostUpdateImg([]);
         loadClubPost();
       })
@@ -396,7 +392,6 @@ const ClubPosts = () => {
                       listType="picture"
                       accept=".png,.jpeg,.jpg"
                       beforeUpload={(file) => {
-                        console.log({ file });
                         return file;
                       }}
                       maxCount={5}

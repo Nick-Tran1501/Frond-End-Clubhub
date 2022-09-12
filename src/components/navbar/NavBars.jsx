@@ -78,7 +78,12 @@ const NavBar = () => {
       headers: {
         "Authorization": `Bearer ${token}`
       },
-      url: "https://rmit-club-dhyty.ondigitalocean.app/api/notify"
+
+      url:"https://rmit-club-dhyty.ondigitalocean.app/api/notify"
+    })
+    .then((response) => {
+      setNotification(response.data)
+
     })
       .then((response) => {
         console.log(response.data);
@@ -130,7 +135,6 @@ const NavBar = () => {
       }
     })
       .then((response) => {
-        console.log(response.data);
         setSearchResult(response.data);
       })
       .catch((err) => { console.log(err) })

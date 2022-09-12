@@ -211,8 +211,9 @@
     border-radius: 6px;
     padding: 5px 5px;
     background-color: #222;
-    /* overflow: hidden; */
     cursor: pointer;
+    height: 500px;
+    
 }
 
 .card_team:hover img{
@@ -220,12 +221,12 @@
 }
 
 .card_team img {
-    width: 60%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
     margin: 10px auto;
     object-fit: cover;
     border-radius: 50%;
-    border: 6px solid rgba(0, 213, 255, 0.79);
+    border: 5px solid rgba(0, 213, 255, 0.79);
 }
 
 .card_team h2 {
