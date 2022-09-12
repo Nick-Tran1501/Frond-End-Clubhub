@@ -67,7 +67,6 @@ function AdminPage() {
             >
               Welcome to Admin Page !
             </Title>
-
             {/* admin page functionality */}
             <Descriptions
               title="Admin Page Descriptions"
@@ -114,3 +113,5 @@ function AdminPage() {
 }
 
 export default AdminPage;
+
+
