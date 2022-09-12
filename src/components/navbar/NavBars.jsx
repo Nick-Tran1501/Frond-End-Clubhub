@@ -81,7 +81,6 @@ const NavBar = () => {
       url:"https://rmit-club-dhyty.ondigitalocean.app/api/notify"
     })
     .then((response) => {
-      console.log(response.data);
       setNotification(response.data)
     })
     .catch((err) => {console.log(err)})
@@ -130,7 +129,6 @@ const NavBar = () => {
         }
       })
       .then((response) => {
-        console.log(response.data);
         setSearchResult(response.data);
       })
       .catch((err) => {console.log(err)})

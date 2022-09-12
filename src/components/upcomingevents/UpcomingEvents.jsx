@@ -15,7 +15,6 @@ function UpcomingEvent() {
     })
       .then((response) => {
         setEvents(response.data);
-        console.log("Event", response.data);
       })
       .catch((error) => {
         console.log(error);

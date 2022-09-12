@@ -123,7 +123,6 @@ export default function PostUpload({ reload }) {
               className="inputField"
               style={{ width: "100%" }}
               onChange={(e) => {
-                console.log(e.target.value);
                 setCreatePostContent(e.target.value);
               }}
             ></textarea>
@@ -135,7 +134,6 @@ export default function PostUpload({ reload }) {
             listType="picture"
             accept=".png,.jpeg,.jpg"
             beforeUpload={(file) => {
-              console.log({ file });
               return file;
             }}
             maxCount={5}
