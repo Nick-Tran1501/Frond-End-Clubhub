@@ -84,7 +84,7 @@ export default function PostUpload({ reload }) {
       <div className="postInput mpost">
         <form className="account">
           <div className="profile_picture">
-            <img src={user.avatarUrl} alt="profile" />
+            <img src={user?.avatarUrl} alt="profile" />
           </div>
           <input
             type="text"
@@ -111,9 +111,9 @@ export default function PostUpload({ reload }) {
         <form onSubmit={handleOk} className="upload_image" id="post_form">
           <div className="user_infor">
             <div className="profile_picture">
-              <img src={user.avatarUrl} alt="profile" />
+              <img src={user?.avatarUrl} alt="profile" />
             </div>
-            <p>{user.name}</p>
+            <p>{user?.name}</p>
           </div>
 
           <div className="caption">

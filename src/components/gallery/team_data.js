@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         name: "Do Quang Thang",
-        image: "",
+        image: "../../image/ThangNho.jpg",
         role: "Front-end Developer"
     },
     {
