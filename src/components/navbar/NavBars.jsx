@@ -7,6 +7,7 @@ import {
   DownOutlined,
   BellOutlined,
   NotificationOutlined,
+  LockFilled,
 } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Rightbars from "../rightbar/RightBars";
@@ -19,6 +20,7 @@ import {
   Button,
   Drawer,
   Avatar,
+  notification as Notif,
 } from "antd";
 import Sidebar from "../sidebar/Sidebars";
 import { useNavigate } from "react-router-dom";
@@ -79,15 +81,11 @@ const NavBar = () => {
         "Authorization": `Bearer ${token}`
       },
 
-      url:"https://rmit-club-dhyty.ondigitalocean.app/api/notify"
-    })
-    .then((response) => {
-      setNotification(response.data)
-
+      url: "https://rmit-club-dhyty.ondigitalocean.app/api/notify"
     })
       .then((response) => {
-        console.log(response.data);
         setNotification(response.data)
+
       })
       .catch((err) => { console.log(err) })
   }, [])
@@ -124,20 +122,35 @@ const NavBar = () => {
 
   const [searchResult, setSearchResult] = useState([])
 
-  const onSearch = () => {
-    // console.log(searchValue);
-    axios({
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
-      data: {
-        value: searchValue
-      }
-    })
-      .then((response) => {
-        setSearchResult(response.data);
+  const onSearch = (e) => {
+    console.log(e);
+    if (!e) {
+      Notif['error']({
+        message: 'Error',
+        description:
+          'Search value can\'t be empty',
+      });
+    } else {
+      axios({
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        url: "https://rmit-club-dhyty.ondigitalocean.app/api/search",
+        data: {
+          value: searchValue
+        }
       })
-      .catch((err) => { console.log(err) })
+        .then((response) => {
+          console.log(response.data)
+          // setSearchResult(response.data);
+          navigate("/results", { state: response.data })
+
+        })
+        .catch((err) => { console.log(err) })
+
+
+
+    }
+
   }
 
 
@@ -210,12 +223,11 @@ const NavBar = () => {
           onChange={(e) => {
             setSearchValue(e.target.value);
           }}
-          onSearch={onSearch}
+          onSearch={(e) => onSearch(e)}
           allowClear
         />
       </Col>
       {/* **************************** */}
-
       <Col
         xs={5}
         sm={5}

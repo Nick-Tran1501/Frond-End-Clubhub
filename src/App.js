@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ProfilePage from "./pages/profile/ProfilePage";
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/admin/AdminPage";
-
+import SearchDisplay from "./pages/SearchDisplay/SearchDisplay"
 import PresidentPage from "./pages/president/PresidentPage";
 import CreateClub from "./components/CreateNewClub/CreateClub";
 
@@ -25,6 +25,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/president" element={<PresidentPage />} />
         <Route path="/createClub" element={<CreateClub />} />
+        <Route path="/results" element={<SearchDisplay />} />
       </Routes>
 
       {/* Tuan's area ---- command if you want do not delete it*/}
