@@ -33,4 +33,17 @@
     flex-wrap: wrap;
     background: #ececec;
   }
+
+  .ant-card-actions {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: deepskyblue;
+  }
+
+  div.ant-card-meta-description {
+    color: green;
+    background-color: honeydew;
+    text-align: center;
+    width: 10rem;
+  }
 }

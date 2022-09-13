@@ -19,6 +19,7 @@ const ResultCard = ({ data }) => {
                 <HomeFilled key="visit" onClick={() => onClickCard()} />,
                 <PlusCircleFilled key="join" />
             ]}
+
         >
             <Meta
                 avatar={<Avatar src={data.logoUrl} />}
