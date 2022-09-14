@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "../ProfilePage";
 import "antd/dist/antd.css";
-import { Image, Button, Comment, Form, Input, List, Carousel, DatePicker, Modal } from "antd";
-import { Col, Row, Layout } from "antd";
+import { Col, Row} from "antd";
 
 const ProfileMember = ({ members }) => {
     return (
@@ -15,7 +14,7 @@ const ProfileMember = ({ members }) => {
                 </Col>
                 {members.map((member) => {
                     return <Col span={12} className='p-row mem-tag'>
-                        <img src={member.avatarUrl} />
+                        <img src={member.avatarUrl} alt="avatar" />
                         <div className='memInfo'>
                             <h3>{member.name}</h3>
                         </div>
