@@ -7,7 +7,7 @@ const ProfileIntro = () => {
     
   return (
     <div>
-      <Image src={require("../../../image/Baseketball InductionDay.jpeg")}></Image>
+      <Image src={require("../../../image/BaseketballInductionDay.jpeg")}></Image>
       
     </div>
   );
