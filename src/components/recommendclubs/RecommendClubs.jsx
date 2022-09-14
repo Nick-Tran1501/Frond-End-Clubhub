@@ -20,14 +20,23 @@ const RecommendClub = () => {
   ]
   )
 
-
-
-
-
-
-
+  const [clubArray, setClubArray] = useState([])
 
   const token = localStorage.getItem("token")
+
+  const onClickRefresh = () => {
+    let data = clubArray.sort((a, b) => 0.5 - Math.random());
+    data = data.slice(0, 3)
+    console.log('refresh')
+    setClubInfo(data)
+  }
+
+
+
+
+
+
+
   useEffect(() => {
     axios({
       headers: { Authorization: `Bearer ${token}` },
@@ -35,9 +44,10 @@ const RecommendClub = () => {
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/clubs/?recruit=true",
     })
       .then((res) => {
+        setClubArray(res.data)
         let shuffledArray = []
         shuffledArray = res.data.sort((a, b) => 0.5 - Math.random());
-        shuffledArray = shuffledArray.slice(0, 2)
+        shuffledArray = shuffledArray.slice(0, 3)
         setClubInfo(shuffledArray)
       })
       .catch((err) => { console.log(err) })
@@ -65,8 +75,10 @@ const RecommendClub = () => {
 
         <Button
           className="ViewMoreButton"
-          shape="round" size="medium" >
-          <p>View More</p>
+          shape="round" size="medium"
+          onClick={() => onClickRefresh()}
+        >
+          <p>Refresh</p>
           <ArrowRightOutlined
             size="small"
             className="ViewMoreIcon"

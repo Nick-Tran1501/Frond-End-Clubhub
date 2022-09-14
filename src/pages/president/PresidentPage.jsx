@@ -26,6 +26,11 @@ const PresidentPage = () => {
         navigate("/home")
     }
 
+    const onClickClubPage = () => {
+        localStorage.setItem("clubId", clubData?.clubData._id)
+        navigate("/profile")
+    }
+
 
     useEffect(() => {
         getClubDetail().then(clubDetail => {
@@ -85,6 +90,7 @@ const PresidentPage = () => {
 
 
                     <div className='club_info'>
+                        <Button type="default" onClick={() => onClickClubPage()} className="president_returnclub_button" >Back to My Club</Button>
                         <Avatar src={clubData?.clubData.logoUrl} size={64} />
                         <Typography.Title level={3}>{clubData?.clubData.name}</Typography.Title>
                         <Typography>{clubData?.clubData.slogan}</Typography>
