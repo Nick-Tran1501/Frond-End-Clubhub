@@ -42,8 +42,8 @@ const RecommendClub = () => {
         {clubInfo.map((club) => {
           
           return(
-            <div>
-              <Clubs key={club?._id} id={club?._id} name={club?.name} slogan={club?.slogan} logoUrl={club?.logoUrl}/>
+            <div key={club?.name} >
+              <Clubs id={club?._id} name={club?.name} slogan={club?.slogan} logoUrl={club?.logoUrl}/>
             </div>
 
           )
