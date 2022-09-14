@@ -12,14 +12,14 @@ const Clubs = ({id,name,slogan, logoUrl}) => {
   }
 
   return (
-    <React.Fragment>
-      <div className="ClubContainer">
-        <button className="ButtonImage">
+    <React.Fragment >
+      <div className="ClubContainer" key={id}>
+        <button className="ButtonImage" key="ButtonIamge">
           
-          <Avatar size={50} src={logoUrl} />
+          <Avatar size={50} src={logoUrl} key={logoUrl}/>
         </button>
 
-        <div className="clubInfo">
+        <div className="clubInfo" key={name}>
           <p
             style={{
               fontWeight: "bold",

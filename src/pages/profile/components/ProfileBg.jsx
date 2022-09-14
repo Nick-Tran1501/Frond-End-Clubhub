@@ -253,7 +253,7 @@ const ProfileBg =({
           <form className="upload_image" id="post_form">
             <div className="user_infor">
               <div className="profile_picture">
-                <img src={club.logoUrl} alt="profile" />
+                <img src={`${club.logoUrl}?${new Date().getTime()}`} alt="profile" />
               </div>
               <p>{club.name}</p>
             </div>
@@ -312,9 +312,9 @@ const ProfileBg =({
               <form className="upload_image" id="post_form">
                 <div className="user_infor">
                   <div className="profile_picture">
-                    <img src="image/default_avata_girl.png" alt="profile" />
+                    <img src={`${club.logoUrl}?${new Date().getTime()}`} alt="profile" />
                   </div>
-                  <p>Doraemon</p>
+                  <p>{club.name}</p>
                 </div>
 
                 <div className="file_img">
