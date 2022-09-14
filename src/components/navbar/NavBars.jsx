@@ -23,7 +23,7 @@ import {
   notification as Notif,
 } from "antd";
 import Sidebar from "../sidebar/Sidebars";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import NotiCard from "./NotiCard";
 // Test function of autocomplete
@@ -56,7 +56,7 @@ const NavBar = () => {
 
 
   const [userProfile, setUserProfile] = useState({});
-
+  const [myClubs, setMyClubs] = useState([])
 
   useEffect(() => {
     axios
@@ -70,6 +70,16 @@ const NavBar = () => {
   }, []);
 
   const navigate = useNavigate();
+  const location = useLocation()
+
+
+  const onClickClub = (clubId) => {
+    localStorage.setItem("clubId", clubId)
+    navigate("/profile")
+    if (location.pathname = "/profile") {
+      navigate(0)
+    }
+  }
 
   // -----------Notification--------------
   const [notification, setNotification] = useState([])
@@ -116,6 +126,31 @@ const NavBar = () => {
       })}
     />
   );
+
+  useEffect(() => {
+    axios.get(
+      "https://rmit-club-dhyty.ondigitalocean.app/api/user/clubs",
+      {
+        headers: { 'Authorization': `Bearer ${token}` }
+      }
+    ).then(res => setMyClubs(res.data))
+      .catch(err => console.log(err))
+  }, [])
+  // Club list
+  const MyClubs = (
+    <Menu
+      selectable
+      items={
+        myClubs.length === 0 ? [{ label: "You have not joined any club!" }] : myClubs.map((club) => {
+          return ({
+            label: <div><Button onClick={() => onClickClub(club._id)}>{club.name}</Button></div>,
+            icon: <Avatar size="large" src={club?.logoUrl} />,
+            key: club._id,
+          })
+        })
+      }
+    />
+  )
 
 
   // function search
@@ -247,28 +282,37 @@ const NavBar = () => {
           }}
         >
           <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
-            <Button
-              style={{
-                all: "unset",
-                textAlign: "center",
-                cursor: "pointer",
-              }}
+            <Dropdown
+              overlay={MyClubs}
+              trigger="click"
+              placement="bottomRight"
+              arrow
             >
-              <DownOutlined
+
+
+              <Button
                 style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
+                  all: "unset",
+                  textAlign: "center",
+                  cursor: "pointer",
                 }}
-              />
-              <p
-                style={{
-                  margin: "0",
-                }}
-                className="SettingText"
               >
-                My Clubs
-              </p>
-            </Button>
+                <DownOutlined
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                />
+                <p
+                  style={{
+                    margin: "0",
+                  }}
+                  className="SettingText"
+                >
+                  My Clubs
+                </p>
+              </Button>
+            </Dropdown>
           </Col>
 
           <Col xs={8} sm={8} md={8} lg={12} xl={12} className="SettingItems">
