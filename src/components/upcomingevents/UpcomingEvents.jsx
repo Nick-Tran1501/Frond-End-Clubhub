@@ -35,7 +35,6 @@ function UpcomingEvent() {
                 })}
               </Carousel>
             </div>
-  
             <div className="event-content">
 
               <Title level={5}> {event?.name} </Title>

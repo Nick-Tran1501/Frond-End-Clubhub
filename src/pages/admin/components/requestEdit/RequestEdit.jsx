@@ -30,7 +30,7 @@ function RequestClub() {
     getRequestList().then((data) => setRequests(data));
   }, []);
 
-  // console.log(requests);
+  console.log(requests);
 
 
   // ----- function ------
@@ -56,15 +56,15 @@ function RequestClub() {
             requests.map((request) => (
               <div className="request-element" key={request._id}>
                 <PageHeader
-                  key={request._id}
-                  title={request.name}
+                  key={request?._id}
+                  title={request?.name}
                   subTitle={request.description}
                   tags={[
-                    <Tag color="blue" key={request._id}>
-                      {request.clubCategory}
+                    <Tag color="blue" key={request?._id}>
+                      {request?.clubCategory}
                     </Tag>,
-                    <Tag color="purple" key={request._id + "status"}>
-                      {request.status}
+                    <Tag color="purple" key={request?._id + "status"}>
+                      {request?.status}
                     </Tag>,
                   ]}
                   extra={[
@@ -86,19 +86,19 @@ function RequestClub() {
                 >
                   <Descriptions size="small" column={1}>
                     <Descriptions.Item label="Creator">
-                      {request.president.username}
+                      {request?.president.username}
                     </Descriptions.Item>
                     <Descriptions.Item label="Email Represent">
-                      <a>{request.email}</a>
+                      <a>{request?.email}</a>
                     </Descriptions.Item>
                     <Descriptions.Item label="Creation Time">
-                      {request.creation}
+                      {request?.createDate}
                     </Descriptions.Item>
                     <Descriptions.Item label="Effective Time">
                       2017-10-10
                     </Descriptions.Item>
                     <Descriptions.Item label="Slogan">
-                      {request.slogan}
+                      {request?.slogan}
                     </Descriptions.Item>
                   </Descriptions>
                 </PageHeader>
