@@ -20,9 +20,12 @@
 
 .JoinButton{
   width: fit-content;
+  margin-top: 0.2rem;
+  margin-left: 4rem;
   border: 1px solid #4D5364;
   border-radius: 32px;
-  display: inline-block;
+  display: flex;
+  flex-flow: row nowrap ;
+  justify-content: space-between;
   text-align: center;
-  align-self: center;
 }
