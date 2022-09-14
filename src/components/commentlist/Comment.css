@@ -33,7 +33,7 @@
   height: 1.5rem;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-basis: 50%;
   gap: 1rem;
 }
