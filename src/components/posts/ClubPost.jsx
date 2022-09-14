@@ -424,7 +424,7 @@ const ClubPosts = () => {
                     <Image
                       key={image.key}
                       width="100%"
-                      height="20rem"
+                      height="500px"
                       src={image.url}
                       className="Images"
                     />

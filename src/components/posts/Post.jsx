@@ -406,20 +406,19 @@ const Post = () => {
                   arrows
                   prevArrow={<LeftOutlined />}
                   nextArrow={<RightOutlined />}
+                  autoplay
                   style={{
                     width: "100%",
                   }}
                 >
                   {post?.images.map((image) => {
-                    return (
-                      <Image
-                        key={image?.key}
+                    return <Image
+                        key={image?.url}
                         width="100%"
-                        height="20rem"
+                        height="500px"
                         src={image?.url}
                         className="Images"
                       />
-                    );
                   })}
                 </Carousel>
               </div>
