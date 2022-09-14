@@ -113,7 +113,7 @@ const Post = () => {
     axios({
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${clubId}/${id}`,
       method: "PUT",
