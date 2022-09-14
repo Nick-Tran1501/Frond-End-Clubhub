@@ -257,48 +257,6 @@ const Register = () => {
                 flexBasis: "50%",
               }}
             >
-              {/*Fullname*/}
-              <Form.Item
-                className="ItemsContainer"
-                onChange={(e) => {
-                  setUserDetail({ ...userDetail, name: e.target.value });
-                }}
-                rules={[{ required: true }]}
-              >
-                <h3
-                  style={{
-                    color: "white",
-                    textAlign: "left",
-                    fontSize: "15px",
-                  }}
-                >
-                  Fullname:
-                </h3>
-
-                <Input
-                  size="large"
-                  placeholder="Enter Your Fullname"
-                  style={{
-                    color: "white",
-                  }}
-                  className="RegisterItems"
-                  allowClear="true"
-                  required
-                />
-                <p
-                  className="FullNameWarning"
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    paddingTop: "2px",
-                    visibility: "hidden",
-                    height: "1px",
-                  }}
-                >
-                  Hint: Word Only, Space between words
-                </p>
-              </Form.Item>
-
               {/* Email*/}
               <Form.Item
                 onChange={(e) => {
@@ -338,47 +296,6 @@ const Register = () => {
                   }}
                 >
                   Example: s1234567@rmit.edu.vn
-                </p>
-              </Form.Item>
-
-              {/* Phone */}
-              <Form.Item
-                onChange={(e) => {
-                  setUserDetail({ ...userDetail, phone: e.target.value });
-                }}
-              >
-                <h3
-                  style={{
-                    color: "white",
-                    textAlign: "left",
-                    fontSize: "15px",
-                  }}
-                >
-                  Phone:
-                </h3>
-
-                <Input
-                  size="large"
-                  placeholder="Enter Your Phone Number"
-                  style={{
-                    color: "white",
-                  }}
-                  maxLength="10"
-                  className="RegisterItems"
-                  allowClear="true"
-                  required
-                />
-                <p
-                  className="PhoneWarning"
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    paddingTop: "2px",
-                    visibility: "hidden",
-                    height: "1px",
-                  }}
-                >
-                  Hint: Number Only, maxinum 10 numbers
                 </p>
               </Form.Item>
 
@@ -438,6 +355,106 @@ const Register = () => {
                   character, and 1 number
                 </p>
               </Form.Item>
+              {/* Re-type Password  */}
+              <Form.Item
+                onChange={(e) => {
+                  setUserDetail({ ...userDetail, retype: e.target.value });
+                }}
+              >
+                <h3
+                  style={{
+                    color: "white",
+                    textAlign: "left",
+                    fontSize: "15px",
+                  }}
+                >
+                  Re-type Password:
+                </h3>
+
+                <Input.Password
+                  size="large"
+                  placeholder="Re-type Password"
+                  style={{
+                    color: "white",
+                  }}
+                  iconRender={(visible) =>
+                    visible ? (
+                      <EyeTwoTone
+                        style={{
+                          color: "white",
+                        }}
+                      />
+                    ) : (
+                      <EyeInvisibleOutlined
+                        style={{
+                          color: "white",
+                        }}
+                      />
+                    )
+                  }
+                  prefix={<LockOutlined />}
+                  className="RegisterItems"
+                  allowClear="true"
+                  required
+                />
+                <p
+                  className="RetypePasswordWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Error: Password Not Match
+                </p>
+              </Form.Item>
+
+              {/* Username */}
+              <Form.Item
+                onChange={(e) => {
+                  setUserDetail({ ...userDetail, username: e.target.value });
+                }}
+              >
+                <h3
+                  style={{
+                    color: "white",
+                    textAlign: "left",
+                    fontSize: "15px",
+                  }}
+                >
+                  Username:
+                </h3>
+
+                <Input
+                  size="large"
+                  placeholder="Enter Your Username"
+                  style={{
+                    color: "white",
+                  }}
+                  prefix={<UserOutlined style={{}} />}
+                  className="RegisterItems"
+                  allowClear="true"
+                  required
+                />
+                <p
+                  className="UsernameWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Input username
+                </p>
+              </Form.Item>
+
+
+
+
             </Col>
 
             {/* Right Column */}
@@ -451,6 +468,49 @@ const Register = () => {
                 flexBasis: "50%",
               }}
             >
+              {/*Fullname*/}
+              <Form.Item
+                className="ItemsContainer"
+                onChange={(e) => {
+                  setUserDetail({ ...userDetail, name: e.target.value });
+                }}
+                rules={[{ required: true }]}
+              >
+                <h3
+                  style={{
+                    color: "white",
+                    textAlign: "left",
+                    fontSize: "15px",
+                  }}
+                >
+                  Fullname:
+                </h3>
+
+                <Input
+                  size="large"
+                  placeholder="Enter Your Fullname"
+                  style={{
+                    color: "white",
+                  }}
+                  className="RegisterItems"
+                  allowClear="true"
+                  required
+                />
+                <p
+                  className="FullNameWarning"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    paddingTop: "2px",
+                    visibility: "hidden",
+                    height: "1px",
+                  }}
+                >
+                  Hint: Word Only, Space between words
+                </p>
+              </Form.Item>
+
+
               {/* DOB */}
               <Form.Item>
                 <h3
@@ -531,11 +591,10 @@ const Register = () => {
                   Please Select Your Gender
                 </p>
               </Form.Item>
-
-              {/* Username */}
+              {/* Phone */}
               <Form.Item
                 onChange={(e) => {
-                  setUserDetail({ ...userDetail, username: e.target.value });
+                  setUserDetail({ ...userDetail, phone: e.target.value });
                 }}
               >
                 <h3
@@ -545,22 +604,22 @@ const Register = () => {
                     fontSize: "15px",
                   }}
                 >
-                  Username:
+                  Phone:
                 </h3>
 
                 <Input
                   size="large"
-                  placeholder="Enter Your Username"
+                  placeholder="Enter Your Phone Number"
                   style={{
                     color: "white",
                   }}
-                  prefix={<UserOutlined style={{}} />}
+                  maxLength="10"
                   className="RegisterItems"
                   allowClear="true"
                   required
                 />
                 <p
-                  className="UsernameWarning"
+                  className="PhoneWarning"
                   style={{
                     color: "red",
                     fontSize: "12px",
@@ -569,65 +628,13 @@ const Register = () => {
                     height: "1px",
                   }}
                 >
-                  Input username
+                  Hint: Number Only, maxinum 10 numbers
                 </p>
               </Form.Item>
 
-              {/* Re-type Password  */}
-              <Form.Item
-                onChange={(e) => {
-                  setUserDetail({ ...userDetail, retype: e.target.value });
-                }}
-              >
-                <h3
-                  style={{
-                    color: "white",
-                    textAlign: "left",
-                    fontSize: "15px",
-                  }}
-                >
-                  Re-type Password:
-                </h3>
 
-                <Input.Password
-                  size="large"
-                  placeholder="Re-type Password"
-                  style={{
-                    color: "white",
-                  }}
-                  iconRender={(visible) =>
-                    visible ? (
-                      <EyeTwoTone
-                        style={{
-                          color: "white",
-                        }}
-                      />
-                    ) : (
-                      <EyeInvisibleOutlined
-                        style={{
-                          color: "white",
-                        }}
-                      />
-                    )
-                  }
-                  prefix={<LockOutlined />}
-                  className="RegisterItems"
-                  allowClear="true"
-                  required
-                />
-                <p
-                  className="RetypePasswordWarning"
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    paddingTop: "2px",
-                    visibility: "hidden",
-                    height: "1px",
-                  }}
-                >
-                  Error: Password Not Match
-                </p>
-              </Form.Item>
+
+
             </Col>
           </Row>
 
