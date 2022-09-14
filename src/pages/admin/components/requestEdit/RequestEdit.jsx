@@ -92,10 +92,10 @@ function RequestClub() {
                       <a>{request?.email}</a>
                     </Descriptions.Item>
                     <Descriptions.Item label="Creation Time">
-                      {request?.createDate}
+                      {request.createDate}
                     </Descriptions.Item>
-                    <Descriptions.Item label="Effective Time">
-                      2017-10-10
+                    <Descriptions.Item label="Club Type">
+                      {request.clubCategory}
                     </Descriptions.Item>
                     <Descriptions.Item label="Slogan">
                       {request?.slogan}
