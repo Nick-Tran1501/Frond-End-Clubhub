@@ -2,8 +2,11 @@ import React from 'react';
 import './Heros.css';
 // import Typical from 'react-typical';
 import { TypeAnimation } from 'react-type-animation';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
 
 const Hero = () => {
+  const navigate = useNavigate()
   return (
     <div className='heroContainer'>
       <div className='hero'>
@@ -25,6 +28,8 @@ const Hero = () => {
               style={{ fontSize: '2em' }}
               />
             </span>
+            <br></br>
+              <Button onClick={()=>{navigate("/")}} style={{borderRadius:"5px"}}>Back to Log In</Button>
             {/* <span> */}
               {/* <Typical 
               loop={Infinity}
