@@ -285,6 +285,7 @@ const LoginForm = () => {
                 color: "white",
               }}
               onChange={OnChange}
+              checked
             >
               Remember me
             </Checkbox>
