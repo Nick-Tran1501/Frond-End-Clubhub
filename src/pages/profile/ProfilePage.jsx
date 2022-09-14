@@ -27,6 +27,7 @@ const Profile = () => {
     slogan: "",
     email: "",
     backgroundUrl: "",
+    members:[]
   });
   useEffect(() => {
     axios({
@@ -34,7 +35,7 @@ const Profile = () => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log(res.data.clubData);
+        console.log("club",res.data.clubData);
         setClub({
           ...club,
           name: res.data.clubData.name,
@@ -43,6 +44,7 @@ const Profile = () => {
           slogan: res.data.clubData.slogan,
           email: res.data.clubData.email,
           backgroundUrl: res.data.clubData.backgroundUrl,
+          members:res.data.clubData.members,
         });
       })
       .catch((err) => {
@@ -75,9 +77,9 @@ const Profile = () => {
                 ClubId={clubId}
                 page={page}
                 changePage={changePage}
-                name={club.name}
-                slogan={club.slogan}
-                email={club.email}
+                name={club?.name}
+                slogan={club?.slogan}
+                email={club?.email}
               />
             </Col>
 
@@ -98,7 +100,7 @@ const Profile = () => {
         {page === "member" && (
           <Row className="main-content">
             <Col span={24}>
-              <ProfileMember />
+              <ProfileMember members={club?.members}/>
             </Col>
           </Row>
         )}
