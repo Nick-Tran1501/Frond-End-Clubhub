@@ -32,7 +32,6 @@ const Register = () => {
   const [disableRegister, setDisableRegister] = useState(false)
 
   const Checked = (e) => {
-    console.log(e)
     setDisableRegister(e)
   };
   //--------Date Format-----

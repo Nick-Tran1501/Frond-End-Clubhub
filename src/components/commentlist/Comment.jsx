@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Comment.css";
-import { Avatar, Dropdown, Menu, Button } from "antd";
+import { Avatar, Dropdown, Menu, Button, Modal, Input } from "antd";
 import { SettingOutlined, EditOutlined } from "@ant-design/icons";
 import axios from "axios";
-const Comment = ({ data,loadPost }) => {
+const Comment = ({ data, loadPost }) => {
+  const [visible, setVisible] = useState(false);
+  const [commentData, setCommentData] = useState([]);
+  const [editing, setEditing] = useState(null);
+
+  const onEdit = (record) => {
+    setVisible(true);
+    setEditing({ ...record });
+  };
+  const resetEditing = () => {
+    setVisible(false);
+    setEditing(null);
+  };
   const menu = (
     <Menu
       style={{
@@ -18,14 +30,15 @@ const Comment = ({ data,loadPost }) => {
               style={{
                 all: "unset",
               }}
+              onClick={() => {
+                onEdit(data);
+                setVisible(true);
+              }}
             >
-              {" "}
               Edit
             </Button>
           ),
-          onClick: () => {
-            // showModal();
-          },
+         
           icons: <EditOutlined />,
         },
         {
@@ -40,7 +53,6 @@ const Comment = ({ data,loadPost }) => {
                 deleteComment(data._id);
               }}
             >
-              {" "}
               Delete
             </Button>
           ),
@@ -59,12 +71,32 @@ const Comment = ({ data,loadPost }) => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/comment/${commentId}`,
     })
       .then((response) => {
-        loadPost()
+        loadPost();
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  //--------Update Comment----------
+  const updateComment = (id) => {
+    console.log("commentid",id);
+    axios({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: "PUT",
+      url: `https://rmit-club-dhyty.ondigitalocean.app/api/comment/${id}`,
+      data: { content: editing.content },
+    })
+    .then((response) => {
+      setVisible(false);
+      loadPost();
+      console.log(response)
+    
+    })
+    .catch((error) => {console.log(error)})
   };
 
   return (
@@ -113,6 +145,39 @@ const Comment = ({ data,loadPost }) => {
               <SettingOutlined />
             </button>
           </Dropdown>
+
+          <Modal
+            title="Update Comment"
+            visible={visible}
+            onCancel={() => {
+              setVisible(false);
+            }}
+            onOk={() => {
+              setCommentData((pre) => {
+                return pre.map((data) => {
+                  if (data._id === editing._id) {
+                    return editing;
+                  } else {
+                    return data;
+                  }
+                });
+              });
+              updateComment(editing._id);
+              resetEditing();
+            }}
+          >
+            <div>
+              <Input.TextArea
+                rows={3}
+                value={editing?.content}
+                onChange={(e) => {
+                  setEditing((pre) => {
+                    return { ...pre, content: e.target.value };
+                  });
+                }}
+              />
+            </div>
+          </Modal>
         </div>
       </div>
     </React.Fragment>

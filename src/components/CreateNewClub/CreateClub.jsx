@@ -124,6 +124,9 @@ const CreateClub = () => {
               <Option value="Tech">Tech</Option>
               <Option value="Academic">Academic</Option>
               <Option value="Sport">Sport</Option>
+              <Option value="Art">Art</Option>
+              <Option value="Hobbies">Hobbies</Option>
+              <Option value="Games">Games</Option>
             </Select>
           </Form.Item>
           <Form.Item wrapperCol={{ span: 24 }}>

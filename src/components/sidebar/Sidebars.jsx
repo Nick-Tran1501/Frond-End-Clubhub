@@ -74,7 +74,6 @@ const sidebar = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
         setUserProfile(response.data);
       })
       .catch((err) => console.log(err));
@@ -102,7 +101,6 @@ const sidebar = () => {
             all: "unset",
           }}
           onClick={() => {
-            // console.log(userProfile);
             onEditStudent(userProfile);
           }}
         >
@@ -119,7 +117,6 @@ const sidebar = () => {
           all: "unset",
         }}
         onClick={() => {
-          // console.log(userProfile);
           navigate("/admin")
         }}
       >
@@ -172,14 +169,12 @@ const sidebar = () => {
           resetEditing();
         }}
         onOk={() => {
-          // console.log(editingStudent);
           const username = editingStudent.username;
           const name = editingStudent.name;
           const dob = editingStudent.dob;
           const phone = editingStudent.phone;
           const gender = editingStudent.gender;
 
-          // console.log(username, name, dob, phone, gender);
           editUser(username, name, dob, phone, gender)
             .then((status) => {
               console.log(status);
@@ -238,8 +233,8 @@ const sidebar = () => {
 
       <div className="sideAdvertise">
         <h2> Want to explore more? </h2>
-        <a href="https://www.rmit.edu.vn/vi" target="_blank" rel="noreferrer">
-          Click Here
+        <a href="https://rmit-finding2.herokuapp.com/index.html" target="_blank" rel="noreferrer">
+          Rmit Finding
         </a>
       </div>
 

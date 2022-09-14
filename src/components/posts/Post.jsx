@@ -61,7 +61,6 @@ const Post = () => {
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/posts/",
     })
       .then((response) => {
-        console.log("Post", response.data);
         setPostData(response.data);
       })
       .catch((error) => {
@@ -83,7 +82,6 @@ const Post = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log("User", response.data);
         setUserProfile(response.data);
       })
       .catch((err) => console.log(err));
@@ -115,7 +113,7 @@ const Post = () => {
     axios({
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/${clubId}/${id}`,
       method: "PUT",
@@ -184,7 +182,7 @@ const Post = () => {
                 <p className="text">
                   {isReadMore ? text.slice(0, 100) : text}
 
-                  <span onClick={toggleReadMore} className="readOrHide">
+                  <span onClick={toggleReadMore} className="readOrHide" style={{cursor:"pointer"}}>
                     {isReadMore ? "...Read more" : " Show less"}
                   </span>
                 </p>
@@ -334,7 +332,6 @@ const Post = () => {
                   visible={visible}
                   onCancel={() => {
                     setVisible(false);
-                    console.log(post._id)
                   }}
                   onOk={() => {
                     setPostData((pre) => {
@@ -386,7 +383,6 @@ const Post = () => {
                       listType="picture"
                       accept=".png,.jpeg,.jpg"
                       beforeUpload={(file) => {
-                        console.log({ file });
                         return file;
                       }}
                       maxCount={5}
@@ -407,23 +403,23 @@ const Post = () => {
               <div className="PostImage">
                 <Carousel
                   dots={false}
+                  effect = {"fade"}
                   arrows
                   prevArrow={<LeftOutlined />}
                   nextArrow={<RightOutlined />}
+                  autoplay
                   style={{
                     width: "100%",
                   }}
                 >
                   {post?.images.map((image) => {
-                    return (
-                      <Image
-                        key={image?.key}
+                    return <Image
+                        key={image?.url}
                         width="100%"
-                        height="20rem"
+                        height="500px"
                         src={image?.url}
                         className="Images"
                       />
-                    );
                   })}
                 </Carousel>
               </div>

@@ -84,7 +84,7 @@ export default function PostUpload({ reload }) {
       <div className="postInput mpost">
         <form className="account">
           <div className="profile_picture">
-            <img src={user.avatarUrl} alt="profile" />
+            <img src={user?.avatarUrl} alt="profile" />
           </div>
           <input
             type="text"
@@ -111,9 +111,9 @@ export default function PostUpload({ reload }) {
         <form onSubmit={handleOk} className="upload_image" id="post_form">
           <div className="user_infor">
             <div className="profile_picture">
-              <img src={user.avatarUrl} alt="profile" />
+              <img src={user?.avatarUrl} alt="profile" />
             </div>
-            <p>{user.name}</p>
+            <p>{user?.name}</p>
           </div>
 
           <div className="caption">
@@ -123,7 +123,6 @@ export default function PostUpload({ reload }) {
               className="inputField"
               style={{ width: "100%" }}
               onChange={(e) => {
-                console.log(e.target.value);
                 setCreatePostContent(e.target.value);
               }}
             ></textarea>
@@ -135,7 +134,6 @@ export default function PostUpload({ reload }) {
             listType="picture"
             accept=".png,.jpeg,.jpg"
             beforeUpload={(file) => {
-              console.log({ file });
               return file;
             }}
             maxCount={5}

@@ -47,7 +47,6 @@ const LoginForm = () => {
 
 
 
-      console.log(user.email, user.password)
       e.preventDefault();
       axios({
         method: "post",
@@ -118,7 +117,6 @@ const LoginForm = () => {
     setVisible(true);
   };
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setVisible(false);
   };
 
@@ -287,6 +285,7 @@ const LoginForm = () => {
                 color: "white",
               }}
               onChange={OnChange}
+              checked
             >
               Remember me
             </Checkbox>
