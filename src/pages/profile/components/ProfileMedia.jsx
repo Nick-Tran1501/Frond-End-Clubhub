@@ -26,7 +26,7 @@ const ProfileMedia = () => {
                     <Image
                         width="100%"
                         height="12rem"
-                        src={require("../../../image/Image1.jpg")}
+                        // src={require("../../../image/Image1.jpg")}
                         className="Images img"
                     />
                 </Col>
@@ -34,7 +34,7 @@ const ProfileMedia = () => {
                     <Image
                         width="100%"
                         height="12rem"
-                        src={require("../../../image/Image1.jpg")}
+                        // src={require("../../../image/Image1.jpg")}
                         className="Images img"
                     />
                 </Col>
@@ -42,7 +42,7 @@ const ProfileMedia = () => {
                     <Image
                         width="100%"
                         height="12rem"
-                        src={require("../../../image/Image1.jpg")}
+                        // src={require("../../../image/Image1.jpg")}
                         className="Images img"
                     />
                 </Col>
@@ -50,7 +50,7 @@ const ProfileMedia = () => {
                     <Image
                         width="100%"
                         height="12rem"
-                        src={require("../../../image/Image2.jpg")}
+                        // src={require("../../../image/Image2.jpg")}
                         className="Images img"
                     />
                 </Col>
@@ -58,7 +58,7 @@ const ProfileMedia = () => {
                     <Image
                         width="100%"
                         height="12rem"
-                        src={require("../../../image/Image3.jpg")}
+                        // src={require("../../../image/Image3.jpg")}
                         className="Images img"
                     />
                 </Col>
