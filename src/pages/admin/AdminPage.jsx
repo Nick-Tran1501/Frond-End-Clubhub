@@ -72,6 +72,8 @@ function AdminPage() {
 
           {/* Area 2 */}
           <Col className="admin-header-subtitle" span={24}>
+
+
             <div className="admin_subHeader">
               <Title
                 level={4}
@@ -128,3 +130,5 @@ function AdminPage() {
 }
 
 export default AdminPage;
+
+
