@@ -35,7 +35,6 @@ const Profile = () => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log("club",res.data.clubData);
         setClub({
           ...club,
           name: res.data.clubData.name,

@@ -51,7 +51,6 @@ const ClubPosts = () => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/posts/clubs/${clubId}`,
     })
       .then((response) => {
-        console.log("Club", response.data);
         setClubPostData(response.data);
       })
       .catch((error) => {
@@ -170,7 +169,7 @@ const ClubPosts = () => {
               <p className="text">
                 {isReadMore ? text.slice(0, 100) : text}
 
-                <span onClick={toggleReadMore} className="readOrHide">
+                <span onClick={toggleReadMore} className="readOrHide" style={{cursor:"pointer"}}>
                   {isReadMore ? "...read more" : " show less"}
                 </span>
               </p>

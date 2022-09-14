@@ -103,6 +103,10 @@ const NavBar = () => {
   const menu = (
     <Menu
       selectable
+      style={{
+        height:"15rem",
+        overflow:"auto"
+      }}
       items={notification.length === 0 ? [{ label: "Currently have no notifications", key: "no-notify12", disabled: true }] : notification.map((noti) => {
         return ({
           label:

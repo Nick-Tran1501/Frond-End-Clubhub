@@ -100,8 +100,6 @@ const Post = () => {
   };
 
   const updatePost = (id) => {
-    console.log("upDatePost",id)
-
     let formData = new FormData();
     formData.append("content", editing.content);
     formData.append("location", "RMIT University");

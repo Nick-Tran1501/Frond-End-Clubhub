@@ -61,7 +61,6 @@ const ProfileSide = ({ changePage }) => {
       url: `https://rmit-club-dhyty.ondigitalocean.app/api/clubs/${clubId}`,
     })
       .then((res) => {
-        console.log(res.data.clubData);
         setClub({
           ...club,
           name: res.data.clubData.name,
@@ -103,7 +102,6 @@ const ProfileSide = ({ changePage }) => {
     })
       .then((response) => {
         setClubImg(response.data);
-        console.log("img", response);
       })
       .catch((err) => {
         console.log(err);

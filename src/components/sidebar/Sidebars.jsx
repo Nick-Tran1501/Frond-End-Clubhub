@@ -62,7 +62,7 @@ const sidebar = () => {
   );
 
   const onClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
   const [userProfile, setUserProfile] = useState({});
