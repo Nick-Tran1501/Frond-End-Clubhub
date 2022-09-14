@@ -4,7 +4,7 @@ import './Heros.css';
 import { TypeAnimation } from 'react-type-animation';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-
+import { ArrowLeftOutlined } from '@ant-design/icons'; 
 const Hero = () => {
   const navigate = useNavigate()
   return (
@@ -29,7 +29,13 @@ const Hero = () => {
               />
             </span>
             <br></br>
-              <Button onClick={()=>{navigate("/")}} style={{borderRadius:"5px"}}>Back to Log In</Button>
+              <Button 
+                onClick={()=>{navigate("/")}} 
+                style={{borderRadius:"5px",all:"unset", fontSize:"20px", padding:"1rem"}}
+              >
+                Back to Log In
+                <ArrowLeftOutlined style={{fontSize:"20px", marginBottom:"1rem"}}/>
+                </Button>
             {/* <span> */}
               {/* <Typical 
               loop={Infinity}
