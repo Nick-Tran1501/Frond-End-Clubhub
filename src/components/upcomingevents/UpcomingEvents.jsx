@@ -26,7 +26,7 @@ function UpcomingEvent() {
       {events.length > 0 &&
         events.map((event) => (
           <div className="event-card" key={event._id}>
-            <div className="event-pic">
+            <div className="event-pic" key= {event._id} >
               <Carousel autoplay dots={false}>
                 {event.imageUrl.map((picture) => {
                   return <Image key={event.key} height="auto" src={picture} />;
