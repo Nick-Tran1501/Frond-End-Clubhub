@@ -28,15 +28,6 @@ function App() {
         <Route path="/results" element={<SearchDisplay />} />
       </Routes>
 
-      {/* Tuan's area ---- command if you want do not delete it*/}
-
-      {/* <AdminPage /> */}
-      {/* <HomePage /> */}
-      {/* <ProfilePage/> */}
-      {/* ---------------------------------------------------------------- */}
-      {/* <CreateClub /> */}
-      {/* <UpcomingEvent/> */}
-
     </div>
   );
 }
