@@ -233,8 +233,8 @@ const sidebar = () => {
 
       <div className="sideAdvertise">
         <h2> Want to explore more? </h2>
-        <a href="https://www.rmit.edu.vn/vi" target="_blank" rel="noreferrer">
-          Click Here
+        <a href="https://rmit-finding2.herokuapp.com/index.html" target="_blank" rel="noreferrer">
+          Rmit Finding
         </a>
       </div>
 
