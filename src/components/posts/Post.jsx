@@ -182,7 +182,7 @@ const Post = () => {
                 <p className="text">
                   {isReadMore ? text.slice(0, 100) : text}
 
-                  <span onClick={toggleReadMore} className="readOrHide">
+                  <span onClick={toggleReadMore} className="readOrHide" style={{cursor:"pointer"}}>
                     {isReadMore ? "...Read more" : " Show less"}
                   </span>
                 </p>
@@ -403,23 +403,23 @@ const Post = () => {
               <div className="PostImage">
                 <Carousel
                   dots={false}
+                  effect = {"fade"}
                   arrows
                   prevArrow={<LeftOutlined />}
                   nextArrow={<RightOutlined />}
+                  autoplay
                   style={{
                     width: "100%",
                   }}
                 >
                   {post?.images.map((image) => {
-                    return (
-                      <Image
-                        key={image?.key}
+                    return <Image
+                        key={image?.url}
                         width="100%"
-                        height="20rem"
+                        height="500px"
                         src={image?.url}
                         className="Images"
                       />
-                    );
                   })}
                 </Carousel>
               </div>

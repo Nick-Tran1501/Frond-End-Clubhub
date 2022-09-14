@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Clubs from "./Clubs";
 import "antd/dist/antd.min.css";
 import "./RecommendClubs.css"
@@ -10,15 +10,23 @@ import {
 
 const RecommendClub = () => {
 
-  const [clubInfo,setClubInfo] = useState([
+  const [clubInfo, setClubInfo] = useState([
     {
-      id:"",
-      name:"",
-      slogan:"",
-      logoUrl:""
+      id: "",
+      name: "",
+      slogan: "",
+      logoUrl: ""
     }
   ]
   )
+
+
+
+
+
+
+
+
   const token = localStorage.getItem("token")
   useEffect(() => {
     axios({
@@ -26,13 +34,16 @@ const RecommendClub = () => {
       method: "get",
       url: "https://rmit-club-dhyty.ondigitalocean.app/api/clubs/?recruit=true",
     })
-    .then((res) => {
-      setClubInfo(res.data)
-    })
-    .catch((err) => {console.log(err)})
-  },[])
-  
-  return(
+      .then((res) => {
+        let shuffledArray = []
+        shuffledArray = res.data.sort((a, b) => 0.5 - Math.random());
+        shuffledArray = shuffledArray.slice(0, 2)
+        setClubInfo(shuffledArray)
+      })
+      .catch((err) => { console.log(err) })
+  }, [])
+
+  return (
     <React.Fragment>
 
       <div className="RecommendContainer">
@@ -40,30 +51,30 @@ const RecommendClub = () => {
         >Recommend for you</h5>
 
         {clubInfo.map((club) => {
-          
-          return(
+
+          return (
             <div key={club?.name} >
-              <Clubs id={club?._id} name={club?.name} slogan={club?.slogan} logoUrl={club?.logoUrl}/>
+              <Clubs id={club?._id} name={club?.name} slogan={club?.slogan} logoUrl={club?.logoUrl} />
             </div>
 
           )
         })}
 
-     
+
 
 
         <Button
           className="ViewMoreButton"
-        shape="round"  size="medium" >
+          shape="round" size="medium" >
           <p>View More</p>
-          <ArrowRightOutlined 
+          <ArrowRightOutlined
             size="small"
             className="ViewMoreIcon"
           />
         </Button>
       </div>
 
-    
+
     </React.Fragment>
   )
 }
