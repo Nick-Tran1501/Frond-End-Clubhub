@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
+
 
 export const getUsers = async () => {
+    const token = localStorage.getItem("token");
     const response = await axios({
         method: "GET",
         url: "https://rmit-club-dhyty.ondigitalocean.app/api/user/getall",
@@ -19,6 +20,7 @@ export const getUsers = async () => {
 
 
 export const deleteStudent = async (userId) => {
+    const token = localStorage.getItem("token");
     const response = await axios({
         method: 'DELETE',
         url: `https://rmit-club-dhyty.ondigitalocean.app/api/admin/users/delete/${userId}`,
